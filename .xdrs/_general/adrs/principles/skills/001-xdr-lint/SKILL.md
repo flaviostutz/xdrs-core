@@ -1,5 +1,5 @@
 ---
-name: 001-xdr-review
+name: 001-xdr-lint
 description: >
   Reviews code changes or files against applicable XDRs (Decision Records) and reports
   violations as structured findings. Activate this skill when the user asks to review,

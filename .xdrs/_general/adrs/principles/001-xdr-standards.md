@@ -22,6 +22,9 @@ Provides clear ownership by scope, predictable navigation, and reusable decision
 ### Implementation Details
 
 - XDRs MUST contain a clear decision about a certain problem or situation. Avoid being too verbose and focus on explaining clearly the context and the decision. Avoid adding contents that are not original. If you have other references that are important to understand the document, add links and references.
+- Make it clear if an instruction is mandatory or advisory
+    - Mandatory language: "must", "always", "never", "required", "mandatory"
+    - Advisory language: "should", "recommended", "advised", "preferably", "possibly", "optionally"
 - Always the following folder structure:
   `.xdrs/[scope]/[type]/[subject]/[number]-[short-title].md`
 - **Scopes:** 
@@ -132,4 +135,4 @@ In the end, state explicitly the question that needs to be answered. E.g: "Which
 
 ## References
 
-- [001-xdr-review skill](skills/001-xdr-review/SKILL.md) - Skill for reviewing code changes against XDRs
+- [001-xdr-lint skill](skills/001-xdr-lint/SKILL.md) - Skill for reviewing code changes against XDRs
