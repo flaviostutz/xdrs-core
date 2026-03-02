@@ -16,14 +16,14 @@
     "bin/npmdata.js"
   ],
   "dependencies": {
-    "npmdata": "^0.5.0"
+    "npmdata": "^0.6.1-beta.0"
   },
   "npmdata": [
     {
       "package": "xdrs",
       "outputDir": ".",
       "files": [
-        ".github/**",
+        "AGENTS.md",
         ".xdrs/**"
       ]
     }

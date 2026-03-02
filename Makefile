@@ -1,14 +1,17 @@
-build:
+build: install
 	pnpm pack --pack-destination=./dist
 
 lint:
 	@echo "No linting rules to check"
 
-test:
-	make build
-	mkdir package
-	cd package && tar -xzf dist/xdrs-*.tgz -C package --strip-components=1
-	cd package && npx bin/npmdata.js
+test: build
+	cd example && make test
+
+clean:
+	rm -rf dist node_modules
+
+install:
+	pnpm install
 
 publish:
 	npx -y monotag@1.26.0 current --bump-action=latest --prefix=
