@@ -18,7 +18,7 @@ categorizing findings by severity and type, and reporting them without modifying
 
 ### Phase 1: XDR Compilation
 
-1. Gather all Decision Records from `.xdrs/` starting from the working directory.
+1. Gather all Decision Records from `.xdrs/index.md` starting from the working directory.
    - XDR scopes are controlled by nested folders; some are broad, others domain-specific.
    - Extract metadata first (status, impact, scope, applicability) to filter relevant XDRs before deep analysis.
 2. Filter relevance based on file types, domains, and architectural patterns in scope.
