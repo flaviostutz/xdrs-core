@@ -29,7 +29,7 @@ Provides clear ownership by scope, predictable navigation, and reusable decision
   `.xdrs/[scope]/[type]/[subject]/[number]-[short-title].md`
 - **Scopes:** 
   - examples: `business-x`, `business-y`, `team-43`, `_general`
-  - `_local` is a reserved scope for XDRs created locally to a specific project or repository. XDRs in `_local` must not be shared with or propagated to other contexts. This scope must always be placed in the lowest position in `.xdrs/index.md` so that its decisions override or extend any decisions from all higher-positioned scopes. When a scope name is not specified, `_local` is the standard scope to use.
+  - `_local` is a reserved scope for XDRs created locally to a specific project or repository. XDRs in `_local` must not be shared with or propagated to other contexts. This scope must always be placed in the lowest position in `.xdrs/index.md` so that its decisions override or extend any decisions from all higher-positioned scopes.
   - **Types:** `adrs`, `bdrs`, `edrs`
   - there can exist sufixes to the standard scope names (e.g: `business-x-mobileapp`, `business-y-servicedesk`)
 - **Subjects:** MUST be one of the following depending on the type of the XDR:
@@ -55,6 +55,7 @@ Provides clear ownership by scope, predictable navigation, and reusable decision
 - XDRs should be less than 100 lines long as a rule of thumb
   - This is important to make them focused on a clear decision
   - Exceptions can reach 200 lines (templates, more elaborate decision implementations etc)
+- ALWAYS use `_local` scope if the user doesn't explicitelly indicate a specific scope while creating an xdr or skill.
 
 **XDR template**
 
