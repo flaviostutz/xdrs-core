@@ -1,2 +1,5 @@
-.xdrs
 output
+# npmdata:start
+.npmdata
+AGENTS.md
+# npmdata:end

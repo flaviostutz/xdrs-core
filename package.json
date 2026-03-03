@@ -20,7 +20,7 @@
     "bin/npmdata.js"
   ],
   "dependencies": {
-    "npmdata": "^0.6.1-beta.0"
+    "npmdata": "file:/Users/flaviostutz/Documents/development/flaviostutz/npmdata/lib/dist/npmdata-0.0.1.tgz"
   },
   "npmdata": [
     {
@@ -29,6 +29,12 @@
       "files": [
         "AGENTS.md",
         ".xdrs/**"
+      ],
+      "symlinks": [
+        {
+          "source": ".xdrs/**/skills/*",
+          "target": "./.github/skills"
+        }
       ]
     }
   ],

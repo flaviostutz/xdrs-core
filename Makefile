@@ -1,3 +1,5 @@
+all: build test
+
 build: install
 	pnpm pack --pack-destination=./dist
 
@@ -11,6 +13,7 @@ clean:
 	rm -rf dist node_modules
 
 install:
+	pnpm add npmdata@file:/Users/flaviostutz/Documents/development/flaviostutz/npmdata/lib/dist/npmdata-0.0.1.tgz
 	pnpm install
 
 publish:
