@@ -30,8 +30,8 @@ packages:
     resolution: {integrity: sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==}
     engines: {node: 18 || 20 || >=22}
 
-  npmdata@0.10.2:
-    resolution: {integrity: sha512-+8U7WW8Yt9qTszGFsYZ0actVY2fMMsUy4B7YP6k6drm9PBjdbh6hWGAI/U96zi3sfU8Z9/z6yLgD3vRhNJ69Ug==}
+  npmdata@0.10.3:
+    resolution: {integrity: sha512-uICq0VW3asYY6YqBQY26jTbWn73hBlG5974ZRG/mn66N9edfNCF5DRx9vaBrmlk6Gk+pzWVVeNOFxshuPqtjRQ==}
     hasBin: true
 
   semver@7.7.4:
@@ -40,7 +40,7 @@ packages:
     hasBin: true
 
   xdrs-core@file:../dist/xdrs-core-0.0.1.tgz:
-    resolution: {integrity: sha512-TtlHxKhxN/fVh/rsrr+y+R6cvhBMAjwoPpJV8N1IbBJHOfiUBTuC4AC6agl/ST0TsVNOftSPOzPjF5wZC31t2w==, tarball: file:../dist/xdrs-core-0.0.1.tgz}
+    resolution: {integrity: sha512-n5EANJ3OEf7t828jCnkqiA+J03r+quX+g17pggcbkYcZOm8vX+t/GpA7SDlDaIZyuZ5VcrbkrpY7TlgQAoxGNw==, tarball: file:../dist/xdrs-core-0.0.1.tgz}
     version: 0.0.1
     hasBin: true
 
@@ -58,7 +58,7 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.4
 
-  npmdata@0.10.2:
+  npmdata@0.10.3:
     dependencies:
       ignore: 7.0.5
       minimatch: 10.2.4
@@ -68,4 +68,4 @@ snapshots:
 
   xdrs-core@file:../dist/xdrs-core-0.0.1.tgz:
     dependencies:
-      npmdata: 0.10.2
+      npmdata: 0.10.3
