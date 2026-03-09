@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       npmdata:
-        specifier: ^0.11.0
-        version: 0.11.0
+        specifier: ^0.12.0
+        version: 0.12.0
 
 packages:
 
@@ -81,8 +81,11 @@ packages:
     resolution: {integrity: sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==}
     engines: {node: 18 || 20 || >=22}
 
-  npmdata@0.11.0:
-    resolution: {integrity: sha512-sHXvQSo/wDSDssTUGqKCWlcvr8PSVFqtebQUBUfEVK4qjFQRyIonSd5ab+lvKEj2g/ty2ym+s/LBZJpl+0akPA==}
+  mypkg@1.0.0:
+    resolution: {integrity: sha512-bUYxZK4prscFYS4f1NYXcZ+TJBjsx+BSdMA+7F3gXGdBRHCDBdVZS5vIlnEWzYuL2jeVNyJZWlFfTmLZMEOh8g==}
+
+  npmdata@0.12.0:
+    resolution: {integrity: sha512-rhnM9Id4ogadDpHfMP9hyLrEDMlpBFduWUtOU8p+3/q3caKjfsv0GtmVqJkVRY2NuKCfY51P+gUqaRVh2bZN5g==}
     hasBin: true
 
   parent-module@1.0.1:
@@ -161,11 +164,14 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.4
 
-  npmdata@0.11.0:
+  mypkg@1.0.0: {}
+
+  npmdata@0.12.0:
     dependencies:
       cosmiconfig: 9.0.1
       ignore: 7.0.5
       minimatch: 10.2.4
+      mypkg: 1.0.0
       semver: 7.7.4
     transitivePeerDependencies:
       - typescript

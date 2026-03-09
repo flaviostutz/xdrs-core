@@ -81,8 +81,11 @@ packages:
     resolution: {integrity: sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==}
     engines: {node: 18 || 20 || >=22}
 
-  npmdata@0.11.0:
-    resolution: {integrity: sha512-sHXvQSo/wDSDssTUGqKCWlcvr8PSVFqtebQUBUfEVK4qjFQRyIonSd5ab+lvKEj2g/ty2ym+s/LBZJpl+0akPA==}
+  mypkg@1.0.0:
+    resolution: {integrity: sha512-bUYxZK4prscFYS4f1NYXcZ+TJBjsx+BSdMA+7F3gXGdBRHCDBdVZS5vIlnEWzYuL2jeVNyJZWlFfTmLZMEOh8g==}
+
+  npmdata@0.12.0:
+    resolution: {integrity: sha512-rhnM9Id4ogadDpHfMP9hyLrEDMlpBFduWUtOU8p+3/q3caKjfsv0GtmVqJkVRY2NuKCfY51P+gUqaRVh2bZN5g==}
     hasBin: true
 
   parent-module@1.0.1:
@@ -106,7 +109,7 @@ packages:
     hasBin: true
 
   xdrs-core@file:../dist/xdrs-core-0.0.1.tgz:
-    resolution: {integrity: sha512-8+eQcshWYjsR/w9+5SUjpgCElqaTSBHwwW8RsAsDKHSp7dP4BaRPD2acNi4og69qT8XoA0lgTo10WOs9a8FP2Q==, tarball: file:../dist/xdrs-core-0.0.1.tgz}
+    resolution: {integrity: sha512-7vHjgEetvXKXmEbqsQPz+X+ShzKmiU8AJ6JkjeUhsbUfqGPRsM7wGJR4DXFgCq3fldkpM8IAHFzM45wrSnsHnw==, tarball: file:../dist/xdrs-core-0.0.1.tgz}
     version: 0.0.1
     hasBin: true
 
@@ -166,11 +169,14 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.4
 
-  npmdata@0.11.0:
+  mypkg@1.0.0: {}
+
+  npmdata@0.12.0:
     dependencies:
       cosmiconfig: 9.0.1
       ignore: 7.0.5
       minimatch: 10.2.4
+      mypkg: 1.0.0
       semver: 7.7.4
     transitivePeerDependencies:
       - typescript
@@ -194,6 +200,6 @@ snapshots:
 
   xdrs-core@file:../dist/xdrs-core-0.0.1.tgz:
     dependencies:
-      npmdata: 0.11.0
+      npmdata: 0.12.0
     transitivePeerDependencies:
       - typescript
