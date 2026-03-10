@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.12 (2026-03-09)
+
+### Maintenance
+
+* release: 0.2.11 [[9766703](https://github.com/flaviostutz/xdrs-core/commit/97667032274e011451ce1298ba56d9f62e267bfe)]
+* bump npmdata [[f0d3e4e](https://github.com/flaviostutz/xdrs-core/commit/f0d3e4e64def93548a14d26aa72316e128b617fd)]
+* pipeline migration [[a6b8dc6](https://github.com/flaviostutz/xdrs-core/commit/a6b8dc6da19ae90be2b561a9dc1906f37de6886e)]
+
+### Misc
+
+
+### Info
+
+* Authors: Flavio Stutz <flaviostutz@gmail.com>
+
+
 ## 0.2.11 (2026-02-28)
 
 ### Features
