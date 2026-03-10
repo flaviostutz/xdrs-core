@@ -1,9 +1,8 @@
 ---
 name: 001-xdr-lint
 description: >
-  Reviews code changes or files against applicable XDRs (Decision Records) and reports
-  violations as structured findings. Activate this skill when the user asks to review,
-  lint, or audit code, or when you identify a need to check compliance with XDRs during implementation.
+  Reviews code changes or files against applicable XDRs (Decision Records) and reports violations as structured findings. 
+  Activate this skill when the user asks to review, lint, or audit code, or when you identify a need to check compliance with XDRs during implementation.
 metadata:
   author: flaviostutz
   version: "1.0"
@@ -11,8 +10,7 @@ metadata:
 
 ## Overview
 
-Performs a structured review of code changes or files against the XDRs in the repository,
-categorizing findings by severity and type, and reporting them without modifying any code.
+Performs a structured review of code changes or files against the XDRs in the repository, categorizing findings by severity and type, and reporting them without modifying any code.
 
 ## Instructions
 
@@ -43,7 +41,7 @@ categorizing findings by severity and type, and reporting them without modifying
 3. For related XDRs and files, lookup for the specific line number in both the XDR and the code that are related to the finding. This will be used in the reporting phase to provide precise references and actionable suggestions.
 
 ### Phase 4: Judgment
-3. Judgment criteria (all must be true to keep a finding):
+1. Judgment criteria (all must be true to keep a finding):
    - Is the violation explicitly stated as a rule in an Accepted XDR using mandatory or advisory language? Templates, examples, and diagrams in XDRs are illustrative only — they do not constitute rules. If the only evidence for the violation is an implicit pattern in a code sample or template, drop it.
    - Is there concrete evidence in the code or diff?
    - Is the finding actionable?
@@ -51,56 +49,37 @@ categorizing findings by severity and type, and reporting them without modifying
 
 ### Phase 5: Reporting
 
-Format each finding as:
-
-```
->> [ERROR|WARNING] [CATEGORY] [filename:line_number](filename#Lline_number): Description
-   - XDR Reference: [.xdrs/scope/type/subject/number-title.md:line_number](.xdrs/scope/type/subject/number-title.md#Lline_number)
-   - Rule: Specific rule text from XDR
-   - Severity: [ERROR|WARNING]
-   - Suggestion: Specific action to fix this issue
-   - Context: Why this matters / What to watch for
-```
-
-Full output structure:
-
-```
-=== Code Review Against XDRs ===
+**Report template**
+--------
+### Code Review Against XDRs
 Scope: [scope identifier]
-Files Analyzed: [number]
-Changes: [+X lines, -Y lines]
 
-=== Findings ===
-[findings list]
+## Findings
+### 1. [ERROR|WARNING] - [filename:line_number](filename:line_number)
+- Title of the finding (<=15 words)
+- XDR reference: [xdr-file:line_number](xdr-file:line_number)
+- Why: Brief description of the issue in 20 words
+- Fix: Specific action to fix this issue in 15 words
+- Relevance: Why this matters / What to watch for in 15 words
 
-=== Summary ===
-- Errors Found: [count]
-- Warnings Found: [count]
-- Review Status: [PASS|FAIL]
+### 2. [second finding etc]
 
-Affected Files Requiring Changes
-[bullet list of files with markdown links to specific findings and severity]
-```
+## Summary
+- Errors: [count]
+- Warnings: [count]
+- Outcome: [PASS|FAIL]
+--------
 
 ### Constraints
-
 - MUST NOT include any text or explanations outside the required output format.
 - MUST NOT edit code. Instruct the user on how to request code changes in suggestions.
 
 ## Examples
-
-User: "Review my changes against XDRs"
-Agent action: runs `git diff origin/main`, reads `.xdrs/` hierarchy, filters applicable XDRs,
-produces structured findings report.
-
-User: "Lint the auth service"
-Agent action: scans all files under the auth service directory, applies relevant XDRs,
-produces structured findings report.
+- An XDR mentions that "Every code MUST have a header comment with author name", if you find a codebase without the author name, report as ERROR.
+- An XDR mentions that "Functions SHOULD be no longer than 50 lines", if you find a function with 80 lines, report as WARNING.
 
 ## Edge Cases
-
 - If no XDRs apply to the scope, output "No applicable XDRs found" and skip reporting.
-- If `git diff` fails (no git repo, no remote), fall back to analyzing staged or working tree files.
 - If a potential violation is in pre-existing code outside the diff, report it as WARNING only.
 
 ## References
