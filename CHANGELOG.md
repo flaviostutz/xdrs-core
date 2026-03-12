@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.17 (2026-03-11)
+
+### Maintenance
+
+* release: 0.2.16 [[87da2a4](https://github.com/flaviostutz/xdrs-core/commit/87da2a48e854f67bd6948918f367dec68819d0e9)]
+* bump npmdata [[5cac3be](https://github.com/flaviostutz/xdrs-core/commit/5cac3be4cf33ec322d417acd0e2f3da712838fd3)]
+* simplyfing AGENTS.md [[a32a129](https://github.com/flaviostutz/xdrs-core/commit/a32a129f1a5df03ca420880358df594686c3cd1a)]
+
+### Misc
+
+
+### Info
+
+* Authors: Flavio Stutz <flaviostutz@gmail.com>
+
+
 ## 0.2.16 (2026-03-10)
 
 ### Maintenance
