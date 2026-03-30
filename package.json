@@ -21,7 +21,7 @@
     "bin/filedist.js"
   ],
   "dependencies": {
-    "filedist": "^0.22.1"
+    "filedist": "^0.24.0"
   },
   "filedist": {
     "sets": [
