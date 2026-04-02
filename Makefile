@@ -1,7 +1,8 @@
-all: build test
+all: build test lint
 
 build: install
 	pnpm pack --pack-destination=./dist
+	make -C examples/mydevkit build
 
 lint:
 	node ./lib/lint.js .
