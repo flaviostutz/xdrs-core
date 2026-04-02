@@ -20,6 +20,7 @@ lint:
 	cd consumer && pnpm exec xdrs-core lint ./output
 
 install:
+	pnpm add xdrs-core@file:../../dist/xdrs-core-0.0.1.tgz
 	pnpm install
 
 consumer-install:
