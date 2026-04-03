@@ -130,14 +130,6 @@ Question: In the end, state explicitly the question that needs to be answered. E
 - `business-x-edr-042` (not `EDR-BUSINESS-X-042`)
 - `business-x-bdr-007`
 
-## Procedures
-
-1. Choose the correct type (ADR, BDR, EDR), scope, and subject for each new XDR.
-2. Create the XDR using the template in the Implementation Details section above, adapting it for the chosen type and required sections.
-3. Update or create the scope `README.md` with examples if needed.
-4. Add/update the new/updated XDRs to `.xdrs/[scope]/[type]/index.md` and to the main `.xdrs/index.md`
-5. Keep decision texts short and link to other XDRs for shared rules
-
 ## Considered Options
 
 * (REJECTED) **Flat list of decisions** - Simple but becomes unmanageable as the number grows.
@@ -150,6 +142,7 @@ Question: In the end, state explicitly the question that needs to be answered. E
 ## References
 
 - [001-lint skill](skills/001-lint/SKILL.md) - Skill for reviewing code changes against XDRs
+- [002-write-xdr skill](skills/002-write-xdr/SKILL.md) - Skill for creating a new XDR from this standard
 - [_core-adr-003 - Skill standards](003-skill-standards.md)
 - [_core-adr-004 - Article standards](004-article-standards.md)
 - [_core-adr-006 - Research standards](006-research-standards.md)
