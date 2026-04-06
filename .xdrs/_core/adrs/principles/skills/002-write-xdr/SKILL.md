@@ -10,7 +10,7 @@ metadata:
 
 ## Overview
 
-Guides the creation of a well-structured XDR by following the standards in `_core-adr-001`, researching existing records for conflicts, and iterating until the document is concise and decision-focused.
+Guides the creation of a well-structured XDR by following the standards in `_core-adr-001`, researching existing records for conflicts, checking redundancy across related artifacts, and iterating until the document is concise and decision-focused.
 
 ## Instructions
 
@@ -53,7 +53,16 @@ Choose a title that clearly states the question this XDR answers, not the answer
 4. Read related `researches/` documents when they exist, especially if they contain constraints, findings, or option tradeoffs that should influence the decision.
 5. Collect XDR IDs and file paths for cross-references.
 
-### Phase 5: Write the First Draft
+### Phase 5: Check Redundancy Across Related Artifacts
+
+1. Review the related XDRs, research documents, skills, articles, and guides connected to the same decision thread.
+2. Identify content that is repeated across those files, especially decision statements, applicability boundaries, mandatory rules, and rationale.
+3. Prioritize the final decision, core boundaries, and short key instructions in the XDR itself.
+4. When another document already explains details well, link to it instead of re-explaining the same content in full.
+5. Copy only short instructions or key excerpts when they materially help a reader apply the decision without leaving the XDR.
+6. Avoid repeating the same decision text across multiple related documents whenever a link or short reference is enough.
+
+### Phase 6: Write the First Draft
 
 Use the mandatory template from `001-xdr-standards`:
 
@@ -81,24 +90,26 @@ Use the mandatory template from `001-xdr-standards`:
 Mandatory rules to apply while drafting:
 - Use mandatory language ("must", "always", "never") only for hard requirements; use advisory language ("should", "recommended") for guidance.
 - Do not duplicate content already in referenced XDRs — link instead.
+- Keep the decision itself authoritative in the XDR. Supporting artifacts may elaborate, but they should not restate the full decision when a short reference is enough.
 - Make clear when the decision applies and any important exception boundaries.
 - Keep exploratory option analysis in a related Research document when it would distract from the final decision text.
 - No emojis. Lowercase filenames.
 - Target under 100 lines total; 200 lines max for complex decisions.
 
-### Phase 6: Review the Draft
+### Phase 7: Review the Draft
 
 Check every item before finalizing:
 
 1. **Length**: Is it under 100 lines? Trim verbose explanations. Move detailed skills to a separate file and link.
 2. **Originality**: Does every sentence add value that cannot be found in a generic web search? Remove obvious advice. Keep only the project-specific decision.
 3. **Clarity**: Is the chosen option unambiguous? Is the "why" clear in one reading?
-4. **Conflicts section**: Is it present and filled if Phase 3 found any conflicts?
-5. **Index entries**: Will the new XDR be added to `[scope]/[type]/index.md` and `.xdrs/index.md`?
+4. **Redundancy**: Is the XDR the primary source for the decision itself, with related documents linked instead of duplicated wherever possible?
+5. **Conflicts section**: Is it present and filled if Phase 3 found any conflicts?
+6. **Index entries**: Will the new XDR be added to `[scope]/[type]/index.md` and `.xdrs/index.md`?
 
 If any check fails, revise and re-run this phase before proceeding.
 
-### Phase 7: Write Files
+### Phase 8: Write Files
 
 1. Create the XDR file at `.xdrs/[scope]/[type]/[subject]/[number]-[short-title].md`.
 2. Add an entry to `.xdrs/[scope]/[type]/index.md` (create the file if it does not exist).
@@ -111,4 +122,5 @@ If any check fails, revise and re-run this phase before proceeding.
 - MUST follow the XDR template from `001-xdr-standards` exactly.
 - MUST NOT add personal opinions or general best-practice content not tied to a decision.
 - MUST NOT create an XDR that duplicates a decision already captured in another XDR — extend or reference instead.
+- MUST prefer links and short references over repeating the same decision content across related documents.
 - MUST keep scope `_local` unless the user explicitly states otherwise.

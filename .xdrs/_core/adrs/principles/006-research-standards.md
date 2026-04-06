@@ -8,9 +8,9 @@ Question: How should research documents be structured and organized so they supp
 
 ## Decision Outcome
 
-**subject-level research documents co-located with XDRs**
+**IMRAD-based subject-level research documents co-located with XDRs**
 
-Research documents are Markdown files placed inside a subject folder alongside decision records. They capture the explored option space, relevant constraints, findings, and proposal tradeoffs that back a decision during elaboration, discussion, approval, retirement, and updates.
+Research documents are Markdown files placed inside a subject folder alongside decision records. They use an IMRAD-inspired paper structure adapted to company needs so teams can combine experienced professional judgment with good-enough evidence, preserve reproducibility where it matters, and revisit the work when technology, constraints, or facts change.
 
 ### Implementation Details
 
@@ -20,13 +20,24 @@ Research documents are Markdown files placed inside a subject folder alongside d
   `.xdrs/[scope]/[type]/[subject]/researches/[number]-[short-title].md`
 - Research documents SHOULD stay focused on one problem statement or decision thread.
 - Research documents MUST state clearly what problem or question is being investigated and who needs the result.
-- The `## Overview` section MUST end with a line in the form `Question: [central question]?` that states the central question the research answers.
-- Research constraints MAY include hard requirements, stack limitations, regulatory limits, or other conditions that narrow the option space.
-- Research documents MUST summarize the problem constraints, important findings, and a small set of proposals with pros and cons for each option.
-- Research proposals are the considered options for the decision thread. They are not the final policy.
+- Research documents MUST follow this section order: `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`, `References`.
+- Research uses a company-adapted IMRAD structure. It MAY include informed professional judgment and experience-based observations, but claims that affect the conclusion MUST have enough evidence to be teachable, reviewable, and useful to other colleagues.
+- Research does not require full academic statistical rigor. Use good-enough evidence that supports the conclusion without demanding exhaustive proof.
+- Research documents MUST describe the methods, tools, sources, and conditions with enough detail that an experienced professional could at least minimally reproduce the important parts of the study, especially the aspects that materially affected the conclusion.
+- The short title portion after the research id MUST stay under 20 words.
+- `## Abstract` MUST be a single paragraph under 200 words summarizing the goal, methods, results, and conclusion. It SHOULD help executives or quick readers decide whether the paper is relevant.
+- `## Introduction` MUST define the problem, context, constraints, known facts, experiences, gaps, assumptions, and objectives. It SHOULD use visuals, bullet points, graphs, or diagrams when that improves understanding. It MUST stay under 700 words and MUST end with `Question: [central question]?`.
+- `## Methods` MUST explain how the study was conducted, including design, tools, data sources, and test conditions, with a reproducibility goal. It MUST stay under 1200 words.
+- `## Results` MUST present findings, data, trends, quantitative results, produced code, and option comparisons when relevant. It SHOULD use figures, tables, or bullet lists where useful. Keep interpretation to a minimum. It MUST stay under 1800 words.
+- When different options for the same problem are being analyzed, `## Results` SHOULD include comparison tables and explicit pros and cons for each option so the research can support later decision making.
+- `## Discussion` MUST interpret the results, explain significance, trade-offs, performance considerations, limitations, and implications for technical readers. It MUST stay under 1000 words.
+- `## Conclusion` MUST summarize the main findings and the likely next uses of the research. It MUST stay under 400 words.
+- `## References` MUST list all cited literature, websites, tutorials, documentation, discussions, or related artifacts.
+- In general, research SHOULD roughly follow the proportion `Introduction : Methods : Results : Discussion ≈ 3 : 5 : 6 : 4`.
+- Be strict about the goal of each section. Avoid duplicating the same material across sections and prefer clarity over rhetorical flourishes.
+- Research documents SHOULD stay under 5000 words total. They MAY exceed that only when the `## Introduction` explicitly states that the study will be lengthy because a very detailed analysis is required.
 - Research documents SHOULD link to the XDRs, skills, articles, discussions, and external references they informed.
 - One research document MAY inform multiple XDRs, including a mix of ADRs, BDRs, and EDRs, when the same investigation produced several downstream decisions.
-- Research documents SHOULD remain concise enough to read end-to-end. Target under 500 lines; hard limit 2000 lines.
 - Research file names MUST be lowercase. Never use emojis.
 - A research document MAY exist before the related XDR is written, or remain after the XDR changes, as long as its status and references stay clear.
 
@@ -56,45 +67,53 @@ All research documents MUST follow this template:
 ```markdown
 # [scope]-research-[number]: [Short Title]
 
-## Overview
+## Abstract
 
-[Brief description of the problem or question being explored, who needs the result, and the decision thread(s) it supports. Under 5 lines.]
+[Goal: help executives or quick readers decide whether the paper is relevant.]
+
+[Single paragraph summarizing the goal, methods, results, and conclusion. Under 200 words. Useful for executives or quick readers deciding whether the paper is relevant.]
+
+## Introduction
+
+[Goal: explain why this study exists.]
+
+[Describe the problem, context, constraints, known facts, experiences, gaps, assumptions, and objectives.
+Use visuals, bullets, graphs, or diagrams when helpful. Under 700 words.]
 
 Question: [Central question of the research]?
 
-## Constraints
+## Methods
 
-- [Constraint or requirement 1]
-- [Constraint or requirement 2]
+[Goal: make the important parts of the study reproducible.]
 
-## Findings
+[Explain how the study was conducted, including design, tools, data sources, and test conditions.
+Include enough detail for an experienced professional to reproduce the relevant parts. Under 1200 words.]
 
-- [Important finding 1]
-- [Important finding 2]
+## Results
 
-## Proposals
+[Goal: present the raw findings with minimal interpretation.]
 
-### Option 1: [Name]
+[Report findings, data, trends, quantitative results, code artifacts, and option comparisons.
+Use figures, tables, or bullets when useful. If multiple options solve the same problem, add comparison tables and explicit pros and cons for each option. Focus on raw findings, not interpretation. Under 1800 words.]
 
-[Short description of the option.]
+## Discussion
 
-**Pros**
-- [Benefit 1]
-- [Benefit 2]
+[Goal: interpret the findings for technical readers.]
 
-**Cons**
-- [Drawback 1]
-- [Drawback 2]
+[Interpret the results, explain significance, trade-offs, performance considerations, limitations, and implications.
+Keep this section technically engaged and under 1000 words.]
 
-### Option 2: [Name]
+## Conclusion
 
-[Same structure as above for each meaningful option.]
+[Goal: summarize the main findings and how they should be used next.]
 
-## Recommendation
-
-[Optional summary of the currently preferred direction, if any.]
+[Summarize the main findings and how the research can be used in next steps. Under 400 words.]
 
 ## References
+
+[Goal: make all cited sources and supporting artifacts traceable.]
+
+[A list of all cited literature, websites, tutorials, documentation, discussions, and related artifacts.]
 
 - [Related XDR or artifact](relative/path.md) - Why it matters
 - [Another related XDR if this research informed multiple decisions](relative/path.md) - Why it matters
@@ -106,10 +125,12 @@ Question: [Central question of the research]?
 
 * (REJECTED) **Inline long-form analysis inside the XDR** - Put all research and decision text in one file.
   * Reason: Makes XDRs too long, mixes evidence with the adopted rule set, and hurts fast retrieval by humans and AI agents.
+* (REJECTED) **Loose note-taking without section discipline** - Keep research as an unstructured collection of findings and opinions.
+  * Reason: Makes replication, review, and future updates harder because readers cannot separate context, method, findings, and interpretation.
 * (REJECTED) **Separate top-level research area outside the subject tree** - Centralize all research in one independent folder.
   * Reason: Breaks proximity with the decisions it supports and makes subject-scoped discovery weaker.
-* (CHOSEN) **Subject-level research folder co-located with XDRs** - Keep exploratory material beside the decisions, skills, and articles it informs.
-  * Reason: Preserves lifecycle context, keeps the XDR concise, and makes the research easy to discover when revisiting or updating a decision.
+* (CHOSEN) **IMRAD-based subject-level research beside XDRs** - Keep exploratory material beside the decisions, skills, and articles it informs, using an IMRAD-inspired structure adapted to company work.
+  * Reason: Preserves lifecycle context, keeps the XDR concise, gives readers a predictable structure, and raises evidence quality without demanding full academic rigor.
 
 ## References
 
