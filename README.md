@@ -14,7 +14,7 @@ This project defines a standard for organizing XDRs that satisfies the following
 
 Every XDR package contains four types of documents:
 
-- **Decision Records (XDRs)** — Architectural (ADR), Business (BDR), or Engineering (EDR) records that capture a single decision, its rationale, and the rules that follow from it. They are the source of truth.
+- **Decision Records (XDRs)** — Architectural (ADR), Business (BDR), or Engineering (EDR) records that capture a single decision, its rationale, and the rules that follow from it. They are the source of truth. An XDR may optionally start with a `Metadata` section for short applicability and validity markers.
 - **Research** — Exploratory documents that capture the problem being investigated, constraints or requirements, findings, and option tradeoffs that back a decision during its lifecycle. One research document may inform multiple downstream decisions, but it is not a replacement for the Decision Record.
 - **Skills** — Step-by-step procedural guides that can be followed by humans, AI agents, or both. Skills are task-based artifacts with a concrete outcome and should include enough detail to verify the task was completed correctly. A skill may start as a fully manual procedure and evolve toward partial or full AI automation over time. Co-located with the XDRs they implement.
 - **Articles** — Synthetic explanatory texts that combine information from multiple XDRs, Research documents, and Skills around a specific topic or audience. They never replace XDRs as source of truth.
@@ -57,6 +57,7 @@ The `lint` command reads `./.xdrs/**` from the given workspace path and checks c
 - research numbering uniqueness per `scope/type/subject/researches`
 - canonical index presence and link consistency
 - root index coverage for all discovered canonical indexes
+- XDR metadata section placement and `Applied to` / `Validity` field format
 - local image and `assets/` links resolving inside the sibling `assets/` folder for each document
 
 Examples:

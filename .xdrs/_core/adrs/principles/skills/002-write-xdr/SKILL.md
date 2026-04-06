@@ -69,6 +69,11 @@ Use the mandatory template from `001-xdr-standards`:
 ```
 # [scope]-[type]-[number]: [Short Title]
 
+## Metadata
+[Optional. Include only when at least one metadata field is present]
+Applied to: [Optional short applicability scope, under 40 words]
+Validity: [Optional. Use Draft, Retired, from YYYY-MM-DD, until YYYY-MM-DD, or from YYYY-MM-DD until YYYY-MM-DD]
+
 ## Context and Problem Statement
 [4 lines max: background, who is impacted, and the explicit question being answered]
 
@@ -88,6 +93,9 @@ Use the mandatory template from `001-xdr-standards`:
 ```
 
 Mandatory rules to apply while drafting:
+- Include `## Metadata` only when `Applied to:` and/or `Validity:` adds value; omit the whole section when neither field is defined.
+- When present, place `## Metadata` immediately before `## Context and Problem Statement`.
+- Keep `Applied to:` under 40 words and use `Validity:` only with ISO dates or the special values `Draft` / `Retired`.
 - Use mandatory language ("must", "always", "never") only for hard requirements; use advisory language ("should", "recommended") for guidance.
 - Do not duplicate content already in referenced XDRs — link instead.
 - Keep the decision itself authoritative in the XDR. Supporting artifacts may elaborate, but they should not restate the full decision when a short reference is enough.
@@ -102,11 +110,12 @@ Mandatory rules to apply while drafting:
 Check every item before finalizing:
 
 1. **Length**: Is it under 100 lines? Trim verbose explanations. Move detailed skills to a separate file and link.
-2. **Originality**: Does every sentence add value that cannot be found in a generic web search? Remove obvious advice. Keep only the project-specific decision.
-3. **Clarity**: Is the chosen option unambiguous? Is the "why" clear in one reading?
-4. **Redundancy**: Is the XDR the primary source for the decision itself, with related documents linked instead of duplicated wherever possible?
-5. **Conflicts section**: Is it present and filled if Phase 3 found any conflicts?
-6. **Index entries**: Will the new XDR be added to `[scope]/[type]/index.md` and `.xdrs/index.md`?
+2. **Metadata**: If metadata exists, is it directly before Context, limited to `Applied to:` / `Validity:`, and omitted entirely when both are absent?
+3. **Originality**: Does every sentence add value that cannot be found in a generic web search? Remove obvious advice. Keep only the project-specific decision.
+4. **Clarity**: Is the chosen option unambiguous? Is the "why" clear in one reading?
+5. **Redundancy**: Is the XDR the primary source for the decision itself, with related documents linked instead of duplicated wherever possible?
+6. **Conflicts section**: Is it present and filled if Phase 3 found any conflicts?
+7. **Index entries**: Will the new XDR be added to `[scope]/[type]/index.md` and `.xdrs/index.md`?
 
 If any check fails, revise and re-run this phase before proceeding.
 

@@ -24,7 +24,7 @@ Performs a structured review of code changes or files against the XDRs in the re
 
 1. Gather all Decision Records from `.xdrs/index.md` starting from the working directory.
    - XDR scopes are controlled by nested folders; some are broad, others domain-specific.
-   - Extract metadata first (status, impact, scope, applicability) to filter relevant XDRs before deep analysis.
+   - Extract metadata first (validity status and applicability) to filter relevant XDRs before deep analysis. Treat `Validity: Draft` and `Validity: Retired` as inactive policy.
 2. Filter relevance based on file types, domains, and architectural patterns in scope.
 
 ### Phase 3: XDR Review
