@@ -2,24 +2,24 @@
 name: 005-write-research
 description: >
   Creates a new research document following XDR research standards: selects scope, type, subject, and number;
-  then writes an IMRAD-based study with enough evidence and method detail to support future decisions.
+  then writes an IMRAD-based study with enough evidence and method detail to stand on its own as a technical paper.
   Activate this skill when the user asks to create, add, or write a research document that backs a decision.
 metadata:
   author: flaviostutz
-  version: "1.1"
+  version: "1.2"
 ---
 
 ## Overview
 
-Guides the creation of a well-structured research document by following `_core-adr-006`, checking related XDRs and existing research to avoid duplication, and producing an IMRAD-based study that supports a decision lifecycle without replacing the XDR. Treat each section goal in the research template as an acceptance criterion, not as optional wording.
+Guides the creation of a well-structured research document by following `_core-adr-006`, checking related XDRs and existing research to avoid duplication, and producing an IMRAD-based study that reads as a standalone technical paper. Treat each section goal in the research template as an acceptance criterion, not as optional wording.
 
 ## Instructions
 
 ### Phase 1: Understand the Research Goal
 
 1. Read `.xdrs/_core/adrs/principles/006-research-standards.md` in full to internalize the folder layout, numbering rules, and mandatory template.
-2. Identify the problem or question being explored, who needs the result, which decision or decision threads this research supports, and why the study matters now.
-3. Internalize the goal of each required section before drafting: `Abstract` proves relevance quickly, `Introduction` explains why the study exists, `Methods` makes the important parts reproducible, `Results` records raw findings with minimal interpretation, `Discussion` interprets the findings, `Conclusion` summarizes next use, and `References` makes sources traceable.
+2. Identify the problem or question being explored, the relevant system or domain context, the likely technical audience, and why the subject matters in practice.
+3. Internalize the goal of each required section before drafting: `Abstract` gives a quick technical reader the question, method, main result, and takeaway, `Introduction` frames the investigated problem and context, `Methods` makes the important parts reproducible, `Results` records raw findings with minimal interpretation, `Discussion` interprets the findings, `Conclusion` summarizes the practical takeaway and boundaries, and `References` makes sources traceable.
 4. Collect the main constraints, known facts, important experiences, gaps, and assumptions that belong in the introduction.
 5. Do NOT proceed without a clear problem statement, a central question, and at least one credible source of evidence or a method for generating it.
 
@@ -47,12 +47,13 @@ Guides the creation of a well-structured research document by following `_core-a
 3. Draft `## Introduction` early so the problem, scope, constraints, assumptions, and central question are fixed before evidence collection expands.
 4. Draft `## Methods` before or while executing the study so tools, data sources, and conditions are captured while they are still precise.
 5. Treat `## Abstract` as a late-stage summary. Do not try to finalize it yet.
+6. Keep process framing out of the body. If related ADRs or repository context matter, push that traceability to `## References` unless it is essential to the technical question itself.
 
 ### Phase 5: Capture Evidence as the Study Runs
 
 1. As experiments, comparisons, code spikes, interviews, benchmarks, or document reviews happen, append the concrete findings to `## Results` continuously.
 2. Prefer capturing tables, bullet points, numbers, code outputs, and option comparisons while the evidence is fresh.
-3. If multiple options solve the same problem, add a comparison table and explicit pros and cons for each option in `## Results` so the research can support later decision making.
+3. If multiple options solve the same problem, add a comparison table and explicit pros and cons for each option in `## Results` so the trade-offs are directly inspectable.
 4. Update `## Methods` whenever the actual study design changes so the final document remains reproducible.
 5. Keep interpretation out of `## Results`; record observations first and save meaning-making for `## Discussion`.
 
@@ -60,8 +61,8 @@ Guides the creation of a well-structured research document by following `_core-a
 
 1. Write `## Discussion` only after the important findings are visible in `## Results`.
 2. Use `## Discussion` to interpret significance, trade-offs, limitations, implications, and performance considerations for technical readers.
-3. Write `## Conclusion` after the discussion so it reflects the actual findings and the most likely next uses of the research.
-4. Write `## Abstract` last so it accurately summarizes the final goal, methods, results, and conclusion for executives or quick readers.
+3. Write `## Conclusion` after the discussion so it reflects the actual findings, practical takeaway, applicability boundaries, and open questions.
+4. Write `## Abstract` last so it accurately summarizes the final goal, methods, results, and conclusion for quick technical readers.
 
 ### Phase 7: Write the Research Document
 
@@ -72,12 +73,12 @@ Use the mandatory template from `006-research-standards`:
 
 ## Abstract
 
-[Single paragraph summarizing the goal, methods, results, and conclusion. Goal: help executives or quick readers decide whether the paper is relevant. Under 200 words.]
+[Single paragraph summarizing the goal, methods, results, and conclusion. Goal: let a quick technical reader understand the question, method, main result, and takeaway. Under 200 words.]
 
 ## Introduction
 
 [Describe the problem, context, constraints, known facts, experiences, gaps, assumptions, and objectives.
-Use visuals, bullets, graphs, or diagrams when helpful. Goal: explain why this study exists. Under 700 words.]
+Use visuals, bullets, graphs, or diagrams when helpful. Goal: explain the investigated problem, operating context, constraints, and why the subject matters. Under 700 words.]
 
 Question: [Central question of the research]?
 
@@ -97,7 +98,7 @@ Use figures, tables, or bullets when useful. If multiple options solve the same 
 
 ## Conclusion
 
-[Summarize the main findings and how the research can be used in next steps. Goal: summarize the main findings and how they should be used next. Under 400 words.]
+[Summarize the main findings, practical takeaway, applicability boundaries, and important open questions. Goal: summarize the main findings and what they mean in practice. Under 400 words.]
 
 ## References
 
@@ -110,7 +111,9 @@ Use figures, tables, or bullets when useful. If multiple options solve the same 
 Rules:
 - Treat the goal sentence of each section as a hard check on what belongs in that section.
 - Focus on exploring and evidencing the problem space; do not turn the document into the final decision.
-- Make it explicit when the same research may feed multiple downstream XDRs.
+- Write as a standalone technical paper for readers who do not know the XDR process.
+- Keep mentions of future ADRs, decision lifecycle, repository process, or artifact management out of the body unless they are materially necessary to understand the research question.
+- Keep traceability to related XDRs, skills, articles, discussions, and external sources primarily in `## References`.
 - Use good-enough evidence. Experienced professional judgment is allowed, but the conclusions still need support that other colleagues can inspect and learn from.
 - Ensure the methods and test conditions are reproducible enough for an experienced professional to rerun or evolve the critical parts later.
 - Use visuals, bullet points, graphs, or diagrams when they improve clarity, especially in the introduction and results.
@@ -120,12 +123,12 @@ Rules:
 
 Before the final review, verify each section against its specific goal:
 
-1. **Abstract goal**: Does it help a quick reader decide whether the research is relevant, in one paragraph and under 200 words?
-2. **Introduction goal**: Does it explain why the study exists, stay within scope, and end with `Question: ...?`?
+1. **Abstract goal**: Does it let a quick technical reader understand the question, method, main result, and takeaway, in one paragraph and under 200 words?
+2. **Introduction goal**: Does it explain the investigated problem and context, stay within scope, and end with `Question: ...?`?
 3. **Methods goal**: Could an experienced professional reproduce the important parts that materially affect the conclusion?
 4. **Results goal**: Are the findings concrete and minimally interpreted, with comparisons and pros/cons when multiple options exist?
 5. **Discussion goal**: Does it interpret the findings rather than repeat the results?
-6. **Conclusion goal**: Does it summarize the main findings and the likely next uses without introducing new evidence?
+6. **Conclusion goal**: Does it summarize the main findings, practical takeaway, applicability boundaries, and open questions without introducing new evidence?
 7. **References goal**: Are cited sources and related artifacts traceable, including related XDRs, skills, articles, and research where relevant?
 
 If any section fails its goal, revise that section before continuing.
@@ -210,7 +213,7 @@ Before writing files, verify:
 2. **Section discipline**: Does each section contain the right kind of content with minimal duplication?
 3. **Method quality**: Could an experienced professional reproduce or extend the important parts of the study from the methods section?
 4. **Evidence quality**: Are the results concrete enough to support the discussion and conclusion?
-5. **Decision boundary**: Does the text support a decision without pretending to be the XDR itself?
+5. **Standalone focus**: Does the text read as a technical paper rather than commentary about future ADRs, repository process, or artifact management?
 6. **Ratio fit**: Does the document stay within section word limits and pass the Python ratio check, or does the introduction explicitly justify the deviation?
 7. **References**: Are all related XDRs, research docs, skills, articles, and external sources linked when relevant?
 
