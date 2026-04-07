@@ -25,12 +25,15 @@ Provides clear ownership by scope, predictable navigation, and reusable decision
 - XDRs are the central artifact of the framework and the authoritative policy for their scope, type, and subject. Supporting artifacts may explain, justify, or operationalize the decision, but they do not replace it.
 - XDRs MAY include a `## Metadata` section, but only when at least one supported metadata field is present. When used, `## Metadata` MUST appear immediately before `## Context and Problem Statement`.
 - Supported XDR metadata fields are:
+  - `Status:` Optional. Defines the lifecycle state of the decision. Allowed values are `Draft`, `Active`, and `Deprecated`. If omitted, the decision is treated as `Active`. Only `Active` decisions may be treated as current policy.
+  - `Valid:` Optional. Defines the time window in which an active decision may be treated as current. Use ISO dates only: `from YYYY-MM-DD`, `until YYYY-MM-DD`, or `from YYYY-MM-DD until YYYY-MM-DD`. If `from` is omitted, the decision takes effect immediately. If `until` is omitted, the decision remains valid indefinitely.
   - `Applied to:` Optional. A short description of the contexts in which the decision is applicable. Keep it under 40 words. If omitted, the decision should be interpreted as applying to all logically applicable elements according to the decision text itself. Examples: `Only frontend code`, `JavaScript projects`, `Performance-sensitive codebases`
-  - `Validity:` Optional. Defines when the decision is active. Use ISO dates only: `from YYYY-MM-DD`, `until YYYY-MM-DD`, or `from YYYY-MM-DD until YYYY-MM-DD`. If `from` is omitted, the decision takes effect immediately. If `until` is omitted, the decision remains valid indefinitely. `Draft` or `Retired` mean the XDR should be ignored as an active rule or policy.
 - Before using, enforcing, or citing an XDR as a current rule, humans and AI agents MUST decide whether the decision is in force for the current case.
-  - Check `Validity:` first to determine whether the XDR is active now. `Draft`, `Retired`, not-yet-active, and expired decisions are not current policy.
-  - Check `Applied to:` next to determine whether the active decision fits the current codebase, system, workflow, or audience.
-  - If either check fails, the XDR MAY still be read as background, history, or context, but it MUST NOT be treated as a current requirement for that case.
+  - Check `Status:` first to determine whether the XDR is eligible to be used now. If `Status:` is omitted, treat it as `Active`. `Draft` and `Deprecated` decisions are background or history, not current policy.
+  - Check `Valid:` next to determine whether the current moment falls inside the decision's active date window. Not-yet-active and expired windows are not current policy.
+  - Check `Applied to:` next to determine whether the active, currently valid decision fits the current codebase, system, workflow, or audience.
+  - Check the decision context and implementation details last to determine any additional boundaries, exceptions, or qualifiers that metadata alone cannot express.
+  - If any check fails, the XDR MAY still be read as background, history, or context, but it MUST NOT be treated as a current requirement for that case.
 - Research documents MAY be added under the same subject to capture the exploration, findings, and proposals that backed a decision. Research is useful during elaboration, discussion, approval, retirement, and updates, but the XDR remains the source of truth.
 - Make it clear if an instruction is mandatory or advisory
     - Mandatory language: "must", "always", "never", "required", "mandatory"
@@ -60,7 +63,7 @@ Provides clear ownership by scope, predictable navigation, and reusable decision
   - Types in IDs: `adr`, `bdr`, `edr`
   - Define the next number of an XDR by checking what is the highest number present in the type+scope. Don't fill numbering gaps, as they might be old deleted XDRs and we should never reuse numbers of different documents/decisions. Numbering gaps are expected.
 - Decisions MUST be concise and reference other XDRs to avoid duplication
-- The `### Implementation Details` section SHOULD state relevant boundaries or exceptions and what a reader should do or avoid in common cases. Use `## Metadata` as the first-pass filter for whether the decision should be used at all, and keep nuanced boundaries in the decision text.
+- The `### Implementation Details` section SHOULD state relevant boundaries or exceptions and what a reader should do or avoid in common cases. Use `## Metadata` as the first-pass filter for whether the decision should be used at all, then keep nuanced boundaries in the decision text.
 - Use concise rules, examples, or `Do` / `Don't` lists only when they help a reader apply the decision correctly. Keep them short and decision-specific.
 - When research exists for a decision, the XDR SHOULD mention the related research documents after the `## Considered Options` list.
 - Never use emojis in contents
@@ -89,9 +92,10 @@ All XDRs MUST follow this template
 
 ## Metadata
 
-[Optional section. Omit the entire section when neither `Applied to:` nor `Validity:` is defined. Readers decide whether to use the XDR by checking `Validity:` first and then `Applied to:`.]
+[Optional section. Omit the entire section when none of `Status:`, `Valid:`, or `Applied to:` is defined. Readers decide whether to use the XDR by checking `Status:` first, treating omission as `Active`, then `Valid:`, then `Applied to:`, and finally the decision text itself.]
+Status: [Optional. Use `Draft`, `Active`, or `Deprecated`. Defaults to `Active` when omitted]
+Valid: [Optional. Use `from YYYY-MM-DD`, `until YYYY-MM-DD`, or `from YYYY-MM-DD until YYYY-MM-DD`]
 Applied to: [Optional short applicability scope, under 40 words]
-Validity: [Optional. Use `Draft`, `Retired`, `from YYYY-MM-DD`, `until YYYY-MM-DD`, or `from YYYY-MM-DD until YYYY-MM-DD`]
 
 ## Context and Problem Statement
 
@@ -145,9 +149,10 @@ Question: In the end, state explicitly the question that needs to be answered. E
 - `.xdrs/business-x/adrs/governance/010-security-and-secrets-management.md`
 - `.xdrs/_core/adrs/devops/001-multi-repo.md`
 - Metadata examples:
+  - `Status: Draft`
+  - `Status: Active`
+  - `Valid: from 2026-03-01 until 2026-12-31`
   - `Applied to: JavaScript projects`
-  - `Validity: Draft`
-  - `Validity: from 2026-03-01 until 2026-12-31`
 
 ```text
 subject/

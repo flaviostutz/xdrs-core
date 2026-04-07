@@ -51,9 +51,11 @@ harder to update, and harder for agents to apply correctly.
 
 Before treating an XDR as a rule for the current case, check its metadata first.
 
-- **Validity first**: `Draft`, `Retired`, not-yet-active, and expired decisions are not current policy.
-- **Applied to second**: if present, the current codebase, workflow, system, or audience must fit that scope.
-- **Then enforce**: only decisions that pass both checks should be used as active requirements. The rest may still be useful background or historical context.
+- **Status first**: only `Active` decisions can be current policy, and omitted `Status` should be treated as `Active`. `Draft` and `Deprecated` are background or historical context.
+- **Valid second**: if present, the current moment must fall inside the decision's date window.
+- **Applied to third**: if present, the current codebase, workflow, system, or audience must fit that scope.
+- **Decision text last**: the XDR's own context and implementation details still determine the final boundaries and exceptions.
+- **Then enforce**: only decisions that pass those checks should be used as active requirements. The rest may still be useful background or historical context.
 
 ### How they relate over time
 
@@ -130,7 +132,7 @@ Follow [_core-adr-001](../001-xdr-standards.md) strictly. Key rules:
 
 - Use **mandatory language** (`must`, `never`, `required`) for non-negotiable rules and
   **advisory language** (`should`, `recommended`) for guidance.
-- Before citing an XDR as a requirement, check `Validity` and then `Applied to` to confirm the decision is active and in scope for the current case.
+- Before citing an XDR as a requirement, check `Status` first, treating omission as `Active`, then `Valid`, then `Applied to`, and finally the decision text to confirm the decision is active and in scope for the current case.
 - Keep XDRs under 100 lines. Move procedural detail to a co-located Skill.
 - Keep exploratory option analysis in a co-located Research document instead of bloating the XDR.
 - Always update the scope+type index and the root index after adding or changing an XDR.

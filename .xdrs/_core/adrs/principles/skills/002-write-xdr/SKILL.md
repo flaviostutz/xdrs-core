@@ -71,8 +71,9 @@ Use the mandatory template from `001-xdr-standards`:
 
 ## Metadata
 [Optional. Include only when at least one metadata field is present]
+Status: [Optional. Use Draft, Active, or Deprecated. Defaults to Active when omitted]
+Valid: [Optional. Use from YYYY-MM-DD, until YYYY-MM-DD, or from YYYY-MM-DD until YYYY-MM-DD]
 Applied to: [Optional short applicability scope, under 40 words]
-Validity: [Optional. Use Draft, Retired, from YYYY-MM-DD, until YYYY-MM-DD, or from YYYY-MM-DD until YYYY-MM-DD]
 
 ## Context and Problem Statement
 [4 lines max: background, who is impacted, and the explicit question being answered]
@@ -93,10 +94,10 @@ Validity: [Optional. Use Draft, Retired, from YYYY-MM-DD, until YYYY-MM-DD, or f
 ```
 
 Mandatory rules to apply while drafting:
-- Include `## Metadata` only when `Applied to:` and/or `Validity:` adds value; omit the whole section when neither field is defined.
+- Include `## Metadata` only when `Status:`, `Valid:`, and/or `Applied to:` adds value; omit the whole section when none of those fields is defined.
 - When present, place `## Metadata` immediately before `## Context and Problem Statement`.
-- Keep `Applied to:` under 40 words and use `Validity:` only with ISO dates or the special values `Draft` / `Retired`.
-- When metadata is present, write it so a reader can decide whether the XDR should be used for the current case without guessing. `Validity:` controls active status; `Applied to:` narrows the contexts where that active decision applies.
+- Keep `Applied to:` under 40 words, use `Status:` only with `Draft`, `Active`, or `Deprecated`, remember that omitted `Status:` means `Active`, and use `Valid:` only with ISO date ranges.
+- When metadata is present, write it so a reader can decide whether the XDR should be used for the current case without guessing. `Status:` controls lifecycle state, omitted `Status:` means `Active`, `Valid:` controls the active time window, `Applied to:` narrows the contexts where that active decision applies, and the decision text defines any remaining boundaries.
 - Use mandatory language ("must", "always", "never") only for hard requirements; use advisory language ("should", "recommended") for guidance.
 - Do not duplicate content already in referenced XDRs — link instead.
 - Keep the decision itself authoritative in the XDR. Supporting artifacts may elaborate, but they should not restate the full decision when a short reference is enough.
@@ -112,7 +113,7 @@ Mandatory rules to apply while drafting:
 Check every item before finalizing:
 
 1. **Length**: Is it under 100 lines? Trim verbose explanations. Move detailed skills to a separate file and link.
-2. **Metadata**: If metadata exists, is it directly before Context, limited to `Applied to:` / `Validity:`, omitted entirely when both are absent, and specific enough for a reader to decide whether the XDR is active and applicable?
+2. **Metadata**: If metadata exists, is it directly before Context, limited to `Status:` / `Valid:` / `Applied to:`, omitted entirely when all three are absent, and specific enough for a reader to decide whether the XDR is active, currently valid, and applicable?
 3. **Originality**: Does every sentence add value that cannot be found in a generic web search? Remove obvious advice. Keep only the project-specific decision.
 4. **Clarity**: Is the chosen option unambiguous? Is the "why" clear in one reading?
 5. **Redundancy**: Is the XDR the primary source for the decision itself, with related documents linked instead of duplicated wherever possible?
