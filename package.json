@@ -13,16 +13,26 @@
     "ai-agents"
   ],
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js"
+  },
   "files": [
     ".xdrs/_core/**",
     ".xdrs/index.md",
     "package.json",
     "AGENTS.md",
     "bin/filedist.js",
-    "lib/**/*.js"
+	  "lib/**/*.js"
   ],
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
   "dependencies": {
-    "filedist": "^0.26.0"
+    "filedist": "^0.26.0",
+    "ignore": "^7.0.5",
+    "minimatch": "^10.2.5"
   },
   "filedist": {
     "sets": [

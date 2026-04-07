@@ -1,0 +1,296 @@
+#!/usr/bin/env node
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+
+const args = process.argv.slice(2);
+
+if (args.includes('--version')) {
+	process.stdout.write('fake-copilot 1.0.0\n');
+	process.exit(0);
+}
+
+const prompt = readOptionValue(args, '-p') || readOptionValue(args, '--prompt');
+if (!prompt) {
+	process.stderr.write('prompt is required\n');
+	process.exit(1);
+}
+
+if (prompt.includes('Reply with READY and nothing else.')) {
+	process.stdout.write('READY\n');
+	process.exit(0);
+}
+
+const workspace = readLastOptionValue(args, '--add-dir') || process.cwd();
+
+if (prompt.includes('XDRS-CORE TEST PHASE: TASK')) {
+	handleTaskPrompt(prompt, workspace);
+	process.exit(0);
+}
+
+if (prompt.includes('XDRS-CORE TEST PHASE: ASSERTION_EVALUATION')) {
+	handleJudgePrompt(prompt, workspace);
+	process.exit(0);
+}
+
+process.stderr.write('unexpected prompt\n');
+	process.exit(1);
+
+function handleTaskPrompt(fullPrompt, workspacePath) {
+	const originalPrompt = extractSection(fullPrompt, 'BEGIN TASK PROMPT', 'END TASK PROMPT');
+
+	if (originalPrompt.includes('package distribution options for our XDR scopes')) {
+		const relativePath = path.join('.xdrs', '_local', 'adrs', 'principles', 'researches', '001-package-distribution-options.md');
+		const filePath = path.join(workspacePath, relativePath);
+		fs.mkdirSync(path.dirname(filePath), { recursive: true });
+		const content = [
+			'# _local-research-001: Package distribution options',
+			'',
+			'## Abstract',
+			'',
+			'This research compares npm packages, git submodules, and manual copy-paste for distributing XDR scopes. The study used document review and a comparison table. The results favored npm packaging for versioning and consumer ergonomics. The practical takeaway is to use npm packaging when repeatable distribution matters.',
+			'',
+			'## Introduction',
+			'',
+			'Teams need a repeatable way to distribute XDR scopes without losing traceability, upgrade control, or consumer clarity.',
+			'',
+			'Question: Which distribution option best fits repeatable XDR scope delivery?',
+			'',
+			'## Methods',
+			'',
+			'The study reviewed repository packaging constraints, compared delivery mechanisms, and recorded the relevant trade-offs in a simple comparison table.',
+			'',
+			'## Results',
+			'',
+			'| Option | Strength | Weakness |',
+			'| --- | --- | --- |',
+			'| npm package | Versioned delivery | Requires publish workflow |',
+			'| git submodule | Keeps source visible | Harder consumer ergonomics |',
+			'| copy-paste | Simple start | No upgrade path |',
+			'',
+			'## Discussion',
+			'',
+			'npm packaging keeps versions explicit and lowers consumer friction, but it adds release workflow overhead.',
+			'',
+			'## Conclusion',
+			'',
+			'Use npm packaging when the team needs repeatable distribution with controlled upgrades. Submodules or copy-paste remain fallback options for narrower contexts.',
+			'',
+			'## References',
+			'',
+			'- [_core-adr-006 - Research standards](../../../../../_core/adrs/principles/006-research-standards.md) - Defines the required research structure',
+			'- [_core-adr-001 - XDR standards](../../../../../_core/adrs/principles/001-xdr-standards.md) - Provides the broader artifact conventions'
+		].join('\n');
+		fs.writeFileSync(filePath, `${content}\n`, 'utf8');
+		writeTaskResult(`Created ${relativePath}.`, [relativePath]);
+		return;
+	}
+
+	if (originalPrompt.includes('customer base')) {
+		const content = [
+			'# Customer Research',
+			'',
+			'- 30% of customers are older than 50 years.',
+			'- 90% of customers are older than 20 years.'
+		].join('\n');
+		fs.writeFileSync(path.join(workspacePath, 'customer-research.md'), `${content}\n`, 'utf8');
+		writeTaskResult('Created customer-research.md with the prompt facts.', ['customer-research.md']);
+		return;
+	}
+
+	if (originalPrompt.includes('summary.txt')) {
+		fs.writeFileSync(path.join(workspacePath, 'summary.txt'), 'behavior ok\n', 'utf8');
+		writeTaskResult('Created summary.txt with behavior ok.', ['summary.txt']);
+		return;
+	}
+
+	writeTaskResult('No changes made.', []);
+}
+
+function handleJudgePrompt(fullPrompt, workspacePath) {
+	const originalPrompt = extractSection(fullPrompt, 'BEGIN ORIGINAL TASK PROMPT', 'END ORIGINAL TASK PROMPT');
+	const assertionPrompt = extractSection(fullPrompt, 'BEGIN JUDGE PROMPT', 'END JUDGE PROMPT');
+	const taskOutput = extractSection(fullPrompt, 'BEGIN TASK OUTPUT', 'END TASK OUTPUT');
+	const reportedChanges = JSON.parse(extractSection(fullPrompt, 'BEGIN AGENT REPORTED CHANGES JSON', 'END AGENT REPORTED CHANGES JSON'));
+	const findings = [];
+	const requiredResearchHeadings = [
+		'## Abstract',
+		'## Introduction',
+		'## Methods',
+		'## Results',
+		'## Discussion',
+		'## Conclusion',
+		'## References'
+	];
+
+	if (assertionPrompt.includes('IMRAD sections')) {
+		const relativePath = path.join('.xdrs', '_local', 'adrs', 'principles', 'researches', '001-package-distribution-options.md');
+		const filePath = path.join(workspacePath, relativePath);
+		if (!fs.existsSync(filePath)) {
+			findings.push(fileFinding(relativePath, null, `${relativePath} should exist.`, 'a research file was created under .xdrs/_local/adrs/principles/researches/'));
+		} else {
+			const content = fs.readFileSync(filePath, 'utf8');
+			for (const heading of requiredResearchHeadings) {
+				if (!content.includes(heading)) {
+					findings.push(fileFinding(relativePath, findLine(content, heading), `${relativePath} is missing ${heading}.`, 'contains the IMRAD sections Abstract, Introduction, Methods, Results, Discussion, Conclusion, and References'));
+				}
+			}
+			if (!content.includes('Question: ')) {
+				findings.push(fileFinding(relativePath, findSectionLine(content, '## Introduction'), `${relativePath} should include a Question: line in the introduction.`, 'includes a Question: line in the introduction'));
+			}
+			if (!content.includes('006-research-standards.md')) {
+				findings.push(fileFinding(relativePath, findSectionLine(content, '## References'), `${relativePath} should reference 006-research-standards.md.`, 'references 006-research-standards.md'));
+			}
+		}
+
+		if (!originalPrompt.includes('scope _local, type adrs, subject principles')) {
+			findings.push(workspaceFinding('The original prompt should preserve the requested scope, type, and subject guidance.', 'Use scope _local, type adrs, subject principles'));
+		}
+		if (!taskOutput.includes(relativePath)) {
+			findings.push(outputFinding(1, 'The final output should mention the created research path.', 'the final output mentions the created research path'));
+		}
+		const addedFile = Array.isArray(reportedChanges)
+			? reportedChanges.find((entry) => entry === relativePath)
+			: null;
+		if (!addedFile) {
+			findings.push(workspaceFinding('The created research file should be present in the added file list.', 'a research file was created under .xdrs/_local/adrs/principles/researches/'));
+		}
+	}
+
+	if (assertionPrompt.includes('not generating facts that are not present in the original prompt')) {
+		const filePath = path.join(workspacePath, 'customer-research.md');
+		if (!fs.existsSync(filePath)) {
+			findings.push(fileFinding('customer-research.md', null, 'customer-research.md should exist.', 'resulting file should be created at customer-research.md'));
+		} else {
+			const content = fs.readFileSync(filePath, 'utf8');
+			if (!originalPrompt.includes('30% of customer > 50 years')) {
+				findings.push(workspaceFinding('The original prompt was not available to the evaluator.', 'not present in the original prompt'));
+			}
+			if (content.includes('40%')) {
+				findings.push(fileFinding('customer-research.md', findLine(content, '40%'), 'customer-research.md includes a fact that is not present in the original prompt.', 'not present in the original prompt'));
+			}
+		}
+	}
+
+	if (assertionPrompt.includes('summary.txt exists')) {
+		const filePath = path.join(workspacePath, 'summary.txt');
+		if (!fs.existsSync(filePath)) {
+			findings.push(fileFinding('summary.txt', null, 'summary.txt should exist.', 'summary.txt exists'));
+		}
+		if (!taskOutput.includes('summary.txt')) {
+			findings.push(outputFinding(1, 'The final output should mention summary.txt.', 'final output mentions summary.txt'));
+		}
+		const addedFile = Array.isArray(reportedChanges)
+			? reportedChanges.find((entry) => entry === 'summary.txt')
+			: null;
+		if (!addedFile) {
+			findings.push(workspaceFinding('summary.txt should be present in the added file list.', 'summary.txt exists'));
+		}
+	}
+
+	if (assertionPrompt.includes('ignored/seed.txt, .git/config, and nested/.git/config are not available in the copied workspace')) {
+		const ignoredFilePath = path.join(workspacePath, 'ignored', 'seed.txt');
+		if (fs.existsSync(ignoredFilePath)) {
+			findings.push(fileFinding('ignored/seed.txt', 1, 'ignored/seed.txt should not exist in the copied workspace.', 'ignored/seed.txt, .git/config, and nested/.git/config are not available in the copied workspace'));
+		}
+		if (fs.existsSync(path.join(workspacePath, '.git', 'config'))) {
+			findings.push(fileFinding('.git/config', 1, '.git/config should not exist in the copied workspace.', 'ignored/seed.txt, .git/config, and nested/.git/config are not available in the copied workspace'));
+		}
+		if (fs.existsSync(path.join(workspacePath, 'nested', '.git', 'config'))) {
+			findings.push(fileFinding('nested/.git/config', 1, 'nested/.git/config should not exist in the copied workspace.', 'ignored/seed.txt, .git/config, and nested/.git/config are not available in the copied workspace'));
+		}
+
+		const leakedIgnoredChange = Array.isArray(reportedChanges)
+			&& reportedChanges.some((entry) => entry === 'ignored/seed.txt'
+				|| entry.startsWith('ignored/')
+				|| entry === '.git/config'
+				|| entry.startsWith('.git/')
+				|| entry === 'nested/.git/config'
+				|| entry.startsWith('nested/.git/'));
+		if (leakedIgnoredChange) {
+			findings.push(workspaceFinding('ignored/ and .git entries should not appear in the change report.', 'are not reported as changes'));
+		}
+	}
+
+	process.stdout.write(`${JSON.stringify({ pass: findings.length === 0, findings })}\n`);
+}
+
+function writeTaskResult(summary, changedFiles) {
+	process.stdout.write(`${JSON.stringify({ summary, changedFiles })}\n`);
+}
+
+function fileFinding(filePath, line, message, assertionRef) {
+	return {
+		target: 'file',
+		path: filePath,
+		line,
+		message,
+		assertionRef
+	};
+}
+
+function outputFinding(line, message, assertionRef) {
+	return {
+		target: 'output',
+		line,
+		message,
+		assertionRef
+	};
+}
+
+function workspaceFinding(message, assertionRef) {
+	return {
+		target: 'workspace',
+		message,
+		assertionRef
+	};
+}
+
+function findLine(content, searchText) {
+	if (!searchText) {
+		return null;
+	}
+
+	const lines = content.split(/\r?\n/);
+	for (let index = 0; index < lines.length; index += 1) {
+		if (lines[index].includes(searchText)) {
+			return index + 1;
+		}
+	}
+
+	return null;
+}
+
+function findSectionLine(content, heading) {
+	return findLine(content, heading);
+}
+
+function extractSection(text, startMarker, endMarker) {
+	const startIndex = text.indexOf(startMarker);
+	const endIndex = text.indexOf(endMarker);
+	if (startIndex === -1 || endIndex === -1 || endIndex <= startIndex) {
+		return '';
+	}
+	return text.slice(startIndex + startMarker.length, endIndex).trim();
+}
+
+function readOptionValue(values, flag) {
+	const index = values.indexOf(flag);
+	if (index === -1 || index === values.length - 1) {
+		return null;
+	}
+	return values[index + 1];
+}
+
+function readLastOptionValue(values, flag) {
+	let result = null;
+	for (let index = 0; index < values.length - 1; index += 1) {
+		if (values[index] === flag) {
+			result = values[index + 1];
+		} else if (values[index].startsWith(`${flag}=`)) {
+			result = values[index].slice(flag.length + 1);
+		}
+	}
+	return result;
+}

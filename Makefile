@@ -1,5 +1,6 @@
 all: build test lint
 
+
 build: install
 	pnpm pack --pack-destination=./dist
 	make -C examples/mydevkit build
@@ -9,13 +10,21 @@ lint:
 	make -C examples/mydevkit lint
 
 test: build
+	make test-lib
 	make -C examples/basic-usage test
 	make -C examples/mydevkit test
+
+test-lib:
+	pnpm exec jest --runInBand --testRegex=".*/lib/.*\.test\.js$$" --testPathIgnorePatterns="node_modules" --verbose
+
+test-integration:
+	pnpm exec jest --runInBand --testRegex=".*/skills/.*\.test\.int\.js$$" --testPathIgnorePatterns="node_modules" --verbose
 
 clean:
 	rm -rf dist node_modules
 	make -C examples/basic-usage clean
 	make -C examples/mydevkit clean
+	make -C tests/skills clean
 
 install:
 # 	pnpm add filedist@file:../filedist/lib/dist/filedist-0.0.1.tgz

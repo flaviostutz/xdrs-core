@@ -24,5 +24,5 @@ Reusable team scope added by this extension package.
 
 ### _local
 
-Project-local packaging notes extracted from the `xdrs-core` dependency.
+Project-local decisions stay in each consumer workspace and are not bundled in this extracted shared index.
 

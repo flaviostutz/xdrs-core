@@ -68,6 +68,46 @@ npx -y xdrs-core lint ./some-project
 pnpm exec xdrs-core lint .
 ```
 
+## Library Testing
+
+The package also exposes a reusable behavior-test library for Jest or any other JavaScript test runner.
+
+Main exports:
+
+- `testPrompt(config, inputPrompt, judgePrompt)` runs the task prompt, evaluates the result in a fresh judge session, and returns an empty string on success or a markdown bullet list on failure.
+- `runPromptTest(config, inputPrompt, judgePrompt)` returns the structured result object when you need access to captured output and the agent-reported changed file list.
+- `copilotCmd(workspaceRoot)` returns a ready-to-use `promptCmd` template for the Copilot CLI. The library uses that same command template for both the task and judge phases. If `workspaceRoot` is omitted it defaults to the current git repository root.
+- `config.workspaceRoot`, when set, is the authoritative workspace under test. If omitted, the library uses the current git repository root.
+
+Execution model:
+
+- phase 1 runs the task prompt and captures final output text plus the files the agent says it changed
+- phase 2 runs an independent judge prompt in a fresh invocation of `promptCmd` against the original task prompt, task output, the agent-reported changed file list, and the current workspace state
+- the judge trusts that reported file list as the authoritative change report and reads file contents from the workspace directly when needed
+- when `workspaceMode: 'copy'` is used, the temporary workspace honors nested `.gitignore` rules and skips git metadata files during the copy
+
+`promptCmd` accepts either a string array or a JSON array string and must include a `{PROMPT}` placeholder.
+
+Example with Jest:
+
+```js
+const { copilotCmd, testPrompt } = require('xdrs-core');
+
+test('creates hello.md', () => {
+  const err = testPrompt(
+    {
+      workspaceRoot: process.cwd(),
+      promptCmd: copilotCmd(process.cwd()),
+      workspaceMode: 'copy'
+    },
+    "Create a nice markdown file at hello.md saying 'hello!'",
+    'The resulting file should be created at hello.md and have hello as part of its contents, without too much extra info (should be <100 chars)'
+  );
+
+  expect(err).toBe('');
+});
+```
+
 ## Requirements
 
 ### Multi-scope support

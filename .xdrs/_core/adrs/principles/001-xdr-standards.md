@@ -52,7 +52,7 @@ Provides clear ownership by scope, predictable navigation, and reusable decision
   - Skills use `.xdrs/[scope]/[type]/[subject]/skills/[number]-[skill-name]/assets/`
 - **Scopes:** 
   - examples: `business-x`, `business-y`, `team-43`, `_core`
-  - `_local` is a reserved scope for XDRs created locally to a specific project or repository. XDRs in `_local` must not be shared with or propagated to other contexts. This scope must always be placed in the lowest position in `.xdrs/index.md` so that its decisions override or extend any decisions from all higher-positioned scopes.
+  - `_local` is a reserved scope for XDRs created locally to a specific project or repository. XDRs in `_local` must not be shared with or propagated to other contexts. This scope must always be placed in the lowest position in `.xdrs/index.md` so that its decisions override or extend any decisions from all higher-positioned scopes. Shared `.xdrs/index.md` files MUST NOT link `_local` canonical type indexes because `_local` stays workspace-local and is not distributed with shared packages. Readers, tools, and agents SHOULD still try to discover existing workspace-local `_local` canonical indexes by default, even when the shared root index does not link them.
   - **Types:** `adrs`, `bdrs`, `edrs`
   - there can exist sufixes to the standard scope names (e.g: `business-x-mobileapp`, `business-y-servicedesk`)
 - **Subjects:** MUST be one of the following depending on the type of the XDR:
