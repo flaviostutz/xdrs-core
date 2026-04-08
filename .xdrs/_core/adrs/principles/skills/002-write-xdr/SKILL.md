@@ -35,7 +35,7 @@ Consult `001-xdr-standards` while making each choice in this phase. The summarie
 **Subject** — pick one from the allowed list for the chosen type (from `001-xdr-standards`):
 - ADR: `principles`, `application`, `data`, `integration`, `platform`, `controls`, `operations`
 - BDR: `principles`, `marketing`, `product`, `controls`, `operations`, `organization`, `finance`, `sustainability`
-- EDR: `principles`, `application`, `infra`, `ai`, `observability`, `devops`, `governance`
+- EDR: `principles`, `application`, `infra`, `observability`, `devops`, `governance`
 
 **XDR ID** — format: `[scope]-[type]-[next available number]`
 - Scan `.xdrs/[scope]/[type]/` for the highest existing number in that scope+type and increment by 1.

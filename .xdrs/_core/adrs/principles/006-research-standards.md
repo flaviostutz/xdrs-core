@@ -58,7 +58,7 @@ Research documents are Markdown files placed inside a subject folder alongside d
 Examples:
 - `.xdrs/_core/adrs/principles/researches/001-research-and-decision-lifecycle.md`
 - `.xdrs/business-x/adrs/platform/researches/003-api-gateway-options.md`
-- `.xdrs/_local/edrs/ai/researches/002-model-serving-constraints.md`
+- `.xdrs/_local/edrs/application/researches/002-model-serving-constraints.md`
 
 **Research numbering**
 

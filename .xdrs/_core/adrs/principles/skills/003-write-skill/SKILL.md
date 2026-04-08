@@ -40,7 +40,7 @@ Quick test:
 **Subject** — pick the most specific match for the chosen type (see `003-skill-standards`):
 - ADR subjects: `principles`, `application`, `data`, `integration`, `platform`, `controls`, `operations`
 - BDR subjects: `principles`, `marketing`, `product`, `controls`, `operations`, `organization`, `finance`, `sustainability`
-- EDR subjects: `principles`, `application`, `infra`, `ai`, `observability`, `devops`, `governance`
+- EDR subjects: `principles`, `application`, `infra`, `observability`, `devops`, `governance`
 
 **Skill number** — scan `.xdrs/[scope]/[type]/[subject]/skills/` for the highest existing number and increment by 1. Never reuse numbers from deleted skills.
 

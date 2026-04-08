@@ -76,7 +76,7 @@ Main exports:
 
 - `testPrompt(config, inputPrompt, judgePrompt)` runs the task prompt, evaluates the result in a fresh judge session, and returns an empty string on success or a markdown bullet list on failure.
 - `runPromptTest(config, inputPrompt, judgePrompt)` returns the structured result object when you need access to captured output and the agent-reported changed file list.
-- `copilotCmd(workspaceRoot)` returns a ready-to-use `promptCmd` template for the Copilot CLI. The library uses that same command template for both the task and judge phases. If `workspaceRoot` is omitted it defaults to the current git repository root.
+- `copilotCmd(workspaceRoot)` returns a ready-to-use `promptCmd` template for the Copilot CLI in headless mode (`--autopilot`, full tool/url permissions, and `--no-ask-user`). The library uses that same command template for both the task and judge phases. If `workspaceRoot` is omitted it defaults to the current git repository root.
 - `config.workspaceRoot`, when set, is the authoritative workspace under test. If omitted, the library uses the current git repository root.
 
 Execution model:
