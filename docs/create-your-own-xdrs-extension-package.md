@@ -13,7 +13,7 @@ xdrs-core structure and extraction flow.
 Use `_local` only for project-only records that must stay inside one repository. Shared packages
 should publish a named scope such as `acme-platform` or `team-ml`, because scopes are the unit of
 ownership, distribution, and override ordering in XDRs. The root structure and precedence rules are
-defined in [_core-adr-001](../.xdrs/_core/adrs/principles/001-xdr-standards.md).
+defined in [_core-adr-001](../.xdrs/_core/adrs/principles/001-xdrs-core.md).
 
 ### Package the whole scope as a normal npm package
 
@@ -122,7 +122,7 @@ generated output, and re-run `check` when upgrading.
 
 ## References
 
-- [_core-adr-001](../.xdrs/_core/adrs/principles/001-xdr-standards.md) - Scope structure, precedence, and distribution model
+- [_core-adr-001](../.xdrs/_core/adrs/principles/001-xdrs-core.md) - Scope structure, precedence, and distribution model
 - [_core-adr-006](../.xdrs/_core/adrs/principles/006-research-standards.md) - Research placement and template rules
 - [_core-adr-003](../.xdrs/_core/adrs/principles/003-skill-standards.md) - Skill co-location and discovery rules
 - [_core-adr-004](../.xdrs/_core/adrs/principles/004-article-standards.md) - Article placement and template rules

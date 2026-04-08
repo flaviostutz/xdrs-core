@@ -17,7 +17,7 @@ same decision system.
   record the adopted direction. They are the central policy artifact of the framework for the
   scope and topic they cover. Three decision record types exist: **ADR** for architectural and
   technical decisions, **BDR** for business and operational decisions, and **EDR** for engineering
-  implementation decisions. See [_core-adr-001](../001-xdr-standards.md).
+  implementation decisions. See [_core-adr-001](../001-xdrs-core.md).
 - **Research** captures exploration before or around a decision: constraints, findings, options,
   pros, and cons. Research supports elaboration, discussion, approval, retirement, and updates,
   but it is not the final rule. A single Research document may inform multiple downstream ADRs,
@@ -128,7 +128,7 @@ guidance, and the explanatory overview close together without collapsing them in
 
 ### Guidelines
 
-Follow [_core-adr-001](../001-xdr-standards.md) strictly. Key rules:
+Follow [_core-adr-001](../001-xdrs-core.md) and [_core-adr-002](../002-xdr-standards.md) strictly. Key rules:
 
 - Use **mandatory language** (`must`, `never`, `required`) for non-negotiable rules and
   **advisory language** (`should`, `recommended`) for guidance.
@@ -167,7 +167,8 @@ Follow [_core-adr-001](../001-xdr-standards.md) strictly. Key rules:
 
 ## References
 
-- [_core-adr-001](../001-xdr-standards.md) - XDR standards and mandatory template
+- [_core-adr-001](../001-xdrs-core.md) - XDR elements: types, scopes, subjects, folder structure
+- [_core-adr-002](../002-xdr-standards.md) - XDR document standards and mandatory template
 - [_core-adr-003](../003-skill-standards.md) - Skill standards and co-location rules
 - [_core-adr-004](../004-article-standards.md) - Article standards
 - [_core-adr-006](../006-research-standards.md) - Research standards

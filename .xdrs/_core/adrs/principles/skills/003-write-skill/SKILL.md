@@ -18,12 +18,12 @@ Guides the creation of a well-structured skill package by following `_core-adr-0
 ### Phase 1: Understand the Skill Goal
 
 1. Read `.xdrs/_core/adrs/principles/003-skill-standards.md` in full to internalize the SKILL.md format, folder layout, and numbering rules.
-2. Read `.xdrs/_core/adrs/principles/001-xdr-standards.md` in full before defining any core element for the skill package. Treat it as the canonical source for type, scope, subject, numbering expectations, naming constraints, and folder placement rules.
+2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining any core element for the skill package. Treat it as the canonical source for type, scope, subject, numbering expectations, naming constraints, and folder placement rules.
 3. Identify what the skill must do, the concrete outcome it should produce, and the exact conditions under which an agent should activate it. Do NOT proceed without a clear goal, outcome, and activation trigger.
 
 ### Phase 2: Select Type, Scope, Subject, and Number
 
-Consult `001-xdr-standards` while making each choice in this phase. The summaries below are orientation only; when there is any ambiguity or edge case, the standard decides.
+Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when there is any ambiguity or edge case, the standard decides.
 
 **Type** — choose one based on the skill's activity:
 - **EDR skill**: engineering workflows, tool usage, coding procedures, implementation how-tos
@@ -125,7 +125,7 @@ If any check fails, revise before continuing.
 ### Constraints
 
 - MUST follow the agentskills SKILL.md format from `003-skill-standards` exactly.
-- MUST consult `001-xdr-standards` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
+- MUST consult `001-xdrs-core` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
 - MUST NOT create a skill that duplicates an existing one — extend or reference it instead.
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST include a References section linking to `003-skill-standards`.
@@ -155,5 +155,5 @@ If any check fails, revise before continuing.
 ## References
 
 - [_core-adr-003 - Skill standards](../../003-skill-standards.md)
-- [_core-adr-001 - XDR standards](../../001-xdr-standards.md)
+- [_core-adr-001 - XDRs core](../../001-xdrs-core.md)
 - [002-write-xdr skill](../002-write-xdr/SKILL.md)

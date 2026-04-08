@@ -17,13 +17,14 @@ Guides the creation of a well-structured XDR by following the standards in `_cor
 ### Phase 1: Understand the Decision
 
 1. Read `.xdrs/index.md` to discover all active scopes and their canonical indexes.
-2. Read `.xdrs/_core/adrs/principles/001-xdr-standards.md` in full to internalize structure rules, mandatory language, and the XDR template.
-3. Treat `.xdrs/_core/adrs/principles/001-xdr-standards.md` as the canonical source for all core XDR element definitions. Before choosing or writing any core element, consult it for the exact rules for type, scope, subject, ID, numbering, title, placement, and applicable folder structure instead of relying on memory or local convention.
-4. Ask the user (or infer from context) the topic of the decision. Do NOT proceed to Phase 2 without a clear topic.
+2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full to internalize structure rules, mandatory language, and the XDR framework elements.
+3. Read `.xdrs/_core/adrs/principles/002-xdr-standards.md` in full to internalize the XDR template and document writing rules.
+4. Treat `001-xdrs-core` as the canonical source for all core XDR element definitions (type, scope, subject, numbering, placement). Treat `002-xdr-standards` as the canonical source for how to write and structure the document itself.
+5. Ask the user (or infer from context) the topic of the decision. Do NOT proceed to Phase 2 without a clear topic.
 
 ### Phase 2: Select Type, Scope, and Subject
 
-Consult `001-xdr-standards` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
+Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
 
 **Type** — choose exactly one based on the nature of the decision:
 - **BDR**: business process, product policy, strategic rule, operational procedure
@@ -32,7 +33,7 @@ Consult `001-xdr-standards` while making each choice in this phase. The summarie
 
 **Scope** — use `_local` unless the user explicitly names another scope.
 
-**Subject** — pick one from the allowed list for the chosen type (from `001-xdr-standards`):
+**Subject** — pick one from the allowed list for the chosen type (from `001-xdrs-core`):
 - ADR: `principles`, `application`, `data`, `integration`, `platform`, `controls`, `operations`
 - BDR: `principles`, `marketing`, `product`, `controls`, `operations`, `organization`, `finance`, `sustainability`
 - EDR: `principles`, `application`, `infra`, `observability`, `devops`, `governance`
@@ -51,10 +52,11 @@ Choose a title that clearly states the question this XDR answers, not the answer
 ### Phase 4: Research Related XDRs
 
 1. Read all existing XDRs relevant to the topic across all scopes listed in `.xdrs/index.md`.
-2. Identify decisions that already address the topic (full or partial overlap).
-3. Note decisions that might conflict with the intended outcome.
-4. Read related `researches/` documents when they exist, especially if they contain constraints, findings, or option tradeoffs that should influence the decision.
-5. Collect XDR IDs and file paths for cross-references.
+2. Evaluate XDR metadata before treating any decision as a current constraint. `Status:` decides whether a decision is eligible to be used, and omitted `Status:` means `Active`; `Valid:` decides whether that active decision is currently in force, `Applied to:` decides whether it fits the current topic, and the decision text defines any remaining boundaries. Treat inactive, out-of-window, or out-of-scope XDRs as background only when assessing overlaps and conflicts.
+3. Identify decisions that already address the topic (full or partial overlap).
+4. Note decisions that might conflict with the intended outcome.
+5. Read related `researches/` documents when they exist, especially if they contain constraints, findings, or option tradeoffs that should influence the decision.
+6. Collect XDR IDs and file paths for cross-references.
 
 ### Phase 5: Check Redundancy Across Related Artifacts
 
@@ -67,7 +69,7 @@ Choose a title that clearly states the question this XDR answers, not the answer
 
 ### Phase 6: Write the First Draft
 
-Use the mandatory template from `001-xdr-standards`:
+Use the mandatory template from `002-xdr-standards`:
 
 ```
 # [scope]-[type]-[number]: [Short Title]
@@ -135,9 +137,15 @@ If any check fails, revise and re-run this phase before proceeding.
 
 ### Constraints
 
-- MUST follow the XDR template from `001-xdr-standards` exactly.
-- MUST consult `001-xdr-standards` as the canonical source for every core element definition, especially type, scope, subject, ID, numbering, naming, and placement.
+- MUST follow the XDR template from `002-xdr-standards` exactly.
+- MUST consult `001-xdrs-core` as the canonical source for element definitions (type, scope, subject, ID, numbering, naming, placement) and `002-xdr-standards` for document writing rules and template.
 - MUST NOT add personal opinions or general best-practice content not tied to a decision.
 - MUST NOT create an XDR that duplicates a decision already captured in another XDR — extend or reference instead.
 - MUST prefer links and short references over repeating the same decision content across related documents.
 - MUST keep scope `_local` unless the user explicitly states otherwise.
+
+## References
+
+- [_core-adr-001 - XDRs core](../../001-xdrs-core.md)
+- [_core-adr-002 - XDR standards](../../002-xdr-standards.md)
+- [_core-adr-003 - Skill standards](../../003-skill-standards.md)

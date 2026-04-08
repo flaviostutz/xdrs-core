@@ -18,7 +18,7 @@ Guides the creation of a well-structured research document by following `_core-a
 ### Phase 1: Understand the Research Goal
 
 1. Read `.xdrs/_core/adrs/principles/006-research-standards.md` in full to internalize the folder layout, numbering rules, and mandatory template.
-2. Read `.xdrs/_core/adrs/principles/001-xdr-standards.md` in full before defining the research document's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering expectations, naming constraints, and folder placement.
+2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining the research document's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering expectations, naming constraints, and folder placement.
 3. Ask the user to confirm the intended direction of the research before planning the document: what decision, question, or option space the study should support, what boundaries or exclusions apply, and what kind of outcome they expect.
 4. Ask the user what evidence already exists and what evidence-gathering methods are acceptable if the current evidence is incomplete. Do not invent facts, sources, or confidence that the user did not provide.
 5. Ask the user what the proposed next step is after the research, such as writing a new XDR, updating an existing XDR, informing a discussion, or documenting trade-offs for later. Use that answer to shape the framing without turning the research into the final decision.
@@ -29,7 +29,7 @@ Guides the creation of a well-structured research document by following `_core-a
 
 ### Phase 2: Select Scope, Type, Subject, and Number
 
-Consult `001-xdr-standards` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
+Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
 
 **Scope** — use `_local` unless the user explicitly names another scope.
 
@@ -45,9 +45,10 @@ Consult `001-xdr-standards` while making each choice in this phase. The summarie
 ### Phase 3: Research Existing Artifacts
 
 1. Read relevant XDRs across all scopes listed in `.xdrs/index.md`.
-2. Read existing research documents in the same or overlapping subjects to avoid duplicating the same study.
-3. Read related skills or articles if they contain context, implementation limits, or terminology that must be reflected.
-4. Collect links that should appear in the final `## References` section.
+2. Evaluate XDR metadata before treating any decision as current context. `Status:` decides whether a decision is eligible to be used, and omitted `Status:` means `Active`; `Valid:` decides whether that active decision is in force at the current moment, `Applied to:` decides whether it fits the intended task context, and the decision text defines any remaining boundaries. Keep inactive, out-of-window, or out-of-scope XDRs as background only.
+3. Read existing research documents in the same or overlapping subjects to avoid duplicating the same study.
+4. Read related skills or articles if they contain context, implementation limits, or terminology that must be reflected.
+5. Collect links that should appear in the final `## References` section.
 
 ### Phase 4: Create the Skeleton and Frame the Study
 
@@ -258,12 +259,12 @@ If any check fails, revise before continuing.
 ## References
 
 - [_core-adr-006 - Research standards](../../006-research-standards.md)
-- [_core-adr-001 - XDR standards](../../001-xdr-standards.md)
+- [_core-adr-001 - XDRs core](../../001-xdrs-core.md)
 - [002-write-xdr skill](../002-write-xdr/SKILL.md)
 
 ## Constraints
 
-- MUST consult `001-xdr-standards` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
+- MUST consult `001-xdrs-core` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
 - MUST follow the research template and section-goal rules from `006-research-standards`.
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST keep the document as research rather than turning it into a final decision.

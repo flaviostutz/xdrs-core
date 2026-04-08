@@ -121,7 +121,7 @@ Prefer tables, bullets, or ASCII art for simple comparisons. Use external figure
 
 ## References
 
-- [_core-adr-001 - XDR standards](001-xdr-standards.md)
+- [_core-adr-001 - XDRs core](001-xdrs-core.md)
 - [_core-adr-003 - Skill standards](003-skill-standards.md)
 - [_core-adr-004 - Article standards](004-article-standards.md)
 - [005-write-research skill](skills/005-write-research/SKILL.md) - Step-by-step instructions for creating a research document

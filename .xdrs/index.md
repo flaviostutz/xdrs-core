@@ -9,7 +9,7 @@ XDRs in scopes listed last override the ones listed first
 ### _core
 
 Decisions about how XDRs work
-[View general ADRs Index](_core/adrs/index.md)
+[View _core ADRs Index](_core/adrs/index.md)
 
 ---
 

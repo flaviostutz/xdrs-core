@@ -128,6 +128,6 @@ skills-ref validate .xdrs/[scope]/[type]/[subject]/skills/[number]-[skill-name]
 - [agentskills specification](https://agentskills.io/specification)
 - [agentskills/agentskills repository](https://github.com/agentskills/agentskills)
 - [skills-ref validation library](https://github.com/agentskills/agentskills/tree/main/skills-ref)
-- [_core-adr-001 - XDR standards](001-xdr-standards.md)
+- [_core-adr-001 - XDRs core](001-xdrs-core.md)
 - [_core-adr-004 - Article standards](004-article-standards.md)
 - [_core-adr-006 - Research standards](006-research-standards.md)

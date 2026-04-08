@@ -65,5 +65,5 @@ Option 3 is the best fit because it preserves the existing navigation model whil
 ## References
 
 - [_core-adr-006](../006-research-standards.md) - Decision that adopts research as a first-class artifact
-- [_core-adr-001](../001-xdr-standards.md) - Base XDR structure and references
+- [_core-adr-001](../001-xdrs-core.md) - Base XDR structure and references
 - [_core-adr-004](../004-article-standards.md) - Distinction between research and synthesis

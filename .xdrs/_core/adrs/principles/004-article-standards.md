@@ -78,7 +78,7 @@ when referencing an information from those documents.]
 
 ## References
 
-- [_core-adr-001 - XDR standards](001-xdr-standards.md)
+- [_core-adr-001 - XDRs core](001-xdrs-core.md)
 - [_core-adr-003 - Skill standards](003-skill-standards.md)
 - [_core-adr-006 - Research standards](006-research-standards.md)
 - [004-write-article skill](skills/004-write-article/SKILL.md) - Step-by-step instructions for creating a new article

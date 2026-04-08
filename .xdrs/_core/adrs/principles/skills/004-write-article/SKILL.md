@@ -17,13 +17,13 @@ Guides the creation of a well-structured article by following `_core-adr-004`, c
 
 1. Read `.xdrs/_core/adrs/principles/004-article-standards.md` in full to internalize the template,
    placement rules, numbering rules, and the constraint that articles are views, not decisions.
-2. Read `.xdrs/_core/adrs/principles/001-xdr-standards.md` in full before defining the article's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering, naming, and folder placement.
+2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining the article's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering, naming, and folder placement.
 3. Identify the topic and intended audience from user input or context. Do NOT proceed without a clear
    topic.
 
 ### Phase 2: Select Scope, Type, and Subject
 
-Consult `001-xdr-standards` while making each choice in this phase. The summaries below are orientation only; when any detail is unclear, the standard decides.
+Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when any detail is unclear, the standard decides.
 
 **Scope** — use `_local` unless the user explicitly names another scope.
 
@@ -117,13 +117,13 @@ Rules to apply while drafting:
 
 ## Constraints
 
-- MUST consult `001-xdr-standards` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
+- MUST consult `001-xdrs-core` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
 - MUST follow the article template and placement rules from `004-article-standards`.
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST defer to active and applicable XDRs when article synthesis conflicts with them.
 
 ## References
 
-- [_core-adr-004 - Article standards](../../../.xdrs/_core/adrs/principles/004-article-standards.md)
-- [_core-adr-006 - Research standards](../../../.xdrs/_core/adrs/principles/006-research-standards.md)
-- [_core-adr-001 - XDR standards](../../../.xdrs/_core/adrs/principles/001-xdr-standards.md)
+- [_core-adr-004 - Article standards](../../004-article-standards.md)
+- [_core-adr-006 - Research standards](../../006-research-standards.md)
+- [_core-adr-001 - XDRs core](../../001-xdrs-core.md)
