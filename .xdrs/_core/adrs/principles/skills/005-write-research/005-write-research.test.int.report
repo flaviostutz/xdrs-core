@@ -6,5 +6,17 @@
       "AGENTS.md"
     ],
     "contextHash": "3dcbcc0a03f4d3b2a797c28165f6f68a"
+  },
+  "Create a very small research document wi-ea3740cd": {
+    "result": "success",
+    "contextFiles": [
+      ".xdrs/_core/adrs/principles/001-xdrs-core.md",
+      ".xdrs/_core/adrs/principles/006-research-standards.md",
+      ".xdrs/_local/bdrs/index.md",
+      ".xdrs/_local/edrs/devops/researches/001-pnpm-vs-yarn-install-speed-monorepo.md",
+      ".xdrs/index.md",
+      "AGENTS.md"
+    ],
+    "contextHash": "a8ffde30ac3757f1185fee620f526720"
   }
 }

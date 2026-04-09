@@ -4,6 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const STATE_FILE = '.xdrs-test-state.json';
+
 const args = process.argv.slice(2);
 
 if (args.includes('--version')) {
@@ -26,6 +28,11 @@ const workspace = readLastOptionValue(args, '--add-dir') || process.cwd();
 
 if (prompt.startsWith('RUN PHASE')) {
 	handleTaskPrompt(prompt, workspace);
+	process.exit(0);
+}
+
+if (prompt.startsWith('FILES PHASE')) {
+	handleFilesPrompt(workspace);
 	process.exit(0);
 }
 
@@ -86,7 +93,7 @@ function handleTaskPrompt(fullPrompt, workspacePath) {
 			'- [_core-adr-001 - XDRs core](../../../../../_core/adrs/principles/001-xdrs-core.md) - Provides the broader artifact conventions'
 		].join('\n');
 		fs.writeFileSync(filePath, `${content}\n`, 'utf8');
-		writeTaskResult(`Created ${relativePath}.`, [relativePath]);
+		saveTaskState(workspacePath, `Created ${relativePath}.`, [relativePath], [], originalPrompt);
 		return;
 	}
 
@@ -98,35 +105,39 @@ function handleTaskPrompt(fullPrompt, workspacePath) {
 			'- 90% of customers are older than 20 years.'
 		].join('\n');
 		fs.writeFileSync(path.join(workspacePath, 'customer-research.md'), `${content}\n`, 'utf8');
-		writeTaskResult('Created customer-research.md with the prompt facts.', ['customer-research.md'], ['seed.txt']);
+		saveTaskState(workspacePath, 'Created customer-research.md with the prompt facts.', ['customer-research.md'], ['seed.txt'], originalPrompt);
 		return;
 	}
 
 	if (originalPrompt.includes('workspace-filter-check')) {
 		const files = fs.readdirSync(workspacePath);
-		writeTaskResult(`Files in workspace: ${files.join(', ')}`, [], files.filter((f) => !f.startsWith('.')));
+		saveTaskState(workspacePath, `Files in workspace: ${files.join(', ')}`, [], files.filter((f) => !f.startsWith('.')), originalPrompt);
 		return;
 	}
 
 	if (originalPrompt.includes('summary.txt')) {
 		fs.writeFileSync(path.join(workspacePath, 'summary.txt'), 'behavior ok\n', 'utf8');
-		writeTaskResult('Created summary.txt with behavior ok.', ['summary.txt'], ['seed.txt']);
+		saveTaskState(workspacePath, 'Created summary.txt with behavior ok.', ['summary.txt'], ['seed.txt'], originalPrompt);
 		return;
 	}
 
-	writeTaskResult('No changes made.', []);
+	saveTaskState(workspacePath, 'No changes made.', [], [], originalPrompt);
+}
+
+function handleFilesPrompt(workspacePath) {
+	const state = readTaskState(workspacePath);
+	process.stdout.write(`${JSON.stringify({ readFiles: state.readFiles, writeFiles: state.writeFiles })}\n`);
 }
 
 function handleJudgePrompt(fullPrompt, workspacePath) {
-	const originalPrompt = extractSection(fullPrompt, '<ORIGINAL TASK PROMPT>', '</ORIGINAL TASK PROMPT>');
-	const taskOutput = extractSection(fullPrompt, '<ORIGINAL TASK OUTPUT>', '</ORIGINAL TASK OUTPUT>');
-	const reportedChangesRaw = extractSection(fullPrompt, '<ORIGINAL TASK REPORTED CHANGES JSON>', '</ORIGINAL TASK REPORTED CHANGES JSON>');
-	const reportedChanges = JSON.parse(reportedChangesRaw || '[]');
-	const contextFilesEndMarker = '</ORIGINAL TASK REPORTED CONTEXT FILES JSON>';
-	const contextFilesEndIndex = fullPrompt.lastIndexOf(contextFilesEndMarker);
-	const assertionPrompt = contextFilesEndIndex !== -1
-		? fullPrompt.slice(contextFilesEndIndex + contextFilesEndMarker.length).trim()
-		: '';
+	const state = readTaskState(workspacePath);
+	const taskOutput = state.text;
+	const reportedChanges = state.writeFiles;
+	const originalPrompt = state.originalPrompt;
+	const instructionsEnd = fullPrompt.lastIndexOf('</INSTRUCTIONS>');
+	const assertionPrompt = instructionsEnd !== -1
+		? fullPrompt.slice(instructionsEnd + '</INSTRUCTIONS>'.length).trim()
+		: fullPrompt;
 	const findings = [];
 	const requiredResearchHeadings = [
 		'## Abstract',
@@ -239,8 +250,18 @@ function handleJudgePrompt(fullPrompt, workspacePath) {
 	process.stdout.write(`${JSON.stringify({ pass: findings.length === 0, findings })}\n`);
 }
 
-function writeTaskResult(text, changedFiles, contextFiles = []) {
-	process.stdout.write(`${JSON.stringify({ text, changedFiles, contextFiles })}\n`);
+function saveTaskState(workspacePath, text, writeFiles, readFiles, originalPrompt) {
+	const state = { text, writeFiles, readFiles, originalPrompt };
+	fs.writeFileSync(path.join(workspacePath, STATE_FILE), `${JSON.stringify(state)}\n`, 'utf8');
+	process.stdout.write(`${text}\n`);
+}
+
+function readTaskState(workspacePath) {
+	try {
+		return JSON.parse(fs.readFileSync(path.join(workspacePath, STATE_FILE), 'utf8'));
+	} catch {
+		return { text: '', writeFiles: [], readFiles: [], originalPrompt: '' };
+	}
 }
 
 function fileFinding(filePath, line, message, assertionRef) {
@@ -287,15 +308,6 @@ function findLine(content, searchText) {
 
 function findSectionLine(content, heading) {
 	return findLine(content, heading);
-}
-
-function extractSection(text, startMarker, endMarker) {
-	const startIndex = text.indexOf(startMarker);
-	const endIndex = text.indexOf(endMarker);
-	if (startIndex === -1 || endIndex === -1 || endIndex <= startIndex) {
-		return '';
-	}
-	return text.slice(startIndex + startMarker.length, endIndex).trim();
 }
 
 function readOptionValue(values, flag) {
