@@ -51,7 +51,7 @@ harder to update, and harder for agents to apply correctly.
 
 Before treating an XDR as a rule for the current case, check its metadata first.
 
-- **Status first**: only `Active` decisions can be current policy, and omitted `Status` should be treated as `Active`. `Draft` and `Deprecated` are background or historical context.
+- **Status first**: only `Active` decisions can be current policy, and omitted `Status` is treated as `Active`. `Draft` and `Deprecated` are background or historical context.
 - **Valid second**: if present, the current moment must fall inside the decision's date window.
 - **Applied to third**: if present, the current codebase, workflow, system, or audience must fit that scope.
 - **Decision text last**: the XDR's own context and implementation details still determine the final boundaries and exceptions.
@@ -136,7 +136,7 @@ Follow [_core-adr-001](../001-xdrs-core.md) and [_core-adr-002](../002-xdr-stand
 - Use **mandatory language** (`must`, `never`, `required`) for non-negotiable rules and
   **advisory language** (`should`, `recommended`) for guidance.
 - Before citing an XDR as a requirement, check `Status` first, treating omission as `Active`, then `Valid`, then `Applied to`, and finally the decision text to confirm the decision is active and in scope for the current case.
-- Keep XDRs under 1300 words. Move procedural detail to a co-located Skill.
+- Keep XDRs under 1300 words as a rule of thumb (exceptions up to 2600 words for templates or more elaborate decisions). Move procedural detail to a co-located Skill.
 - Keep exploratory option analysis in a co-located Research document instead of bloating the XDR.
 - Always update the scope+type index and the root index after adding or changing an XDR.
 - Use `_local` scope when a decision is project-specific and must not be shared.

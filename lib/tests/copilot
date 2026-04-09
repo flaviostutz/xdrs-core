@@ -95,13 +95,13 @@ function handleTaskPrompt(fullPrompt, workspacePath) {
 			'- 90% of customers are older than 20 years.'
 		].join('\n');
 		fs.writeFileSync(path.join(workspacePath, 'customer-research.md'), `${content}\n`, 'utf8');
-		writeTaskResult('Created customer-research.md with the prompt facts.', ['customer-research.md']);
+		writeTaskResult('Created customer-research.md with the prompt facts.', ['customer-research.md'], ['seed.txt']);
 		return;
 	}
 
 	if (originalPrompt.includes('summary.txt')) {
 		fs.writeFileSync(path.join(workspacePath, 'summary.txt'), 'behavior ok\n', 'utf8');
-		writeTaskResult('Created summary.txt with behavior ok.', ['summary.txt']);
+		writeTaskResult('Created summary.txt with behavior ok.', ['summary.txt'], ['seed.txt']);
 		return;
 	}
 
@@ -216,8 +216,8 @@ function handleJudgePrompt(fullPrompt, workspacePath) {
 	process.stdout.write(`${JSON.stringify({ pass: findings.length === 0, findings })}\n`);
 }
 
-function writeTaskResult(summary, changedFiles) {
-	process.stdout.write(`${JSON.stringify({ summary, changedFiles })}\n`);
+function writeTaskResult(summary, changedFiles, readFiles = []) {
+	process.stdout.write(`${JSON.stringify({ summary, changedFiles, readFiles })}\n`);
 }
 
 function fileFinding(filePath, line, message, assertionRef) {
