@@ -1,0 +1,14 @@
+{
+  "Create a skill with instructions on how -a7079882": {
+    "result": "success",
+    "contextFiles": [
+      ".xdrs/_core/adrs/principles/001-xdrs-core.md",
+      ".xdrs/_core/adrs/principles/003-skill-standards.md",
+      ".xdrs/_local/bdrs/index.md",
+      ".xdrs/_local/bdrs/operations/001-agent-behavior-validation-procedure.md",
+      ".xdrs/index.md",
+      "AGENTS.md"
+    ],
+    "contextHash": "738b99bad5adfe36fa14191c6c31ddab"
+  }
+}

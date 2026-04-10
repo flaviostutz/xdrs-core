@@ -1,22 +1,15 @@
 {
-  "Reply ONLY with \"READY\" after checking i-a61b0904": {
+  "Create a very small research document wi-7896a781": {
     "result": "success",
     "contextFiles": [
-      ".xdrs/_core/adrs/principles/skills/001-lint/SKILL.md",
-      "AGENTS.md"
-    ],
-    "contextHash": "3dcbcc0a03f4d3b2a797c28165f6f68a"
-  },
-  "Create a very small research document wi-ea3740cd": {
-    "result": "success",
-    "contextFiles": [
+      ".github/skills/005-write-research/005-write-research.test.int.js",
+      ".xdrs/_core/adrs/index.md",
       ".xdrs/_core/adrs/principles/001-xdrs-core.md",
       ".xdrs/_core/adrs/principles/006-research-standards.md",
-      ".xdrs/_local/bdrs/index.md",
-      ".xdrs/_local/edrs/devops/researches/001-pnpm-vs-yarn-install-speed-monorepo.md",
+      ".xdrs/_local/edrs/languages/researches/001-java-vs-python-for-datascience.md",
       ".xdrs/index.md",
       "AGENTS.md"
     ],
-    "contextHash": "a8ffde30ac3757f1185fee620f526720"
+    "contextHash": "2f06eb73c19194e53321d4b75c0fc214"
   }
 }

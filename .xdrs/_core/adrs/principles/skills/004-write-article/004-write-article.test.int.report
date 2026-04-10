@@ -1,0 +1,17 @@
+{
+  "Create a short article for new users exp-73060d4f": {
+    "result": "success",
+    "contextFiles": [
+      ".xdrs/_core/adrs/index.md",
+      ".xdrs/_core/adrs/principles/001-xdrs-core.md",
+      ".xdrs/_core/adrs/principles/004-article-standards.md",
+      ".xdrs/_core/adrs/principles/articles/001-xdrs-overview.md",
+      ".xdrs/_local/bdrs/index.md",
+      ".xdrs/_local/bdrs/operations/001-agent-behavior-validation-procedure.md",
+      ".xdrs/index.md",
+      "AGENTS.md",
+      "README.md"
+    ],
+    "contextHash": "75745a424155326ee56008bcf923999e"
+  }
+}

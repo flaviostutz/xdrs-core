@@ -27,8 +27,9 @@ Collectively, these are referred to as XDRs.
 - Make it clear if an instruction is mandatory or advisory.
   - Mandatory language: "must", "always", "never", "required", "mandatory"
   - Advisory language: "should", "recommended", "advised", "preferably", "possibly", "optionally"
-- Always use the following folder structure for XDR documents:
+- ALWAYS use the following folder structure for XDR documents:
   `.xdrs/[scope]/[type]/[subject]/[number]-[short-title].md`
+- ALWAYS ignore symlinks paths. NEVER create or update documents inside symlinked folders.
 - Optional supporting artifacts under the same subject:
   - `.xdrs/[scope]/[type]/[subject]/researches/[number]-[short-title].md`
   - `.xdrs/[scope]/[type]/[subject]/skills/[number]-[skill-name]/SKILL.md`
