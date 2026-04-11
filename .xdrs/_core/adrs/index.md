@@ -14,12 +14,6 @@ Foundational standards, principles, and guidelines.
 - [_core-adr-006](principles/006-research-standards.md) - **Research standards** — How to structure research documents backing XDR decisions
 - [_core-adr-007](principles/007-plan-standards.md) - **Plan standards** — How to structure ephemeral execution plans that implement decisions
 
-## Research
-
-Exploratory documents that back decisions during their lifecycle.
-
-- [_core-research-001](principles/researches/001-research-and-decision-lifecycle.md) - **Research and decision lifecycle** (how research supports XDRs, skills, and articles)
-
 ## Skills
 
 Step-by-step procedural guides for humans and AI agents.

@@ -1,4 +1,4 @@
-# _core-research-001: Research and decision lifecycle
+# _local-research-001: Research and decision lifecycle
 
 ## Abstract
 

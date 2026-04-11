@@ -59,7 +59,7 @@ Research documents are Markdown files placed inside a subject folder alongside d
 ```
 
 Examples:
-- `.xdrs/_core/adrs/principles/researches/001-research-and-decision-lifecycle.md`
+- `.xdrs/_local/adrs/principles/researches/001-research-and-decision-lifecycle.md`
 - `.xdrs/business-x/adrs/platform/researches/003-api-gateway-options.md`
 - `.xdrs/_local/edrs/application/researches/002-model-serving-constraints.md`
 
@@ -115,7 +115,7 @@ Prefer tables, bullets, or ASCII art for simple comparisons. Use external figure
 
 ## Considered Options
 
-- Related research: [001-research-and-decision-lifecycle](researches/001-research-and-decision-lifecycle.md)
+- Related research: [001-research-and-decision-lifecycle](../../../_local/adrs/principles/researches/001-research-and-decision-lifecycle.md)
 
 * (REJECTED) **Inline long-form analysis inside the XDR** - Put all research and decision text in one file.
   * Reason: Makes XDRs too long, mixes evidence with the adopted rule set, and hurts fast retrieval by humans and AI agents.
