@@ -2,13 +2,13 @@
   "Create a very small XDR deciding to use -8b1a2ddd": {
     "result": "success",
     "contextFiles": [
+      ".xdrs/_core/adrs/index.md",
       ".xdrs/_core/adrs/principles/001-xdrs-core.md",
       ".xdrs/_core/adrs/principles/002-xdr-standards.md",
-      ".xdrs/_local/bdrs/index.md",
-      ".xdrs/_local/bdrs/operations/001-agent-behavior-validation-procedure.md",
+      ".xdrs/_core/adrs/principles/skills/002-write-xdr/SKILL.md",
       ".xdrs/index.md",
       "AGENTS.md"
     ],
-    "contextHash": "5ceaa69409aa5eff1728d3a4212865a0"
+    "contextHash": "8d030307248237f1775ab38126d354db"
   }
 }

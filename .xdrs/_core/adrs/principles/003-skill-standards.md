@@ -39,6 +39,8 @@ Place a skill under the XDR type that matches the nature of the activity the ski
 - **ADR skills** - architectural evaluation, pattern compliance checks, technology selection guidance (e.g. how to review an architecture diagram, how to assess API design)
 - **BDR skills** - business process execution, market analysis, operations procedures, business rules
 
+The `[subject]` component in the folder path MUST be one of the allowed subjects for the chosen type. The required list of allowed subjects per type is defined in `_core-adr-001`.
+
 Quick test:
 - "Is the skill about *how to implement or operate* something?" → EDR.
 - "Is the skill about *how to evaluate or decide on* architecture?" → ADR.

@@ -39,7 +39,7 @@ Consult `001-xdrs-core` while making each choice in this phase. The summaries be
 - **ADR**: system context, integration pattern, overarching architectural choice
 - **EDR**: specific tool/library, coding practice, testing strategy, project structure, pipelines
 
-**Subject** — pick the subject that best matches the plan's topic. If the plan spans more than one subject, place it in `principles`.
+**Subject** — pick the subject that best matches the plan's topic (required list per type is in `_core-adr-001`). If the plan spans more than one subject, place it in `principles`.
 
 ### Phase 3: Assign a Number and Name
 
@@ -75,11 +75,11 @@ Use the mandatory template from `007-plan-standards`:
 
 [Required. What we expect to achieve. Under 200 words.]
 
+Expected end date: YYYY-MM-DD
+
 ## Acceptance Criteria
 
 [Optional. Expected result and how to verify the goal is achieved. Under 100 words.]
-
-Expected end date: YYYY-MM-DD
 
 ## Approach
 
@@ -110,7 +110,7 @@ Rules to apply while drafting:
 
 - Focus on the problem, solution, and approach. Avoid bloating with generic project management content.
 - Link to Decisions the plan implements, Research that informs it, and Skills that guide execution.
-- The Expected end date must be in ISO format (YYYY-MM-DD) and should not be more than 2 years from the plan creation date.
+- The Expected end date must be in ISO format (YYYY-MM-DD), placed inside the `## Proposed Solution` section, and should not be more than 2 years from the plan creation date.
 - If the plan scope is too large for 2 years, break it into multiple plans.
 - Remember that this plan must be deleted after full implementation. Write it with that ephemeral nature in mind.
 - Prefer plain Markdown, tables, or ASCII art for structure and flow.

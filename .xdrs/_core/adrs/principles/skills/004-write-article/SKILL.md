@@ -48,7 +48,7 @@ If the topic spans multiple types, use `adrs`. Use the same rules as `002-write-
 - **ADR**: system context, integration pattern, overarching architectural choice
 - **EDR**: specific tool/library, coding practice, testing strategy, project structure, pipelines
 
-**Subject** — pick the subject that best matches the article's topic (see `004-article-standards`).
+**Subject** — pick the subject that best matches the article's topic (required list per type is in `_core-adr-001`).
 If the article spans more than one subject, place it in `principles`.
 
 ### Phase 3: Assign a Number and Name

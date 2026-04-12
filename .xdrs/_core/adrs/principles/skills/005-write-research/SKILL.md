@@ -42,7 +42,7 @@ Consult `001-xdrs-core` while making each choice in this phase. The summaries be
 - **ADR**: system context, integration pattern, overarching architectural choice
 - **EDR**: specific tool/library, coding practice, testing strategy, project structure, pipelines
 
-**Subject** — pick the most specific subject that matches the problem domain.
+**Subject** — pick the most specific subject that matches the problem domain (required list per type is in `_core-adr-001`).
 
 **Research number** — scan `.xdrs/[scope]/[type]/[subject]/researches/` for the highest existing number and increment by 1. Never reuse numbers from deleted research documents.
 

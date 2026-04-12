@@ -37,7 +37,7 @@ Quick test:
 
 **Scope** — use `_local` unless the user explicitly names another scope.
 
-**Subject** — pick the most specific match for the chosen type (see `003-skill-standards`):
+**Subject** — pick the most specific match for the chosen type (required list per type is in `_core-adr-001`):
 - ADR subjects: `principles`, `application`, `data`, `integration`, `platform`, `controls`, `operations`
 - BDR subjects: `principles`, `marketing`, `product`, `controls`, `operations`, `organization`, `finance`, `sustainability`
 - EDR subjects: `principles`, `application`, `infra`, `observability`, `devops`, `governance`

@@ -18,6 +18,7 @@ Research documents are Markdown files placed inside a subject folder alongside d
 - `Research` is the artifact name. `researches/` is only the folder name used alongside `skills/` and `articles/`.
 - Research documents MUST live under `researches/` inside the relevant subject folder:
   `.xdrs/[scope]/[type]/[subject]/researches/[number]-[short-title].md`
+- The `[subject]` component MUST be one of the allowed subjects for the chosen type. The required list of allowed subjects per type is defined in `_core-adr-001`.
 - Research documents SHOULD stay focused on one investigated problem, comparison, or hypothesis.
 - Research documents MUST state clearly what problem or question is being investigated, the relevant system or domain context, and why the subject matters in practice.
 - Research documents MUST follow this section order: `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`, `References`.

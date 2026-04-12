@@ -22,7 +22,8 @@ Plans are Markdown documents placed inside a subject folder alongside decision r
 - A plan can be high level, describing only one milestone, or more complex, describing a WBS (work breakdown structure) along with owners, multiple milestones in a tactical sequence, and checklists to verify completeness. Actual tasks performed by actors should normally be tracked in specialized software such as GitHub or Azure DevOps.
 - The total time to deliver a plan should not be more than 2 years. If more time is needed, create a new plan later with what was learned.
 - Plans MUST live under `plans/` inside the relevant subject folder: `.xdrs/[scope]/[type]/[subject]/plans/[number]-[short-title].md`
-- Plans MUST include an `Expected end date:` field in ISO format (YYYY-MM-DD).
+- The `[subject]` component MUST be one of the allowed subjects for the chosen type. The required list of allowed subjects per type is defined in `_core-adr-001`.
+- Plans MUST include an `Expected end date:` field in ISO format (YYYY-MM-DD) inside the `## Proposed Solution` section.
 - Always use lowercase file names.
 - Never use emojis in plan content.
 - Images and other local resource files referenced by a plan SHOULD live in `plans/assets/` next to the plan files.
@@ -70,11 +71,11 @@ E.g.: Our checkout abandon rate is 50%, and it's increasing over time.]
 [Required. What we expect to achieve to solve the problem described above. Under 200 words.
 E.g.: Reduce payment time in our App by 30% and fix the 3 most impactful bugs.]
 
+Expected end date: YYYY-MM-DD
+
 ## Acceptance Criteria
 
 [Optional. Used to make it clear what the expected result is and to create a way to verify when the goal is achieved. May include a short checklist. Under 100 words.]
-
-Expected end date: YYYY-MM-DD
 
 ## Approach
 
