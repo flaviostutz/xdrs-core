@@ -6,12 +6,14 @@ description: >
   Activate this skill when the user asks to create, add, or write a research document that backs a decision.
 metadata:
   author: flaviostutz
-  version: "1.3"
+  version: "1.4"
 ---
 
 ## Overview
 
 Guides the creation of a well-structured research document by following `_core-adr-006`, consulting `xdr-standards` for every core element definition, checking related XDRs and existing research to avoid duplication, and producing an IMRAD-based study that reads as a standalone technical paper. Treat each section goal in the research template as an acceptance criterion, not as optional wording. Do not assume missing direction, evidence, or intended follow-up; ask the user explicitly before proceeding when those points are not already concrete.
+
+This skill is interactive by design. Ask clarifying questions to the user at each phase where direction, evidence, or scope is unclear. Ask sequentially — one focused set of questions at a time — and wait for the user's answers before advancing to the next phase. Never front-load all questions at once if not all are yet relevant.
 
 ## Instructions
 
@@ -19,15 +21,17 @@ Guides the creation of a well-structured research document by following `_core-a
 
 1. Read `.xdrs/_core/adrs/principles/006-research-standards.md` in full to internalize the folder layout, numbering rules, and mandatory template.
 2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining the research document's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering expectations, naming constraints, and folder placement.
-3. Ask the user to confirm the intended direction of the research before planning the document: what decision, question, or option space the study should support, what boundaries or exclusions apply, and what kind of outcome they expect.
-4. Ask the user what evidence already exists and what evidence-gathering methods are acceptable if the current evidence is incomplete. Do not invent facts, sources, or confidence that the user did not provide.
-5. Ask the user what the proposed next step is after the research, such as writing a new XDR, updating an existing XDR, informing a discussion, or documenting trade-offs for later. Use that answer to shape the framing without turning the research into the final decision.
+3. Ask the user to confirm the intended direction of the research before planning the document: what decision, question, or option space the study should support, what boundaries or exclusions apply, and what kind of outcome they expect. Wait for the answers before proceeding.
+4. Ask the user what evidence already exists and what evidence-gathering methods are acceptable if the current evidence is incomplete. Do not invent facts, sources, or confidence that the user did not provide. Wait for the answers before proceeding.
+5. Ask the user what the proposed next step is after the research, such as writing a new XDR, updating an existing XDR, informing a discussion, or documenting trade-offs for later. Use that answer to shape the framing without turning the research into the final decision. Wait for the answers before proceeding.
 6. Identify the problem or question being explored, the relevant system or domain context, the likely technical audience, and why the subject matters in practice.
 7. Internalize the goal of each required section before drafting: `Abstract` gives a quick technical reader the question, method, main result, and takeaway, `Introduction` frames the investigated problem and context, `Methods` makes the important parts reproducible, `Results` records raw findings with minimal interpretation, `Discussion` interprets the findings, `Conclusion` summarizes the practical takeaway and boundaries, and `References` makes sources traceable.
 8. Collect the main constraints, known facts, important experiences, gaps, and assumptions that belong in the introduction.
-9. Do NOT proceed without a clear problem statement, a central question, explicit user direction, an understood next step, and at least one credible source of evidence or a method for generating it. If any of these are ambiguous, stop and ask instead of assuming.
+9. Do NOT proceed without a clear problem statement, a central question, explicit user direction, an understood next step, and at least one credible source of evidence or a method for generating it. If any of these are ambiguous, use `vscode_askQuestions` to ask the user instead of assuming. After receiving answers, evaluate whether any response introduces new ambiguity and, if so, ask a follow-up set of questions before proceeding.
 
 ### Phase 2: Select Scope, Type, Subject, and Number
+
+If the answers from Phase 1 leave scope, type, or subject ambiguous, use `vscode_askQuestions` to present the candidate options with a brief rationale for each and ask the user to confirm the selection before proceeding. If the user's answer raises a related uncertainty, ask a follow-up question to resolve it before locking the selection.
 
 Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
 
@@ -54,12 +58,14 @@ Consult `001-xdrs-core` while making each choice in this phase. The summaries be
 
 1. Create the final section skeleton in the research file before running the study: `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`, `References`.
 2. Write a one-line note under each section heading capturing that section's goal before filling in the content so the draft stays disciplined.
-3. Draft `## Introduction` early so the problem, scope, constraints, assumptions, and central question are fixed before evidence collection expands.
-4. Draft `## Methods` before or while executing the study so tools, data sources, and conditions are captured while they are still precise.
+3. Draft `## Introduction` early so the problem, scope, constraints, assumptions, and central question are fixed before evidence collection expands. If the central research question is still unclear after Phase 1, use `vscode_askQuestions` to confirm it in a single focused question before drafting the introduction. If the answer reveals further ambiguity, ask one more targeted follow-up before proceeding.
+4. Draft `## Methods` before or while executing the study so tools, data sources, and conditions are captured while they are still precise. If the study design is uncertain, use `vscode_askQuestions` to clarify which methods or data sources are applicable before committing to a design. Follow up if the answer leaves the design still unclear.
 5. Treat `## Abstract` as a late-stage summary. Do not try to finalize it yet.
 6. Keep process framing out of the body. If related ADRs or repository context matter, push that traceability to `## References` unless it is essential to the technical question itself.
 
 ### Phase 5: Capture Evidence as the Study Runs
+
+If at any point during evidence collection a significant gap appears, an assumption cannot be verified, or a new branch of the question emerges, pause and use `vscode_askQuestions` to ask the user a focused question before continuing. If the answer resolves one gap but reveals another, ask a follow-up question immediately. Do not proceed past a critical gap by guessing.
 
 1. As experiments, comparisons, code spikes, interviews, benchmarks, or document reviews happen, append the concrete findings to `## Results` continuously.
 2. Prefer capturing tables, bullet points, numbers, code outputs, and option comparisons while the evidence is fresh.
@@ -68,6 +74,8 @@ Consult `001-xdrs-core` while making each choice in this phase. The summaries be
 5. Keep interpretation out of `## Results`; record observations first and save meaning-making for `## Discussion`.
 
 ### Phase 6: Synthesize After Results Stabilize
+
+If the results contain competing interpretations or the intended audience for the conclusions is unclear, use `vscode_askQuestions` to ask the user a focused question before writing the discussion. Keep the question specific to a single open point. If the answer raises a further interpretive uncertainty, ask one targeted follow-up before writing.
 
 1. Write `## Discussion` only after the important findings are visible in `## Results`.
 2. Use `## Discussion` to interpret significance, trade-offs, limitations, implications, and performance considerations for technical readers.

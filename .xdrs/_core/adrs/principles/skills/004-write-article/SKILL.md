@@ -13,12 +13,27 @@ Guides the creation of a well-structured article by following `_core-adr-004`, c
 
 ## Instructions
 
+### Phase 0: Clarify Intent
+
+Before reading any standards, ask the user clarifying questions to gather the information needed to proceed. Use the `vscode_askQuestions` tool with all questions in a single call.
+
+Mandatory questions (ask only if not already provided by the user):
+- **Topic**: What is the article about? (skip if the user already stated it)
+- **Audience**: Who is the intended reader? (e.g., new developers, product managers, external contributors) MUST always be asked explicitly; never infer from context.
+- **Scope**: Which XDR scope should contain the article? (default is `_local`; confirm or ask only if context is ambiguous)
+
+Optional questions (ask only when genuinely unclear):
+- **Type**: Should the article primarily synthesize ADRs, BDRs, or EDRs? Ask only when the topic spans multiple types.
+- **Existing XDRs**: Are there specific Decision Records or Skills you want the article to reference or synthesize?
+
+Do NOT proceed to Phase 1 until you have at minimum a clear **topic** and **audience**.
+
 ### Phase 1: Understand the Article Goal
 
 1. Read `.xdrs/_core/adrs/principles/004-article-standards.md` in full to internalize the template,
    placement rules, numbering rules, and the constraint that articles are views, not decisions.
 2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining the article's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering, naming, and folder placement.
-3. Identify the topic and intended audience from user input or context. Do NOT proceed without a clear
+3. Confirm the topic and intended audience gathered in Phase 0. Do NOT proceed without a clear
    topic.
 
 ### Phase 2: Select Scope, Type, and Subject

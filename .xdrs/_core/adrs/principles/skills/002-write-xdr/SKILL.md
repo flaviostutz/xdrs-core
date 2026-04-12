@@ -21,6 +21,9 @@ Guides the creation of a well-structured XDR by following the standards in `_cor
 3. Read `.xdrs/_core/adrs/principles/002-xdr-standards.md` in full to internalize the XDR template and document writing rules.
 4. Treat `001-xdrs-core` as the canonical source for all core XDR element definitions (type, scope, subject, numbering, placement). Treat `002-xdr-standards` as the canonical source for how to write and structure the document itself.
 5. Ask the user (or infer from context) the topic of the decision. Do NOT proceed to Phase 2 without a clear topic.
+   - Ask one focused clarifying question at a time. Wait for the answer before asking the next question.
+   - Each answer may reveal new ambiguities; ask follow-up questions as needed until the topic, intent, and scope are unambiguous.
+   - Stop asking and proceed only when the decision topic is fully understood.
 
 ### Phase 2: Select Type, Scope, and Subject
 
@@ -37,6 +40,8 @@ Consult `001-xdrs-core` while making each choice in this phase. The summaries be
 - ADR: `principles`, `application`, `data`, `integration`, `platform`, `controls`, `operations`
 - BDR: `principles`, `marketing`, `product`, `controls`, `operations`, `organization`, `finance`, `sustainability`
 - EDR: `principles`, `application`, `infra`, `observability`, `devops`, `governance`
+
+When type, scope, or subject cannot be confidently inferred, ask the user a clarifying question before proceeding. Ask one question at a time and wait for the answer; follow up if the response introduces new ambiguity.
 
 **XDR ID** — format: `[scope]-[type]-[next available number]`
 - Scan `.xdrs/[scope]/[type]/` for the highest existing number in that scope+type and increment by 1.

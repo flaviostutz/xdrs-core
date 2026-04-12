@@ -19,7 +19,13 @@ Guides the creation of a well-structured plan document by following `_core-adr-0
 
 1. Read `.xdrs/_core/adrs/principles/007-plan-standards.md` in full to internalize the template, placement rules, numbering rules, and the constraint that plans are ephemeral and must be deleted after implementation.
 2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining the plan's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering, naming, and folder placement.
-3. Identify the problem being solved, the proposed solution, and the expected timeline from user input or context. Do NOT proceed without a clear problem statement and proposed solution. Ask the user if these are not clear.
+3. Identify the problem being solved, the proposed solution, and the expected timeline from user input or context. Do NOT proceed without a clear problem statement and proposed solution.
+4. Ask the user clarifying questions to fill any gaps before writing the plan. Use the following rules:
+   - Ask all initial questions in a single batch so the user can answer them together.
+   - After receiving the answers, evaluate whether any answer introduces new ambiguity or opens a related topic that requires further clarification. If it does, ask a focused follow-up question (or a small batch of follow-up questions) before proceeding.
+   - Repeat this question-answer loop until you have enough information to write the plan with confidence.
+   - Typical questions cover: the problem being solved, the proposed solution, the expected timeline, the scope, the key stakeholders, and any known constraints or risks.
+   - Do NOT ask questions whose answers are already clear from context.
 
 
 ### Phase 2: Select Scope, Type, and Subject
