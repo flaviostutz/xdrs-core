@@ -2,15 +2,15 @@
   "Review xdr 001-xdrs-core-ac1c8339": {
     "result": "success",
     "contextFiles": [
+      ".github/skills/001-lint/SKILL.md",
       ".xdrs/_core/adrs/index.md",
       ".xdrs/_core/adrs/principles/001-xdrs-core.md",
       ".xdrs/_core/adrs/principles/002-xdr-standards.md",
-      ".xdrs/_core/adrs/principles/skills/001-lint/SKILL.md",
-      ".xdrs/_local/bdrs/index.md",
+      ".xdrs/_local/adrs/index.md",
       ".xdrs/index.md",
       "AGENTS.md"
     ],
-    "contextHash": "98562e9ef1410e8976d719391a098ab3"
+    "contextHash": "080ea010bbb924d74c9196e7c3e0f6af"
   },
   "Reply ONLY with \"READY\" after checking i-a61b0904": {
     "result": "success",

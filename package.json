@@ -44,7 +44,8 @@
           ],
           "exclude": [
             "**/*.test.js",
-            "**/*.test.int.js"
+            "**/*.test.int.js",
+            "**/*.test.int.report"
           ]
         },
         "output": {

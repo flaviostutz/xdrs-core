@@ -4,14 +4,17 @@
     "contextFiles": [
       ".xdrs/_core/adrs/index.md",
       ".xdrs/_core/adrs/principles/001-xdrs-core.md",
+      ".xdrs/_core/adrs/principles/002-xdr-standards.md",
+      ".xdrs/_core/adrs/principles/003-skill-standards.md",
       ".xdrs/_core/adrs/principles/004-article-standards.md",
+      ".xdrs/_core/adrs/principles/006-research-standards.md",
+      ".xdrs/_core/adrs/principles/007-plan-standards.md",
       ".xdrs/_core/adrs/principles/articles/001-xdrs-overview.md",
-      ".xdrs/_local/bdrs/index.md",
-      ".xdrs/_local/bdrs/operations/001-agent-behavior-validation-procedure.md",
+      ".xdrs/_local/adrs/index.md",
+      ".xdrs/_local/adrs/principles/researches/001-research-and-decision-lifecycle.md",
       ".xdrs/index.md",
-      "AGENTS.md",
-      "README.md"
+      "AGENTS.md"
     ],
-    "contextHash": "75745a424155326ee56008bcf923999e"
+    "contextHash": "4935b72a3613a4fad7cc72e477afed7a"
   }
 }
