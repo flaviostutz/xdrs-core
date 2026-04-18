@@ -28,6 +28,7 @@ test: clean install
 
 	mkdir -p output/.xdrs/_core/adrs/application
 	cp output/.xdrs/_core/adrs/principles/001-xdrs-core.md output/.xdrs/_core/adrs/application/001-duplicate-number.md
+	chmod +w output/.xdrs/_core/adrs/application/001-duplicate-number.md
 	! pnpm exec xdrs-core lint ./output
 
     # temper AGENTS.md and verify that it fails on check

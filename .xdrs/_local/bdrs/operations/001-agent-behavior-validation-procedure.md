@@ -37,5 +37,5 @@ Keep the repository's agent behavior validation procedure as a `_local` BDR and 
 
 ## References
 
-- [README.md](../../../../../README.md) - Public library usage for prompt behavior tests
+- [README.md](../../../../README.md) - Public library usage for prompt behavior tests
 - [lib/testPrompt.test.js](../../../../lib/testPrompt.test.js) - Repository-local behavior-test checks
