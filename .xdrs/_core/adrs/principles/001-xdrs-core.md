@@ -36,6 +36,7 @@ Collectively, these are referred to as XDRs.
 - ALWAYS use the following folder structure for XDR documents:
   `.xdrs/[scope]/[type]/[subject]/[number]-[short-title].md`
 - ALWAYS ignore symlinks paths. NEVER create or update documents inside symlinked folders.
+- **Readonly files are external XDRs.** A file with read-only permissions (e.g., `444` set by a distribution tool such as filedist) was distributed from an external source repository. It must NEVER be modified locally. To change it, submit the change to the source repository and re-extract the updated package.
 - Optional supporting artifacts under the same subject:
   - `.xdrs/[scope]/[type]/[subject]/researches/[number]-[short-title].md`
   - `.xdrs/[scope]/[type]/[subject]/skills/[number]-[skill-name]/SKILL.md`
