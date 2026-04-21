@@ -1,6 +1,6 @@
 # xdr-standards
 
-XDRs (eXtended Decision Records) is a standard for organizing Architectural (ADR), Business (BDR), and Engineering (EDR) decision records so that AI agents and humans can reliably find and follow them. Each XDR package bundles four document types: Decision Records (the source of truth), Research (exploratory backing), Skills (step-by-step procedural guides), and Articles (synthetic overviews).
+XDRs (eXtended Decision Records) is a standard for organizing Architectural (ADR), Business (BDR), and Engineering (EDR) decision records so that AI agents and humans can reliably find and follow them. Each XDR package bundles five document types: Decision Records (the source of truth), Research (exploratory backing), Skills (step-by-step procedural guides), Articles (synthetic overviews), and Plans (ephemeral execution guidance).
 
 > **Note:** This repository contains a minimum set of standards and very basic set of ADRs that describe the proposed decisions structure. It is intended to be used as a foundation that other projects can reference, extend, or install as a dependency in order to bootstrap and create their own XDRs.
 
@@ -66,7 +66,7 @@ The folder layout, file naming, and document format are designed so that AI agen
 - Each XDR is a small, focused Markdown file (target under 1300 words), covering one decision.
 - The canonical index per scope and type lists all XDRs with short descriptions, enabling agents to identify relevant records without reading every file.
 - The root index at `.xdrs/index.md` provides a single entry point for discovery.
-- XDR metadata gives agents a first-pass filter: check `Valid` for the convergence date, then check `Applied to`, and finally the decision text itself to confirm the decision should be used in the current context. All documents present in the collection are considered active.
+- XDR metadata gives agents a first-pass filter: check `valid-from` for the convergence date, then check `applied-to`, and finally the decision text itself to confirm the decision should be used in the current context. All documents present in the collection are considered active.
 - Decisions cross-reference each other by XDR ID rather than duplicating content, keeping individual files concise.
 - Subject folders reduce the search space when a query maps to a known domain.
 
@@ -166,7 +166,7 @@ The `lint` command reads `./.xdrs/**` from the given workspace path and checks c
 - plan `Expected end date:` field presence and ISO date format
 - canonical index presence and link consistency
 - root index coverage for all discovered canonical indexes
-- XDR metadata section placement and `Valid` / `Applied to` field format
+- XDR metadata section placement and `valid-from` / `applied-to` field format
 - local markdown links between XDR documents, skills, articles, researches, and plans (excluding fenced code blocks)
 - local image and `assets/` links resolving inside the sibling `assets/` folder for each document
 
