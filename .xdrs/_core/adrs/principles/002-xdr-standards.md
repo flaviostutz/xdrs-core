@@ -25,7 +25,7 @@ XDR documents are the authoritative policy for their scope, type, and subject. T
 |---|---|---|
 | `name` | Yes | 1-64 characters. Lowercase letters, numbers, hyphens, and leading underscores only. Must not end with a hyphen. Must not contain consecutive hyphens. Must match the document identifier from the heading: `[scope]-[type]-[number]-[short-title]`. |
 | `description` | Yes | 1-1024 characters. Describes what this decision is about and when to use it. Should include keywords that help agents identify when to apply it. |
-| `applied-to` | No | Short description of contexts this decision is applicable to. Keep it under 40 words. If omitted, the decision applies to all logically applicable elements. Examples: `Only frontend code`, `JavaScript projects`. |
+| `applied-to` | No | Short description of contexts this decision is applicable to. Keep it under 40 words. If omitted, the decision applies to all logically applicable elements. ONLY use this section if the usage is very specific to a specific case. Examples: `Only frontend code`, `JavaScript projects`. |
 | `valid-from` | No | ISO date (`YYYY-MM-DD`) indicating from when this decision must be enforced. Before this date it should be used everywhere possible, but compliance is not enforced during reviews until after this date. |
 | `license` | No | SPDX license expression (e.g. `MIT`, `Apache-2.0`, `CC-BY-4.0`). Indicates the license under which the document content is shared. If omitted, the license is governed by the repository or package defaults. |
 | `metadata` | No | Arbitrary key-value map for additional properties not defined by this spec. |
@@ -106,6 +106,14 @@ Question: In the end, state explicitly the question that needs to be answered. E
 ### Implementation Details
 
 [Optional section with implementation specifics, applicability boundaries, rules, concise examples, or do/don't guidance. This is the answer to the question in the "Context and Problem Statement". (<1300 words)]
+
+## Considered Options 
+[this section is present ONLY if there was more than one option to choose from]
+
+* (CHOSEN) **Option 2** - Brief description of option 2
+  * Reason: Brief description of why this option was accepted, containing the strengths, strategical motivations and it's differential over the other options.
+* (REJECTED) **Option 1** - Brief description of option 1
+  * Reason: Brief description why this was rejected with important aspects to be re-checked in the case we want to change this decision
 
 [Related research, if any]
 - [Research document title](researches/001-example.md) - Brief description of what it informed
