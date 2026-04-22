@@ -5,7 +5,7 @@ It is intended to be layered on top of `_core` through the package `.filedistrc`
 
 ## Related Scope Indexes
 
-- [_core ADRs](../../_core/adrs/index.md)
+- [_core ADRs](/.xdrs/_core/adrs/index.md)
 
 ## Principles
 

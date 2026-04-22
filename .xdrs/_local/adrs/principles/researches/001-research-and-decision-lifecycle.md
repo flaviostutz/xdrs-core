@@ -94,6 +94,6 @@ Subject-level co-location in `researches/[number]-[short-title].md` alongside th
 
 ## References
 
-- [_core-adr-006](../../../../_core/adrs/principles/006-research-standards.md) - Decision that adopts research as a first-class artifact
-- [_core-adr-001](../../../../_core/adrs/principles/001-xdrs-core.md) - Base XDR structure and folder conventions
-- [_core-adr-004](../../../../_core/adrs/principles/004-article-standards.md) - Distinction between research (evidence) and synthesis (articles)
+- [_core-adr-006](/.xdrs/_core/adrs/principles/006-research-standards.md) - Decision that adopts research as a first-class artifact
+- [_core-adr-001](/.xdrs/_core/adrs/principles/001-xdrs-core.md) - Base XDR structure and folder conventions
+- [_core-adr-004](/.xdrs/_core/adrs/principles/004-article-standards.md) - Distinction between research (evidence) and synthesis (articles)

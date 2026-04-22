@@ -34,4 +34,4 @@ be installed by a consumer workspace.
 
 ## References
 
-- [mydevkit-adr-001](../../001-publish-mydevkit-as-an-extension-package.md)
+- [mydevkit-adr-001](/.xdrs/mydevkit/adrs/principles/001-publish-mydevkit-as-an-extension-package.md)

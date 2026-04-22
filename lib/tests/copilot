@@ -89,8 +89,8 @@ function handleTaskPrompt(fullPrompt, workspacePath) {
 			'',
 			'## References',
 			'',
-			'- [_core-adr-006 - Research standards](../../../../../_core/adrs/principles/006-research-standards.md) - Defines the required research structure',
-			'- [_core-adr-001 - XDRs core](../../../../../_core/adrs/principles/001-xdrs-core.md) - Provides the broader artifact conventions'
+			'- [_core-adr-006 - Research standards](/.xdrs/_core/adrs/principles/006-research-standards.md) - Defines the required research structure',
+			'- [_core-adr-001 - XDRs core](/.xdrs/_core/adrs/principles/001-xdrs-core.md) - Provides the broader artifact conventions'
 		].join('\n');
 		fs.writeFileSync(filePath, `${content}\n`, 'utf8');
 		saveTaskState(workspacePath, `Created ${relativePath}.`, [relativePath], [], originalPrompt);

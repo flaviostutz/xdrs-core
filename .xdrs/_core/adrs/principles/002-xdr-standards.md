@@ -148,8 +148,8 @@ Question: In the end, state explicitly the question that needs to be answered. E
 ## References
 
 - [_core-adr-001 - XDRs core](001-xdrs-core.md) - Framework elements: types, scopes, subjects, folder structure
-- [001-lint skill](skills/001-lint/SKILL.md) - Skill for reviewing code changes against XDRs
-- [002-write-xdr skill](skills/002-write-xdr/SKILL.md) - Skill for creating a new XDR following this standard
+- [001-lint skill](/.xdrs/_core/adrs/principles/skills/001-lint/SKILL.md) - Skill for reviewing code changes against XDRs
+- [002-write-xdr skill](/.xdrs/_core/adrs/principles/skills/002-write-xdr/SKILL.md) - Skill for creating a new XDR following this standard
 - [_core-adr-003 - Skill standards](003-skill-standards.md)
 - [_core-adr-004 - Article standards](004-article-standards.md)
 - [_core-adr-006 - Research standards](006-research-standards.md)

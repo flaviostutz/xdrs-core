@@ -107,6 +107,7 @@ Collectively, these are referred to as XDRs.
     - `governance`: Engineering governance, risk controls, and compliance mechanics.
       - Examples: dependency governance, approval policies, mandatory quality checks.
 - Never use emojis
+- **Links:** Links that reference a parent folder MUST use absolute paths from the repository root with a leading `/` (e.g., `/.xdrs/_core/adrs/principles/001-xdrs-core.md`). Sibling files and child folder references SHOULD use relative paths (e.g., `002-other-doc.md`, `assets/image.png`, `subdir/file.md`). Never use relative paths that traverse up the directory tree (e.g., `../../assets/test.png`, `../other.md`); they break when files are moved and are harder to read.
 - **Indexes**
   - Keep a canonical index with all XDRs of a certain type+scope in `.xdrs/[scope]/[type]/index.md`
   - Canonical index requirements:
@@ -144,8 +145,8 @@ subject/
 ## References
 
 - [_core-adr-002 - XDR standards](002-xdr-standards.md) - Standards for writing individual XDR decision documents
-- [001-lint skill](skills/001-lint/SKILL.md) - Skill for reviewing code changes against XDRs
-- [002-write-xdr skill](skills/002-write-xdr/SKILL.md) - Skill for creating a new XDR following this standard
+- [001-lint skill](/.xdrs/_core/adrs/principles/skills/001-lint/SKILL.md) - Skill for reviewing code changes against XDRs
+- [002-write-xdr skill](/.xdrs/_core/adrs/principles/skills/002-write-xdr/SKILL.md) - Skill for creating a new XDR following this standard
 - [_core-adr-003 - Skill standards](003-skill-standards.md)
 - [_core-adr-004 - Article standards](004-article-standards.md)
 - [_core-adr-006 - Research standards](006-research-standards.md)

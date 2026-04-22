@@ -21,7 +21,7 @@ distribution contract to stay easy to review as a dedicated file.
 ### Consumer flow
 
 Consumers install the package, run `pnpm exec mydevkit extract`, and then use `xdrs-core lint` to
-validate the resulting tree. The example [README.md](../../../../README.md) contains the exact
+validate the resulting tree. The example [README.md](/examples/mydevkit/README.md) contains the exact
 commands.
 
 ### Sample packaged PNG asset
@@ -34,5 +34,5 @@ needs them.
 
 ## References
 
-- [mydevkit-adr-001](../001-publish-mydevkit-as-an-extension-package.md)
-- [README.md](../../../../README.md)
+- [mydevkit-adr-001](/.xdrs/mydevkit/adrs/principles/001-publish-mydevkit-as-an-extension-package.md)
+- [README.md](/examples/mydevkit/README.md)
