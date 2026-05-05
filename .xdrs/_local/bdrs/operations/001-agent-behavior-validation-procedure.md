@@ -1,7 +1,7 @@
 ---
 name: _local-bdr-001-agent-behavior-validation-procedure-for-this-repository
 description: Defines the agent behavior validation procedure for this repository. Apply when maintaining or releasing xdrs-core.
-applied-to: xdrs-core repository maintenance and release workflow
+applyTo: xdrs-core repository maintenance and release workflow
 ---
 
 # _local-bdr-001: Agent behavior validation procedure for this repository
@@ -18,7 +18,7 @@ Question: How should xdrs-core keep its agent behavior validation procedure docu
 
 Keep the repository's agent behavior validation procedure as a `_local` BDR and do not distribute it with `_core`.
 
-### Implementation Details
+### Details
 
 - This repository MAY use the `testPrompt` / `runPromptTest` library exported by `xdrs-core`, together with repository-local fixtures, to validate agent behavior during maintenance and release work.
 - The authoritative policy for this procedure MUST live under `.xdrs/_local/**`, not under `.xdrs/_core/**`.
@@ -37,5 +37,5 @@ Keep the repository's agent behavior validation procedure as a `_local` BDR and 
 
 ## References
 
-- [README.md](/README.md) - Public library usage for prompt behavior tests
-- [lib/testPrompt.test.js](/lib/testPrompt.test.js) - Repository-local behavior-test checks
+- [README.md](../../../../README.md) - Public library usage for prompt behavior tests
+- [lib/testPrompt.test.js](../../../../lib/testPrompt.test.js) - Repository-local behavior-test checks

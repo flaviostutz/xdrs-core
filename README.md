@@ -66,7 +66,7 @@ The folder layout, file naming, and document format are designed so that AI agen
 - Each XDR is a small, focused Markdown file (target under 1300 words), covering one decision.
 - The canonical index per scope and type lists all XDRs with short descriptions, enabling agents to identify relevant records without reading every file.
 - The root index at `.xdrs/index.md` provides a single entry point for discovery.
-- XDR metadata gives agents a first-pass filter: check `valid-from` for the convergence date, then check `applied-to`, and finally the decision text itself to confirm the decision should be used in the current context. All documents present in the collection are considered active.
+- XDR metadata gives agents a first-pass filter: check `validFrom` for the convergence date, then check `applyTo`, and finally the decision text itself to confirm the decision should be used in the current context. All documents present in the collection are considered active.
 - Decisions cross-reference each other by XDR ID rather than duplicating content, keeping individual files concise.
 - Subject folders reduce the search space when a query maps to a known domain.
 
@@ -115,7 +115,7 @@ Document types:
 See [.xdrs/index.md](.xdrs/index.md) for the full list of active decision records.
 
 For a deeper overview of XDRs — objective, structure, guidelines, extension, and usage — see the [XDRs Overview article](.xdrs/_core/adrs/principles/articles/001-xdrs-overview.md).
-For packaging guidance on publishing your own reusable scope with DRs, Research documents, skills, and articles, see the [Create your own xdrs-core extension package article](docs/create-your-own-xdrs-extension-package.md), then compare [examples/basic-usage](examples/basic-usage) and [examples/mydevkit](examples/mydevkit).
+For packaging guidance on publishing your own reusable scope with DRs, Research documents, skills, and articles, see the [Create your own xdrs-core extension package article](.xdrs/_local/adrs/principles/articles/001-create-your-own-xdrs-extension-package.md), then compare [examples/basic-usage](examples/basic-usage) and [examples/mydevkit](examples/mydevkit).
 
 ## Flow: Decision -> Distribution -> Usage
 
@@ -166,7 +166,7 @@ The `lint` command reads `./.xdrs/**` from the given workspace path and checks c
 - plan `Expected end date:` field presence and ISO date format
 - canonical index presence and link consistency
 - root index coverage for all discovered canonical indexes
-- XDR metadata section placement and `valid-from` / `applied-to` field format
+- XDR metadata section placement and `validFrom` / `applyTo` field format
 - local markdown links between XDR documents, skills, articles, researches, and plans (excluding fenced code blocks)
 - local image and `.assets/` links resolving inside the sibling `.assets/` folder for each document
 

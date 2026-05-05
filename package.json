@@ -22,7 +22,7 @@
     ".xdrs/index.md",
     "package.json",
     "AGENTS.md",
-    "bin/filedist.js",
+    "bin/core.js",
 	  "lib/**/*.js"
   ],
   "devDependencies": {
@@ -73,5 +73,5 @@
       }
     ]
   },
-  "bin": "bin/filedist.js"
+  "bin": "bin/core.js"
 }

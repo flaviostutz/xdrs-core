@@ -19,7 +19,7 @@ Question: How should this example package compose `xdrs-core` and its own scope 
 The package uses `.filedistrc` as the source of truth for extraction rules and composes the
 published `xdrs-core` package with the local `mydevkit` scope.
 
-### Implementation Details
+### Details
 
 - The package MUST keep its extraction rules in `.filedistrc`.
 - The package MUST expose a thin `bin/filedist.js` wrapper so consumers run `extract` and `check`
@@ -39,7 +39,7 @@ published `xdrs-core` package with the local `mydevkit` scope.
 
 ## References
 
-- [package.json](/examples/mydevkit/package.json)
-- [.filedistrc](/examples/mydevkit/.filedistrc)
-- [README.md](/examples/mydevkit/README.md)
+- [package.json](../../../../package.json)
+- [.filedistrc](../../../../.filedistrc)
+- [README.md](../../../../README.md)
 - [001-release-package](skills/001-release-package/SKILL.md) - Skill for packing, verifying, and publishing the example package
