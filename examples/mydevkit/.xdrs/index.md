@@ -24,5 +24,5 @@ Reusable team scope added by this extension package.
 
 ### _local (reserved)
 
-Project-local decisions stay in each consumer workspace and are not bundled in this extracted shared index.
+Read _local scope index at `_local/index.md` when it exists.
 

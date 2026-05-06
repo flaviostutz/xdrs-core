@@ -15,4 +15,4 @@ Decision records for the city traffic management authority.
 
 ### _local (reserved)
 
-Project-local XDRs that must not be shared with other contexts. Always keep this scope last so its decisions override or extend all scopes listed above.
+Read _local scope index at `_local/index.md` when it exists.

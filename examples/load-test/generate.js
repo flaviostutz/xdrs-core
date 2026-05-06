@@ -864,7 +864,7 @@ const xdrsRootIndex = [
   ``,
   `### _local (reserved)`,
   ``,
-  `Project-local XDRs that must not be shared with other contexts. Always keep this scope last so its decisions override or extend all scopes listed above.`,
+  `Read _local scope index at \`_local/index.md\` when it exists.`,
 ].join('\n');
 
 write(path.join(__dirname, '.xdrs', 'index.md'), xdrsRootIndex);
