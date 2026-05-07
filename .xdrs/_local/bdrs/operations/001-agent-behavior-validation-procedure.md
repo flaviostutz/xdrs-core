@@ -1,10 +1,10 @@
 ---
-name: _local-bdr-001-agent-behavior-validation-procedure-for-this-repository
+name: _local-bdr-001-agent-behavior-validation-procedure-local
 description: Defines the agent behavior validation procedure for this repository. Apply when maintaining or releasing xdrs-core.
 apply-to: xdrs-core repository maintenance and release workflow
 ---
 
-# _local-bdr-001: Agent behavior validation procedure for this repository
+# _local-bdr-001: Agent behavior validation procedure local
 
 ## Context and Problem Statement
 
