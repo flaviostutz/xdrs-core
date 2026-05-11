@@ -14,6 +14,7 @@ Foundational standards, principles, and guidelines.
 - [_core-adr-006](principles/006-research-standards.md) - **Research standards** — How to structure research documents backing XDR decisions
 - [_core-adr-007](principles/007-plan-standards.md) - **Plan standards** — How to structure ephemeral execution plans that implement decisions
 - [_core-adr-008](principles/008-xdr-standards-structured.md) - **XDR standards - structured** — How to expose individually referenceable numbered rules inside an XDR when external citation by identifier is required
+- [_core-adr-009](principles/009-presentation-standards.md) - **Presentation standards** — How to structure Marp slide presentations that support XDR documents
 
 ## Skills
 
@@ -25,6 +26,7 @@ Step-by-step procedural guides for humans and AI agents.
 - [004-write-article](principles/skills/004-write-article/SKILL.md) - **Write Article** — create a new article document
 - [005-write-research](principles/skills/005-write-research/SKILL.md) - **Write Research** — create a new research document
 - [006-write-plan](principles/skills/006-write-plan/SKILL.md) - **Write Plan** — create a new plan document
+- [007-write-presentation](principles/skills/007-write-presentation/SKILL.md) - **Write Presentation** — create Marp slide presentations for XDR documents
 
 ## Articles
 

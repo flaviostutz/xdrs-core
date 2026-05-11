@@ -109,7 +109,7 @@ Rules:
 ### Phase 6: Update the Parent Document
 
 1. Add a link to the slide file in the parent document. Place it in the `## References` section or, for XDRs, in the most appropriate section.
-2. Use a descriptive link text like `[Presentation slides](path/to/.assets/file-slides.md)`.
+2. Use a descriptive link text such as "Presentation slides" pointing to the slide file in `.assets/`.
 
 ### Phase 7: Write Files
 

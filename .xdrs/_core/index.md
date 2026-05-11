@@ -35,9 +35,13 @@ Each artifact type has its own writing standard:
 
 The business decision [_core-bdr-001](bdrs/principles/001-xdr-decisions-and-skills-usage.md) establishes how agents and humans must use XDR decisions and skills, separating policy authority (which lives in XDRs) from execution guidance (which lives in skills).
 
+### Presentation standards
+
+Slide presentations that support XDR documents follow [_core-adr-009](adrs/principles/009-presentation-standards.md). Slides use the Marp Markdown format, live in `.assets/` next to the document they support, and must maintain bidirectional links with the parent document.
+
 ### Available skills
 
-The `_core` scope ships with six skills that automate the most common framework operations:
+The `_core` scope ships with seven skills that automate the most common framework operations:
 
 - **001-lint** reviews code and files against applicable XDRs
 - **002-write-xdr** guides creation of a new decision record
@@ -45,6 +49,7 @@ The `_core` scope ships with six skills that automate the most common framework 
 - **004-write-article** guides creation of a new article
 - **005-write-research** guides creation of a new research document
 - **006-write-plan** guides creation of a new execution plan
+- **007-write-presentation** guides creation of Marp slide presentations
 
 ### Getting started
 
