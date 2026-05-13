@@ -2,7 +2,7 @@
 
 ## Before you start
 
-This project uses XDRs as its source of truth for decisions about structure, engineering, and documentation. Before proposing a change, review:
+This project uses XDRS as its source of truth for policies about structure, engineering, and documentation. Before proposing a change, review:
 
 - `.xdrs/index.md`
 - the relevant scope and type index under `.xdrs/`
@@ -29,7 +29,7 @@ Do not start larger feature work without prior discussion. Open an issue to expl
 
 - the problem being solved
 - why the change belongs in this project
-- the expected impact on users, XDRs, skills, articles, or packaging
+- the expected impact on users, Policies, skills, articles, or packaging
 
 This keeps feature work aligned before implementation starts and avoids unnecessary PR churn.
 
@@ -79,15 +79,15 @@ make lint
 make test
 ```
 
-If your change affects examples, packaging, or XDR content, make sure those paths still work end to end.
+If your change affects examples, packaging, or Policy content, make sure those paths still work end to end.
 
-## XDR-related contributions
+## XDRS-related contributions
 
-When changing XDRs, skills, or articles:
+When changing Policies, skills, or articles:
 
-- keep XDRs focused and concise
+- keep Policies focused and concise
 - update canonical indexes when required
-- avoid introducing conflicts with accepted XDRs
+- avoid introducing conflicts with accepted Policies
 - place new content in the correct scope, type, and subject
 
-If a contribution introduces a reusable or non-trivial decision, document it as an XDR instead of leaving the rationale only in the PR.
+If a contribution introduces a reusable or non-trivial decision, document it as a Policy instead of leaving the rationale only in the PR.

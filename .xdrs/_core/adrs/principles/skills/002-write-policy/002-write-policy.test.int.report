@@ -1,10 +1,10 @@
 {
-  "Create a very small XDR deciding to use -8b1a2ddd": {
+  "Create a very small XDRS Policy deciding to -8b1a2ddd": {
     "result": "success",
     "contextFiles": [
       ".xdrs/_core/adrs/index.md",
       ".xdrs/_core/adrs/principles/002-xdr-standards.md",
-      ".xdrs/_core/adrs/principles/skills/002-write-xdr/SKILL.md",
+      ".xdrs/_core/adrs/principles/skills/002-write-policy/SKILL.md",
       ".xdrs/index.md",
       "AGENTS.md"
     ],

@@ -37,7 +37,7 @@ make -C examples/mydevkit test
 ```
 
 That target packs this example and then delegates to the [consumer](consumer) Makefile, which
-installs the local tarball, extracts the composed XDR tree, verifies the generated skill symlink,
+installs the local tarball, extracts the composed XDRS tree, verifies the generated skill symlink,
 and lints the resulting workspace.
 
 For a fuller production-oriented package built on top of xdrs-core, see

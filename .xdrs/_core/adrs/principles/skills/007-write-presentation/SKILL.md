@@ -1,8 +1,8 @@
 ---
 name: 007-write-presentation
 description: >
-  Creates a Marp slide presentation for an existing XDR document (decision, research, article, or plan).
-  Activate this skill when the user asks to create slides, a presentation, or a slide deck for an XDR document.
+  Creates a Marp slide presentation for an existing XDRS document (policy, research, article, or plan).
+  Activate this skill when the user asks to create slides, a presentation, or a slide deck for an XDRS document.
 metadata:
   author: flaviostutz
   version: "1.0"
@@ -10,7 +10,7 @@ metadata:
 
 ## Overview
 
-Guides the creation of a Marp Markdown slide presentation that supports an existing XDR document. The skill ensures the slides follow presentation standards (`_core-adr-009`), are correctly placed in the `.assets/` folder, and maintain bidirectional links with the parent document.
+Guides the creation of a Marp Markdown slide presentation that supports an existing XDRS document. The skill ensures the slides follow presentation standards (`_core-adr-policy-009`), are correctly placed in the `.assets/` folder, and maintain bidirectional links with the parent document.
 
 ## Instructions
 
@@ -18,7 +18,7 @@ Guides the creation of a Marp Markdown slide presentation that supports an exist
 
 1. Read `.xdrs/_core/adrs/principles/009-presentation-standards.md` in full to internalize all presentation rules.
 2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` for `.assets/` placement rules and general framework structure.
-3. Identify the parent document (decision, research, article, or plan) that the slides will support. The parent document must already exist. If no parent document exists, inform the user that slides cannot be standalone and suggest creating the parent document first.
+3. Identify the parent document (policy, research, article, or plan) that the slides will support. The parent document must already exist. If no parent document exists, inform the user that slides cannot be standalone and suggest creating the parent document first.
 4. If the user wants slides covering content from multiple documents, check whether an article already exists that synthesizes those documents. If not, suggest creating an article first (using the 004-write-article skill) and then creating slides for that article.
 
 ### Phase 2: Define the Presentation Scope
@@ -108,13 +108,13 @@ Rules:
 
 ### Phase 6: Update the Parent Document
 
-1. Add a link to the slide file in the parent document. Place it in the `## References` section or, for XDRs, in the most appropriate section.
+1. Add a link to the slide file in the parent document. Place it in the `## References` section or, for Policies, in the most appropriate section.
 2. Use a descriptive link text such as "Presentation slides" pointing to the slide file in `.assets/`.
 
 ### Phase 7: Write Files
 
 1. Create the slide file at the correct `.assets/` location:
-   - XDRs: `[xdrs-root]/[scope]/[type]/[subject]/.assets/[slide-file].md`
+   - Policies: `[xdrs-root]/[scope]/[type]/[subject]/.assets/[slide-file].md`
    - Articles: `[xdrs-root]/[scope]/[type]/[subject]/articles/.assets/[slide-file].md`
    - Research: `[xdrs-root]/[scope]/[type]/[subject]/researches/.assets/[slide-file].md`
    - Skills: `[xdrs-root]/[scope]/[type]/[subject]/skills/[number]-[skill-name]/.assets/[slide-file].md`
@@ -132,7 +132,7 @@ Rules:
 
 ### Constraints
 
-- MUST follow presentation standards from `_core-adr-009` exactly.
+- MUST follow presentation standards from `_core-adr-policy-009` exactly.
 - MUST NOT create slides without an existing parent document.
 - MUST NOT create standalone slides that reference multiple documents without an article as the parent.
 - MUST maintain bidirectional links between slides and parent document.
@@ -144,7 +144,7 @@ Rules:
 ## Examples
 
 **Input**: "Create slides for our naming conventions decision"
-- Locate the parent XDR (e.g. `003-naming-conventions.md`)
+- Locate the parent Policy (e.g. `003-naming-conventions.md`)
 - Ask: "Who is the target audience for these slides?"
 - Create: `.assets/003-naming-conventions-slides.md`
 - Update: Add link in `003-naming-conventions.md`
@@ -152,7 +152,7 @@ Rules:
 **Input**: "Create an executive presentation covering our security and data decisions"
 - Check if an article synthesizing security + data decisions exists
 - If not, suggest creating the article first
-- Create slides for the article, not the individual XDRs
+- Create slides for the article, not the individual Policies
 
 ## Edge Cases
 
@@ -163,7 +163,7 @@ Rules:
 
 ## References
 
-- [_core-adr-009 - Presentation standards](../../009-presentation-standards.md)
-- [_core-adr-001 - XDRs core](../../001-xdrs-core.md)
-- [_core-adr-004 - Article standards](../../004-article-standards.md)
-- [_core-adr-003 - Skill standards](../../003-skill-standards.md)
+- [_core-adr-policy-009 - Presentation standards](../../009-presentation-standards.md)
+- [_core-adr-policy-001 - XDRS core](../../001-xdrs-core.md)
+- [_core-adr-policy-004 - Article standards](../../004-article-standards.md)
+- [_core-adr-policy-003 - Skill standards](../../003-skill-standards.md)

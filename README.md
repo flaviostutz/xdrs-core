@@ -1,24 +1,35 @@
-# xdr-standards
+# xdrs-core
 
-XDRs (eXtended Decision Records) is a standard for organizing Architectural (ADR), Business (BDR), and Engineering (EDR) decision records so that AI agents and humans can reliably find and follow them. Each XDR package bundles five document types: Decision Records (the source of truth), Research (exploratory backing), Skills (step-by-step procedural guides), Articles (synthetic overviews), and Plans (ephemeral execution guidance).
+XDRS is a framework to structure, compile and distribute Architectural (ADR), Business (BDR), and Engineering (EDR) decision records contents so that AI agents and humans can reliably find and use them with hierarchical scopes and controlled rollout in the format of distributable versioned packages. Decision Records are decomposed into Research (why), Policies (what), Skills (how), Plan (when) and Articles (views) with a well structured index structure and the definition of hierarchical scopes.
 
-> **Note:** This repository contains a minimum set of standards and very basic set of ADRs that describe the proposed decisions structure. It is intended to be used as a foundation that other projects can reference, extend, or install as a dependency in order to bootstrap and create their own XDRs.
+After preparation those elements can be downloaded anywhere and used to compose xdrs corpus, which can be used as a context source for AI agents, web site publishing, RAG applications etc.
+
+> **Note:** This repository contains a minimum set of standards and a very basic set of ADRs that describe the proposed structure. It is intended to be used as a foundation that other projects can reference, extend, or install as a dependency in order to bootstrap and create their own XDRS packages.
 
 ## Objective
 
-Decision Records capture Architectural (ADR), Business (BDR), and Engineering (EDR) decisions. As organizations grow, hundreds of decisions accumulate across teams, levels, and domains. Without a consistent structure, AI agents cannot efficiently locate the right decisions for a given context, and humans cannot maintain or evolve them sustainably.
+Policies capture Architectural (ADR), Business (BDR), and Engineering (EDR) decisions. As organizations grow, hundreds of decisions accumulate across teams, levels, and domains. Without a consistent structure, AI agents cannot efficiently locate the right decisions for a given context, and humans cannot maintain or evolve them sustainably.
 
-This project defines a standard for organizing XDRs that satisfies the following requirements.
+This project defines a standard for organizing XDRS that satisfies the following requirements.
 
-## XDR elements
+## XDRS elements
 
-Every XDR package contains five types of documents:
+A traditional Decision Record normally combines several concerns in the same document:
+- A **reason** (why the decision was made, options considered, evidence gathered)
+- A **policy** (rules, core decision, what must be followed)
+- A **plan** (consequences, implementation approach, how to roll out the decision)
+- A **how-to** (step-by-step procedure for executing under the decision)
+- A **view** (overview of the topic connecting related decisions together)
 
-- **Decision Records (XDRs)** — Architectural (ADR), Business (BDR), or Engineering (EDR) records that capture a single decision, its rationale, and the rules that follow from it. They are the source of truth.
-- **Research** — Exploratory documents that capture the problem being investigated, constraints or requirements, findings, and option tradeoffs that back a decision during its lifecycle. One research document may inform multiple downstream decisions, but it is not a replacement for the Decision Record.
+The XDRS framework separates these concerns into different document types, each with a clear role:
+
+- **Policies** — Documents that captures a policy, core decision, rule, guardrails or any other boundary, captured from a Architectural (ADR), Business (BDR), or Engineering (EDR) documents. They are the source of truth. This is the core document type in the framework.
+- **Research** — Exploratory documents that capture the problem being investigated, constraints or requirements, findings, and option tradeoffs that back a decision during its lifecycle. One research document may inform multiple downstream decisions, but it is not a replacement for the Policy.
 - **Skills** — Step-by-step procedural guides that can be followed by humans, AI agents, or both. Skills are task-based artifacts with a concrete outcome and should include enough detail to verify the task was completed correctly. A skill may start as a fully manual procedure and evolve toward partial or full AI automation over time.
-- **Articles** — Synthetic explanatory texts that combine information from multiple XDRs, Research documents, and Skills around a specific topic or audience. They never replace XDRs as source of truth.
-- **Plans** — Ephemeral execution documents that describe a problem, proposed solution, and the approach and activities needed to solve it. Plans have a clear start and end and must be deleted after full implementation. Lasting outputs are captured as Decisions, Skills, Articles, or other artifacts.
+- **Articles** — Synthetic explanatory texts that combine information from multiple Policies, Research documents, and Skills around a specific topic or audience. They never replace Policies as source of truth.
+- **Plans** — Ephemeral execution documents that describe a problem, proposed solution, and the approach and activities needed to solve it. Plans have a clear start and end and must be deleted after full implementation. Lasting outputs are captured as Policies, Skills, Articles, or other artifacts.
+
+The compilation process of a raw Decision Record is to distribute it into those different documents and create links between them. You can also use the framework standalone, generating these elements individually directly during the writing process without starting from a raw Decision Record.
 
 ## Getting started
 
@@ -27,12 +38,14 @@ Every XDR package contains five types of documents:
 2. On the workspace root folder, run `npx xdrs-core`
 
    The basic xdrs tooling should be installed in your workspace along with:
-     - AGENTS.md pointing to the XDRs structure
-     - XDR related skills and prompts for Copilot
+     - AGENTS.md pointing to the Policies structure
+     - XDRS related skills and prompts for Copilot
 
 3. Run a prompt such as:
 
-   > Create an ADR about our decision on using Python for AI related projects. For high volume projects (expected >1000 t/s), an exception can be made on using Golang.
+   > Create a policy about our decision on using Python for AI related projects. For high volume projects (expected >1000 t/s), an exception can be made on using Golang.
+
+   > Compile ADR 043-python-package-manager into the XDRS structure
 
 ## Examples
 
@@ -45,7 +58,7 @@ Every XDR package contains five types of documents:
 
 ### Multi-scope support
 
-Different teams at different organizational levels make decisions that apply to different audiences. XDRs are organized by scope (e.g. `_core`, `business-x`, `business-y-mobileapp`) so that each team owns its own decision space. Scopes can extend or override decisions from broader scopes, with explicit precedence rules: scopes listed later in an index override those listed earlier.
+Different teams at different organizational levels make decisions that apply to different audiences. XDRS are organized by scope (e.g. `_core`, `business-x`, `business-y-mobileapp`) so that each team owns its own decision space. Scopes can extend or override policies from broader scopes, with explicit precedence rules: scopes listed later in an index override those listed earlier.
 
 ### Subject grouping
 
@@ -53,26 +66,26 @@ Within each scope and type, decisions are grouped by subject (e.g. `application`
 
 ### Extensibility
 
-Over time, decisions from various teams and domains accumulate in a shared workspace. The folder structure `.xdrs/[scope]/[type]/[subject]/` is designed to accommodate new scopes, types, and subjects without reorganizing existing content. A root index at `.xdrs/index.md` points to all canonical scope indexes, and each canonical index is updated incrementally as new XDRs are added.
+Over time, decisions from various teams and domains accumulate in a shared workspace. The folder structure `.xdrs/[scope]/[type]/[subject]/` is designed to accommodate new scopes, types, and subjects without reorganizing existing content. A root index at `.xdrs/index.md` points to all canonical scope indexes, and each canonical index is updated incrementally as new XDRS scopes are added.
 
 ### Distributability
 
-XDR packages are versioned and distributed via the npm registry. This allows teams to adopt specific decision sets at a specific version, rather than accepting all decisions at once. It avoids "all or nothing" situations when linting or checking adherence to decisions in the context of tech debt management. Teams can pin, upgrade, or override only the scopes that are relevant to them.
+XDRS packages are versioned and distributed via the npm registry. This allows teams to adopt specific decision sets at a specific version, rather than accepting all decisions at once. It avoids "all or nothing" situations when linting or checking adherence to decisions in the context of tech debt management. Teams can pin, upgrade, or override only the scopes that are relevant to them.
 
 ### AI-agent friendliness
 
 The folder layout, file naming, and document format are designed so that AI agents can efficiently work with hundreds of decisions:
 
-- Each XDR is a small, focused Markdown file (target under 1300 words), covering one decision.
-- The canonical index per scope and type lists all XDRs with short descriptions, enabling agents to identify relevant records without reading every file.
+- Each Policy is a small, focused Markdown file (target under 1300 words), covering a set of rules or statements.
+- The canonical index per scope and type lists all XDRS elements with short descriptions, enabling agents to identify relevant records without reading every file.
 - The root index at `.xdrs/index.md` provides a single entry point for discovery.
-- XDR metadata gives agents a first-pass filter: check `valid-from` for the convergence date, then check `apply-to`, and finally the decision text itself to confirm the decision should be used in the current context. All documents present in the collection are considered active.
-- Decisions cross-reference each other by XDR ID rather than duplicating content, keeping individual files concise.
+- Policy metadata gives agents a first-pass filter: check `valid-from` for the convergence date, then check `apply-to`, and finally the decision text itself to confirm the decision should be used in the current context. All documents present in the collection are considered active.
+- Decisions cross-reference each other by Policy ID rather than duplicating content, keeping individual files concise.
 - Subject folders reduce the search space when a query maps to a known domain.
 
 ### Multi-agent framework support
 
-XDRs and skills must be usable by any type of AI agent, not only coding agents (e.g. GitHub Copilot, Cursor, Cline). General-purpose agent frameworks such as LangGraph, CrewAI, AutoGen, and similar orchestration runtimes must be able to consume XDRs without relying on IDE-specific tooling or conventions.
+Policies and skills must be usable by any type of AI agent, not only coding agents (e.g. GitHub Copilot, Cursor, Cline). General-purpose agent frameworks such as LangGraph, CrewAI, AutoGen, and similar orchestration runtimes must be able to consume Policies without relying on IDE-specific tooling or conventions.
 
 This is especially important for BDRs: because business rules govern decisions that span both technical and non-technical workflows, agents built with any framework must be able to discover, fetch, and apply BDRs programmatically using only standard file-system or HTTP access to Markdown files.
 
@@ -85,8 +98,8 @@ This is especially important for BDRs: because business rules govern decisions t
     [type]/                         # adrs | bdrs | edrs
       index.md                      # canonical index for this scope+type
       [subject]/
-        [number]-[short-title].md   # individual decision record
-        .assets/                     # optional local resources for subject-level XDR files
+        [number]-[short-title].md   # individual policy document
+        .assets/                     # optional local resources for subject-level Policy files
         researches/                 # optional decision-backing research documents
           [number]-[short-title].md
           .assets/
@@ -94,7 +107,7 @@ This is especially important for BDRs: because business rules govern decisions t
           [number]-[skill-name]/
             SKILL.md
             .assets/
-        articles/                   # optional synthetic views over XDRs, Research, and Skills
+        articles/                   # optional synthetic views over Policies, Research, and Skills
           [number]-[short-title].md
           .assets/
         plans/                      # optional ephemeral execution plans
@@ -108,32 +121,32 @@ Document types:
 - **BDR** - Business Decision Record: business process and strategy decisions
 - **EDR** - Engineering Decision Record: engineering workflow and tooling decisions
 - **Research** - Exploratory support material used while evaluating or updating a decision. Research captures constraints, findings, options, and proposal tradeoffs, but it is not the source of truth.
-- **Skills** - Step-by-step procedural guides that can be followed by humans, AI agents, or both. Must comply with Decision Records, but add the execution detail they lack. Skills are not mandatory by themselves unless referenced by an XDR or another policy artifact. A skill may start as a fully manual human procedure and evolve incrementally toward partial or full AI automation without being restructured. Co-located with the XDRs they implement inside `skills/` sub-directories.
-- **Articles** - Synthetic views that explain concepts or combine information from multiple Decision Records, Research documents, and Skills into a coherent text for a specific topic or audience. Articles are not the source of truth; Decision Records take precedence when there is a conflict. Useful as navigational indexes that link related artifacts around a specific aspect.
-- **Plans** - Ephemeral execution documents that describe a problem, proposed solution, and the approach and activities needed to solve it. Plans have a clear start and end and must be deleted after full implementation. Lasting outputs are captured as Decisions, Skills, Articles, or other artifacts. Co-located with XDRs inside `plans/` sub-directories.
+- **Skills** - Step-by-step procedural guides that can be followed by humans, AI agents, or both. Must comply with Policies, but add the execution detail they lack. Skills are not mandatory by themselves unless referenced by a Policy or another policy artifact. A skill may start as a fully manual human procedure and evolve incrementally toward partial or full AI automation without being restructured. Co-located with the Policies they implement inside `skills/` sub-directories.
+- **Articles** - Synthetic views that explain concepts or combine information from multiple Policies, Research documents, and Skills into a coherent text for a specific topic or audience. Articles are not the source of truth; Policies take precedence when there is a conflict. Useful as navigational indexes that link related artifacts around a specific aspect.
+- **Plans** - Ephemeral execution documents that describe a problem, proposed solution, and the approach and activities needed to solve it. Plans have a clear start and end and must be deleted after full implementation. Lasting outputs are captured as Policies, Skills, Articles, or other artifacts. Co-located with Policies inside `plans/` sub-directories.
 
-See [.xdrs/index.md](.xdrs/index.md) for the full list of active decision records.
+See [.xdrs/index.md](.xdrs/index.md) for the full list of active policies.
 
-For a deeper overview of XDRs — objective, structure, guidelines, extension, and usage — see the [XDRs Overview article](.xdrs/_core/adrs/principles/articles/001-xdrs-overview.md).
-For packaging guidance on publishing your own reusable scope with DRs, Research documents, skills, and articles, see the [Create your own xdrs-core extension package article](.xdrs/_local/adrs/principles/articles/001-create-your-own-xdrs-extension-package.md), then compare [examples/basic-usage](examples/basic-usage) and [examples/mydevkit](examples/mydevkit).
+For a deeper overview of XDRS — objective, structure, guidelines, extension, and usage — see the [XDRS Overview article](.xdrs/_core/adrs/principles/articles/001-xdrs-overview.md).
+For packaging guidance on publishing your own reusable scope with Policies, Research documents, skills, and articles, see the [Create your own xdrs-core extension package article](.xdrs/_local/adrs/principles/articles/001-create-your-own-xdrs-extension-package.md), then compare [examples/basic-usage](examples/basic-usage) and [examples/mydevkit](examples/mydevkit).
 
 ## Flow: Decision -> Distribution -> Usage
 
-XDRs, Research documents, and skills follow a three-stage lifecycle that keeps decision-making decentralized while allowing controlled adoption across projects.
+Policies, Research documents, and skills follow a three-stage lifecycle that keeps decision-making decentralized while allowing controlled adoption across projects.
 
 ### Decision
 
-Each scope manages its own set of XDR artifacts independently. Scope owners discuss and evolve decisions through whatever process fits their team, such as RFCs, pull requests, or architecture review boards. Research documents, XDRs, and skills are authored, reviewed, and merged within the scope's folder in the repository.
+Each scope manages its own set of XDRS artifacts independently. Scope owners discuss and evolve decisions through whatever process fits their team, such as RFCs, pull requests, or architecture review boards. Research documents, Policies, and skills are authored, reviewed, and merged within the scope's folder in the repository.
 
 ### Distribution
 
 Once a set of decisions is ready to share, scope owners pack the relevant `.xdrs/[scope]/` folder into a versioned npm package using a tool such as [filedist](https://github.com/flaviostutz/filedist) and publish it to an npm registry, either public or a company-internal one. Versioning gives consumers explicit control over which revision of a scope's decisions they adopt, avoiding situations where a single breaking policy change is forced on all consumers at once.
 
-The same applies to Research documents, skills, articles, and any sibling `.assets/` folders: because they live alongside XDRs inside the scope folder, they are included in the same package and published together.
+The same applies to Research documents, skills, articles, and any sibling `.assets/` folders: because they live alongside Policies inside the scope folder, they are included in the same package and published together.
 
 ### Usage
 
-A project that wants to follow a scope's decisions adds the corresponding npm package as a regular dependency. Using a tool such as [filedist](https://github.com/flaviostutz/filedist), the package contents are unpacked into the project's `.xdrs/` folder at install or update time. Updating the dependency version pulls in the latest XDRs, Research documents, and skills for that scope, keeping the project aligned with the scope owners' current decisions.
+A project that wants to follow a scope's decisions adds the corresponding npm package as a regular dependency. Using a tool such as [filedist](https://github.com/flaviostutz/filedist), the package contents are unpacked into the project's `.xdrs/` folder at install or update time. Updating the dependency version pulls in the latest Policies, Research documents, and skills for that scope, keeping the project aligned with the scope owners' current decisions.
 
 Multiple scope packages can be combined in the same workspace by listing them as separate dependencies. Scope precedence (defined in `.xdrs/index.md`) determines which decisions take effect when scopes overlap.
 
@@ -152,13 +165,13 @@ Multiple scope packages can be combined in the same workspace by listing them as
 
 The published package exposes the `xdrs-core` CLI.
 
-- Bootstrap or extract managed XDR files with the existing `filedist`-backed commands such as `npx -y xdrs-core extract` and `npx -y xdrs-core check`.
-- Lint an XDR tree with `npx -y xdrs-core lint .`. By default, scopes whose files are listed in the workspace root `.filedist` file are treated as external and skipped; use `--all` to include them.
+- Bootstrap or extract managed XDRS files with the existing `filedist`-backed commands such as `npx -y xdrs-core extract` and `npx -y xdrs-core check`.
+- Lint a Policy tree with `npx -y xdrs-core lint .`. By default, scopes whose files are listed in the workspace root `.filedist` file are treated as external and skipped; use `--all` to include them.
 
 The `lint` command reads `./.xdrs/**` from the given workspace path and checks common consistency rules, including:
 
 - allowed scope, type, and subject folder structure
-- XDR numbering uniqueness per `scope/type`
+- Policy numbering uniqueness per `scope/type`
 - skill numbering uniqueness per `scope/type/subject/skills`
 - article numbering uniqueness per `scope/type/subject/articles`
 - research numbering uniqueness per `scope/type/subject/researches`
@@ -166,8 +179,8 @@ The `lint` command reads `./.xdrs/**` from the given workspace path and checks c
 - plan `Expected end date:` field presence and ISO date format
 - canonical index presence and link consistency
 - root index coverage for all discovered canonical indexes
-- XDR metadata section placement and `valid-from` / `apply-to` field format
-- local markdown links between XDR documents, skills, articles, researches, and plans (excluding fenced code blocks)
+- Policy metadata section placement and `valid-from` / `apply-to` field format
+- local markdown links between Policy documents, skills, articles, researches, and plans (excluding fenced code blocks)
 - local image and `.assets/` links resolving inside the sibling `.assets/` folder for each document
 
 Examples:

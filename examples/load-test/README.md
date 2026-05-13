@@ -1,6 +1,6 @@
 # Load-test example – city traffic management
 
-This example contains **3 000 XDR content files** for a fictional city traffic management authority and is used to load-test xdrs-core querying, context-window handling, and lint performance.
+This example contains **3 000 XDRS content files** for a fictional city traffic management authority and is used to load-test xdrs-core querying, context-window handling, and lint performance.
 
 ## Domain
 
@@ -15,7 +15,7 @@ The `city-traffic` scope covers a multi-modal transport authority managing:
 
 | Type | Count | % |
 |---|---|---|
-| XDR decisions (ADR/BDR/EDR) | 1500 | 50 % |
+| Policy | 1500 | 50 % |
 | Research | 450 | 15 % |
 | Skills (SKILL.md) | 600 | 20 % |
 | Articles | 300 | 10 % |

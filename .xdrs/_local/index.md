@@ -6,11 +6,11 @@ Repository-local decisions and supporting artifacts for the xdrs-core project. T
 
 ## Content
 
-This scope captures decisions specific to maintaining the xdrs-core repository itself, including agent behavior validation procedures and research on how decision records interact with their supporting artifacts.
+This scope captures decisions specific to maintaining the xdrs-core repository itself, including agent behavior validation procedures and research on how policies interact with their supporting artifacts.
 
 ### Architecture
 
-Exploratory research on how research documents support and relate to XDRs, skills, and articles throughout their lifecycle.
+Exploratory research on how research documents support and relate to Policies, skills, and articles throughout their lifecycle.
 
 ### Operations
 
@@ -19,4 +19,3 @@ Business procedures for validating agent behavior within this repository, ensuri
 ## Type Indexes
 
 - [ADRs Index](adrs/index.md) - Local architecture decisions and research
-- [BDRs Index](bdrs/index.md) - Local business and operational decisions

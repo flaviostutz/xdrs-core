@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Load-test data generator for city-traffic XDRs.
+ * Load-test data generator for city-traffic XDRS elements.
  *
  * Produces exactly 3000 content files:
  *  1500  decisions  (50%) – ADR/BDR/EDR  (600 ADR · 450 BDR · 450 EDR)
@@ -33,7 +33,7 @@ const TOPICS = {
   adr_platform: [
     'central-traffic-control-architecture','road-sensor-network-topology',
     'traffic-signal-coordination-protocol','bus-rapid-transit-corridor-design',
-    'train-track-circuit-architecture','bicycle-lane-infrastructure-standards',
+    'train-track-circuit-architecture','bicycle-lane-infra-standards',
     'pedestrian-signal-timing-systems','bridge-structural-monitoring',
     'tunnel-emergency-egress-systems','overhead-catenary-power-supply',
     'road-weather-information-systems','variable-message-sign-placement',
@@ -124,14 +124,14 @@ const TOPICS = {
     'urban-mobility-reporting-standards','multimodal-data-model-standards',
     'carbon-neutrality-targets','noise-limit-standards',
     'pedestrian-safety-standards','bicycle-facility-standards',
-    'autonomous-vehicle-readiness-standards','disaster-recovery-standards',
+    'autonomous-vehicle-readiness','disaster-recovery-standards',
     'cloud-security-standards','iot-device-security-standards',
     'data-sovereignty-standards',
   ],
 
   adr_integration: [
     'smart-corridor-pilot-program','autonomous-bus-trial-architecture',
-    'connected-vehicle-testbed','next-generation-ticketing-development',
+    'connected-vehicle-testbed','next-gen-ticketing-development',
     'bike-share-expansion-architecture','ev-bus-fleet-introduction',
     'drone-delivery-corridor-development','hydrogen-vehicle-infrastructure',
     'micro-mobility-integration','smart-parking-pilot',
@@ -140,7 +140,7 @@ const TOPICS = {
     'tram-extension-design','regional-train-integration',
     'high-capacity-bus-corridor','urban-air-mobility-corridor',
     'predictive-signal-control','data-driven-transport-planning',
-    'citizen-mobility-app-development','public-transport-accessibility-upgrade',
+    'citizen-mobility-app-development','public-transport-accessibility',
     'mobility-innovation-lab','smart-junction-prototype',
     'open-mobility-data-marketplace','collaborative-filtering-routing',
     'real-time-ridesharing-integration','flood-resilient-transport',
@@ -270,7 +270,7 @@ const TOPICS = {
     'emergency-services-integration','police-systems-integration',
     'road-works-register-integration','permit-management-integration',
     'public-alert-system-integration','social-media-monitoring-integration',
-    'third-party-mobility-provider-integration','smart-parking-system-integration',
+    'third-party-mobility-integration','smart-parking-system-integration',
     'ev-charge-network-integration','bike-share-backend-integration',
     'open311-integration','national-transport-data-integration',
     'cctv-analytics-integration','environmental-sensor-integration',
@@ -361,7 +361,7 @@ function topic(bank, idx) {
 function genDecision(scope, typeShort, subject, num, slug) {
   const typeNames = { adr: 'ADR', bdr: 'BDR', edr: 'EDR' };
   const typeName  = typeNames[typeShort];
-  const id        = `city-traffic-${typeShort}-${pad(num)}`;
+  const id        = `city-traffic-${typeShort}-policy-${pad(num)}`;
   const name      = `${id}-${slug}`;
   const title     = titleCase(slug);
   const subjectTitle = titleCase(subject);
@@ -495,7 +495,7 @@ function genResearch(scope, typeShort, subject, num, slug) {
     ``,
     `## Conclusion`,
     ``,
-    `Option A is recommended. It balances cost, operational simplicity, and standards compliance. The authority should proceed with Option A as the basis for the related decision record. Ongoing evaluation against emerging options is recommended at two-year intervals.`,
+    `Option A is recommended. It balances cost, operational simplicity, and standards compliance. The authority should proceed with Option A as the basis for the related policy. Ongoing evaluation against emerging options is recommended at two-year intervals.`,
     ``,
     `## References`,
     ``,
@@ -533,7 +533,7 @@ function genSkill(scope, typeShort, subject, num, slug) {
     ``,
     `### Phase 1: Prepare`,
     ``,
-    `1. Review the applicable decision records and any recent updates posted to the ${subject} index.`,
+    `1. Review the applicable policies and any recent updates posted to the ${subject} index.`,
     `2. Confirm that all prerequisite conditions are met and documented in the shift log.`,
     `3. Notify all affected teams and stakeholders of the planned activity at least 30 minutes in advance.`,
     `4. Verify that test and monitoring systems are active and capturing baseline data.`,
@@ -586,7 +586,7 @@ function genArticle(scope, typeShort, subject, num, slug) {
     ``,
     `${title} is a critical aspect of the authority's ${typeLabel.toLowerCase()} approach to managing a multi-modal transport network. Poor decisions in this area affect safety, service quality, cost efficiency, and regulatory compliance across trains, buses, road vehicles, bicycles, and pedestrian infrastructure.`,
     ``,
-    `The following decision records govern ${title.toLowerCase()}:`,
+    `The following policies govern ${title.toLowerCase()}:`,
     ``,
     `- See the [${typeShort.toUpperCase()}s index](../../index.md) for all applicable ${typeShort.toUpperCase()}s in this subject area.`,
     ``,
@@ -605,7 +605,7 @@ function genArticle(scope, typeShort, subject, num, slug) {
     ``,
     `## References`,
     ``,
-    `- [${typeShort.toUpperCase()}s decision index](../../index.md)`,
+    `- [${typeShort.toUpperCase()}s policy index](../../index.md)`,
     `- [_core article standards](../../../../_core/adrs/principles/004-article-standards.md)`,
   ].join('\n');
 }
@@ -637,7 +637,7 @@ function genPlan(scope, typeShort, subject, num, slug) {
     ``,
     `## Proposed Solution`,
     ``,
-    `Implement the ${title} standard as defined in the related decision record, including tooling, training, and verification steps across all affected transport modes.`,
+    `Implement the ${title} standard as defined in the related policy, including tooling, training, and verification steps across all affected transport modes.`,
     ``,
     `Expected end date: ${endDate}`,
     ``,
@@ -650,7 +650,7 @@ function genPlan(scope, typeShort, subject, num, slug) {
     ``,
     `| # | Milestone | Owner | Target Date |`,
     `|---|-----------|-------|-------------|`,
-    `| 1 | Decision record approved and published | ${subjectTitle} Lead | 2026-07-01 |`,
+    `| 1 | Policy approved and published | ${subjectTitle} Lead | 2026-07-01 |`,
     `| 2 | Training materials developed and delivered | Training Team | 2026-09-01 |`,
     `| 3 | Tooling and templates deployed to all teams | Engineering Team | 2026-11-01 |`,
     `| 4 | First compliance audit completed | Governance Team | 2027-02-01 |`,
@@ -658,14 +658,14 @@ function genPlan(scope, typeShort, subject, num, slug) {
     ``,
     `## Deliverables`,
     ``,
-    `- Updated decision records for ${subjectTitle}`,
+    `- Updated policies for ${subjectTitle}`,
     `- Training materials and delivery records`,
     `- Tooling deployment evidence`,
     `- Compliance audit report`,
     ``,
     `## References`,
     ``,
-    `- Related decision records in [${typeShort.toUpperCase()}s index](../../index.md)`,
+    `- Related policies in [${typeShort.toUpperCase()}s index](../../index.md)`,
     `- [Plan standards](../../../../_core/adrs/principles/007-plan-standards.md)`,
   ].join('\n');
 }
@@ -830,7 +830,7 @@ const rootIndex = [
   ``,
   `## Overview`,
   ``,
-  `The \`city-traffic\` scope contains all decision records for the city traffic management authority. The authority manages a multi-modal transport network covering trains, buses, road vehicles, bicycles, and pedestrian infrastructure.`,
+  `The \`city-traffic\` scope contains all policies for the city traffic management authority. The authority manages a multi-modal transport network covering trains, buses, road vehicles, bicycles, and pedestrian infrastructure.`,
   ``,
   `## Domains`,
   ``,
@@ -847,13 +847,13 @@ write(path.join(OUT, 'index.md'), rootIndex);
 
 // ── Root .xdrs index ──────────────────────────────────────────────────────
 const xdrsRootIndex = [
-  `# XDR Standards Index`,
+  `# XDRS Index`,
   ``,
-  `This index points to all type- and scope-specific XDR indexes. XDRs (Decision Records) cover Architectural (ADR), Business (BDR), and Engineering (EDR) decisions. Each scope has its own canonical index that lists all XDRs for that scope, organized by subject.`,
+  `This index points to all type- and scope-specific XDRS indexes. XDRS cover Architectural (ADR), Business (BDR), and Engineering (EDR) decisions. Each scope has its own canonical index that lists all Policies for that scope, organized by subject.`,
   ``,
   `## Scope Indexes`,
   ``,
-  `XDRs in scopes listed last override the ones listed first`,
+  `XDRS scopes listed last override the ones listed first`,
   ``,
   `### city-traffic`,
   ``,

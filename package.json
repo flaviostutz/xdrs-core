@@ -1,13 +1,13 @@
 {
   "name": "xdrs-core",
   "version": "0.0.1",
-  "description": "A standard way to organize Decision Records (XDRs) across scopes, subjects, and teams so that AI agents can reliably query and follow them.",
+  "description": "A framework to structure, compile and distribute Architectural (ADR), Business (BDR), and Engineering (EDR) decision records contents so that AI agents and humans can reliably find and use them with hierarchical scopes and controlled rollout in the format of distributable versioned packages.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flaviostutz/xdrs-core.git"
   },
   "keywords": [
-    "xdr",
+    "xdrs",
     "adr",
     "decision-records",
     "ai-agents"

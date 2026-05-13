@@ -1,13 +1,13 @@
 ---
-name: mydevkit-adr-001-publish-mydevkit-as-an-extension-package
-description: Defines how mydevkit publishes as an XDR extension package composing xdrs-core. Use as an example of reusable XDR package composition.
+name: mydevkit-adr-policy-001-publish-mydevkit-as-an-extension-package
+description: Defines how mydevkit publishes as a XDRS extension package composing xdrs-core. Use as an example of reusable XDRS package composition.
 ---
 
-# mydevkit-adr-001: Publish mydevkit as an extension package
+# mydevkit-adr-policy-001: Publish mydevkit as an extension package
 
 ## Context and Problem Statement
 
-We want a small but working example of a reusable XDR package that extends `xdrs-core` without
+We want a small but working example of a reusable XDRS package that extends `xdrs-core` without
 embedding its `filedist` configuration in `package.json`.
 
 Question: How should this example package compose `xdrs-core` and its own scope for consumers?

@@ -1,9 +1,9 @@
 # _core BDRs Index
 
-Business and operational decisions about how the XDR framework operates, including policy and process rules for framework users. Owned by the platform team. Propose changes via pull request.
+Business decisions about how the XDRS framework itself is governed and used. Owned by the platform team. Propose changes via pull request.
 
 ## Principles
 
-Foundational business principles and policy decisions that guide all framework users.
+Foundational standards, principles, and guidelines.
 
-- [_core-bdr-001](principles/001-xdr-decisions-and-skills-usage.md) - **XDR decisions and skills usage** — How agents and humans must use XDR decisions and skills, separating policy authority from execution guidance
+- [_core-bdr-policy-001](principles/001-xdr-decisions-and-skills-usage.md) - **Policy decisions and skills usage** — How agents and humans must use XDRS policies and skills, separating policy authority from execution guidance

@@ -1,10 +1,10 @@
-# XDR Standards Index
+# XDRS Index
 
-This index points to all type- and scope-specific XDR indexes. XDRs (Decision Records) cover Architectural (ADR), Business (BDR), and Engineering (EDR) decisions. Each scope has its own canonical index that lists all XDRs for that scope, organized by subject.
+This index points to all type- and scope-specific XDRS indexes. XDRS cover Architectural (ADR), Business (BDR), and Engineering (EDR) decisions. Each scope has its own canonical index that lists all Policies for that scope, organized by subject.
 
 ## Scope Indexes
 
-XDRs in scopes listed last override the ones listed first
+XDRS scopes listed last override the ones listed first
 
 ### city-traffic
 

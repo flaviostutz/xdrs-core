@@ -2,7 +2,7 @@
 
 ## Overview
 
-This article explains how to turn your own XDR scope into a distributable npm package. It is for
+This article explains how to turn your own XDRS scope into a distributable npm package. It is for
 teams that want to publish their own DRs, Research documents, skills, and articles while staying compatible with the
 xdrs-core structure and extraction flow.
 
@@ -12,8 +12,8 @@ xdrs-core structure and extraction flow.
 
 Use `_local` only for project-only records that must stay inside one repository. Shared packages
 should publish a named scope such as `acme-platform` or `team-ml`, because scopes are the unit of
-ownership, distribution, and override ordering in XDRs. The root structure and precedence rules are
-defined in [_core-adr-001](../../../../_core/adrs/principles/001-xdrs-core.md).
+ownership, distribution, and override ordering in Policies. The root structure and precedence rules are
+defined in [_core-adr-policy-001](../../../../_core/adrs/principles/001-xdrs-core.md).
 
 ### Package the whole scope as a normal npm package
 
@@ -21,7 +21,7 @@ The package shape used by this repository is the simplest reference implementati
 artifact is a regular npm package with a `files` whitelist, a thin CLI entrypoint, and `filedist`
 configuration embedded in [package.json](../../../../../package.json). The important parts are:
 
-- include the shipped XDR tree, agent instruction files, and CLI files in `files`
+- include the shipped XDRS tree, agent instruction files, and CLI files in `files`
 - expose `bin/filedist.js` as the package `bin` so consumers run the package through the same
   `extract` and `check` interface
 - define one `filedist.sets` entry for managed files and another for editable local overrides
@@ -68,9 +68,9 @@ ship together:
           .assets/
 ```
 
-The co-location rule for Research documents comes from [_core-adr-006](../../../../_core/adrs/principles/006-research-standards.md),
-the co-location rule for skills comes from [_core-adr-003](../../../../_core/adrs/principles/003-skill-standards.md),
-and article placement rules come from [_core-adr-004](../../../../_core/adrs/principles/004-article-standards.md).
+The co-location rule for Research documents comes from [_core-adr-policy-006](../../../../_core/adrs/principles/006-research-standards.md),
+the co-location rule for skills comes from [_core-adr-policy-003](../../../../_core/adrs/principles/003-skill-standards.md),
+and article placement rules come from [_core-adr-policy-004](../../../../_core/adrs/principles/004-article-standards.md).
 When you publish the scope folder, those documents travel together and stay version-aligned.
 Prefer plain Markdown, tables, or ASCII art for simple indications. When any of those documents genuinely need images or local supporting files, keep them in the sibling `.assets/` folder next to the document so the package stays self-contained.
 
@@ -78,7 +78,7 @@ Prefer plain Markdown, tables, or ASCII art for simple indications. When any of 
 
 This repository's managed `filedist` set creates symlinks from `.xdrs/**/skills/*` into
 `.github/skills`, configured in [package.json](../../../../../package.json). That means your skills
-remain authored next to the XDRs they implement, but consumers also get the discovery path expected
+remain authored next to the Policies they implement, but consumers also get the discovery path expected
 by GitHub Copilot and similar tooling.
 
 If your package targets non-Copilot agents too, keep the source of truth in `.xdrs/[scope]/.../skills/`
@@ -107,7 +107,7 @@ including prerelease tag handling. Your extension package can follow the same sh
 local verification, then `npm publish` to your public or internal registry.
 
 Version the package with semantic versioning according to the impact on consumers, not only on the
-changed file. [_core-adr-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdr-packages.md)
+changed file. [_core-adr-policy-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdr-packages.md)
 defines the practical rule: breaking guidance or changed mandatory behavior is `MAJOR`, additive
 guidance such as new DRs, Research documents, skills, or articles is usually `MINOR`, and low-risk corrections are
 `PATCH`.
@@ -115,18 +115,18 @@ guidance such as new DRs, Research documents, skills, or articles is usually `MI
 ### Use agentme as the fuller packaged example
 
 This repository shows the baseline xdrs-core packaging model. For a fuller distribution package that
-combines reusable XDR scopes with additional agent workflow files and presets, use
+combines reusable XDRS scopes with additional agent workflow files and presets, use
 [flaviostutz/agentme](https://github.com/flaviostutz/agentme) as the reference. Its README shows the
 same extraction model applied to a richer package: install the dependency, run `extract`, review the
 generated output, and re-run `check` when upgrading.
 
 ## References
 
-- [_core-adr-001](../../../../_core/adrs/principles/001-xdrs-core.md) - Scope structure, precedence, and distribution model
-- [_core-adr-006](../../../../_core/adrs/principles/006-research-standards.md) - Research placement and template rules
-- [_core-adr-003](../../../../_core/adrs/principles/003-skill-standards.md) - Skill co-location and discovery rules
-- [_core-adr-004](../../../../_core/adrs/principles/004-article-standards.md) - Article placement and template rules
-- [_core-adr-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdr-packages.md) - Versioning policy for published XDR packages
+- [_core-adr-policy-001](../../../../_core/adrs/principles/001-xdrs-core.md) - Scope structure, precedence, and distribution model
+- [_core-adr-policy-006](../../../../_core/adrs/principles/006-research-standards.md) - Research placement and template rules
+- [_core-adr-policy-003](../../../../_core/adrs/principles/003-skill-standards.md) - Skill co-location and discovery rules
+- [_core-adr-policy-004](../../../../_core/adrs/principles/004-article-standards.md) - Article placement and template rules
+- [_core-adr-policy-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdr-packages.md) - Versioning policy for published XDRS packages
 - [package.json](../../../../../package.json) - Reference `files`, `bin`, symlink, and `filedist` set layout
 - [Makefile](../../../../../Makefile) - Reference pack and publish flow
 - [examples/basic-usage/package.json](../../../../../examples/basic-usage/package.json) - Minimal consumer dependency setup

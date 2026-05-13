@@ -50,7 +50,7 @@ function handleTaskPrompt(fullPrompt, workspacePath) {
 		? fullPrompt.slice(instructionsEnd + '</INSTRUCTIONS>'.length).trim()
 		: '';
 
-	if (originalPrompt.includes('package distribution options for our XDR scopes')) {
+	if (originalPrompt.includes('package distribution options for our XDRS scopes')) {
 		const relativePath = path.join('.xdrs', '_local', 'adrs', 'principles', 'researches', '001-package-distribution-options.md');
 		const filePath = path.join(workspacePath, relativePath);
 		fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -59,13 +59,13 @@ function handleTaskPrompt(fullPrompt, workspacePath) {
 			'',
 			'## Abstract',
 			'',
-			'This research compares npm packages, git submodules, and manual copy-paste for distributing XDR scopes. The study used document review and a comparison table. The results favored npm packaging for versioning and consumer ergonomics. The practical takeaway is to use npm packaging when repeatable distribution matters.',
+			'This research compares npm packages, git submodules, and manual copy-paste for distributing XDRS scopes. The study used document review and a comparison table. The results favored npm packaging for versioning and consumer ergonomics. The practical takeaway is to use npm packaging when repeatable distribution matters.',
 			'',
 			'## Introduction',
 			'',
-			'Teams need a repeatable way to distribute XDR scopes without losing traceability, upgrade control, or consumer clarity.',
+			'Teams need a repeatable way to distribute XDRS scopes without losing traceability, upgrade control, or consumer clarity.',
 			'',
-			'Question: Which distribution option best fits repeatable XDR scope delivery?',
+			'Question: Which distribution option best fits repeatable XDRS scope delivery?',
 			'',
 			'## Methods',
 			'',

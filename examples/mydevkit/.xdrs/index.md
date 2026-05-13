@@ -1,14 +1,14 @@
-# XDR Standards Index
+# XDRS Index
 
 This index points to the base and extension scopes bundled by the `mydevkit` package.
 
 ## Scope Indexes
 
-XDRs in scopes listed last override the ones listed first
+XDRS scopes listed last override the ones listed first
 
 ### _core
 
-Base XDR standards extracted from the `xdrs-core` dependency.
+Base XDRS standards extracted from the `xdrs-core` dependency.
 
 [View scope _core](_core/index.md)
 
