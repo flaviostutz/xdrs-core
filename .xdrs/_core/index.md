@@ -29,7 +29,7 @@ Each artifact type has its own writing standard:
 
 ### Versioning and distribution
 
-[_core-adr-policy-005](adrs/principles/005-semantic-versioning-for-xdr-packages.md) defines how XDRS packages use semantic versioning to communicate upgrade impact when decisions are shared across repositories or teams.
+[_core-adr-policy-005](adrs/principles/005-semantic-versioning-for-xdrs-packages.md) defines how XDRS packages use semantic versioning to communicate upgrade impact when decisions are shared across repositories or teams.
 
 ### Usage policy
 

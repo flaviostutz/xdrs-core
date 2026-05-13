@@ -10,7 +10,7 @@ Foundational standards, principles, and guidelines.
 - [_core-adr-policy-002](principles/002-policy-standards.md) - **Policy standards** — How to write individual Policy documents: template, metadata, ID, lifecycle rules
 - [_core-adr-policy-003](principles/003-skill-standards.md) - **Skill standards** — How to author and organize reusable skill packages within XDRS projects
 - [_core-adr-policy-004](principles/004-article-standards.md) - **Article standards** — How to write synthetic views combining Policies, research, and skills
-- [_core-adr-policy-005](principles/005-semantic-versioning-for-xdr-packages.md) - **Semantic versioning for XDRS packages** — How to version XDRS packages to communicate upgrade impact
+- [_core-adr-policy-005](principles/005-semantic-versioning-for-xdrs-packages.md) - **Semantic versioning for XDRS packages** — How to version XDRS packages to communicate upgrade impact
 - [_core-adr-policy-006](principles/006-research-standards.md) - **Research standards** — How to structure research documents backing Policy decisions
 - [_core-adr-policy-007](principles/007-plan-standards.md) - **Plan standards** — How to structure ephemeral execution plans that implement decisions
 - [_core-adr-policy-008](principles/008-xdr-standards-structured.md) - **Policy standards - structured** — How to expose individually referenceable numbered rules inside a Policy when external citation by identifier is required

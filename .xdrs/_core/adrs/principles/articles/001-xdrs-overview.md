@@ -203,4 +203,4 @@ Follow [_core-adr-policy-001](../001-xdrs-core.md) and [_core-adr-policy-002](..
 - [003-write-skill skill](../skills/003-write-skill/SKILL.md) - Writing a new skill
 - [004-write-article skill](../skills/004-write-article/SKILL.md) - Writing a new article
 - [005-write-research skill](../skills/005-write-research/SKILL.md) - Writing a new research document
-- [_core-adr-policy-005](../005-semantic-versioning-for-xdr-packages.md) - Semantic versioning rules for XDRS packages
+- [_core-adr-policy-005](../005-semantic-versioning-for-xdrs-packages.md) - Semantic versioning rules for XDRS packages

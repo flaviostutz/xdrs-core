@@ -107,7 +107,7 @@ including prerelease tag handling. Your extension package can follow the same sh
 local verification, then `npm publish` to your public or internal registry.
 
 Version the package with semantic versioning according to the impact on consumers, not only on the
-changed file. [_core-adr-policy-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdr-packages.md)
+changed file. [_core-adr-policy-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdrs-packages.md)
 defines the practical rule: breaking guidance or changed mandatory behavior is `MAJOR`, additive
 guidance such as new DRs, Research documents, skills, or articles is usually `MINOR`, and low-risk corrections are
 `PATCH`.
@@ -126,7 +126,7 @@ generated output, and re-run `check` when upgrading.
 - [_core-adr-policy-006](../../../../_core/adrs/principles/006-research-standards.md) - Research placement and template rules
 - [_core-adr-policy-003](../../../../_core/adrs/principles/003-skill-standards.md) - Skill co-location and discovery rules
 - [_core-adr-policy-004](../../../../_core/adrs/principles/004-article-standards.md) - Article placement and template rules
-- [_core-adr-policy-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdr-packages.md) - Versioning policy for published XDRS packages
+- [_core-adr-policy-005](../../../../_core/adrs/principles/005-semantic-versioning-for-xdrs-packages.md) - Versioning policy for published XDRS packages
 - [package.json](../../../../../package.json) - Reference `files`, `bin`, symlink, and `filedist` set layout
 - [Makefile](../../../../../Makefile) - Reference pack and publish flow
 - [examples/basic-usage/package.json](../../../../../examples/basic-usage/package.json) - Minimal consumer dependency setup
