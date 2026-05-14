@@ -6,5 +6,5 @@ This index covers repository-local architecture and engineering decisions for xd
 
 Synthetic documents that combine and link multiple Policies, Research documents, and Skills around a topic.
 
-- [_local-article-001](principles/articles/001-create-your-own-xdrs-extension-package.md) - **Create your own xdrs-core extension package** (how to publish a reusable Policy scope as an npm package)
+- [_local-adr-article-001](principles/articles/001-create-your-own-xdrs-extension-package.md) - **Create your own xdrs-core extension package** (how to publish a reusable Policy scope as an npm package)
 

@@ -1,5 +1,5 @@
 ---
-name: 005-write-research
+name: _core-adr-skill-005-write-research
 description: >
   Creates a new research document following XDRS research standards: selects scope, type, subject, and number;
   then writes an IMRAD-based study with enough evidence and method detail to stand on its own as a technical paper.
@@ -88,7 +88,7 @@ If the results contain competing interpretations or the intended audience for th
 Use the mandatory template from `006-research-standards`:
 
 ```markdown
-# [scope]-research-[number]: [Short Title]
+# [scope]-[type]-research-[number]: [Short Title]
 
 ## Abstract
 

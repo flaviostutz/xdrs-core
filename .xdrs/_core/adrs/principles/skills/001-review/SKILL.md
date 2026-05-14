@@ -1,5 +1,5 @@
 ---
-name: 001-review
+name: _core-adr-skill-001-review
 description: >
   Reviews code changes or files against applicable Policies and reports violations as structured findings. 
   Activate this skill when the user asks to review, lint, or audit code or Policies, or when you identify a need to check compliance with Policies during implementation.

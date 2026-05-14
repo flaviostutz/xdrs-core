@@ -31,10 +31,6 @@ Each artifact type has its own writing standard:
 
 [_core-adr-policy-005](adrs/principles/005-semantic-versioning-for-xdrs-packages.md) defines how XDRS packages use semantic versioning to communicate upgrade impact when decisions are shared across repositories or teams.
 
-### Usage policy
-
-The business decision [_core-bdr-policy-001](bdrs/principles/001-xdr-decisions-and-skills-usage.md) establishes how agents and humans must use XDRS policies and skills, separating policy authority (which lives in Policies) from execution guidance (which lives in skills).
-
 ### Presentation standards
 
 Slide presentations that support XDRS documents follow [_core-adr-policy-009](adrs/principles/009-presentation-standards.md). Slides use the Marp Markdown format, live in `.assets/` next to the document they support, and must maintain bidirectional links with the parent document.
@@ -43,20 +39,18 @@ Slide presentations that support XDRS documents follow [_core-adr-policy-009](ad
 
 The `_core` scope ships with seven skills that automate the most common framework operations:
 
-- **001-review** reviews code and files against applicable Policies
-- **002-write-policy** guides creation of a new Policy document
-- **003-write-skill** guides creation of a new skill package
-- **004-write-article** guides creation of a new article
-- **005-write-research** guides creation of a new research document
-- **006-write-plan** guides creation of a new execution plan
-- **007-write-presentation** guides creation of Marp slide presentations
+- **_core-adr-skill-001-review** reviews code and files against applicable Policies
+- **_core-adr-skill-002-write-policy** guides creation of a new Policy document
+- **_core-adr-skill-003-write-skill** guides creation of a new skill package
+- **_core-adr-skill-004-write-article** guides creation of a new article
+- **_core-adr-skill-005-write-research** guides creation of a new research document
+- **_core-adr-skill-006-write-plan** guides creation of a new execution plan
+- **_core-adr-skill-007-write-presentation** guides creation of Marp slide presentations
 
 ### Getting started
 
-For a narrative introduction to the framework, including how elements differ, how to decide whether a Policy applies, and how to extend the framework with your own scopes, see the overview article [_core-article-001](adrs/principles/articles/001-xdrs-overview.md).
+For a narrative introduction to the framework, including how elements differ, how to decide whether a Policy applies, and how to extend the framework with your own scopes, see the overview article [_core-adr-article-001](adrs/principles/articles/001-xdrs-overview.md).
 
 ## Type Indexes
 
 - [ADRs Index](adrs/index.md) - Architectural decisions about the XDRS framework structure and standards
-- [BDRs Index](bdrs/index.md) - Business decisions about XDRS framework governance and usage
-- [BDRs Index](bdrs/index.md) - Business decisions about how agents and humans must use XDRS policies and skills

@@ -61,7 +61,7 @@ Examples:
 All plans MUST follow this template:
 
 ```markdown
-# [scope]-plan-[number]: [Short Title]
+# [scope]-[type]-plan-[number]: [Short Title]
 
 ## Executive Summary
 

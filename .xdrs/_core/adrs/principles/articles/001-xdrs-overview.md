@@ -1,4 +1,4 @@
-# _core-article-001: XDRS Overview
+# _core-adr-article-001: XDRS Overview
 
 ## Overview
 

@@ -1,4 +1,4 @@
-# mydevkit-article-001: mydevkit package overview
+# mydevkit-adr-article-001: mydevkit package overview
 
 ## Overview
 

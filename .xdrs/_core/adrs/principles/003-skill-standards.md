@@ -81,7 +81,7 @@ Examples:
 
 ```
 ---
-name: 001-skill-name      # required: must match the parent directory name exactly; max 64 chars
+name: [scope]-[type]-skill-[number]-[skill-name]      # required: full identifier including scope and type; max 64 chars
 description: >            # required: what the skill does AND when to activate it; max 1024 chars
   Concise explanation of the skill and the situations in which an agent should load it.
 license: <license>        # optional
@@ -110,7 +110,8 @@ Known gotchas and how to handle them.
 ```
 
 Rules:
-- The `name` field must match the parent directory name exactly (e.g., directory `001-code-review` uses `name: 001-code-review`). This preserves agentskills spec compliance while encoding the ordering number.
+- The `name` field MUST use the format `[scope]-[type]-skill-[number]-[skill-name]` (e.g., `_core-adr-skill-001-code-review`). This aligns skill identifiers with the Policy document identifier format, making every XDRS element consistently identifiable by scope and type.
+- The directory name MUST follow the format `[number]-[skill-name]` (e.g., `001-code-review`), which keeps the filesystem hierarchy simple while the `name:` field carries the full identifier.
 - `## Overview` SHOULD state the task objective, expected outcome, and relevant prerequisites or tools when they matter.
 - `## Instructions` SHOULD include verification steps or acceptance criteria at the end of the task, or at the end of major phases when partial validation matters.
 - For simple structure, flow, layout, or relationship indications, `SKILL.md` SHOULD prefer plain Markdown, tables, or ASCII art instead of external assets.

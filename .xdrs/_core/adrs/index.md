@@ -20,16 +20,16 @@ Foundational standards, principles, and guidelines.
 
 Step-by-step procedural guides for humans and AI agents.
 
-- [001-review](principles/skills/001-review/SKILL.md) - **Review** — review code and files against Policies
-- [002-write-policy](principles/skills/002-write-policy/SKILL.md) - **Write Policy** — create a new Policy document
-- [003-write-skill](principles/skills/003-write-skill/SKILL.md) - **Write Skill** — create a new skill package
-- [004-write-article](principles/skills/004-write-article/SKILL.md) - **Write Article** — create a new article document
-- [005-write-research](principles/skills/005-write-research/SKILL.md) - **Write Research** — create a new research document
-- [006-write-plan](principles/skills/006-write-plan/SKILL.md) - **Write Plan** — create a new plan document
-- [007-write-presentation](principles/skills/007-write-presentation/SKILL.md) - **Write Presentation** — create Marp slide presentations for XDRS documents
+- [_core-adr-skill-001-review](principles/skills/001-review/SKILL.md) - **Review** — review code and files against Policies
+- [_core-adr-skill-002-write-policy](principles/skills/002-write-policy/SKILL.md) - **Write Policy** — create a new Policy document
+- [_core-adr-skill-003-write-skill](principles/skills/003-write-skill/SKILL.md) - **Write Skill** — create a new skill package
+- [_core-adr-skill-004-write-article](principles/skills/004-write-article/SKILL.md) - **Write Article** — create a new article document
+- [_core-adr-skill-005-write-research](principles/skills/005-write-research/SKILL.md) - **Write Research** — create a new research document
+- [_core-adr-skill-006-write-plan](principles/skills/006-write-plan/SKILL.md) - **Write Plan** — create a new plan document
+- [_core-adr-skill-007-write-presentation](principles/skills/007-write-presentation/SKILL.md) - **Write Presentation** — create Marp slide presentations for XDRS documents
 
 ## Articles
 
 Synthetic views combining Policies, Research, and Skills around a specific topic.
 
-- [_core-article-001](principles/articles/001-xdrs-overview.md) - **XDRS Overview** (objective, structure, getting started, guidelines, extension, usage)
+- [_core-adr-article-001](principles/articles/001-xdrs-overview.md) - **XDRS Overview** (objective, structure, getting started, guidelines, extension, usage)

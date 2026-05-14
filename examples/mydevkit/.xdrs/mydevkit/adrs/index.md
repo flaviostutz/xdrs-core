@@ -13,7 +13,7 @@ It is intended to be layered on top of `_core` through the package `.filedistrc`
 
 ## Skills
 
-- [001-release-package](principles/skills/001-release-package/SKILL.md) - Pack, verify, and publish the extension package
+- [mydevkit-adr-skill-001-release-package](principles/skills/001-release-package/SKILL.md) - Pack, verify, and publish the extension package
 
 ## Articles
 

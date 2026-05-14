@@ -1,5 +1,5 @@
 ---
-name: 004-write-article
+name: _core-adr-skill-004-write-article
 description: >
    Creates a new article document following XDRS article standards: selects scope, type, subject, and number; then writes a focused synthetic text that combines and links multiple Policies, Research documents, and Skills around a topic. Activate this skill when the user asks to create, add, or write a new article, guide, or overview document within an XDRS project.
 metadata:
@@ -72,7 +72,7 @@ If the article spans more than one subject, place it in `principles`.
 Use the mandatory template from `004-article-standards`:
 
 ```
-# [scope]-article-[number]: [Short Title]
+# [scope]-[type]-article-[number]: [Short Title]
 
 ## Overview
 

@@ -42,4 +42,4 @@ published `xdrs-core` package with the local `mydevkit` scope.
 - [package.json](../../../../package.json)
 - [.filedistrc](../../../../.filedistrc)
 - [README.md](../../../../README.md)
-- [001-release-package](skills/001-release-package/SKILL.md) - Skill for packing, verifying, and publishing the example package
+- [mydevkit-adr-skill-001-release-package](skills/001-release-package/SKILL.md) - Skill for packing, verifying, and publishing the example package

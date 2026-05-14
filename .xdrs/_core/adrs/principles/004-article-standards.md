@@ -62,7 +62,7 @@ Examples:
 All articles MUST follow this template:
 
 ```markdown
-# [scope]-article-[number]: [Short Title]
+# [scope]-[type]-article-[number]: [Short Title]
 
 ## Overview
 

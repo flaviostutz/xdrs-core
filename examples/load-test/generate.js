@@ -440,7 +440,7 @@ function genResearch(scope, typeShort, subject, num, slug) {
   const subjectTitle = titleCase(subject);
 
   return [
-    `# city-traffic-research-${pad(num)}: ${title}`,
+    `# city-traffic-${typeShort}-research-${pad(num)}: ${title}`,
     ``,
     `## Abstract`,
     ``,
@@ -512,7 +512,7 @@ function genSkill(scope, typeShort, subject, num, slug) {
 
   return [
     `---`,
-    `name: ${pad(num)}-${slug}`,
+    `name: ${scope}-${typeShort}-skill-${pad(num)}-${slug}`,
     `description: Step-by-step skill for performing ${title.toLowerCase()} within the city traffic management authority's ${subjectTitle} domain. Follow these steps when executing this procedure for trains, buses, road vehicles, bicycles, or pedestrian systems.`,
     `---`,
     ``,
@@ -576,7 +576,7 @@ function genArticle(scope, typeShort, subject, num, slug) {
   const typeLabel = { adr: 'Architecture', bdr: 'Business', edr: 'Engineering' }[typeShort];
 
   return [
-    `# city-traffic-article-${pad(num)}: ${title}`,
+    `# city-traffic-${typeShort}-article-${pad(num)}: ${title}`,
     ``,
     `## Overview`,
     ``,
@@ -617,7 +617,7 @@ function genPlan(scope, typeShort, subject, num, slug) {
   const endDate = '2027-11-30';
 
   return [
-    `# city-traffic-plan-${pad(num)}: ${title}`,
+    `# city-traffic-${typeShort}-plan-${pad(num)}: ${title}`,
     ``,
     `## Executive Summary`,
     ``,

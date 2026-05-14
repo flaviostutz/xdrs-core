@@ -81,7 +81,7 @@ Examples:
 All research documents MUST follow this template:
 
 ```markdown
-# [scope]-research-[number]: [Short Title]
+# [scope]-[type]-research-[number]: [Short Title]
 
 ## Abstract
 
