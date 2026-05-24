@@ -1,25 +1,25 @@
 SHELL := /bin/bash
 
 clean:
-	@rm -rf output node_modules
+	@rm -rf output node_modules .filedist.lock .filedist.yml
 
 test: clean install
-	pnpm exec xdrs-core extract --output ./output
+	pnpm exec xdrs-core install --output ./output
 	test -e output/AGENTS.md
 	test ! -e output/README.md
 	test ! -e output/LICENSE
-	test -e output/.filedist
-	# .xdrs/index.md should not be tracked in .filedist (it uses managed=false/keepExisting=true)
-	! grep -e ".xdrs/index.md" output/.filedist
+	test -e .filedist.lock
+	# .xdrs/index.md should not be tracked in .filedist.lock (it uses managed=false)
+	! grep -e ".xdrs/index.md" .filedist.lock
 	test -e output/.xdrs/_core/adrs/principles/001-xdrs-core.md
 	! grep -Eq "_local/(adrs|bdrs|edrs)/index\\.md" output/.xdrs/index.md
 	
-	pnpm exec xdrs-core extract --output ./output
+	pnpm exec xdrs-core install --output ./output
 
-	# test that .xdrs/index.md changes are preserved on re-extraction (--keep-existing)
+	# test that .xdrs/index.md changes are preserved on re-extraction (--mutable)
 	chmod +w output/.xdrs/index.md
 	echo "## CUSTOM SECTION" >> output/.xdrs/index.md
-	pnpm exec xdrs-core extract --output ./output --keep-existing
+	pnpm exec xdrs-core install --output ./output --mutable
 	grep -q "CUSTOM SECTION" output/.xdrs/index.md
 
 	# filedist check - verify managed files are in sync

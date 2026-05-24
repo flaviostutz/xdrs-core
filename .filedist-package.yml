@@ -1,0 +1,23 @@
+sets:
+  - selector:
+      files:
+        - AGENTS.md
+        - .xdrs/_core/**
+      exclude:
+        - "**/*.test.js"
+        - "**/*.test.int.js"
+        - "**/*.test.int.report"
+    output:
+      path: .
+      symlinks:
+        - source: .xdrs/**/skills/*
+          target: .github/skills
+      gitignore: false
+
+  - selector:
+      files:
+        - .xdrs/index.md
+    output:
+      path: .
+      gitignore: false
+      managed: false

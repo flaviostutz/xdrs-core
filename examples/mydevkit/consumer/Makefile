@@ -1,14 +1,14 @@
 SHELL := /bin/bash
 
 clean:
-	@rm -rf node_modules output pnpm-lock.yaml
+	@rm -rf node_modules output pnpm-lock.yaml .filedist.lock .filedist.yml
 
 install:
 	pnpm add mydevkit@file:../dist/mydevkit-0.0.1.tgz xdrs-core@file:../../../dist/xdrs-core-0.0.1.tgz
 	pnpm install
 
 test: clean install
-	pnpm exec mydevkit extract --output ./output
+	pnpm exec mydevkit install --output ./output
 	test -e output/AGENTS.md
 	test -e output/.xdrs/_core/adrs/principles/001-xdrs-core.md
 	test -e output/.xdrs/mydevkit/adrs/principles/001-publish-mydevkit-as-an-extension-package.md
@@ -19,5 +19,5 @@ test: clean install
 	@echo "All tests passed!"
 
 lint: clean install
-	pnpm exec mydevkit extract --output ./output
+	pnpm exec mydevkit install --output ./output
 	pnpm exec xdrs-core lint ./output

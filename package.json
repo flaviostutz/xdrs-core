@@ -20,58 +20,19 @@
   "files": [
     ".xdrs/_core/**",
     ".xdrs/index.md",
+    ".filedist-package.yml",
     "package.json",
     "AGENTS.md",
     "bin/core.js",
-	  "lib/**/*.js"
+    "lib/**/*.js"
   ],
   "devDependencies": {
     "jest": "^29.7.0"
   },
   "dependencies": {
-    "filedist": "^0.26.0",
+    "filedist": "^0.33.0",
     "ignore": "^7.0.5",
     "minimatch": "^10.2.5"
-  },
-  "filedist": {
-    "sets": [
-      {
-        "selector": {
-          "files": [
-            "AGENTS.md",
-            ".xdrs/_core/**"
-          ],
-          "exclude": [
-            "**/*.test.js",
-            "**/*.test.int.js",
-            "**/*.test.int.report"
-          ]
-        },
-        "output": {
-          "path": ".",
-          "symlinks": [
-            {
-              "source": ".xdrs/**/skills/*",
-              "target": ".github/skills"
-            }
-          ],
-          "gitignore": false
-        }
-      },
-      {
-        "selector": {
-          "files": [
-            ".xdrs/index.md"
-          ]
-        },
-        "output": {
-          "path": ".",
-          "gitignore": false,
-          "managed": false,
-          "keepExisting": true
-        }
-      }
-    ]
   },
   "bin": "bin/core.js"
 }

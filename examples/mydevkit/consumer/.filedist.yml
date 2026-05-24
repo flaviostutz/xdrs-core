@@ -1,0 +1,5 @@
+version: 1
+sets:
+  - package: mydevkit
+    output:
+      path: ./output

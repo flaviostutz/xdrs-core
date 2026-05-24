@@ -90,9 +90,9 @@ The [examples/basic-usage](../../../../../examples/basic-usage) folder is the be
 for the minimal consumer side of the workflow:
 
 1. depend on the locally packed tarball from `dist/`
-2. run `pnpm exec xdrs-core extract --output ./output`
+2. run `pnpm exec xdrs-core install --output ./output`
 3. verify the expected files exist
-4. re-run extraction to confirm keep-existing behavior
+4. re-run extraction to confirm mutable behavior
 5. run `check` and `lint` against the extracted tree
 
 That same pattern should exist in your extension package repository. For an example of a reusable

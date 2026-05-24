@@ -23,7 +23,7 @@ be installed by a consumer workspace.
 ### Phase 2: Verify the consumer flow
 
 1. Install the packed tarball in the `consumer/` fixture together with the local `xdrs-core` tarball.
-2. Run `pnpm exec mydevkit extract --output ./output` from the consumer workspace.
+2. Run `pnpm exec mydevkit install --output ./output` from the consumer workspace.
 3. Run `pnpm exec mydevkit check --output ./output`.
 4. Run `pnpm exec xdrs-core lint ./output`.
 
