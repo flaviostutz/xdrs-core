@@ -407,6 +407,8 @@ function genDecision(scope, typeShort, subject, num, slug) {
     `---`,
     `name: ${name}`,
     `description: Defines the ${title.toLowerCase()} decision for the city traffic management authority. Use when designing, implementing, or reviewing ${subject} components.`,
+    `apply-to: City traffic management authority systems and operations`,
+    `valid-from: 2024-01-01`,
     `---`,
     ``,
     `# ${id}: ${title}`,

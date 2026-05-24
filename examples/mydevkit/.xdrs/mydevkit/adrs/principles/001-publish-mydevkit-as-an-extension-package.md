@@ -1,6 +1,8 @@
 ---
 name: mydevkit-adr-policy-001-publish-mydevkit-as-an-extension-package
 description: Defines how mydevkit publishes as a XDRS extension package composing xdrs-core. Use as an example of reusable XDRS package composition.
+valid-from: 2025-01-01
+apply-to: extension packages
 ---
 
 # mydevkit-adr-policy-001: Publish mydevkit as an extension package

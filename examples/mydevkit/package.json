@@ -1,10 +1,10 @@
 {
   "name": "mydevkit",
   "version": "0.0.1",
-  "description": "Example xdrs-core extension package using .filedistrc",
+  "description": "Example xdrs-core extension package using .filedist-package.yml",
   "files": [
     ".xdrs/**",
-    ".filedistrc",
+    ".filedist-package.yml",
     "README.md",
     "bin/filedist.js"
   ],
