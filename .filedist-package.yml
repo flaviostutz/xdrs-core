@@ -10,7 +10,9 @@ sets:
     output:
       path: .
       symlinks:
-        - source: .xdrs/**/skills/*
+        - source: .xdrs/**/skills/001-review
+          target: .github/skills
+        - source: .xdrs/**/skills/008-write-xdrs-doc
           target: .github/skills
       gitignore: false
 
