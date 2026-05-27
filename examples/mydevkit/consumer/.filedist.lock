@@ -17,7 +17,7 @@ files:
     - .xdrs/_core/adrs/principles/005-semantic-versioning-for-xdrs-packages.md|xdrs-core|0.0.1|file|3060fcc77aa7|0
     - .xdrs/_core/adrs/principles/006-research-standards.md|xdrs-core|0.0.1|file|ff847fcd5914|0
     - .xdrs/_core/adrs/principles/007-plan-standards.md|xdrs-core|0.0.1|file|ed6f135f86a4|0
-    - .xdrs/_core/adrs/principles/008-xdr-standards-structured.md|xdrs-core|0.0.1|file|cde0f3c2e305|0
+    - .xdrs/_core/adrs/principles/008-xdr-standards-structured.md|xdrs-core|0.0.1|file|3c6b7c9b1415|0
     - .xdrs/_core/adrs/principles/009-presentation-standards.md|xdrs-core|0.0.1|file|d454789bedd2|0
     - .xdrs/_core/adrs/principles/articles/.assets/001-xdrs-overview-slides.md|xdrs-core|0.0.1|file|d4071aa47a37|0
     - .xdrs/_core/adrs/principles/articles/001-xdrs-overview.md|xdrs-core|0.0.1|file|6e9080496d4e|0
@@ -47,5 +47,5 @@ files:
     - .github/skills/006-write-plan|mydevkit|0.0.1|symlink|2b94edbd7c9a|0
     - .github/skills/007-write-presentation|mydevkit|0.0.1|symlink|50275c9840fb|0
     - .github/skills/001-release-package|mydevkit|0.0.1|symlink|634cba4753a2|0
-checksum: 194cf607dcdb
+checksum: 7c6d712b21a6
 
