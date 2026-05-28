@@ -1,6 +1,6 @@
 output
 pnpm-lock.yaml
 # filedist:start
-.filedist
+.filedist.lock
 AGENTS.md
 # filedist:end
