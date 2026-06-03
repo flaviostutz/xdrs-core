@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       filedist:
-        specifier: ^0.34.1
-        version: 0.34.1
+        specifier: ^0.34.2
+        version: 0.34.2
       ignore:
         specifier: ^7.0.5
         version: 7.0.5
@@ -545,8 +545,8 @@ packages:
   fb-watchman@2.0.2:
     resolution: {integrity: sha512-p5161BqbuCaSnB8jIbzQHOlpgsPmK5rJVDfDKO91Axs5NC1uu3HRQm6wt9cd9/+GtQQIO53JdGXXoyDpTAsgYA==}
 
-  filedist@0.34.1:
-    resolution: {integrity: sha512-Sw2lTHqUibxHAIxG38Stc6i3lV2EKByhx1iYzgtY+FeMjeQsWm/5MNLAIuu+k5LIIKauEqzKwA+gvcCY1cTBBQ==}
+  filedist@0.34.2:
+    resolution: {integrity: sha512-xh1XvVOpGOi06dVGFG3qLrTSwGXguCMeShPyHV2eoNxiM1TH3z3VmjI9zqj9p0WqOy4RXX7duV2zByRjgzWKQg==}
     hasBin: true
 
   fill-range@7.1.1:
@@ -1803,7 +1803,7 @@ snapshots:
     dependencies:
       bser: 2.1.1
 
-  filedist@0.34.1:
+  filedist@0.34.2:
     dependencies:
       ignore: 7.0.5
       js-yaml: 4.1.1
