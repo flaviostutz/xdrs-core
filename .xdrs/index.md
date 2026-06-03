@@ -19,4 +19,6 @@ Defines how XDRS framework work
 
 ### _local (reserved)
 
+_local scope is the default scope for new xdrs and might override other scope decisions. These decisions are local and are not supposed to be shared in other contexts.
+
 Read _local scope index at `_local/index.md` when it exists.
