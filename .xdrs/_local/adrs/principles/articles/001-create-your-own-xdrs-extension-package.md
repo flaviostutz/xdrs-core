@@ -77,12 +77,12 @@ Prefer plain Markdown, tables, or ASCII art for simple indications. When any of 
 ### Expose skills to Copilot-compatible tooling
 
 This repository's managed `filedist` set creates symlinks from `.xdrs/**/skills/*` into
-`.github/skills`, configured in [package.json](../../../../../package.json). That means your skills
+`.agents/skills`, configured in [package.json](../../../../../package.json). That means your skills
 remain authored next to the Policies they implement, but consumers also get the discovery path expected
-by GitHub Copilot and similar tooling.
+by VS Code Copilot, Cursor, and similar tooling.
 
 If your package targets non-Copilot agents too, keep the source of truth in `.xdrs/[scope]/.../skills/`
-and treat `.github/skills` as an exposure mechanism rather than the canonical location.
+and treat `.agents/skills` as an exposure mechanism rather than the canonical location.
 
 ### Verify with a consumer example before publishing
 

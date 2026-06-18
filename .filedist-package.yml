@@ -11,9 +11,9 @@ sets:
       path: .
       symlinks:
         - source: .xdrs/**/skills/001-review
-          target: .github/skills
+          target: .agents/skills
         - source: .xdrs/**/skills/008-write-xdrs-doc
-          target: .github/skills
+          target: .agents/skills
       gitignore: false
 
   - selector:

@@ -16,4 +16,4 @@ sets:
       gitignore: false
       symlinks:
         - source: .xdrs/**/skills/*
-          target: .github/skills
+          target: .agents/skills
