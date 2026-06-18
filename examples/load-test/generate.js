@@ -514,7 +514,7 @@ function genSkill(scope, typeShort, subject, num, slug) {
 
   return [
     `---`,
-    `name: ${scope}-${typeShort}-skill-${pad(num)}-${slug}`,
+    `name: ${pad(num)}-${slug}`,
     `description: Step-by-step skill for performing ${title.toLowerCase()} within the city traffic management authority's ${subjectTitle} domain. Follow these steps when executing this procedure for trains, buses, road vehicles, bicycles, or pedestrian systems.`,
     `---`,
     ``,

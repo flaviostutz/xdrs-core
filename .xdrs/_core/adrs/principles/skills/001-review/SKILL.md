@@ -1,5 +1,5 @@
 ---
-name: _core-adr-skill-001-review
+name: 001-review
 description: >
    Reviews code changes, xdrs docs or any other files against applicable Policies and reports violations as structured findings.
    Activate this skill when the user asks to review, lint, audit, check, verify, validate, or assess any files or Policies, or when checking whether a document or implementation is consistent with, compliant with, or conforms to a standard or Policy.

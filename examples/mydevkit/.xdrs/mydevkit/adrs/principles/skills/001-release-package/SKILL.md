@@ -1,5 +1,5 @@
 ---
-name: mydevkit-adr-skill-001-release-package
+name: 001-release-package
 description: >
   Packs and verifies the mydevkit extension package that composes xdrs-core through a standalone
   .filedistrc file.
