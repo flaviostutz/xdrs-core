@@ -1,5 +1,5 @@
 ---
-name: _core-adr-policy-010-core-scope-naming
+name: _core-adr-policy-010-core-scope-naming-convention
 description: Defines the -core suffix naming convention for XDRS scopes used to hold meta governance content such as writing standards, structural templates, ownership, and process guidance for a domain. Use when designing or evaluating shared scopes.
 apply-to: All XDRS scope authors and maintainers
 valid-from: 2026-06-24
