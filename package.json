@@ -30,7 +30,7 @@
     "jest": "^29.7.0"
   },
   "dependencies": {
-    "filedist": "^0.37.0",
+    "filedist": "^0.39.0",
     "ignore": "^7.0.5",
     "minimatch": "^10.2.5"
   },

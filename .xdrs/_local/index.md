@@ -1,3 +1,11 @@
+---
+scope-type: _local
+name: _local
+description: Workspace-local decisions for the xdrs-core repository. Covers agent validation workflows and research specific to this project.
+apply-to: xdrs-core repository only
+valid-from: 2025-01-01
+---
+
 # _local Scope Overview
 
 ## Overview

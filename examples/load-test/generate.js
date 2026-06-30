@@ -828,6 +828,14 @@ for (const typeShort of ['adr', 'bdr', 'edr']) {
 
 // ── Root scope index ───────────────────────────────────────────────────────
 const rootIndex = [
+  `---`,
+  `scope-type: domain`,
+  `name: city-traffic`,
+  `description: Contains all policies for the city traffic management authority, covering a multi-modal transport network including trains, buses, road vehicles, bicycles, and pedestrian infrastructure.`,
+  `apply-to: All teams and systems within the city traffic management authority`,
+  `valid-from: 2025-01-01`,
+  `---`,
+  ``,
   `# city-traffic Scope Overview`,
   ``,
   `## Overview`,
