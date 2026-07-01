@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 clean:
-	@rm -rf output node_modules .filedist.lock .filedist.yml
+	@rm -rf output node_modules .filedist.lock .filedist.yml pnpm-lock.yaml AGENTS.md
 
 test: clean install
 	pnpm exec xdrs-core install --output ./output

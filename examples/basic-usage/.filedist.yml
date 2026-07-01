@@ -1,6 +1,0 @@
-version: 1
-sets:
-  - package: xdrs-core
-    output:
-      path: ./output
-      mutable: true

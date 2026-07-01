@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 clean:
-	@rm -rf dist node_modules
+	@rm -rf dist node_modules .filedist.lock
 	make -C consumer clean
 
 build: install

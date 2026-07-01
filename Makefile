@@ -5,10 +5,10 @@ build: install
 	pnpm pack --pack-destination=./dist
 	make -C examples/mydevkit build
 
-lint:
+lint: build
 	node ./lib/lint.js .
-	node ./lib/lint.js examples/mydevkit/consumer/output
 	make -C examples/mydevkit lint
+	node ./lib/lint.js examples/mydevkit/consumer/output
 	make -C examples/load-test lint
 
 test: build
@@ -23,7 +23,7 @@ test-integration:
 	pnpm exec jest --runInBand --testRegex=".*/skills/.*\.test\.int\.js$$" --testPathIgnorePatterns="node_modules|/output/" --verbose
 
 clean:
-	rm -rf dist node_modules
+	rm -rf dist node_modules tmp city-traffic
 	make -C examples/basic-usage clean
 	make -C examples/mydevkit clean
 
