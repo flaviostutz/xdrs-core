@@ -6,7 +6,7 @@ This index points to all type- and scope-specific XDRS indexes. It covers Archit
 
 XDRS scopes listed last override the ones listed first
 
-Default ordering by scope type: `core → reference → platform → domain → _local`
+Default ordering by scope type: `core → reference → platform → standard → _local`
 
 ### _core
 

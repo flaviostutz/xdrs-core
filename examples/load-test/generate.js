@@ -430,7 +430,7 @@ function genDecision(scope, typeShort, subject, num, slug) {
     `## References`,
     ``,
     `- [city-traffic ${typeShort.toUpperCase()}s index](../index.md)`,
-    `- [_core-adr-001](../../../_core/adrs/principles/001-xdrs-core.md)`,
+    `- [_core-adr-001](../../../_core/adrs/principles/003-xdrs-core.md)`,
   ];
 
   return lines.join('\n');
@@ -668,7 +668,7 @@ function genPlan(scope, typeShort, subject, num, slug) {
     `## References`,
     ``,
     `- Related policies in [${typeShort.toUpperCase()}s index](../../index.md)`,
-    `- [Plan standards](../../../../_core/adrs/principles/007-plan-standards.md)`,
+    `- [Plan standards](../../../../_core/adrs/principles/005-plan-standards.md)`,
   ].join('\n');
 }
 
@@ -829,7 +829,7 @@ for (const typeShort of ['adr', 'bdr', 'edr']) {
 // ── Root scope index ───────────────────────────────────────────────────────
 const rootIndex = [
   `---`,
-  `scope-type: domain`,
+  `scope-type: standard`,
   `name: city-traffic`,
   `description: Contains all policies for the city traffic management authority, covering a multi-modal transport network including trains, buses, road vehicles, bicycles, and pedestrian infrastructure.`,
   `apply-to: All teams and systems within the city traffic management authority`,
@@ -865,6 +865,13 @@ const xdrsRootIndex = [
   ``,
   `XDRS scopes listed last override the ones listed first`,
   ``,
+  `### _core`,
+  ``,
+  `Core framework scope providing scope-type definitions.`,
+  `[View scope _core](_core/index.md)`,
+  ``,
+  `---`,
+  ``,
   `### city-traffic`,
   ``,
   `Decision records for the city traffic management authority.`,
@@ -879,8 +886,66 @@ const xdrsRootIndex = [
 
 write(path.join(__dirname, '.xdrs', 'index.md'), xdrsRootIndex);
 
-// ---------------------------------------------------------------------------
-// Summary
+// ── Minimal _core scope ───────────────────────────────────────────────────
+// Required so the linter can resolve the 'standard' scope-type policy.
+const CORE_OUT = path.join(__dirname, '.xdrs', '_core');
+
+write(path.join(CORE_OUT, 'index.md'), [
+  `---`,
+  `scope-type: core`,
+  `name: _core`,
+  `description: Core framework scope providing scope-type definitions.`,
+  `apply-to: All XDRS scopes`,
+  `valid-from: 2025-01-01`,
+  `---`,
+  ``,
+  `# _core Scope Overview`,
+  ``,
+  `[ADRs](adrs/index.md)`,
+].join('\n'));
+
+write(path.join(CORE_OUT, 'adrs', 'index.md'), [
+  `# _core ADR Index`,
+  ``,
+  `Core ADRs.`,
+  ``,
+  `## principles`,
+  ``,
+  `- [001-core-scope-type](principles/001-core-scope-type.md) - core scope type`,
+  `- [002-standard-scope-type](principles/002-standard-scope-type.md) - standard scope type`,
+  `- [003-xdrs-core](principles/003-xdrs-core.md) - XDRS core`,
+  `- [004-article-standards](principles/004-article-standards.md) - Article standards`,
+  `- [005-plan-standards](principles/005-plan-standards.md) - Plan standards`,
+].join('\n'));
+
+function coreStub(num, name, title) {
+  return [
+    `---`,
+    `name: _core-adr-policy-${num}-${name}`,
+    `description: ${title}.`,
+    `apply-to: All XDRS scopes`,
+    `valid-from: 2025-01-01`,
+    `---`,
+    ``,
+    `# _core-adr-policy-${num}: ${title}`,
+    ``,
+    `## Context and Problem Statement`,
+    ``,
+    `Stub for load-test.`,
+    ``,
+    `## Decision Outcome`,
+    ``,
+    `See full definition in the xdrs-core package.`,
+  ].join('\n');
+}
+
+write(path.join(CORE_OUT, 'adrs', 'principles', '001-core-scope-type.md'), coreStub('001', 'core-scope-type', 'core scope type'));
+write(path.join(CORE_OUT, 'adrs', 'principles', '002-standard-scope-type.md'), coreStub('002', 'standard-scope-type', 'standard scope type'));
+write(path.join(CORE_OUT, 'adrs', 'principles', '003-xdrs-core.md'), coreStub('003', 'xdrs-core', 'XDRS core'));
+write(path.join(CORE_OUT, 'adrs', 'principles', '004-article-standards.md'), coreStub('004', 'article-standards', 'Article standards'));
+write(path.join(CORE_OUT, 'adrs', 'principles', '005-plan-standards.md'), coreStub('005', 'plan-standards', 'Plan standards'));
+
+
 // ---------------------------------------------------------------------------
 console.log(`\nGenerated ${generated} content files (target: 3000). Distribution: decisions=${totals.decisions}, research=${totals.research}, skills=${totals.skills}, articles=${totals.articles}, plans=${totals.plans}`);
 

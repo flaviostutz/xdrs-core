@@ -1,5 +1,5 @@
 ---
-scope-type: domain
+scope-type: standard
 name: mydevkit
 description: Reusable architectural guidance for consumers of the mydevkit extension package. Covers release workflows, package structure, and developer tooling decisions.
 apply-to: Projects consuming the mydevkit extension package

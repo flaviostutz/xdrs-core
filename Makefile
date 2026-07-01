@@ -7,7 +7,7 @@ build: install
 
 lint:
 	node ./lib/lint.js .
-	node ./lib/lint.js examples/mydevkit
+	node ./lib/lint.js examples/mydevkit/consumer/output
 	make -C examples/mydevkit lint
 	make -C examples/load-test lint
 

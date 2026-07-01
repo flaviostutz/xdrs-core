@@ -6,6 +6,13 @@ This index points to all type- and scope-specific XDRS indexes. XDRS cover Archi
 
 XDRS scopes listed last override the ones listed first
 
+### _core
+
+Core framework scope providing scope-type definitions.
+[View scope _core](_core/index.md)
+
+---
+
 ### city-traffic
 
 Decision records for the city traffic management authority.
