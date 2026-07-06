@@ -1,0 +1,8 @@
+{
+  "name": "typed-scope",
+  "version": "1.0.0",
+  "description": "XDRS typed scopes example showing core, reference, platform, standard, and custom scope types",
+  "dependencies": {
+    "xdrs-core": "file:../../dist/xdrs-core-0.0.1.tgz"
+  }
+}
