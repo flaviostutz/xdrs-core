@@ -60,6 +60,16 @@ The compilation process of a raw Decision Record is to distribute it into those 
 
 Different teams at different organizational levels make decisions that apply to different audiences. XDRS are organized by scope (e.g. `_core`, `business-x`, `business-y-mobileapp`) so that each team owns its own decision space. Scopes can extend or override policies from broader scopes, with explicit precedence rules: scopes listed later in an index override those listed earlier.
 
+### Scope types and `follows`
+
+Every scope declares a `scope-type` in its `index.md` frontmatter. The five built-in types are `core`, `reference`, `platform`, `standard`, and `_local`, each with different governance rules. Custom types (e.g. `business-area`) can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope.
+
+`core` scopes play a special role: they carry **meta-policies** — authoring standards, scope-type definitions, and governance conventions that apply to all scopes in the workspace. `_core` is the built-in foundation; teams can add their own `core` scope (e.g. `myorg-core`) to extend it with organization-level standards.
+
+The `follows` field in a scope's `index.md` links it to one or more `core` scopes whose policies it must respect (beyond `_core`). This models organizational hierarchies: a team scope can follow a business-area `core` scope, which in turn follows `_core`.
+
+See [examples/typed-scope](examples/typed-scope) for a full working example covering all five scope types and a custom `business-area` type.
+
 ### Subject grouping
 
 Within each scope and type, decisions are grouped by subject (e.g. `application`, `data`, `platform` for ADRs; `product`, `finance` for BDRs). This keeps related decisions together, improves human navigation, and allows AI agents to narrow their search to the relevant subject folder before reading individual records.
