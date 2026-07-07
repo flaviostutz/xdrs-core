@@ -7,6 +7,16 @@ valid-from: 2025-01-01
 
 # _core-adr-policy-008: Policy structured standards
 
+## Context and Problem Statement
+
+Some Policy documents define strong rules or constraints that must be individually referenceable by other documents, skills, or automated agents. The standard policy format from `_core-adr-policy-002` does not specify how such numbered rule blocks should be structured, titled, or cited. Without a consistent format, citations become ambiguous and tools cannot reliably locate referenced rules.
+
+## Decision Outcome
+
+**Numbered rule blocks with stable identifiers, normative language, and dot-notation citations**
+
+Policies that define strong or frequently-cited rules MUST use a numbered rule block format. Each rule receives a stable two-digit identifier, a lowercase kebab-case title, and a body with at least one normative keyword. Citations MUST use dot-notation referencing the exact rule identifier.
+
 ### Details
 
 #### 01-always-use-numbered-rules-for-strong-or-referenceable-policies
