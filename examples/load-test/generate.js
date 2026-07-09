@@ -74,7 +74,7 @@ const TOPICS = {
     'api-gateway-design',
   ],
 
-  adr_controls: [
+  adr_governance: [
     'traffic-volume-monitoring','vehicle-speed-monitoring',
     'air-quality-monitoring-network','cctv-surveillance-architecture',
     'incident-alert-system','predictive-maintenance-monitoring',
@@ -129,7 +129,7 @@ const TOPICS = {
     'data-sovereignty-standards',
   ],
 
-  adr_integration: [
+  adr_data: [
     'smart-corridor-pilot-program','autonomous-bus-trial-architecture',
     'connected-vehicle-testbed','next-gen-ticketing-development',
     'bike-share-expansion-architecture','ev-bus-fleet-introduction',
@@ -174,7 +174,7 @@ const TOPICS = {
     'road-works-coordination-policy','passenger-information-accuracy',
   ],
 
-  bdr_controls: [
+  bdr_governance: [
     'transport-authority-mandate','regulatory-compliance-framework',
     'data-governance-policy','privacy-policy-for-traveler-data',
     'third-party-supplier-governance','risk-management-framework',
@@ -240,7 +240,7 @@ const TOPICS = {
   ],
 
   // ─── EDR SUBJECTS ────────────────────────────────────────────────────────
-  edr_infra: [
+  edr_platform: [
     'cloud-infrastructure-platform','database-selection-for-traffic-data',
     'message-broker-selection','api-gateway-platform',
     'containerization-strategy','kubernetes-cluster-design',
@@ -285,7 +285,7 @@ const TOPICS = {
     'apple-maps-transit-integration','waze-traffic-integration',
   ],
 
-  edr_devops: [
+  edr_data: [
     'ci-cd-pipeline-for-traffic-systems','traffic-data-ingestion-pipeline',
     'vehicle-telemetry-pipeline','cctv-video-processing-pipeline',
     'incident-report-automation','fare-data-reconciliation-pipeline',
@@ -682,19 +682,19 @@ const PLAN = [
   // ADRs – 600 decisions · 180 research · 240 skills · 120 articles · 60 plans
   { type: 'adrs', typeShort: 'adr', subject: 'platform',    decisions: 102, research: 30, skills: 42, articles: 21, plans:  9 },
   { type: 'adrs', typeShort: 'adr', subject: 'application', decisions: 102, research: 30, skills: 42, articles: 21, plans: 12 },
-  { type: 'adrs', typeShort: 'adr', subject: 'controls',    decisions:  99, research: 30, skills: 39, articles: 21, plans: 12 },
+  { type: 'adrs', typeShort: 'adr', subject: 'governance',   decisions:  99, research: 30, skills: 39, articles: 21, plans: 12 },
   { type: 'adrs', typeShort: 'adr', subject: 'operations',  decisions:  99, research: 30, skills: 39, articles: 18, plans:  9 },
   { type: 'adrs', typeShort: 'adr', subject: 'principles',  decisions:  99, research: 30, skills: 39, articles: 21, plans:  9 },
-  { type: 'adrs', typeShort: 'adr', subject: 'integration', decisions:  99, research: 30, skills: 39, articles: 18, plans:  9 },
+  { type: 'adrs', typeShort: 'adr', subject: 'data',        decisions:  99, research: 30, skills: 39, articles: 18, plans:  9 },
   // BDRs – 450 decisions · 150 research · 195 skills · 105 articles · 45 plans
   { type: 'bdrs', typeShort: 'bdr', subject: 'operations',  decisions: 120, research: 39, skills: 51, articles: 27, plans: 12 },
-  { type: 'bdrs', typeShort: 'bdr', subject: 'controls',    decisions: 108, research: 36, skills: 48, articles: 27, plans: 12 },
+  { type: 'bdrs', typeShort: 'bdr', subject: 'governance',  decisions: 108, research: 36, skills: 48, articles: 27, plans: 12 },
   { type: 'bdrs', typeShort: 'bdr', subject: 'product',     decisions: 117, research: 39, skills: 51, articles: 27, plans: 12 },
   { type: 'bdrs', typeShort: 'bdr', subject: 'finance',     decisions: 105, research: 36, skills: 45, articles: 24, plans:  9 },
   // EDRs – 450 decisions · 120 research · 165 skills · 75 articles · 45 plans
-  { type: 'edrs', typeShort: 'edr', subject: 'infra',        decisions: 117, research: 30, skills: 42, articles: 21, plans: 12 },
+  { type: 'edrs', typeShort: 'edr', subject: 'platform',    decisions: 117, research: 30, skills: 42, articles: 21, plans: 12 },
   { type: 'edrs', typeShort: 'edr', subject: 'application',  decisions: 114, research: 30, skills: 42, articles: 18, plans: 12 },
-  { type: 'edrs', typeShort: 'edr', subject: 'devops',       decisions: 111, research: 30, skills: 42, articles: 18, plans: 12 },
+  { type: 'edrs', typeShort: 'edr', subject: 'data',         decisions: 111, research: 30, skills: 42, articles: 18, plans: 12 },
   { type: 'edrs', typeShort: 'edr', subject: 'governance',   decisions: 108, research: 30, skills: 39, articles: 18, plans:  9 },
 ];
 

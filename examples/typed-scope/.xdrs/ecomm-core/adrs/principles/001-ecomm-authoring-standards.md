@@ -33,9 +33,7 @@ Avoid: "Use Stripe", "We chose Stripe for payments"
 Authors MUST choose the most specific subject that fits the decision:
 
 - Use `principles` for foundational rules that apply across the entire scope.
-- Use `application` for decisions about specific systems, services, or integrations.
-- Use `data` for decisions about data models, storage, or retention.
-- Use `integration` for decisions about third-party or inter-service connectivity.
+- Use `application` for decisions about specific systems, services, integrations, or inter-service connectivity.
 
 Do not use `principles` as a catch-all when a more specific subject applies.
 

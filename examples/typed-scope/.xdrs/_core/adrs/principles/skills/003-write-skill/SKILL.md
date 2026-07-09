@@ -38,10 +38,7 @@ Quick test:
 **Scope** — use `_local` unless the user explicitly names another scope.
 - If the user names a scope other than `_local`, check the workspace root `.filedist.lock` file. If any file under `.xdrs/[scope]/` appears in `.filedist.lock`, the scope is external and new documents MUST NOT be created there. Inform the user and ask them to choose a non-external scope.
 
-**Subject** — pick the most specific match for the chosen type (required list per type is in `_core-adr-policy-001`):
-- ADR subjects: `principles`, `application`, `data`, `integration`, `platform`, `controls`, `operations`
-- BDR subjects: `principles`, `marketing`, `product`, `controls`, `operations`, `organization`, `finance`, `sustainability`
-- EDR subjects: `principles`, `application`, `infra`, `observability`, `devops`, `governance`
+**Subject** — MUST read `_core-adr-policy-016` ([016-policy-subjects.md](../../016-policy-subjects.md)) in full before choosing when it exists, otherwise read `001-xdrs-core` ([001-xdrs-core.md](../../001-xdrs-core.md)). Those documents define all allowed subjects per type with full descriptions, examples, and disambiguation tiebreakers. Do not rely on summaries or prior knowledge of the subject list — always read the policy and select the most specific subject that matches the skill's activity domain.
 
 **Skill number** — scan `.xdrs/[scope]/[type]/[subject]/skills/` for the highest existing number and increment by 1. Never reuse numbers from deleted skills.
 
