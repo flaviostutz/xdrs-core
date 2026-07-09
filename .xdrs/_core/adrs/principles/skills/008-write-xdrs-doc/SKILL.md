@@ -45,3 +45,4 @@ Read the full content of the skill file for the inferred type, then follow all i
 - MUST follow all phases of the target skill from Phase 1 onward; do not skip any phase.
 - MUST NOT create documents of a type not listed in the routing table above.
 - When routing to the Policy skill, MUST also read `_core-adr-policy-016` (`.xdrs/_core/adrs/principles/016-policy-subjects.md`) before choosing a subject — it contains the allowed subject list, descriptions, and disambiguation tiebreaker rules.
+- When routing to the Policy skill, MUST also read `_core-adr-policy-017` (`.xdrs/_core/adrs/principles/017-policy-numbering-ranges.md`) before choosing a policy number — it defines the subject-based block ranges that determine valid numbers for each subject.

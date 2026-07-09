@@ -42,7 +42,9 @@ Consult `001-xdrs-core` while making each choice in this phase. The summaries be
 When type, scope, or subject cannot be confidently inferred, ask the user a clarifying question before proceeding. Ask one question at a time and wait for the answer; follow up if the response introduces new ambiguity.
 
 **Policy ID** — format: `[scope]-[type]-[next available number]`
-- Scan `.xdrs/[scope]/[type]/` for the highest existing number in that scope+type and increment by 1.
+- Read `_core-adr-policy-017` ([017-policy-numbering-ranges.md](../../017-policy-numbering-ranges.md)) to identify the 100-number block reserved for the chosen subject (e.g. `principles` → 001–100, `application` → 101–200).
+- Scan `.xdrs/[scope]/[type]/[subject]/` for all existing numbers within that block and use the lowest number in the block that has not yet been assigned.
+- Use the overflow range (901–999) only when all 100 slots in the subject's block are exhausted, taking the next available number there.
 - Never reuse numbers from deleted Policies.
 
 ### Phase 3: Choose the Title

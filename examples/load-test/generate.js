@@ -722,8 +722,23 @@ if (total !== 3000) {
 // ---------------------------------------------------------------------------
 let generated = 0;
 
-// Global per-type decision counters to ensure unique numbers across all subjects
-const typeDecisionCounters = { adrs: 0, bdrs: 0, edrs: 0 };
+// Subject-block-aware numbering per _core-adr-policy-017-policy-numbering-ranges
+const SUBJECT_BLOCK_STARTS = {
+  principles: 1, application: 101, data: 201, platform: 301,
+  operations: 401, governance: 501, product: 601, finance: 701,
+};
+const BLOCK_SIZE = 100;
+const subjectDecisionCounters = {};
+const overflowCounters = { adrs: 900, bdrs: 900, edrs: 900 };
+
+function nextDecisionNumber(type, subject) {
+  const key = `${type}-${subject}`;
+  if (!subjectDecisionCounters[key]) subjectDecisionCounters[key] = 0;
+  const idx = subjectDecisionCounters[key]++;
+  const blockStart = SUBJECT_BLOCK_STARTS[subject];
+  if (blockStart === undefined || idx >= BLOCK_SIZE) return ++overflowCounters[type];
+  return blockStart + idx;
+}
 
 // ── Subject indexes (not counted toward 1000) ──────────────────────────────
 // Collect artifact links per type for the type index
@@ -741,8 +756,7 @@ for (const row of PLAN) {
 
   // ── Decisions ─────────────────────────────────────────────────────────────
   for (let i = 1; i <= decisions; i++) {
-    typeDecisionCounters[type]++;
-    const globalNum = typeDecisionCounters[type];
+    const globalNum = nextDecisionNumber(type, subject);
     const slug = topic(topicKey, i - 1);
     const fileName = `${pad(globalNum)}-${slug}.md`;
     const filePath = path.join(subjectDir, fileName);
