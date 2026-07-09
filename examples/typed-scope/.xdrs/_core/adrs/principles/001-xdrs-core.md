@@ -109,8 +109,6 @@ Policies can be of different kinds, depending on the nature of the decision:
   - **BDR subjects**
     - `principles`: Business principles and decision criteria that guide all business areas.
       - Examples: customer fairness rules, policy precedence, strategic guardrails.
-    - `marketing`: Go-to-market, communication, and campaign policy decisions.
-      - Examples: campaign approval rules, channel usage standards, positioning constraints.
     - `product`: Product behavior, lifecycle, and offering decisions.
       - Examples: feature rollout policy, packaging/tiers, product requirement governance.
     - `controls`: Business control framework decisions.
@@ -121,8 +119,6 @@ Policies can be of different kinds, depending on the nature of the decision:
       - Examples: decision rights, team topology, accountability boundaries.
     - `finance`: Financial and cost-control business decisions.
       - Examples: budgeting process, pricing governance, investment approval rules.
-    - `sustainability`: Environmental and social responsibility policy decisions.
-      - Examples: sustainability KPIs, reporting cadence, procurement sustainability criteria.
   - **EDR subjects**
     - `principles`: Engineering principles and non-functional quality defaults.
       - Examples: coding standards baseline, testing philosophy, secure-by-default engineering rules.

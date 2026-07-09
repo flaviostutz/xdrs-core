@@ -15,7 +15,7 @@ test('003-write-skill creates a devops skill package', async () => {
 			...copilotCmd(REPO_ROOT),
 		},
 		'Create a skill with instructions on how to do a call to a customer during a marketing campaign: - look for the phone number in the CRM opportunity, - read the proposal to be offered, - make the call, - maintain a friendly and professional tone, - report the outcome on CRM, - say "Thank you for your time".',
-		'Verify that SKILL.md was created under .xdrs/_local/bdrs/marketing/skills and has instructions about calling a customer, especifically about the tone of voice',
+		'Verify that SKILL.md was created under .xdrs/_local/bdrs/operations/skills and has instructions about calling a customer, especifically about the tone of voice',
 		null,
 		true
 	);
