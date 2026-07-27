@@ -39,6 +39,10 @@ The policy `name` field MUST end with `{scope-type}-scope-type` (e.g., `security
 
 Note: this naming applies to the **policy name** only, not to any scope directory name. It is distinct from the `-core` scope-name suffix convention defined in `_core-adr-policy-011`.
 
+##### 02b-def-companion-files
+
+A scope-type definition MAY be split across multiple policy files. The primary file MUST follow rule 02 above. Each additional companion file MUST be named `NNN-{scope-type}-scope-type-{qualifier}.md` (e.g., `012-business-area-scope-type-writing-style.md`), where `{qualifier}` is a short lowercase kebab-case descriptor. All companion files MUST be placed in the **same** `[type]/principles/` directory as the primary file within the same scope. A companion file MUST NOT exist without a corresponding primary file in the same scope and type folder. Tools and agents MUST apply all companion files for a scope-type as additional mandatory conventions alongside the primary.
+
 ##### 03-def-required-content
 
 A scope-type definition policy MUST define:
@@ -65,7 +69,7 @@ Custom scope-type names MUST NOT start with `_`. The `_` prefix is reserved for 
 
 ##### 07-def-parent-scope-type
 
-A scope-type definition policy MAY declare a parent scope type by including a rule titled `NN-parent-scope-type` in its `### Details` section. The body of that rule MUST reference the parent scope-type name in backticks (e.g., "Instances of this scope type inherit all rules from the `standard` scope type."). Tools and agents MUST resolve the full parent chain transitively. Child scope-type standards override parent standards on any conflict.
+A scope-type definition policy MAY declare a parent scope type by including a rule titled `NN-parent-scope-type` in its `### Details` section. The body of that rule MUST reference the parent scope-type name in backticks (e.g., "Instances of this scope type inherit all rules from the `standard` scope type."). This rule MUST appear only in the **primary** file (rule 02), not in a companion file (rule 02b). Tools and agents MUST resolve the full parent chain transitively. Child scope-type standards override parent standards on any conflict.
 
 ##### 08-def-valid-iff-policy-exists
 
@@ -111,8 +115,9 @@ When adding or reviewing content in a scope, tools and agents MUST:
 
 1. Read the scope's `scope-type` from its `index.md`.
 2. Search the `[type]/principles/` directories of all `core`-type scopes in the workspace for a file whose name ends with `{scope-type}-scope-type.md`.
-3. If found, apply its rules as mandatory conventions.
-4. If the scope-type policy contains a rule titled `NN-parent-scope-type`, extract the parent type name (backtick-quoted identifier in the rule body) and repeat steps 2–4 for the parent. Continue until no more parents are declared. Detect and stop on cycles.
+3. If found, also load all companion files (`{scope-type}-scope-type-{qualifier}.md`) from the **same directory** (same scope and type folder) and apply their rules as additional mandatory conventions alongside the primary.
+4. Apply all rules from the primary and its companions as mandatory conventions.
+5. If the primary scope-type policy contains a rule titled `NN-parent-scope-type`, extract the parent type name (backtick-quoted identifier in the rule body) and repeat steps 2–5 for the parent. Continue until no more parents are declared. Detect and stop on cycles.
 
 ##### 16-application-local
 

@@ -28,9 +28,10 @@ Policy documents are the authoritative source of truth for their scope, type, an
 | `name` | Yes | 1-64 characters. Lowercase letters, numbers, hyphens, and leading underscores only. MUST NOT end with a hyphen. MUST NOT contain consecutive hyphens. MUST match the document identifier from the heading: `[scope]-[type]-policy-[number]-[short-title]`. |
 | `description` | Yes | 1-1024 characters. Describes what this decision is about and when to use it. SHOULD include keywords that help agents identify when to apply it. |
 | `apply-to` | Yes | Short description of contexts this decision is applicable to. Keep it under 40 words. Use `All scopes` when the decision applies broadly. Examples: `Only frontend code`, `JavaScript projects`, `All scopes`. |
-| `valid-from` | Yes | ISO date (`YYYY-MM-DD`) indicating from when this decision MUST be enforced. Before this date it SHOULD be used everywhere possible, but compliance is not enforced during reviews until after this date. Defaults to the date the Policy was created. When updating an existing Policy whose `valid-from` date has already passed, preserve the original date—do not update it to the current date. The historical date shows when the policy was originally enabled and is important for understanding policy evolution. |
+| `valid-from` | Yes | ISO date (`YYYY-MM-DD`) indicating from when this decision MUST be enforced. Before this date it SHOULD be used everywhere possible, but compliance is not enforced during reviews until after this date. Defaults to the date the Policy was created. When updating an existing Policy whose `valid-from` date has already passed, preserve the original date—it MUST NOT be updated to the current date. The historical date shows when the policy was originally enabled and is important for understanding policy evolution. |
 | `license` | No | SPDX license expression (e.g. `MIT`, `Apache-2.0`, `CC-BY-4.0`). Indicates the license under which the document content is shared. If omitted, the license is governed by the repository or package defaults. |
 | `metadata` | No | Arbitrary key-value map for additional properties not defined by this spec. |
+| `freeze-reference` | No | Boolean (`true` or `false`, defaults to `false`). When `true`, the policy MUST NOT be renamed, renumbered, or moved because external parties reference it by its current identity (path, number, name, heading). Reference-identity issues are intentionally exempt. See rule [`01-freeze-reference-exemption`](#01-freeze-reference-exemption). |
 
   - Minimal example:
     ```yaml
@@ -60,14 +61,19 @@ Policy documents are the authoritative source of truth for their scope, type, an
 - Research documents MAY be added under the same subject to capture the exploration, findings, and proposals that backed a decision. Research is useful during elaboration, discussion, and updates of Policies, but the Policy document remains the source of truth.
 - **Policy Id:** [scope]-[type]-policy-[number] (numbers are scoped per type+scope combination and MUST NOT be reused within that combination; MUST be lowercase)
   - Types in IDs: `adr-policy`, `bdr-policy`, `edr-policy`
-  - Define the next number of a Policy by checking what is the highest number present in the type+scope. Don't fill numbering gaps, as they might be old deleted Policies and we MUST NOT reuse numbers of different documents/decisions. Numbering gaps are expected.
+  - Policy numbers MUST follow the subject-based block ranges defined in [`_core-adr-policy-017`](017-policy-numbering-ranges.md). Each subject has a reserved 100-number block; use the lowest available number within the block for the chosen subject. Use the overflow range (901–999) only when the subject's block is exhausted.
+  - Numbering gaps are expected and MUST NOT be filled, as gaps may represent deleted policies whose numbers MUST NOT be reused.
 - Policies MUST be concise and reference other Policies to avoid duplication.
+- Policies MUST NOT contain duplicated content: the same rule or information MUST NOT appear more than once in the document, whether stated identically or rephrased. Consolidate into a single authoritative statement and reference it where needed.
+- Policies MUST NOT contain conflicting content: all rules and statements within the same document MUST be consistent with each other.
 - The `### Details` section SHOULD state relevant boundaries or exceptions and what a reader SHOULD do or avoid in common cases. Use the frontmatter fields `apply-to` and `valid-from` as the first-pass filter for applicability, then keep nuanced boundaries in the decision text.
 - Use concise rules, examples, `Allowed` / `Disallowed` lists or checklists with required items to help the reader apply the decision correctly. Keep them short and decision-specific.
 - Policies MUST NOT include historical change notes or descriptions of what changed from a previous version. State only the current rule that MUST be followed. Historical context is available via git history or versioned packages.
+- The `valid-from` field MUST NOT be updated automatically when a Policy is changed. It reflects the original enforcement date and MUST remain unchanged throughout the Policy's lifetime. Only update it intentionally when explicitly changing the enforcement start date as a deliberate decision.
 - When a policy covers elements that could be confused with each other, include explicit disambiguation statements clarifying the distinction before stating the rules for each.
 - A "why" explanation for a policy rule MAY only be included if it is brief, non-obvious, relevant to the reader, and not longer than the rule itself.
 - Rules MUST focus on what is required or forbidden. Explanations of why a rule exists belong in a Research document, not in the Policy itself. Link to the relevant research when the rationale is important for adoption.
+- Each policy rule and rule block MUST be unambiguous: it MUST be possible to clearly follow, check, and discuss it without requiring additional interpretation.
 - When the decision defines strong policies or rules that SHOULD be stated explicitly as stable rule blocks, or when other documents, skills, or agents need to cite those rules individually by identifier, the Policy MUST follow the extension [_core-adr-policy-008 - Policy structured standards](008-policy-structured-standards.md) instead of using plain bullet lists for those rules.
 - Conflict handling applies to Policy documents:
   - For cross-scope overrides, document the decision conflict in the Policy `## Conflicts` section of the Policy that overrides another scope.
@@ -81,6 +87,17 @@ Policy documents are the authoritative source of truth for their scope, type, an
   - This is important to make them focused on a clear decision
   - Exceptions can reach under 2600 words (templates, more elaborate decision implementations etc)
 - MUST use `_local` scope if the user doesn't explicitly indicate a specific scope while creating a policy or skill.
+
+#### 01-freeze-reference-exemption
+
+When a policy's frontmatter includes `freeze-reference: true`, the policy MUST NOT be renamed, renumbered, or moved because external parties reference it by its current identity. The policy's reference identity is its full addressable path and canonical identifier: scope location, type folder, subject folder, number, filename, frontmatter `name` field, and document heading identifier. All checks and reviews that would require changing the reference identity MUST be ignored unless the owner explicitly requests them to be fixed. Specifically, the following checks are exempt:
+
+- Invalid subject folder (scope, subject, or type placement does not match allowed values)
+- Numbering range mismatch (number outside the reserved block for the subject per [`_core-adr-policy-017`](017-policy-numbering-ranges.md))
+- Document heading format mismatch (heading does not start with the expected `# scope-type-policy-number:` prefix)
+- Frontmatter `name` field mismatch (name does not match the expected identifier derived from the file path)
+
+Content-level checks that do not affect the policy's reference (required sections, word count, emojis, broken outgoing links, structured rule block format, normative language) remain enforced. The `valid-from` date is not taken into consideration when evaluating whether `freeze-reference` applies.
 
 **Policy template**
 

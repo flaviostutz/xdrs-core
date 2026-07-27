@@ -28,6 +28,8 @@ Policies can be of different kinds, depending on the nature of the decision:
 - ADR (Architectural Decision Record): Wider architectural and technical decisions. Examples: how big topics relate to each other, system contexts, overview without realy deciding on details, integration patterns, overarching topics, corporate wide practices, corporate systems, external and internal partners etc
 - EDR (Engineering Decision Record): captures engineering details about how to implement things. Examples: specific tools and libraries selection, framework usage, best practices on coding, testing, quality, project structure, pipelines etc
 
+ADR and EDR share the same six technical subject names (see [`_core-adr-policy-016`](016-policy-subjects.md)). The type disambiguates the abstraction level: ADR captures the architectural choice (what to adopt, which strategy, which topology); EDR captures the engineering implementation of that choice (how to configure, which conventions to follow, which tools to use). When the same concern spans both layers, authors MUST create two separate documents in the same-named subject across types. See `_core-adr-policy-016` for full subject descriptions, examples, and cross-type tiebreaker rules.
+
 #### General framework standards
 
 - The main document type in the collection of XDRS is the Policy document, which contains the core of a decision, contraints, rules and what SHOULD be followed. Other documents are normally related to this policy and MUST NOT go against its contents.
@@ -90,48 +92,8 @@ Policies can be of different kinds, depending on the nature of the decision:
     - `metadata` (optional): Arbitrary key-value map for additional scope metadata.
     - `follows` (optional): Core scope names whose Policies apply as mandatory conventions to this scope, beyond `_core`. Last-listed takes precedence on conflicts (e.g., `follows: myarea-core, shared-standards`).
     - `related-scopes` (optional): Scope names of parent, sibling, or child scopes. Use when structural links help verify policy correctness across related scopes.
-- **Subjects:** MUST be one of the following depending on the type of the Policy. Use the subject to indicate the main concern of the decision.
-  - **ADR subjects**
-    - `principles`: Cross-cutting architecture and policy foundations.
-      - Examples: architecture style, interoperability rules, long-term technology direction.
-    - `application`: System and service design decisions at application level.
-      - Examples: modularization strategy, service decomposition, app-level security flows.
-    - `data`: Data architecture and information modeling choices.
-      - Examples: canonical schemas, data ownership boundaries, retention strategies.
-    - `integration`: Decisions about communication between internal/external systems.
-      - Examples: sync vs async patterns, contract strategy, partner integration approach.
-    - `platform`: Platform-level runtime and enabling capabilities.
-      - Examples: cloud/runtime baseline, foundational services, platform tenancy approach.
-    - `controls`: Architecture controls for risk, security, and compliance at a high level.
-      - Examples: encryption baseline, auditability requirements, policy enforcement points.
-    - `operations`: Operational architecture decisions.
-      - Examples: incident model, resilience objectives, operational ownership boundaries.
-  - **BDR subjects**
-    - `principles`: Business principles and decision criteria that guide all business areas.
-      - Examples: customer fairness rules, policy precedence, strategic guardrails.
-    - `product`: Product behavior, lifecycle, and offering decisions.
-      - Examples: feature rollout policy, packaging/tiers, product requirement governance.
-    - `controls`: Business control framework decisions.
-      - Examples: approval segregation, mandatory checks, exception handling policy.
-    - `operations`: Day-to-day business process and procedure decisions.
-      - Examples: support workflows, onboarding/offboarding procedures, SLA operations.
-    - `organization`: Structure, roles, and responsibility model decisions.
-      - Examples: decision rights, team topology, accountability boundaries.
-    - `finance`: Financial and cost-control business decisions.
-      - Examples: budgeting process, pricing governance, investment approval rules.
-  - **EDR subjects**
-    - `principles`: Engineering principles and non-functional quality defaults.
-      - Examples: coding standards baseline, testing philosophy, secure-by-default engineering rules.
-    - `application`: Code-level implementation patterns and application conventions.
-      - Examples: framework patterns, layer organization, API implementation conventions.
-    - `infra`: Infrastructure implementation and runtime operations details.
-      - Examples: IaC patterns, environment provisioning, network/runtime hardening details.
-    - `observability`: Telemetry, monitoring, alerting, and diagnostics implementation.
-      - Examples: log/metric/tracing standards, alert routing policy, SLO measurement approach.
-    - `devops`: Delivery pipeline, release automation, and developer workflow decisions.
-      - Examples: CI/CD stages, branch strategy, release promotion gates.
-    - `governance`: Engineering governance, risk controls, and compliance mechanics.
-      - Examples: dependency governance, approval policies, mandatory quality checks.
+- **Subjects:** The subject folder MUST be chosen per [`_core-adr-policy-016`](016-policy-subjects.md), which defines allowed subjects, full descriptions, examples, and disambiguation tiebreakers.
+- **Policy numbering:** Numbers MUST be assigned within the subject-based block ranges defined in [`_core-adr-policy-017`](017-policy-numbering-ranges.md). Use the lowest available number within the block for the chosen subject. See [`_core-adr-policy-002-policy-standards.01-freeze-reference-exemption`](002-policy-standards.md) for exemptions.
 - MUST NOT use emojis
 - **Links:** Use relative paths for all links; MUST NOT use absolute paths starting with `/`.
 - **Indexes**
@@ -140,8 +102,8 @@ Policies can be of different kinds, depending on the nature of the decision:
   - Canonical index requirements:
     - Organize XDRS documents by subject for easier navigation
     - Add a short description of what this scope is about (responsibilities, general worries, teams involved, link to discussion process, etc)
-    - Add a list of other scope indexes that this scope might be related to (only add scopes that might be overridden). E.g: "business-x-mobileapp" scope could refer to "business-x" and "sensitive-data" scopes in its index list. XDRS in scopes listed last override XDRS in scopes listed first when addressing the same topic.
-    - Each XDRS element entry in the index MUST include a short description of its content. The description SHOULD use an imperative statement or the question it answers when possible (<15 words). Example: "Use this while planning a new feature", "What communication tone we use with our customers?", "PNPM vs Yarn comparison study"
+    - Add links to related scope indexes that this scope might override or be overridden by (scopes listed last override earlier ones on the same topic).
+    - Each XDRS element entry MUST include a short description. SHOULD use an imperative statement or the question it answers (<15 words). Example: "Use this while planning a new feature", "What communication tone we use with our customers?"
   - Outside the scopes, keep a root index in `[xdrs-root]/index.md` that links to each scope index (`[xdrs-root]/[scope]/index.md`). Add the text "XDRS scopes listed last override the ones listed first". The root index MUST NOT link directly to type indexes; readers navigate from the scope index to the type indexes. Use the link text pattern `View scope [scope_name]` for each scope link (e.g. `[View scope myteam] linking to (myteam/index.md)`).
   - MUST verify if indexes are up to date after making changes
 - **Scope index**
@@ -153,9 +115,9 @@ Policies can be of different kinds, depending on the nature of the decision:
   - Whenever the contents of a scope change (new Policies, skills, articles, research, or plans are added, updated, or removed), evaluate whether the scope index SHOULD be updated to reflect the newer contents.
 
 **Folder structure examples** (using the default `.xdrs/` root):
-- `.xdrs/business-x/edrs/devops/003-required-development-workflow.md`
-- `.xdrs/business-x/adrs/controls/010-security-and-secrets-management.md`
-- `.xdrs/_core/edrs/devops/001-multi-repo.md`
+- `.xdrs/business-x/edrs/platform/003-required-development-workflow.md`
+- `.xdrs/business-x/adrs/governance/010-security-and-secrets-management.md`
+- `.xdrs/_core/edrs/platform/001-multi-repo.md`
 
 ```text
 subject/
@@ -181,6 +143,7 @@ subject/
 - [_core-adr-policy-002 - Policy standards](002-policy-standards.md) - Standards for writing individual Policy documents
 - [_core-adr-policy-010 - Scope governance](010-scope-governance.md) - Scope-type definition convention, scope-local standards, and governance application model
 - [_core-adr-policy-011 - core scope type](011-core-scope-type.md) - Defines the `core` scope type and meta-governance scope conventions
+- [_core-adr-policy-016 - Policy Subjects](016-policy-subjects.md) - Allowed subjects per type, descriptions, examples, and disambiguation tiebreakers
 - [001-review skill](skills/001-review/SKILL.md) - Skill for reviewing code changes against Policies
 - [002-write-policy skill](skills/002-write-policy/SKILL.md) - Skill for creating a new Policy following this standard
 - [_core-adr-policy-003 - Skill standards](003-skill-standards.md)

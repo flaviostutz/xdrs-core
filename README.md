@@ -64,9 +64,39 @@ Different teams at different organizational levels make decisions that apply to 
 
 Every scope declares a `scope-type` in its `index.md` frontmatter. The five built-in types are `core`, `reference`, `platform`, `standard`, and `_local`, each with different governance rules. Custom types (e.g. `business-area`) can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope.
 
-`core` scopes play a special role: they carry **meta-policies** — authoring standards, scope-type definitions, and governance conventions that apply to all scopes in the workspace. `_core` is the built-in foundation; teams can add their own `core` scope (e.g. `myorg-core`) to extend it with organization-level standards.
+| Type | Purpose | Naming pattern | Root index order |
+|---|---|---|---|
+| `core` | Meta-governance: authoring standards, scope-type definitions, process guidance. No consumable policies. | `{name}-core` (e.g. `myorg-core`) | 1st |
+| `reference` | Standards, regulations, or reference models to be adopted or adapted (e.g. PCI-DSS, ISO 27001, reference architectures). Not a live service. | `{domain}-ref-{name}` (e.g. `security-ref-baseline`) | 2nd |
+| `platform` | Existing live services or infrastructure teams can consume directly (e.g. cloud platform, shared data service). | `{domain}-plat-{name}` (e.g. `cloud-plat-infra`) | 3rd |
+| `standard` | Business areas, products, teams, or any general-purpose scope. Default type when nothing else fits. | Any valid scope name (e.g. `checkout`, `mobile-app`) | 4th |
+| `_local` | Workspace-local overrides. Reserved exclusively for the `_local` scope. Never distributed. | `_local` (reserved) | last |
 
-The `follows` field in a scope's `index.md` links it to one or more `core` scopes whose policies it must respect (beyond `_core`). This models organizational hierarchies: a team scope can follow a business-area `core` scope, which in turn follows `_core`.
+**`core` scopes** carry meta-policies — authoring standards, scope-type definitions, and governance conventions. `_core` is the built-in foundation; teams add their own `core` scope (e.g. `myorg-core`) to extend it with organisation-level standards. A `core`-type scope MUST NOT contain consumable policies intended for other teams to follow.
+
+**`reference` scopes** hold read-only material to adopt or map against: industry frameworks, regulatory requirements, vendor best-practice patterns, business procedure standards. Content describes how something should be done — not what is currently running.
+
+**`platform` scopes** document what already exists and is ready to use. A scope is of type `platform` when its content describes a live operational capability — what is available, how to access it, and what constraints apply.
+
+**`standard` scopes** are the default. Use them for team, product, or business-area scopes that do not fit the other types.
+
+**`_local` scopes** hold workspace-specific content such as local tooling decisions, transition overrides, or temporary decisions. This content is never packaged or distributed.
+
+The `follows` field in a scope's `index.md` links it to one or more `core` scopes whose standards it must respect (beyond `_core`). This models organisational hierarchies: a team scope can follow a business-area `core` scope, which in turn follows `_core`.
+
+```yaml
+# .xdrs/checkout/index.md
+---
+scope-type: standard
+name: checkout
+follows: ecomm-core        # must comply with ecomm-core authoring standards
+description: Checkout team decisions
+---
+```
+
+The recommended ordering in `.xdrs/index.md` is: `core → reference → platform → standard → _local`. Scopes listed later override earlier ones on the same topic.
+
+Custom scope types can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope. The `checkout` scope in [examples/typed-scope](examples/typed-scope) uses a custom `business-area` type defined in `ecomm-core`.
 
 See [examples/typed-scope](examples/typed-scope) for a full working example covering all five scope types and a custom `business-area` type.
 

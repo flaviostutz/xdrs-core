@@ -15,6 +15,14 @@ Guides the creation of a well-structured skill package by following `_core-adr-p
 
 ## Instructions
 
+### Phase 0: Prerequisites Gate — MUST complete before writing
+
+Identify the target scope from the user's request; use `_local` if none is specified. Read the scope's `index.md` frontmatter and perform ALL of the following checks. If ANY check fails, output a FAIL result immediately and do not proceed:
+
+- **Follows scopes:** If the scope declares `follows:` entries (e.g., `follows: myarea-core, shared-standards`), verify that each listed scope directory exists in the workspace AND contains an accessible `index.md` (e.g., `.xdrs/[scope-name]/index.md`). If any listed scope is missing or unreadable, output: `FAIL — Cannot proceed: scope \`[scope-name]\` is listed in \`follows\` but its policies are not present in the workspace. Install it before authoring documents in this scope, as the governance constraints cannot be verified.`
+- **Scope-local core policy:** Check whether a `-core` policy file exists for the target scope (i.e., a file ending in `{scope-name}-core.md` inside the scope's `[type]/principles/` directory). If the scope's `index.md` references or implies a local core standard and that file is absent or unreadable, output: `FAIL — Cannot proceed: the local core policy \`{scope-name}-core.md\` is referenced for scope \`[scope-name]\` but could not be found. Without it, the document cannot be authored in full compliance with the scope's governance.`
+- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer declared by the scope MUST be present before writing begins.
+
 ### Phase 1: Understand the Skill Goal
 
 1. Read `.xdrs/_core/adrs/principles/003-skill-standards.md` in full to internalize the SKILL.md format, folder layout, and numbering rules.
@@ -38,7 +46,7 @@ Quick test:
 **Scope** — use `_local` unless the user explicitly names another scope.
 - If the user names a scope other than `_local`, check the workspace root `.filedist.lock` file. If any file under `.xdrs/[scope]/` appears in `.filedist.lock`, the scope is external and new documents MUST NOT be created there. Inform the user and ask them to choose a non-external scope.
 
-**Subject** — MUST read `_core-adr-policy-016` ([016-policy-subjects.md](../../016-policy-subjects.md)) in full before choosing when it exists, otherwise read `001-xdrs-core` ([001-xdrs-core.md](../../001-xdrs-core.md)). Those documents define all allowed subjects per type with full descriptions, examples, and disambiguation tiebreakers. Do not rely on summaries or prior knowledge of the subject list — always read the policy and select the most specific subject that matches the skill's activity domain.
+**Subject** — MUST read `_core-adr-policy-016` ([016-policy-subjects.md](../../016-policy-subjects.md)) in full before choosing. That document defines all allowed subjects per type with full descriptions, examples, and disambiguation tiebreakers. Do not rely on summaries or prior knowledge of the subject list — always read the policy and select the most specific subject that matches the skill's activity domain.
 
 **Skill number** — scan `.xdrs/[scope]/[type]/[subject]/skills/` for the highest existing number and increment by 1. Never reuse numbers from deleted skills.
 
@@ -143,16 +151,16 @@ If any check fails, revise before continuing.
 **Input**: "Create a skill to help debug CI pipelines"
 - Type: EDR (engineering workflow)
 - Scope: `_local`
-- Subject: `devops`
-- Number: scan `.xdrs/_local/edrs/devops/skills/` → next available
-- Output: `.xdrs/_local/edrs/devops/skills/001-debug-ci-pipeline/SKILL.md`
+- Subject: `platform`
+- Number: scan `.xdrs/_local/edrs/platform/skills/` → next available
+- Output: `.xdrs/_local/edrs/platform/skills/001-debug-ci-pipeline/SKILL.md`
 
 **Input**: "Create a skill to review API designs"
 - Type: ADR (architectural evaluation)
 - Scope: `_local`
-- Subject: `integration`
-- Number: scan `.xdrs/_local/adrs/integration/skills/` → next available
-- Output: `.xdrs/_local/adrs/integration/skills/001-review-api-design/SKILL.md`
+- Subject: `application`
+- Number: scan `.xdrs/_local/adrs/application/skills/` → next available
+- Output: `.xdrs/_local/adrs/application/skills/001-review-api-design/SKILL.md`
 
 ## Edge Cases
 

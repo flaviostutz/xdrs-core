@@ -14,6 +14,14 @@ Guides the creation of a well-structured Policy by following the standards in `_
 
 ## Instructions
 
+### Phase 0: Prerequisites Gate — MUST complete before writing
+
+Identify the target scope from the user's request; use `_local` if none is specified. Read the scope's `index.md` frontmatter and perform ALL of the following checks. If ANY check fails, output a FAIL result immediately and do not proceed:
+
+- **Follows scopes:** If the scope declares `follows:` entries (e.g., `follows: myarea-core, shared-standards`), verify that each listed scope directory exists in the workspace AND contains an accessible `index.md` (e.g., `.xdrs/[scope-name]/index.md`). If any listed scope is missing or unreadable, output: `FAIL — Cannot proceed: scope \`[scope-name]\` is listed in \`follows\` but its policies are not present in the workspace. Install it before authoring documents in this scope, as the governance constraints cannot be verified.`
+- **Scope-local core policy:** Check whether a `-core` policy file exists for the target scope (i.e., a file ending in `{scope-name}-core.md` inside the scope's `[type]/principles/` directory). If the scope's `index.md` references or implies a local core standard and that file is absent or unreadable, output: `FAIL — Cannot proceed: the local core policy \`{scope-name}-core.md\` is referenced for scope \`[scope-name]\` but could not be found. Without it, the document cannot be authored in full compliance with the scope's governance.`
+- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer declared by the scope MUST be present before writing begins.
+
 ### Phase 1: Understand the Decision
 
 1. Read the XDRS root `index.md` (default: `.xdrs/index.md`) to discover all active scopes and their canonical indexes.
@@ -37,12 +45,14 @@ Consult `001-xdrs-core` while making each choice in this phase. The summaries be
 **Scope** — use `_local` unless the user explicitly names another scope.
 - If the user names a scope other than `_local`, check the workspace root `.filedist.lock` file. If any file under `.xdrs/[scope]/` appears in `.filedist.lock`, the scope is external and new documents MUST NOT be created there. Inform the user and ask them to choose a non-external scope.
 
-**Subject** — MUST read `_core-adr-policy-016` ([016-policy-subjects.md](../../016-policy-subjects.md)) in full before choosing when it exists, otherwise read `001-xdrs-core` ([001-xdrs-core.md](../../001-xdrs-core.md)). Those documents define all allowed subjects per type with full descriptions, examples, and disambiguation tiebreakers. Do not rely on summaries or prior knowledge of the subject list — always read the policy and select the subject that best matches the decision topic according to its definitions.
+**Subject** — MUST read `_core-adr-policy-016` ([016-policy-subjects.md](../../016-policy-subjects.md)) in full before choosing. That document defines all allowed subjects per type with full descriptions, examples, and disambiguation tiebreakers. Do not rely on summaries or prior knowledge of the subject list — always read the policy and select the subject that best matches the decision topic according to its definitions.
 
 When type, scope, or subject cannot be confidently inferred, ask the user a clarifying question before proceeding. Ask one question at a time and wait for the answer; follow up if the response introduces new ambiguity.
 
 **Policy ID** — format: `[scope]-[type]-[next available number]`
-- Scan `.xdrs/[scope]/[type]/` for the highest existing number in that scope+type and increment by 1.
+- Read `_core-adr-policy-017` ([017-policy-numbering-ranges.md](../../017-policy-numbering-ranges.md)) to identify the 100-number block reserved for the chosen subject (e.g. `principles` → 001–100, `application` → 101–200).
+- Scan `.xdrs/[scope]/[type]/[subject]/` for all existing numbers within that block and use the lowest number in the block that has not yet been assigned.
+- Use the overflow range (901–999) only when all 100 slots in the subject's block are exhausted, taking the next available number there.
 - Never reuse numbers from deleted Policies.
 
 ### Phase 3: Choose the Title
@@ -157,7 +167,7 @@ Check every item before finalizing:
 6. **Conflicts section**: Is it present and filled if Phase 3 found any conflicts?
 7. **Index entries**: Will the new Policy be added to `[scope]/[type]/index.md` and the Policy root `index.md`?
 8. **Meta-policy compliance**: Check the target scope's `index.md` for a `follows` frontmatter field. `_core` Policies always apply to all scopes. If `follows` lists additional core scope names (e.g., `follows: [myarea-core]`), verify that each listed scope directory exists in the workspace (e.g., `.xdrs/[scope-name]/index.md`). If any listed scope is missing, STOP immediately and tell the user: "Scope `[scope-name]` is listed in `follows` but not found in the workspace. Install it before proceeding." Once all `follows` scopes are confirmed present, verify the document satisfies all requirements from those Policies. Scopes are applied in order; last-listed scope in `follows` takes precedence when the same topic is covered by multiple scopes.
-   - **Scope-type standards:** Read the target scope's `scope-type`. Search the `[type]/principles/` directories of all `core`-type scopes for a file ending in `{scope-type}-scope-type.md`. Apply its rules as requirements for the new Policy. Resolve any `NN-parent-scope-type` rule transitively. See `_core-adr-policy-010` rules 15 and 17.
+   - **Scope-type standards:** Read the target scope's `scope-type`. Search the `[type]/principles/` directories of all `core`-type scopes for a file ending in `{scope-type}-scope-type.md`. If found, also load all companion files (`{scope-type}-scope-type-{qualifier}.md`) from the **same directory** and apply their rules as additional requirements. Resolve any `NN-parent-scope-type` rule transitively from the primary file. See `_core-adr-policy-010` rules 15 and 17.
    - **Scope-local standards:** Search the target scope's own `[type]/principles/` for a file ending in `{scope-name}-core.md`. If found, apply its rules as requirements; they override scope-type standards on conflict. See `_core-adr-policy-010` rules 16 and 17.
 
 If any check fails, revise and re-run this phase before proceeding.
