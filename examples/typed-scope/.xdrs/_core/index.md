@@ -22,7 +22,7 @@ If you are evaluating whether to adopt XDRS, setting up a new XDRS project, or e
 
 ### Framework structure and organization
 
-The core architectural decision [_core-adr-policy-001](adrs/principles/001-xdrs-core.md) defines the fundamental building blocks: three decision types (ADR for architecture, BDR for business, EDR for engineering), scopes as grouping boundaries, subjects as topic categories within each type, and a folder layout that keeps everything discoverable. It also defines the index system (canonical type indexes, scope indexes, and the root index) that ties the collection together.
+The core architectural decision [_core-adr-policy-001](adrs/principles/001-xdrs-standards.md) defines the fundamental building blocks: three decision types (ADR for architecture, BDR for business, EDR for engineering), scopes as grouping boundaries, subjects as topic categories within each type, and a folder layout that keeps everything discoverable. It also defines the index system (canonical type indexes, scope indexes, and the root index) that ties the collection together.
 
 When external tools or conventions require XDRS files to be accessible from paths outside the `.xdrs/` root (for example, AI agent runtimes that expect skills in `.agents/skills/`), [_core-adr-policy-018](adrs/principles/018-external-path-symlinks.md) governs how to do this safely using symlinks.
 
@@ -47,7 +47,7 @@ Slide presentations that support XDRS documents follow [_core-adr-policy-009](ad
 
 ### Standard scope meta governance
 
-[_core-adr-policy-010](adrs/principles/010-scope-governance.md) defines the full scope governance model: how to define a custom scope type using `{scope-type}-scope-type` policies, how to define scope-local content standards using a `{scope-name}-core` policy, and how all governance mechanisms (`follows:`, scope-type standards, scope-local standards) apply with their precedence chain.
+[_core-adr-policy-010](adrs/principles/010-scope-governance.md) defines the full scope governance model: how to define a custom scope type using `{scope-type}-scope-type` policies, how to define scope-local content standards using local meta-policies (`NNN-core.md` or `NNN-core-{qualifier}.md` in `principles/`), and how all governance mechanisms (`follows:`, scope-type standards, local meta-policies) apply with their precedence chain.
 
 [_core-adr-policy-011](adrs/principles/011-core-scope-type.md) defines the `core` scope type — meta-governance scopes named with the `-core` suffix (e.g., `security-core`) that hold writing standards, templates, ownership, and process guidance for a group of related scopes. They must not contain consumable policies, and all contributors to governed scopes must follow their standards via an explicit `follows:` declaration.
 

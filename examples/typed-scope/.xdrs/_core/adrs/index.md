@@ -6,7 +6,7 @@ Decisions about how the XDRS framework itself works: structure, standards, docum
 
 Foundational standards, principles, and guidelines.
 
-- [_core-adr-policy-001](principles/001-xdrs-core.md) - **XDRS core** — Types, scopes, subjects, folder structure, and indexes for the XDRS framework
+- [_core-adr-policy-001](principles/001-xdrs-standards.md) - **XDRS standards** — Types, scopes, subjects, folder structure, and indexes for the XDRS framework
 - [_core-adr-policy-002](principles/002-policy-standards.md) - **Policy standards** — How to write individual Policy documents: template, metadata, ID, lifecycle rules
 - [_core-adr-policy-003](principles/003-skill-standards.md) - **Skill standards** — How to author and organize reusable skill packages within XDRS projects
 - [_core-adr-policy-004](principles/004-article-standards.md) - **Article standards** — How to write synthetic views combining Policies, research, and skills

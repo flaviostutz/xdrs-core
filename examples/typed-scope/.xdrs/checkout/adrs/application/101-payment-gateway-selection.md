@@ -1,11 +1,11 @@
 ---
-name: checkout-adr-policy-001-payment-gateway-selection
+name: checkout-adr-policy-101-payment-gateway-selection
 description: Decides which payment gateway the checkout flow uses for card processing and defines the constraints governing that choice and future gateway changes.
 apply-to: Checkout team services handling card payment authorisation
 valid-from: 2026-07-06
 ---
 
-# checkout-adr-policy-001: Payment gateway selection
+# checkout-adr-policy-101: Payment gateway selection
 
 ## Context and Problem Statement
 
@@ -42,4 +42,4 @@ Replacing the primary gateway requires a new policy version or a superseding pol
 ## References
 
 - [ecomm-ref-payments-adr-policy-001](../../../ecomm-ref-payments/adrs/principles/001-pci-dss-compliance.md) — PCI-DSS compliance requirements
-- [ecomm-plat-cloud-adr-policy-001](../../../ecomm-plat-cloud/adrs/application/001-cloud-regions.md) — Cloud regions and deployment constraints
+- [ecomm-plat-cloud-adr-policy-101](../../../ecomm-plat-cloud/adrs/application/101-cloud-regions.md) — Cloud regions and deployment constraints

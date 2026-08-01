@@ -30,8 +30,8 @@ test('001-review outputs the required review template', async () => {
 			workspaceMode: 'copy',
 			...copilotCmd(REPO_ROOT),
 		},
-		'Review XDRS Policy 001-xdrs-core',
-		'Verify that the skill 001-review was used, contains "## Findings", and "## Summary", includes an "Outcome: PASS", and that it read file 001-review/SKILL.md and 001-xdrs-core.md.',
+		'Review XDRS Policy 001-xdrs-standards',
+		'Verify that the skill 001-review was used, contains "## Findings", and "## Summary", includes an "Outcome: PASS", and that it read file 001-review/SKILL.md and 001-xdrs-standards.md.',
 		null,
 		true
 	);

@@ -22,13 +22,14 @@ This skill is interactive by design. Ask clarifying questions to the user at eac
 Identify the target scope from the user's request; use `_local` if none is specified. Read the scope's `index.md` frontmatter and perform ALL of the following checks. If ANY check fails, output a FAIL result immediately and do not proceed:
 
 - **Follows scopes:** If the scope declares `follows:` entries (e.g., `follows: myarea-core, shared-standards`), verify that each listed scope directory exists in the workspace AND contains an accessible `index.md` (e.g., `.xdrs/[scope-name]/index.md`). If any listed scope is missing or unreadable, output: `FAIL — Cannot proceed: scope \`[scope-name]\` is listed in \`follows\` but its policies are not present in the workspace. Install it before authoring documents in this scope, as the governance constraints cannot be verified.`
-- **Scope-local core policy:** Check whether a `-core` policy file exists for the target scope (i.e., a file ending in `{scope-name}-core.md` inside the scope's `[type]/principles/` directory). If the scope's `index.md` references or implies a local core standard and that file is absent or unreadable, output: `FAIL — Cannot proceed: the local core policy \`{scope-name}-core.md\` is referenced for scope \`[scope-name]\` but could not be found. Without it, the document cannot be authored in full compliance with the scope's governance.`
-- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer declared by the scope MUST be present before writing begins.
+- **Local meta-policies:** Scan the target scope's `[type]/principles/` directories for all files whose filename title starts with `core` (i.e., `NNN-core.md` or `NNN-core-{qualifier}.md`), excluding scope-type definition files. If any are found but cannot be read, output: `FAIL — Cannot proceed: local meta-policy \`[filename]\` exists in scope \`[scope-name]\` but could not be read. Without it, the document cannot be authored in full compliance with the scope's governance.` Zero matches is valid.
+- **Scope-type:** Read the scope's `scope-type` from its `index.md`. If `scope-type` is declared, search the `[type]/principles/` directories of all `core`-type scopes in the workspace for a file whose name ends with `{scope-type}-scope-type.md`. If the scope declares a `scope-type` but no matching file is found, output: `FAIL — Cannot proceed: scope \`[scope-name]\` declares \`scope-type: [scope-type]\` but no \`[scope-type]-scope-type.md\` policy exists in any \`core\`-type scope in the workspace. The scope is READ-ONLY; install the scope-type governance before authoring documents in this scope.`
+- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer MUST be present before writing begins.
 
 ### Phase 1: Understand the Research Goal
 
 1. Read `.xdrs/_core/adrs/principles/006-research-standards.md` in full to internalize the folder layout, numbering rules, and mandatory template.
-2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining the research document's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering expectations, naming constraints, and folder placement.
+2. Read `.xdrs/_core/adrs/principles/001-xdrs-standards.md` in full before defining the research document's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering expectations, naming constraints, and folder placement.
 3. Ask the user to confirm the intended direction of the research before planning the document: what decision, question, or option space the study should support, what boundaries or exclusions apply, and what kind of outcome they expect. Wait for the answers before proceeding.
 4. Ask the user what evidence already exists and what evidence-gathering methods are acceptable if the current evidence is incomplete. Do not invent facts, sources, or confidence that the user did not provide. Wait for the answers before proceeding.
 5. Ask the user what the proposed next step is after the research, such as writing/updating an existing Policy, informing a discussion, or documenting trade-offs for later. Use that answer to shape the framing without turning the research into the final decision. Wait for the answers before proceeding.
@@ -41,7 +42,7 @@ Identify the target scope from the user's request; use `_local` if none is speci
 
 If the answers from Phase 1 leave scope, type, or subject ambiguous, use `vscode_askQuestions` to present the candidate options with a brief rationale for each and ask the user to confirm the selection before proceeding. If the user's answer raises a related uncertainty, ask a follow-up question to resolve it before locking the selection.
 
-Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
+Consult `001-xdrs-standards` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
 
 **Scope** — use `_local` unless the user explicitly names another scope.
 - If the user names a scope other than `_local`, check the workspace root `.filedist.lock` file. If any file under `.xdrs/[scope]/` appears in `.filedist.lock`, the scope is external and new documents MUST NOT be created there. Inform the user and ask them to choose a non-external scope.
@@ -287,12 +288,12 @@ If any check fails, revise before continuing.
 ## References
 
 - [_core-adr-policy-006 - Research standards](../../006-research-standards.md)
-- [_core-adr-policy-001 - XDRS core](../../001-xdrs-core.md)
+- [_core-adr-policy-001 - XDRS standards](../../001-xdrs-standards.md)
 - [002-write-policy skill](../002-write-policy/SKILL.md)
 
 ## Constraints
 
-- MUST consult `001-xdrs-core` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
+- MUST consult `001-xdrs-standards` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
 - MUST follow the research template and section-goal rules from `006-research-standards`.
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST NOT create documents in external scopes (scopes whose files appear in the workspace root `.filedist.lock`).

@@ -1,11 +1,11 @@
 ---
-name: ecomm-plat-cloud-adr-policy-001-cloud-regions
+name: ecomm-plat-cloud-adr-policy-101-cloud-regions
 description: Defines available cloud deployment regions for the ecomm platform and the constraints that govern region selection for new workloads.
 apply-to: All ecomm teams deploying new services or expanding existing ones
 valid-from: 2026-07-06
 ---
 
-# ecomm-plat-cloud-adr-policy-001: Cloud regions
+# ecomm-plat-cloud-adr-policy-101: Cloud regions
 
 ## Context and Problem Statement
 

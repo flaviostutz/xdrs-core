@@ -8,4 +8,4 @@ Architecture decisions for the ecomm checkout business area.
 
 ## Application
 
-- [checkout-adr-policy-001](application/001-payment-gateway-selection.md) - **Payment gateway selection** — Which payment gateway to use for checkout flows and the constraints governing the choice
+- [checkout-adr-policy-001](application/101-payment-gateway-selection.md) - **Payment gateway selection** — Which payment gateway to use for checkout flows and the constraints governing the choice

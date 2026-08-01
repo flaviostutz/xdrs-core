@@ -168,7 +168,7 @@ Question: In the end, state explicitly the question that needs to be answered. E
 
 ## References
 
-- [_core-adr-policy-001 - Policies core](001-xdrs-core.md) - Framework elements: types, scopes, subjects, folder structure
+- [_core-adr-policy-001 - XDRS standards](001-xdrs-standards.md) - Framework elements: types, scopes, subjects, folder structure
 - [001-review skill](skills/001-review/SKILL.md) - Skill for reviewing code changes against Policies
 - [002-write-policy skill](skills/002-write-policy/SKILL.md) - Skill for creating a new Policy following this standard
 - [_core-adr-policy-003 - Skill standards](003-skill-standards.md)

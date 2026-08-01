@@ -29,8 +29,9 @@ Optional questions (ask only when genuinely unclear):
 **Prerequisites gate** — once the scope is confirmed from the answers above, perform ALL of the following checks before proceeding. If ANY check fails, output a FAIL result immediately and do not continue:
 
 - **Follows scopes:** If the scope declares `follows:` entries (e.g., `follows: myarea-core, shared-standards`), verify that each listed scope directory exists in the workspace AND contains an accessible `index.md` (e.g., `.xdrs/[scope-name]/index.md`). If any listed scope is missing or unreadable, output: `FAIL — Cannot proceed: scope \`[scope-name]\` is listed in \`follows\` but its policies are not present in the workspace. Install it before authoring documents in this scope, as the governance constraints cannot be verified.`
-- **Scope-local core policy:** Check whether a `-core` policy file exists for the target scope (i.e., a file ending in `{scope-name}-core.md` inside the scope's `[type]/principles/` directory). If the scope's `index.md` references or implies a local core standard and that file is absent or unreadable, output: `FAIL — Cannot proceed: the local core policy \`{scope-name}-core.md\` is referenced for scope \`[scope-name]\` but could not be found. Without it, the document cannot be authored in full compliance with the scope's governance.`
-- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer declared by the scope MUST be present before writing begins.
+- **Local meta-policies:** Scan the target scope's `[type]/principles/` directories for all files whose filename title starts with `core` (i.e., `NNN-core.md` or `NNN-core-{qualifier}.md`), excluding scope-type definition files. If any are found but cannot be read, output: `FAIL — Cannot proceed: local meta-policy \`[filename]\` exists in scope \`[scope-name]\` but could not be read. Without it, the document cannot be authored in full compliance with the scope's governance.` Zero matches is valid.
+- **Scope-type:** Read the scope's `scope-type` from its `index.md`. If `scope-type` is declared, search the `[type]/principles/` directories of all `core`-type scopes in the workspace for a file whose name ends with `{scope-type}-scope-type.md`. If the scope declares a `scope-type` but no matching file is found, output: `FAIL — Cannot proceed: scope \`[scope-name]\` declares \`scope-type: [scope-type]\` but no \`[scope-type]-scope-type.md\` policy exists in any \`core\`-type scope in the workspace. The scope is READ-ONLY; install the scope-type governance before authoring documents in this scope.`
+- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer MUST be present before writing begins.
 
 Do NOT proceed to Phase 1 until you have at minimum a clear **topic** and **audience**.
 
@@ -38,13 +39,13 @@ Do NOT proceed to Phase 1 until you have at minimum a clear **topic** and **audi
 
 1. Read `.xdrs/_core/adrs/principles/004-article-standards.md` in full to internalize the template,
    placement rules, numbering rules, and the constraint that articles are views, not decisions.
-2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full before defining the article's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering, naming, and folder placement.
+2. Read `.xdrs/_core/adrs/principles/001-xdrs-standards.md` in full before defining the article's core elements. Treat it as the canonical source for how to choose and write type, scope, subject, numbering, naming, and folder placement.
 3. Confirm the topic and intended audience gathered in Phase 0. Do NOT proceed without a clear
    topic.
 
 ### Phase 2: Select Scope, Type, and Subject
 
-Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when any detail is unclear, the standard decides.
+Consult `001-xdrs-standards` while making each choice in this phase. The summaries below are orientation only; when any detail is unclear, the standard decides.
 
 **Scope** — use `_local` unless the user explicitly names another scope.
 - If the user names a scope other than `_local`, check the workspace root `.filedist.lock` file. If any file under `.xdrs/[scope]/` appears in `.filedist.lock`, the scope is external and new documents MUST NOT be created there. Inform the user and ask them to choose a non-external scope.
@@ -152,7 +153,7 @@ Rules to apply while drafting:
 
 ## Constraints
 
-- MUST consult `001-xdrs-core` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
+- MUST consult `001-xdrs-standards` as the canonical source for every core element definition, especially type, scope, subject, numbering, naming, and placement.
 - MUST follow the article template and placement rules from `004-article-standards`.
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST NOT create documents in external scopes (scopes whose files appear in the workspace root `.filedist.lock`).
@@ -160,4 +161,4 @@ Rules to apply while drafting:
 
 - [_core-adr-policy-004 - Article standards](../../004-article-standards.md)
 - [_core-adr-policy-006 - Research standards](../../006-research-standards.md)
-- [_core-adr-policy-001 - XDRS core](../../001-xdrs-core.md)
+- [_core-adr-policy-001 - XDRS standards](../../001-xdrs-standards.md)

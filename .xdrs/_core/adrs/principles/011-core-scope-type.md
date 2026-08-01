@@ -73,5 +73,5 @@ Distributing `-core` scopes alongside their companion consumable scope to downst
 
 ## References
 
-- [_core-adr-policy-010 - Scope governance](010-scope-governance.md) — full scope governance model including when to prefer a `{scope-name}-core` policy (scope-local) vs. this pattern
-- [_core-adr-policy-001 - XDRS core](001-xdrs-core.md) — scope structure, `follows:` field, scope index frontmatter
+- [_core-adr-policy-010 - Scope governance](010-scope-governance.md) — full scope governance model including when to prefer a local meta-policy (`NNN-core.md` in `principles/`) vs. this pattern
+- [_core-adr-policy-001 - XDRS standards](001-xdrs-standards.md) — scope structure, `follows:` field, scope index frontmatter

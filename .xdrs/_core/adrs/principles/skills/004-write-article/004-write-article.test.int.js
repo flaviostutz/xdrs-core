@@ -15,7 +15,7 @@ test('004-write-article creates a local principles article', async () => {
 			...copilotCmd(REPO_ROOT),
 		},
 		'Create a short article for new users explaining the overall principles of xdrs, element types and the role of each document in adrs',
-		'Verify that an article markdown file was created under .xdrs/_local/adrs/principles/articles/ and that it has references to 001-xdrs-core.md',
+		'Verify that an article markdown file was created under .xdrs/_local/adrs/principles/articles/ and that it has references to 001-xdrs-standards.md',
 		null,
 		true
 	);

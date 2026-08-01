@@ -3,7 +3,7 @@
     "result": "success",
     "contextFiles": [
       ".xdrs/_core/adrs/index.md",
-      ".xdrs/_core/adrs/principles/001-xdrs-core.md",
+      ".xdrs/_core/adrs/principles/001-xdrs-standards.md",
       ".xdrs/_core/adrs/principles/002-xdr-standards.md",
       ".xdrs/_core/adrs/principles/003-skill-standards.md",
       ".xdrs/_core/adrs/principles/004-article-standards.md",

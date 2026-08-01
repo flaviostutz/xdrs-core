@@ -11,7 +11,7 @@ test: clean install
 	test -e .filedist.lock
 	# .xdrs/index.md should not be tracked in .filedist.lock (it uses managed=false)
 	! grep -e ".xdrs/index.md" .filedist.lock
-	test -e output/.xdrs/_core/adrs/principles/001-xdrs-core.md
+	test -e output/.xdrs/_core/adrs/principles/001-xdrs-standards.md
 	! grep -Eq "_local/(adrs|bdrs|edrs)/index\\.md" output/.xdrs/index.md
 	
 	pnpm exec xdrs-core install --output ./output
@@ -27,7 +27,7 @@ test: clean install
 	pnpm exec xdrs-core lint ./output
 
 	mkdir -p output/.xdrs/_core/adrs/application
-	cp output/.xdrs/_core/adrs/principles/001-xdrs-core.md output/.xdrs/_core/adrs/application/001-duplicate-number.md
+	cp output/.xdrs/_core/adrs/principles/001-xdrs-standards.md output/.xdrs/_core/adrs/application/001-duplicate-number.md
 	! pnpm exec xdrs-core lint --all ./output
 
     # temper AGENTS.md and verify that it fails on check

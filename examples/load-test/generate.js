@@ -430,7 +430,7 @@ function genDecision(scope, typeShort, subject, num, slug) {
     `## References`,
     ``,
     `- [city-traffic ${typeShort.toUpperCase()}s index](../index.md)`,
-    `- [_core-adr-001](../../../_core/adrs/principles/003-xdrs-core.md)`,
+    `- [_core-adr-001](../../../_core/adrs/principles/003-xdrs-standards.md)`,
   ];
 
   return lines.join('\n');
@@ -927,7 +927,7 @@ write(path.join(CORE_OUT, 'adrs', 'index.md'), [
   ``,
   `- [001-core-scope-type](principles/001-core-scope-type.md) - core scope type`,
   `- [002-standard-scope-type](principles/002-standard-scope-type.md) - standard scope type`,
-  `- [003-xdrs-core](principles/003-xdrs-core.md) - XDRS core`,
+  `- [003-xdrs-standards](principles/003-xdrs-standards.md) - XDRS standards`,
   `- [004-article-standards](principles/004-article-standards.md) - Article standards`,
   `- [005-plan-standards](principles/005-plan-standards.md) - Plan standards`,
 ].join('\n'));
@@ -955,7 +955,7 @@ function coreStub(num, name, title) {
 
 write(path.join(CORE_OUT, 'adrs', 'principles', '001-core-scope-type.md'), coreStub('001', 'core-scope-type', 'core scope type'));
 write(path.join(CORE_OUT, 'adrs', 'principles', '002-standard-scope-type.md'), coreStub('002', 'standard-scope-type', 'standard scope type'));
-write(path.join(CORE_OUT, 'adrs', 'principles', '003-xdrs-core.md'), coreStub('003', 'xdrs-core', 'XDRS core'));
+write(path.join(CORE_OUT, 'adrs', 'principles', '003-xdrs-standards.md'), coreStub('003', 'xdrs-standards', 'XDRS standards'));
 write(path.join(CORE_OUT, 'adrs', 'principles', '004-article-standards.md'), coreStub('004', 'article-standards', 'Article standards'));
 write(path.join(CORE_OUT, 'adrs', 'principles', '005-plan-standards.md'), coreStub('005', 'plan-standards', 'Plan standards'));
 

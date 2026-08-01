@@ -19,15 +19,16 @@ Guides the creation of a well-structured Policy by following the standards in `_
 Identify the target scope from the user's request; use `_local` if none is specified. Read the scope's `index.md` frontmatter and perform ALL of the following checks. If ANY check fails, output a FAIL result immediately and do not proceed:
 
 - **Follows scopes:** If the scope declares `follows:` entries (e.g., `follows: myarea-core, shared-standards`), verify that each listed scope directory exists in the workspace AND contains an accessible `index.md` (e.g., `.xdrs/[scope-name]/index.md`). If any listed scope is missing or unreadable, output: `FAIL — Cannot proceed: scope \`[scope-name]\` is listed in \`follows\` but its policies are not present in the workspace. Install it before authoring documents in this scope, as the governance constraints cannot be verified.`
-- **Scope-local core policy:** Check whether a `-core` policy file exists for the target scope (i.e., a file ending in `{scope-name}-core.md` inside the scope's `[type]/principles/` directory). If the scope's `index.md` references or implies a local core standard and that file is absent or unreadable, output: `FAIL — Cannot proceed: the local core policy \`{scope-name}-core.md\` is referenced for scope \`[scope-name]\` but could not be found. Without it, the document cannot be authored in full compliance with the scope's governance.`
-- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer declared by the scope MUST be present before writing begins.
+- **Local meta-policies:** Scan the target scope's `[type]/principles/` directories for all files whose filename title starts with `core` (i.e., `NNN-core.md` or `NNN-core-{qualifier}.md`), excluding scope-type definition files. If any are found but cannot be read, output: `FAIL — Cannot proceed: local meta-policy \`[filename]\` exists in scope \`[scope-name]\` but could not be read. Without it, the policy cannot be authored in full compliance with the scope's governance.` Zero matches is valid.
+- **Scope-type:** Read the scope's `scope-type` from its `index.md`. If `scope-type` is declared, search the `[type]/principles/` directories of all `core`-type scopes in the workspace for a file whose name ends with `{scope-type}-scope-type.md`. If the scope declares a `scope-type` but no matching file is found, output: `FAIL — Cannot proceed: scope \`[scope-name]\` declares \`scope-type: [scope-type]\` but no \`[scope-type]-scope-type.md\` policy exists in any \`core\`-type scope in the workspace. The scope is READ-ONLY; install the scope-type governance before authoring documents in this scope.`
+- **Rationale:** Authoring a document without all mandatory governance layers loaded risks producing content that silently violates scope policies. Every governance layer MUST be present before writing begins.
 
 ### Phase 1: Understand the Decision
 
 1. Read the XDRS root `index.md` (default: `.xdrs/index.md`) to discover all active scopes and their canonical indexes.
-2. Read `.xdrs/_core/adrs/principles/001-xdrs-core.md` in full to internalize structure rules, mandatory language, and the XDRS framework elements.
+2. Read `.xdrs/_core/adrs/principles/001-xdrs-standards.md` in full to internalize structure rules, mandatory language, and the XDRS framework elements.
 3. Read `.xdrs/_core/adrs/principles/002-policy-standards.md` in full to internalize the Policy template and document writing rules.
-4. Treat `001-xdrs-core` as the canonical source for all core XDRS element definitions (type, scope, subject, numbering, placement). Treat `002-policy-standards` as the canonical source for how to write and structure the document itself.
+4. Treat `001-xdrs-standards` as the canonical source for all core XDRS element definitions (type, scope, subject, numbering, placement). Treat `002-policy-standards` as the canonical source for how to write and structure the document itself.
 5. Ask the user (or infer from context) the topic of the decision. Do NOT proceed to Phase 2 without a clear topic.
    - Ask one focused clarifying question at a time. Wait for the answer before asking the next question.
    - Each answer may reveal new ambiguities; ask follow-up questions as needed until the topic, intent, and scope are unambiguous.
@@ -35,7 +36,7 @@ Identify the target scope from the user's request; use `_local` if none is speci
 
 ### Phase 2: Select Type, Scope, and Subject
 
-Consult `001-xdrs-core` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
+Consult `001-xdrs-standards` while making each choice in this phase. The summaries below are orientation only; when any detail matters, the standard decides.
 
 **Type** — choose exactly one based on the nature of the decision:
 - **BDR**: business process, product policy, strategic rule, operational procedure
@@ -193,7 +194,7 @@ If any check fails, revise and re-run this phase before proceeding.
 ### Constraints
 
 - MUST follow the Policy template from `002-policy-standards` exactly.
-- MUST consult `001-xdrs-core` as the canonical source for element definitions (type, scope, subject, ID, numbering, naming, placement) and `002-policy-standards` for document writing rules and template.
+- MUST consult `001-xdrs-standards` as the canonical source for element definitions (type, scope, subject, ID, numbering, naming, placement) and `002-policy-standards` for document writing rules and template.
 - MUST NOT add personal opinions or general best-practice content not tied to a decision.
 - MUST NOT create a Policy that duplicates a decision already captured in another Policy — extend or reference instead.
 - MUST prefer links and short references over repeating the same decision content across related documents.
@@ -202,6 +203,6 @@ If any check fails, revise and re-run this phase before proceeding.
 
 ## References
 
-- [_core-adr-policy-001 - XDRS core](../../001-xdrs-core.md)
+- [_core-adr-policy-001 - XDRS standards](../../001-xdrs-standards.md)
 - [_core-adr-policy-002 - Policy standards](../../002-policy-standards.md)
 - [_core-adr-policy-003 - Skill standards](../../003-skill-standards.md)
