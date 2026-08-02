@@ -953,8 +953,12 @@ function coreStub(num, name, title) {
   ].join('\n');
 }
 
-write(path.join(CORE_OUT, 'adrs', 'principles', '001-core-scope-type.md'), coreStub('001', 'core-scope-type', 'core scope type'));
-write(path.join(CORE_OUT, 'adrs', 'principles', '002-standard-scope-type.md'), coreStub('002', 'standard-scope-type', 'standard scope type'));
+function coreStubScopeType(num, name, title) {
+  return coreStub(num, name, title) + '\n\n### Details\n\n#### 01-stub\n\nStub rule for load-test purposes. All rules MUST follow the xdrs-core package definition.';
+}
+
+write(path.join(CORE_OUT, 'adrs', 'principles', '001-core-scope-type.md'), coreStubScopeType('001', 'core-scope-type', 'core scope type'));
+write(path.join(CORE_OUT, 'adrs', 'principles', '002-standard-scope-type.md'), coreStubScopeType('002', 'standard-scope-type', 'standard scope type'));
 write(path.join(CORE_OUT, 'adrs', 'principles', '003-xdrs-standards.md'), coreStub('003', 'xdrs-standards', 'XDRS standards'));
 write(path.join(CORE_OUT, 'adrs', 'principles', '004-article-standards.md'), coreStub('004', 'article-standards', 'Article standards'));
 write(path.join(CORE_OUT, 'adrs', 'principles', '005-plan-standards.md'), coreStub('005', 'plan-standards', 'Plan standards'));

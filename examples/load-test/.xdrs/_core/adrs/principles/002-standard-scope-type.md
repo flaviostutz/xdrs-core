@@ -14,3 +14,9 @@ Stub for load-test.
 ## Decision Outcome
 
 See full definition in the xdrs-core package.
+
+### Details
+
+#### 01-stub
+
+Stub rule for load-test purposes. All rules MUST follow the xdrs-core package definition.
