@@ -40,4 +40,4 @@ Every policy in a `business-area` scope MUST include a `## References` section l
 ## References
 
 - [ecomm-core-adr-policy-002](002-business-area-scope-type.md) — primary business-area scope type definition
-- [_core-adr-policy-010](../../../_core/adrs/principles/010-scope-governance.md) — companion file conventions (rule 02b)
+- [_core-adr-policy-010](../../../_core/adrs/principles/010-scope-governance.md) — companion file conventions (rule 03)

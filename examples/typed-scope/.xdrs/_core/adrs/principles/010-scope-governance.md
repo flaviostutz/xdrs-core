@@ -39,18 +39,18 @@ The policy `name` field MUST end with `{scope-type}-scope-type` (e.g., `security
 
 Note: this naming applies to the **policy name** only, not to any scope directory name. It is distinct from the `-core` scope-name suffix convention defined in `_core-adr-policy-011`.
 
-##### 02b-def-companion-files
+##### 03-def-companion-files
 
 A scope-type definition MAY be split across multiple policy files. The primary file MUST follow rule 02 above. Each additional companion file MUST be named `NNN-{scope-type}-scope-type-{qualifier}.md` (e.g., `012-business-area-scope-type-writing-style.md`), where `{qualifier}` is a short lowercase kebab-case descriptor. All companion files MUST be placed in the **same** `[type]/principles/` directory as the primary file within the same scope. A companion file MUST NOT exist without a corresponding primary file in the same scope and type folder. Tools and agents MUST apply all companion files for a scope-type as additional mandatory conventions alongside the primary.
 
-##### 03-def-required-content
+##### 04-def-required-content
 
 A scope-type definition policy MUST define:
 
 - The scope type name (the value that instances declare in their `scope-type:` field).
 - When to use this scope type and what kinds of scopes SHOULD declare it.
 
-##### 04-def-preferred-content
+##### 05-def-preferred-content
 
 A scope-type definition policy SHOULD define:
 
@@ -59,19 +59,19 @@ A scope-type definition policy SHOULD define:
 - What content SHOULD NOT be placed in scopes of this type.
 - Special instructions on how to organise or write content in scopes of this type.
 
-##### 05-def-instance-declaration
+##### 06-def-instance-declaration
 
 A scope that is an instance of a custom scope type MUST declare `scope-type: {scope-type}` in its `index.md` frontmatter (e.g., `scope-type: business-area`).
 
-##### 06-def-no-underscore-prefix
+##### 07-def-no-underscore-prefix
 
 Custom scope-type names MUST NOT start with `_`. The `_` prefix is reserved for built-in scope types defined in `_core` (currently only `_local`).
 
-##### 07-def-parent-scope-type
+##### 08-def-parent-scope-type
 
-A scope-type definition policy MAY declare a parent scope type by including a rule titled `NN-parent-scope-type` in its `### Details` section. The body of that rule MUST reference the parent scope-type name in backticks (e.g., "Instances of this scope type inherit all rules from the `standard` scope type."). This rule MUST appear only in the **primary** file (rule 02), not in a companion file (rule 02b). Tools and agents MUST resolve the full parent chain transitively. Child scope-type standards override parent standards on any conflict.
+A scope-type definition policy MAY declare a parent scope type by including a rule titled `NN-parent-scope-type` in its `### Details` section. The body of that rule MUST reference the parent scope-type name in backticks (e.g., "Instances of this scope type inherit all rules from the `standard` scope type."). This rule MUST appear only in the **primary** file (rule 02), not in a companion file (rule 03). Tools and agents MUST resolve the full parent chain transitively. Child scope-type standards override parent standards on any conflict.
 
-##### 08-def-valid-iff-policy-exists
+##### 09-def-valid-iff-policy-exists
 
 A `scope-type` value in a scope `index.md` is valid if and only if a policy file whose name ends with `{scope-type}-scope-type` exists in the `principles` subject of any `core`-type scope in the workspace. Tools (such as `xdrs-core lint`) MUST enforce this.
 
@@ -81,31 +81,31 @@ When a scope declares a `scope-type` but the corresponding `{scope-type}-scope-t
 
 #### Section B — Local meta-policies
 
-##### 09-local-naming
+##### 10-local-naming
 
-The word `core` as a hyphen-delimited segment in a policy filename title is reserved for local meta-policies. A local meta-policy is identified by its filename title starting with `core`: either `NNN-core.md` (primary, no qualifier) or `NNN-core-{qualifier}.md` (companion, where `{qualifier}` is a short lowercase kebab-case descriptor). A policy filename title MUST NOT use `core` as a word segment unless it is a valid local meta-policy (see rule 10). Scope-type definition files (`NNN-{scope-type}-scope-type.md`) are exempt from this restriction even when their title begins with `core`.
+The word `core` as a hyphen-delimited segment in a policy filename title is reserved for local meta-policies. A local meta-policy is identified by its filename title starting with `core`: either `NNN-core.md` (primary, no qualifier) or `NNN-core-{qualifier}.md` (companion, where `{qualifier}` is a short lowercase kebab-case descriptor). A policy filename title MUST NOT use `core` as a word segment unless it is a valid local meta-policy (see rule 11). Scope-type definition files (`NNN-{scope-type}-scope-type.md`) are exempt from this restriction even when their title begins with `core`.
 
-##### 10-local-placement
+##### 11-local-placement
 
 Local meta-policy files MUST be placed in the `principles` subject of any type folder within the scope they govern (e.g., `my-team/adrs/principles/001-core.md`). They apply implicitly to that scope — no declaration in `index.md` is required. Local meta-policies MUST NOT be placed in any other subject folder; a file whose title starts with `core` in a non-`principles` subject is a lint error.
 
-##### 10b-local-primary-required
+##### 12-local-primary-required
 
 A companion local meta-policy (`NNN-core-{qualifier}.md`) MUST NOT exist in a type folder unless a primary local meta-policy (`NNN-core.md`) also exists in the **same** type folder. Tools MUST enforce this constraint.
 
-##### 10c-local-unique-qualifier
+##### 13-local-unique-qualifier
 
 Each qualifier (including the blank qualifier of the primary) MUST be unique across all type folders within the same scope. For example, a scope MUST NOT have both `adrs/principles/001-core.md` and `bdrs/principles/001-core.md` — the blank qualifier would appear twice.
 
-##### 11-local-optional
+##### 14-local-optional
 
 Creating a local meta-policy is optional. It SHOULD be created when a scope has specific structural, authoring, or content constraints that differ from `_core` defaults or the scope's declared scope-type standards.
 
-##### 12-local-content
+##### 15-local-content
 
 A local meta-policy SHOULD define the same kinds of instructions as a scope-type definition policy (rules 03–04 above): naming conventions for content in the scope, allowed content, forbidden content, and organisation rules. These instructions apply only to policy documents authored in this one scope; they do not govern non-policy artifacts (skills, articles, plans, research).
 
-##### 13-local-mandatory-when-present
+##### 16-local-mandatory-when-present
 
 When one or more local meta-policies exist in a scope, tools and agents MUST load and apply ALL of them as mandatory conventions when authoring or reviewing **policy documents** in that scope. If any found local meta-policy file is unreadable, tools MUST halt and report an error before proceeding.
 
@@ -113,11 +113,11 @@ When one or more local meta-policies exist in a scope, tools and agents MUST loa
 
 #### Section C — Governance application and precedence
 
-##### 14-application-follows
+##### 17-application-follows
 
 A scope's `follows:` frontmatter field lists `core`-type scope names whose policies apply as mandatory conventions to this scope, in addition to `_core`. The last-listed scope takes precedence on conflicts when the same topic is addressed by multiple `follows:` scopes.
 
-##### 15-application-scope-type
+##### 18-application-scope-type
 
 When adding or reviewing content in a scope, tools and agents MUST:
 
@@ -127,7 +127,7 @@ When adding or reviewing content in a scope, tools and agents MUST:
 4. Apply all rules from the primary and its companions as mandatory conventions.
 5. If the primary scope-type policy contains a rule titled `NN-parent-scope-type`, extract the parent type name (backtick-quoted identifier in the rule body) and repeat steps 2–5 for the parent. Continue until no more parents are declared. Detect and stop on cycles.
 
-##### 16-application-local
+##### 19-application-local
 
 When adding or reviewing **policy documents** in a scope, tools and agents MUST:
 
@@ -135,7 +135,7 @@ When adding or reviewing **policy documents** in a scope, tools and agents MUST:
 2. If any are found, read and apply ALL of them as mandatory conventions. If a found file is unreadable, halt with an error before proceeding.
 3. If none are found, continue without error — absence of local meta-policies is valid.
 
-##### 17-precedence
+##### 20-precedence
 
 When multiple standards address the same topic, the following precedence applies (later in the list overrides earlier on conflict):
 
@@ -146,7 +146,7 @@ When multiple standards address the same topic, the following precedence applies
 
 All of the above are subordinate to `_core` structural rules, which MUST NOT be overridden.
 
-##### 18-ordering-custom-types
+##### 21-ordering-custom-types
 
 Custom-type scopes SHOULD be placed in the `standard` position in the root `index.md` ordering (i.e., after `platform` scopes and before `_local`).
 
