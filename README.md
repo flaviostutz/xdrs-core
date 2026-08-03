@@ -62,13 +62,14 @@ Different teams at different organizational levels make decisions that apply to 
 
 ### Scope types and `follows`
 
-Every scope declares a `scope-type` in its `index.md` frontmatter. The five built-in types are `core`, `reference`, `platform`, `standard`, and `_local`, each with different governance rules. Custom types (e.g. `business-area`) can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope.
+Every scope declares a `scope-type` in its `index.md` frontmatter. The six built-in types are `core`, `reference`, `platform`, `compiled`, `standard`, and `_local`, each with different governance rules. Custom types (e.g. `business-area`) can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope.
 
 | Type | Purpose | Naming pattern | Root index order |
 |---|---|---|---|
 | `core` | Meta-governance: authoring standards, scope-type definitions, process guidance. No consumable policies. | `{name}-core` (e.g. `myorg-core`) | 1st |
 | `reference` | Standards, regulations, or reference models to be adopted or adapted (e.g. PCI-DSS, ISO 27001, reference architectures). Not a live service. | `{domain}-ref-{name}` (e.g. `security-ref-baseline`) | 2nd |
 | `platform` | Existing live services or infrastructure teams can consume directly (e.g. cloud platform, shared data service). | `{domain}-plat-{name}` (e.g. `cloud-plat-infra`) | 3rd |
+| `compiled` | Policies compiled directly from external sources (web pages, git repos, local folders). All content must trace to source; no invented content. Combinable with other types. | Free-form (no naming requirement) | any, before `_local` |
 | `standard` | Business areas, products, teams, or any general-purpose scope. Default type when nothing else fits. | Any valid scope name (e.g. `checkout`, `mobile-app`) | 4th |
 | `_local` | Workspace-local overrides. Reserved exclusively for the `_local` scope. Never distributed. | `_local` (reserved) | last |
 
@@ -77,6 +78,18 @@ Every scope declares a `scope-type` in its `index.md` frontmatter. The five buil
 **`reference` scopes** hold read-only material to adopt or map against: industry frameworks, regulatory requirements, vendor best-practice patterns, business procedure standards. Content describes how something should be done — not what is currently running.
 
 **`platform` scopes** document what already exists and is ready to use. A scope is of type `platform` when its content describes a live operational capability — what is available, how to access it, and what constraints apply.
+
+**`compiled` scopes** hold policies compiled directly from external authoritative sources. All content must trace back to the source; no invented content is allowed. A `compiled` scope requires a local meta-policy with source URLs and compilation configuration, and uses the `009-compile-scope` skill to fetch, compile, and keep content up to date. The `compiled` type may be combined with another type (e.g. `scope-type: compiled, reference`) when the combined type's governance also applies.
+
+```yaml
+# .xdrs/owasp-top10/adrs/principles/001-core.md  (compilation meta-policy)
+## Sources
+- [web] https://owasp.org/Top10/
+- [git] https://github.com/OWASP/Top10.git
+
+## Selectors
+Include A01–A10 risk entries only.
+```
 
 **`standard` scopes** are the default. Use them for team, product, or business-area scopes that do not fit the other types.
 
@@ -94,7 +107,7 @@ description: Checkout team decisions
 ---
 ```
 
-The recommended ordering in `.xdrs/index.md` is: `core → reference → platform → standard → _local`. Scopes listed later override earlier ones on the same topic.
+The recommended ordering in `.xdrs/index.md` is: `core → reference → platform → compiled/standard → _local`. Scopes listed later override earlier ones on the same topic.
 
 Custom scope types can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope. The `checkout` scope in [examples/typed-scope](examples/typed-scope) uses a custom `business-area` type defined in `ecomm-core`.
 
