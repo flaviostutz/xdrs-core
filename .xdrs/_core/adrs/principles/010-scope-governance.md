@@ -15,15 +15,13 @@ XDRS provides three mechanisms that govern what content belongs in a scope and h
 2. **`follows:` declarations**: a scope explicitly declares that it follows the standards of a named `core`-type scope.
 3. **Scope-local standards**: a policy inside a scope that defines content rules specific to that one scope.
 
-Without a clear definition of how these mechanisms are authored and how they interact, tools, agents, and authors cannot reliably determine which standards apply when adding or reviewing content in a scope.
-
 ## Decision Outcome
 
 **Define scope types as policies, local meta-policies as `core`-named policies in `principles/`, and a clear precedence chain for governance application.**
 
 All scope types — both the five built-in types and any custom types — are defined using the same convention: a `{scope-type}-scope-type` policy in a `core`-type scope. Scope-local standards (called _local meta-policies_) are optional policies whose filename title starts with `core` and which are placed in the `principles` subject of the scope. Multiple local meta-policy files are allowed, each distinguished by an optional qualifier. Tools and agents apply all applicable standards in a defined order.
 
-> **Choosing between a local meta-policy and a `-core` sibling scope**: use a local meta-policy (Section B) when the standards apply only to one scope and do not need to be shared. Use a separate `-core` sibling scope (see `_core-adr-policy-011`) when the meta governance needs to be shared with or distributed to other teams, or when it governs a family of scopes sharing the same prefix.
+> **Choosing between a local meta-policy and a `-core` sibling scope**: use a local meta-policy when the standards apply only to one scope. Use a `-core` sibling scope (see `_core-adr-policy-011`) when the governance needs to be shared or governs a family of scopes.
 
 ### Details
 
@@ -84,7 +82,7 @@ A scope-type definition policy MAY declare a parent scope type by including a ru
 
 A `scope-type` value in a scope `index.md` is valid if and only if a policy file whose name ends with `{scope-type}-scope-type` exists in the `principles` subject of any `core`-type scope in the workspace. Tools (such as `xdrs-core lint`) MUST enforce this for every element when `scope-type` is an array.
 
-When a scope declares a `scope-type` (single or array) but any corresponding `{scope-type}-scope-type.md` policy is absent from the workspace, the scope MUST be treated as READ-ONLY by all tools and agents: content in it MUST NOT be added, changed, or removed, and its content MUST NOT be reviewed. Tools and agents MUST surface the read-only status to the user and MUST NOT propose or apply any changes until the scope-type governance is installed.
+When a scope declares a `scope-type` but any corresponding `{scope-type}-scope-type.md` policy is absent from the workspace, the scope MUST be treated as READ-ONLY: content MUST NOT be added, changed, removed, or reviewed. Tools MUST surface the read-only status and MUST NOT apply changes until the scope-type governance is installed.
 
 #### 11-def-scope-type-must-be-structured
 
@@ -120,7 +118,7 @@ Creating a local meta-policy is optional. It SHOULD be created when a scope has 
 
 #### 18-local-content
 
-A local meta-policy SHOULD define the same kinds of instructions as a scope-type definition policy (rules 04–05 above): naming conventions for content in the scope, allowed content, forbidden content, and organisation rules. These instructions apply only to policy documents authored in this one scope; they do not govern non-policy artifacts (skills, articles, plans, research). Local meta-policies and their companion files MAY include a `## Conflicts` section to declare that one of their rules overrides a conflicting rule from a scope-type policy or `follows:` scope policy (see Section C rule 26-conflict-declarations).
+A local meta-policy SHOULD define the same kinds of instructions as a scope-type definition policy (rules 04–05 above): naming conventions for content in the scope, allowed content, forbidden content, and organisation rules. These instructions apply only to policy documents authored in this one scope; they do not govern non-policy artifacts (skills, articles, plans, research).
 
 #### 19-local-must-be-structured
 
@@ -142,14 +140,14 @@ Tools and agents MUST apply the policies of all scopes listed in a scope's `foll
 
 When adding or reviewing content in a scope, tools and agents MUST:
 
-1. Read the scope's `scope-type` from its `index.md`. Normalise the value to a list: split on commas and trim whitespace; a single value with no comma becomes a one-element list.
+1. Read the scope's `scope-type` from its `index.md`. Normalise to a list: split on commas and trim whitespace.
 2. For each declared type in list order, resolve its full ancestor chain:
-   a. Search the `[type]/principles/` directories of all `core`-type scopes in the workspace for the `{scope-type}-scope-type.md` primary file.
-   b. If found, load the primary and all companion files (`{scope-type}-scope-type-{qualifier}.md`) from the **same directory**. Companions are loaded in alphabetical order by qualifier.
-   c. If the primary contains a rule titled `NN-parent-scope-type`, extract the parent type name (backtick-quoted identifier in the rule body) and repeat steps a–c for the parent. Continue until no more parents are declared. Detect and stop on cycles.
-3. Concatenate all resolved ancestor chains in declaration order to form a single flat list (e.g., for `scope-type: [reference, platform]` where `reference → standard` and `platform → core`: `[standard, reference, core, platform]`).
-4. Deduplicate the flat list keeping the **first occurrence** of each type (preserves the ancestor semantics of whichever type introduced the parent earliest).
-5. Apply all policies from the deduplicated list as mandatory conventions. Later entries in the list override earlier entries when the same rule number appears with different content, provided the override is declared (see rule 26-conflict-declarations).
+   a. Search `[type]/principles/` directories of all `core`-type scopes for the `{scope-type}-scope-type.md` primary file.
+   b. If found, load the primary and all companion files (`{scope-type}-scope-type-{qualifier}.md`) from the **same directory**, in alphabetical qualifier order.
+   c. If the primary contains a rule titled `NN-parent-scope-type`, extract the parent type name and repeat steps a–c. Detect and stop on cycles.
+3. Concatenate all resolved ancestor chains in declaration order to form a flat list (e.g., `scope-type: [reference, platform]` where `reference → standard`, `platform → core`: `[standard, reference, core, platform]`).
+4. Deduplicate keeping the **first occurrence** of each type.
+5. Apply all policies from the deduplicated list as mandatory conventions. Later entries override earlier entries on same rule number conflicts (see rule 26-conflict-declarations).
 
 #### 23-application-local
 
@@ -167,8 +165,6 @@ When multiple governance layers define a rule with the same rule number, the lat
 2. `follows:` scope policies (applied in `follows:` list order; last-listed scope wins among themselves).
 3. Local meta-policies (`NNN-core.md` and companions in alphabetical qualifier order).
 
-In all cases, an override is valid only if the overriding policy contains a `## Conflicts` section that explicitly declares the conflict with the overridden rule (see rule 26-conflict-declarations). A conflict that is not declared MUST be surfaced as an error by tools and agents; the content cannot be validated until the conflict is resolved.
-
 All of the above are subordinate to `_core` structural rules, which MUST NOT be overridden.
 
 #### 25-ordering-custom-types
@@ -183,9 +179,61 @@ When a policy (scope-type definition, local meta-policy, or companion) overrides
 - The policy file where the original rule is defined.
 - A short explanation of why the override is required for this scope or type.
 
-A `## Conflicts` section MAY also document cross-scope-type incompatibilities for informational purposes — cases where two declared scope types define the same rule number differently and the content author needs to know which definition wins. Tools and agents MUST detect undeclared conflicts at review time (rules with the same number defined differently in the loaded chain) and surface them as errors. Semantic conflict detection (two rules with different numbers that are logically incompatible) is the responsibility of the authoring agent, not the lint tool.
+A `## Conflicts` section MAY also document cross-scope-type incompatibilities for informational purposes. Tools and agents MUST detect undeclared conflicts at review time and surface them as errors. Semantic conflict detection is the responsibility of the authoring agent, not the lint tool.
 
 ## References
 
 - [_core-adr-policy-011 - core scope type](011-core-scope-type.md) — defines the `core` scope type and when to use a `-core` sibling scope vs. a scope-local policy
-- [_core-adr-policy-001 - XDRS standards](001-xdrs-standards.md) — scope structure, `follows:` field definition, scope index frontmatter fields
+- [_core-adr-policy-001 - XDRS standards](001-xdrs-standards.md) — scope structure, `follows:` and `extends:` field definitions, scope index frontmatter fields
+
+---
+
+**Section D — Scope extends**
+
+#### 27-extends-declaration
+
+A scope MAY declare an `extends:` field in its `index.md` YAML frontmatter. The value MUST be a single scope name or a comma-separated list (YAML list format also valid). The field causes all **policy documents** (decision records only — skills, articles, research, and plans are NOT inherited) from the listed scopes to be treated as if authored in the extending scope. Valid for all scope types.
+
+#### 28-extends-disjoint
+
+The `extends:` field and the `follows:` field MUST reference disjoint sets of scope names. The same scope MUST NOT appear in both fields. Tools MUST enforce this and report an error using code `_core-adr-policy-010.28-extends-disjoint`.
+
+#### 29-extends-reserved-scopes
+
+A scope `extends:` declaration MUST NOT reference the reserved scope names `_local` or `_core` by name. `_local` is workspace-only and non-distributable; `_core` policies are always applied implicitly to every scope and extending them would be redundant. Tools MUST enforce this and report an error using code `_core-adr-policy-010.29-extends-reserved-scopes`.
+
+#### 30-extends-no-self
+
+A scope `extends:` declaration MUST NOT reference the declaring scope itself. Tools MUST enforce this and report an error using code `_core-adr-policy-010.30-extends-no-self`.
+
+#### 31-extends-no-cycle
+
+`extends:` declarations MUST NOT form circular chains (e.g., scope A extends B, B extends A). Tools MUST detect such cycles across the full workspace and report an error using code `_core-adr-policy-010.31-extends-no-cycle`, identifying the cycle.
+
+#### 32-extends-mandatory-presence
+
+Every scope listed in a scope's `extends:` field MUST exist in the workspace with an accessible `index.md`. If any referenced scope is absent or its `index.md` cannot be read, all READ, WRITE, and REVIEW operations on the extending scope MUST fail immediately. Tools MUST surface a clear message naming the missing scope and citing code `_core-adr-policy-010.32-extends-mandatory-presence`.
+
+#### 33-extends-content-precedence
+
+When loading the effective policy set for a scope, tools and agents MUST resolve the full `extends:` chain depth-first and apply the following content precedence (lowest to highest):
+
+1. Transitively extended scopes, in depth-first order, deduplicated keeping first occurrence. For A extends [B, C] where B itself extends [D]: resolved order is D < B < C.
+2. The extending scope's own policy documents (always take highest precedence and override all inherited policies).
+
+Deduplication: if the same scope name appears more than once in the depth-first traversal, keep only the first occurrence. When a scope's policy overrides an inherited policy on the same topic, the overriding policy MUST include a `## Conflicts` section (see rule 34).
+
+Note: the `extends:` content-precedence chain is independent of Section C rule 24. `extends:` determines which policy documents are in scope; rule 24 determines which authoring rules apply.
+
+#### 34-extends-conflict-declaration
+
+When an extending scope's own policy addresses the same topic as a policy in an extended scope, or when two extended scopes address the same topic differently, the higher-precedence policy MUST include a `## Conflicts` section that:
+
+- Names the conflicting policy (scope and policy ID) being overridden or superseded.
+- Explains why the override or difference exists.
+
+An undeclared semantic conflict between policies from the `extends:` chain MUST be surfaced as an error during review (see `_core-adr-policy-010.34-extends-conflict-declaration`).
+
+#### 35-extends-index
+
+Scopes referenced only via `extends:` chains and not linked in the root `index.md` are **exempt** from the "root index must link all scopes" requirement. These scopes form the building-block layer; the root index lists only entry scopes. If a scope is both referenced via `extends:` AND linked in the root index, tools SHOULD warn of ambiguous dual precedence (the root index ordering governs for consumers that do not interpret `extends:` declarations), using warning code `_core-adr-policy-010.35-extends-index`.

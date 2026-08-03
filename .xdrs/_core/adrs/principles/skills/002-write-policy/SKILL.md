@@ -58,7 +58,7 @@ Choose a title that clearly states the question this Policy answers, not the ans
 
 ### Phase 4: Research Related Policies
 
-1. Read all existing Policies relevant to the topic across all scopes listed in the Policy root `index.md`.
+1. Read all existing Policies relevant to the topic across all scopes listed in the Policy root `index.md`. **Additionally**, if the target scope declares an `extends:` field in its `index.md`, resolve its full `extends:` chain depth-first (see `_core-adr-policy-010` rule 33) and treat all policy documents from those extended scopes as if they were authored in the target scope — they MUST be included in the research and conflict check just like policies written directly in the scope.
 2. Evaluate Policy metadata before treating any decision as a current constraint. All documents present in the collection are considered active. `valid-from:` determines the convergence date for adoption, `apply-to:` determines whether it fits the current topic, and the decision text defines any remaining boundaries. Treat out-of-window or out-of-scope Policies as background only when assessing overlaps and conflicts.
 3. Identify decisions that already address the topic (full or partial overlap).
 4. Note decisions that might conflict with the intended outcome.
