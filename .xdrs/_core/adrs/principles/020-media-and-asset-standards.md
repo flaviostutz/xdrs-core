@@ -42,6 +42,9 @@ Non-Markdown files (images, diagrams, schemas, JSON examples, binaries, or any o
 #### 07-assets-placement
 Non-Markdown files MUST live in the sibling `.assets/` folder next to the referencing document. The canonical per-document-type `.assets/` paths are defined in `_core-adr-policy-001`.
 
+#### 08-svg-drawio-embedded
+Any `.svg` file stored in an XDRS `.assets/` folder MUST contain embedded draw.io XML source data. SVG files without embedded draw.io source MUST NOT be added to XDRS `.assets/` folders. This ensures every diagram can be reopened and edited in draw.io without requiring a separate source file.
+
 ## References
 
 - [_core-adr-policy-001 - XDRS standards](001-xdrs-standards.md) - Per-document-type `.assets/` canonical paths
