@@ -12,6 +12,10 @@ Policies capture Architectural (ADR), Business (BDR), and Engineering (EDR) deci
 
 This project defines a standard for organizing XDRS that satisfies the following requirements.
 
+## Overview
+
+![XDRS Overview Diagram](.xdrs/_core/adrs/principles/articles/.assets/001-xdrs-overview.svg)
+
 ## XDRS elements
 
 A traditional Decision Record normally combines several concerns in the same document:
