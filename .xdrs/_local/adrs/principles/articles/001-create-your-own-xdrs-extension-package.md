@@ -72,7 +72,7 @@ The co-location rule for Research documents comes from [_core-adr-policy-006](..
 the co-location rule for skills comes from [_core-adr-policy-003](../../../../_core/adrs/principles/003-skill-standards.md),
 and article placement rules come from [_core-adr-policy-004](../../../../_core/adrs/principles/004-article-standards.md).
 When you publish the scope folder, those documents travel together and stay version-aligned.
-Prefer plain Markdown, tables, or ASCII art for simple indications. When any of those documents genuinely need images or local supporting files, keep them in the sibling `.assets/` folder next to the document so the package stays self-contained.
+For diagram format preferences and non-Markdown asset rules, follow [`_core-adr-policy-020`](../../../../_core/adrs/principles/020-media-and-asset-standards.md). When any of those documents genuinely need images or local supporting files, keep them in the sibling `.assets/` folder next to the document so the package stays self-contained.
 
 ### Expose skills to Copilot-compatible tooling
 
