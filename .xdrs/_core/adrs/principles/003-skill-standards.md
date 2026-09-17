@@ -75,7 +75,7 @@ Examples:
 
 **Skill naming**
 
-Unlike Policies, Research, Articles, and Initiatives, skill packages MUST NOT use a numeric prefix. A skill is identified by a descriptive name alone, keeping it compatible with the wider agentskills ecosystem, where clients (including this framework's own agentskills-format consumers) expect a plain descriptive identifier rather than a sequence number. Each skill name MUST be unique within its `scope/type/subject/skills/` namespace; check for an existing skill with the same name before creating a new one.
+Unlike Policies, Research, Articles, and Initiatives, skill packages are not auto-numbered. A skill is identified by a descriptive name, keeping it compatible with the wider agentskills ecosystem, where clients (including this framework's own agentskills-format consumers) expect a plain descriptive identifier rather than an auto-generated sequence number. The name MAY still contain digits, including as a prefix, when that is simply part of the descriptive name (e.g., `2fa-setup`). Each skill name MUST be unique within its `scope/type/subject/skills/` namespace; check for an existing skill with the same name before creating a new one.
 
 **SKILL.md format** (agentskills spec)
 
@@ -111,7 +111,7 @@ Known gotchas and how to handle them.
 
 Rules:
 - The `name` field MUST match the folder name exactly (e.g., `code-review`). This keeps skill identifiers simple and aligned with the filesystem hierarchy.
-- The directory name and the `name:` field MUST contain only lowercase alphanumeric characters and hyphens (e.g., `code-review`), with no numeric prefix.
+- The directory name and the `name:` field MUST contain only lowercase alphanumeric characters and hyphens (e.g., `code-review`, `2fa-setup`).
 - `## Overview` SHOULD state the task objective, expected outcome, and relevant prerequisites or tools when they matter.
 - `## Instructions` SHOULD include verification steps or acceptance criteria at the end of the task, or at the end of major phases when partial validation matters.
 - For diagram format preferences and non-Markdown asset rules, see [`_core-adr-policy-020`](020-media-and-asset-standards.md).

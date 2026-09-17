@@ -61,7 +61,7 @@ Every XDRS scope declares a `scope-type` in its `index.md` YAML frontmatter. A `
 
 ### Available skills
 
-The `_core` scope ships with seven skills that automate the most common framework operations:
+The `_core` scope ships with nine skills that automate the most common framework operations:
 
 - **review** reviews code and files against applicable Policies
 - **write-policy** guides creation of a new Policy document
@@ -70,6 +70,8 @@ The `_core` scope ships with seven skills that automate the most common framewor
 - **write-research** guides creation of a new research document
 - **write-initiative** guides creation of a new execution initiative
 - **write-presentation** guides creation of Marp slide presentations
+- **write-xdrs-doc** routes a request to the right authoring skill above based on document type
+- **compile-scope** compiles or updates a `compiled`-type scope from its configured external sources
 
 ### Getting started
 
