@@ -355,6 +355,16 @@ function topic(bank, idx) {
   return list[idx % list.length];
 }
 
+// Skills are not numbered (see _core-adr-policy-003), so their folder/file name is the
+// slug alone. Topic banks are smaller than the generated skill counts, so once a bank
+// cycles we append a `-N` suffix to keep names unique within the subject.
+function skillSlug(bank, idx) {
+  const list = TOPICS[bank];
+  const slug = list[idx % list.length];
+  const cycle = Math.floor(idx / list.length);
+  return cycle === 0 ? slug : `${slug}-${cycle + 1}`;
+}
+
 // ---------------------------------------------------------------------------
 // Content generators
 // ---------------------------------------------------------------------------
@@ -508,13 +518,13 @@ function genResearch(scope, typeShort, subject, num, slug) {
   ].join('\n');
 }
 
-function genSkill(scope, typeShort, subject, num, slug) {
+function genSkill(scope, typeShort, subject, slug) {
   const title = titleCase(slug);
   const subjectTitle = titleCase(subject);
 
   return [
     `---`,
-    `name: ${pad(num)}-${slug}`,
+    `name: ${slug}`,
     `description: Step-by-step skill for performing ${title.toLowerCase()} within the city traffic management authority's ${subjectTitle} domain. Follow these steps when executing this procedure for trains, buses, road vehicles, bicycles, or pedestrian systems.`,
     `---`,
     ``,
@@ -778,11 +788,11 @@ for (const row of PLAN) {
   // ── Skills ────────────────────────────────────────────────────────────────
   const skillsDir = path.join(subjectDir, 'skills');
   for (let i = 1; i <= skills; i++) {
-    const slug = topic(topicKey, i - 1);
-    const skillDir = path.join(skillsDir, `${pad(i)}-${slug}`);
-    write(path.join(skillDir, 'SKILL.md'), genSkill('city-traffic', typeShort, subject, i, slug));
+    const slug = skillSlug(topicKey, i - 1);
+    const skillDir = path.join(skillsDir, slug);
+    write(path.join(skillDir, 'SKILL.md'), genSkill('city-traffic', typeShort, subject, slug));
     generated++;
-    links.skills.push(`- [${pad(i)}-${slug}](./${subject}/skills/${pad(i)}-${slug}/SKILL.md)`);
+    links.skills.push(`- [${slug}](./${subject}/skills/${slug}/SKILL.md)`);
   }
 
   // ── Articles ──────────────────────────────────────────────────────────────

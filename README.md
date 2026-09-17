@@ -85,7 +85,7 @@ Every scope declares a `scope-type` in its `index.md` frontmatter. The six built
 
 **`platform` scopes** document what already exists and is ready to use. A scope is of type `platform` when its content describes a live operational capability — what is available, how to access it, and what constraints apply.
 
-**`compiled` scopes** hold policies compiled directly from external authoritative sources. All content must trace back to the source; no invented content is allowed. A `compiled` scope requires a local meta-policy with source URLs and compilation configuration, and uses the `009-compile-scope` skill to fetch, compile, and keep content up to date. The `compiled` type may be combined with another type (e.g. `scope-type: compiled, reference`) when the combined type's governance also applies.
+**`compiled` scopes** hold policies compiled directly from external authoritative sources. All content must trace back to the source; no invented content is allowed. A `compiled` scope requires a local meta-policy with source URLs and compilation configuration, and uses the `compile-scope` skill to fetch, compile, and keep content up to date. The `compiled` type may be combined with another type (e.g. `scope-type: compiled, reference`) when the combined type's governance also applies.
 
 ```yaml
 # .xdrs/owasp-top10/adrs/principles/001-core.md  (compilation meta-policy)
@@ -163,7 +163,7 @@ This is especially important for BDRs: because business rules govern decisions t
           [number]-[short-title].md
           .assets/
         skills/                     # optional skill packages for humans and AI agents
-          [number]-[skill-name]/
+          [skill-name]/
             SKILL.md
             .assets/
         articles/                   # optional synthetic views over Policies, Research, and Skills
@@ -231,7 +231,6 @@ The `lint` command reads `./.xdrs/**` from the given workspace path and checks c
 
 - allowed scope, type, and subject folder structure
 - Policy numbering uniqueness per `scope/type`
-- skill numbering uniqueness per `scope/type/subject/skills`
 - article numbering uniqueness per `scope/type/subject/articles`
 - research numbering uniqueness per `scope/type/subject/researches`
 - initiative numbering uniqueness per `scope/type/subject/initiatives`

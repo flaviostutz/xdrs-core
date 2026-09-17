@@ -10,7 +10,7 @@ valid-from: 2025-01-01
 
 ## Overview
 
-The `_core` scope defines the XDRS framework itself: how policies, skills, research, articles, and initiatives are structured, written, versioned, and discovered. This scope is aimed at engineers, architects, and business analysts who build or consume xdrs-based documentation.
+The `_core` scope defines the XDRS (eXtensible Decision Record System) framework itself: how policies, skills, research, articles, and initiatives are structured, written, versioned, and discovered. This scope is aimed at engineers, architects, and business analysts who build or consume xdrs-based documentation.
 
 ## Content
 
@@ -63,13 +63,13 @@ Every XDRS scope declares a `scope-type` in its `index.md` YAML frontmatter. A `
 
 The `_core` scope ships with seven skills that automate the most common framework operations:
 
-- **001-review** reviews code and files against applicable Policies
-- **002-write-policy** guides creation of a new Policy document
-- **003-write-skill** guides creation of a new skill package
-- **004-write-article** guides creation of a new article
-- **005-write-research** guides creation of a new research document
-- **006-write-initiative** guides creation of a new execution initiative
-- **007-write-presentation** guides creation of Marp slide presentations
+- **review** reviews code and files against applicable Policies
+- **write-policy** guides creation of a new Policy document
+- **write-skill** guides creation of a new skill package
+- **write-article** guides creation of a new article
+- **write-research** guides creation of a new research document
+- **write-initiative** guides creation of a new execution initiative
+- **write-presentation** guides creation of Marp slide presentations
 
 ### Getting started
 

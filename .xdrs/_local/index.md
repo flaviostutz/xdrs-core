@@ -1,7 +1,7 @@
 ---
 scope-type: _local
 name: _local
-description: Workspace-local decisions for the xdrs-core repository. Covers agent validation workflows and research specific to this project.
+description: Workspace-local decisions for the xdrs-core repository. Not distributed to downstream consumers.
 apply-to: xdrs-core repository only
 valid-from: 2025-01-01
 ---
@@ -14,15 +14,11 @@ Repository-local decisions and supporting artifacts for the xdrs-core project. T
 
 ## Content
 
-This scope captures decisions specific to maintaining the xdrs-core repository itself, including agent behavior validation procedures and research on how policies interact with their supporting artifacts.
+This scope captures decisions and supporting artifacts specific to maintaining the xdrs-core repository itself.
 
-### Architecture
+### Extending the framework
 
-Exploratory research on how research documents support and relate to Policies, skills, and articles throughout their lifecycle.
-
-### Operations
-
-Business procedures for validating agent behavior within this repository, ensuring that probe tests and validation workflows remain local rather than being shipped as core policy.
+[_local-adr-article-001](adrs/principles/articles/001-create-your-own-xdrs-extension-package.md) explains how to turn a Policy scope into a distributable npm package.
 
 ## Type Indexes
 

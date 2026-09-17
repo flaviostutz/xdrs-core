@@ -10,9 +10,9 @@ sets:
     output:
       path: .
       symlinks:
-        - source: .xdrs/**/skills/001-review
+        - source: .xdrs/**/skills/review
           target: .agents/skills
-        - source: .xdrs/**/skills/008-write-xdrs-doc
+        - source: .xdrs/**/skills/write-xdrs-doc
           target: .agents/skills
       gitignore: false
 

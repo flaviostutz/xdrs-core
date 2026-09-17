@@ -41,4 +41,4 @@ published `xdrs-core` package with the local `mydevkit` scope.
 
 ## References
 
-- [001-release-package](skills/001-release-package/SKILL.md) - Skill for packing, verifying, and publishing the example package
+- [release-package](skills/release-package/SKILL.md) - Skill for packing, verifying, and publishing the example package
