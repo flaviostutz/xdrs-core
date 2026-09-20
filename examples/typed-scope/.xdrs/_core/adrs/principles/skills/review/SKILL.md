@@ -14,17 +14,34 @@ metadata:
 
 Performs a structured review of code changes or files against the Policies in the repository, categorizing findings by severity and type, and reporting them without modifying any code.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A git diff, file set, or documents to review.
 
-### Optional
+#### Optional
 
 - Specific Policies or scope to focus on.
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- Structured ERROR/WARNING findings report in chat.
+
+#### Changes
+
+- None.
+
+### Halt Conditions
+
+- A declared follows scope is missing or unreadable.
+- A declared extends scope is missing or unreadable.
+- A local meta-policy file exists but cannot be read.
+- The declared scope-type has no governance policy.
+
+### Runtime Requirements
 
 - `git` available for diff-scoped reviews.
 - `npx @mermaid-js/mermaid-cli` for Mermaid diagram checks.
@@ -124,26 +141,9 @@ Scope: [scope identifier]
 - A Policy mentions that "Every code MUST have a header comment with author name", if you find a codebase without the author name, report as ERROR.
 - A Policy mentions that "Functions SHOULD be no longer than 50 lines", if you find a function with 80 lines, report as WARNING.
 
-## Outputs
-
-### Contents
-
-- Structured ERROR/WARNING findings report in chat.
-
-### Changes
-
-- None.
-
 ## Edge Cases
 - If no Policies apply to the scope, output "No applicable Policies found" and skip reporting.
 - If a potential violation is in pre-existing code outside the diff, report it as WARNING only.
-
-## Halt Conditions
-
-- A declared follows scope is missing or unreadable.
-- A declared extends scope is missing or unreadable.
-- A local meta-policy file exists but cannot be read.
-- The declared scope-type has no governance policy.
 
 ## Anti-Patterns
 
@@ -165,4 +165,3 @@ Scope: [scope identifier]
 - [_core-adr-policy-002 - Policy standards](../../002-policy-standards.md)
 - [_core-adr-policy-003 - Skill standards](../../003-skill-standards.md)
 - [_core-adr-policy-020 - Media and asset standards](../../020-media-and-asset-standards.md)
-

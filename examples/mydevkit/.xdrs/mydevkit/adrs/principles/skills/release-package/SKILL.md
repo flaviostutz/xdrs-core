@@ -14,17 +14,35 @@ metadata:
 Use this skill when updating the example package and needing to confirm that the packed tarball can
 be installed by a consumer workspace.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - Current state of the mydevkit package source.
 
-### Optional
+#### Optional
 
 - None.
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- A verified, publish-ready tarball.
+
+#### Changes
+
+- A published package version, if approved.
+
+### Halt Conditions
+
+- Blocks publish if the consumer fixture fails checks.
+
+### User Interaction
+
+- Confirmation before publishing a new version.
+
+### Runtime Requirements
 
 - `pnpm` available.
 - Network/registry access for the publish step only.
@@ -47,24 +65,6 @@ be installed by a consumer workspace.
 
 1. Bump the package version according to the consumer impact.
 2. Publish after the local consumer verification passes.
-
-## Outputs
-
-### Contents
-
-- A verified, publish-ready tarball.
-
-### Changes
-
-- A published package version, if approved.
-
-## Halt Conditions
-
-- Blocks publish if the consumer fixture fails checks.
-
-## User Interaction
-
-- Confirmation before publishing a new version.
 
 ## Anti-Patterns
 

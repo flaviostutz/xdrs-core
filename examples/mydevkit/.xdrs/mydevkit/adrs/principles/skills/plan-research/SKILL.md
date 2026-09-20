@@ -15,13 +15,27 @@ metadata:
 Turns a topic into a short research plan: a handful of imagined scenarios followed by the
 research questions those scenarios raise.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A topic to plan research for.
 
-### Optional
+#### Optional
+
+- None.
+
+### Outputs
+
+#### Contents
+
+- A numbered list of research questions.
+
+#### Changes
+
+- None.
+
+### Halt Conditions
 
 - None.
 
@@ -43,20 +57,6 @@ research questions those scenarios raise.
 - Topic: "adoption of a new internal API" → Plan: "1. What breaks if adoption is instant across
   all teams? 2. What support burden does single-team adoption create? 3. How do we version the
   API safely if it changes mid-rollout?"
-
-## Outputs
-
-### Contents
-
-- A numbered list of research questions.
-
-### Changes
-
-- None.
-
-## Halt Conditions
-
-- None.
 
 ## Anti-Patterns
 

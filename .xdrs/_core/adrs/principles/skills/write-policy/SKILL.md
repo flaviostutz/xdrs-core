@@ -13,15 +13,33 @@ metadata:
 
 Guides the creation of a well-structured Policy by following the standards in `_core-adr-policy-001`, consulting `policy-standards` for every core element definition, researching existing policies for conflicts, checking redundancy across related artifacts, and iterating until the document is concise, decision-focused, and clear about when the decision should be used.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A decision topic to document.
 
-### Optional
+#### Optional
 
 - Preferred Policy type, if already known.
+
+### Outputs
+
+#### Contents
+
+- A new Policy file.
+
+#### Changes
+
+- Index entries added in the relevant scope.
+
+### Halt Conditions
+
+- Decision conflicts with an existing Policy, unresolved.
+
+### User Interaction
+
+- Clarifying questions when the decision topic is ambiguous.
 
 ## Instructions
 
@@ -197,24 +215,6 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - MUST prefer links and short references over repeating the same decision content across related documents.
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST NOT create documents in external scopes (scopes whose files appear in the workspace root `.filedist.lock`).
-
-## Outputs
-
-### Contents
-
-- A new Policy file.
-
-### Changes
-
-- Index entries added in the relevant scope.
-
-## Halt Conditions
-
-- Decision conflicts with an existing Policy, unresolved.
-
-## User Interaction
-
-- Clarifying questions when the decision topic is ambiguous.
 
 ## Anti-Patterns
 

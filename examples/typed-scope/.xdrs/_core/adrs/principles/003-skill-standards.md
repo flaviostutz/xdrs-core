@@ -108,15 +108,31 @@ metadata:                 # required
 
 Brief description of the skill goal.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 - Bare minimum the skill needs to start working, one bullet per item, or "None".
 
-### Optional
+#### Optional
 - Extra helpful context the skill can use if given, one bullet per item, or "None".
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+- Generated files or chat-delivered results, one bullet per item, or "None".
+
+#### Changes
+- External system mutations that are part of the skill's main objective, one bullet per item, or "None".
+
+### Halt Conditions
+- Specific triggers that make the skill stop before completing, one bullet per item, or "None".
+
+### User Interaction
+
+Optional section: human-in-the-loop (HITL) exchanges during execution — a clarifying question or
+an approval gate — one bullet per item, or "None". Omit this section entirely when none apply.
+
+### Runtime Requirements
 
 Optional section: tooling, network access, or environment prerequisites beyond the LLM itself,
 one bullet per item. Omit this section entirely when none apply.
@@ -129,25 +145,9 @@ Step-by-step instructions the agent should follow. State one clearly recommended
 
 Concrete input/output examples that illustrate correct behavior.
 
-## Outputs
-
-### Contents
-- Generated files or chat-delivered results, one bullet per item, or "None".
-
-### Changes
-- External system mutations that are part of the skill's main objective, one bullet per item, or "None".
-
 ## Edge Cases
 
 Known gotchas and how to handle them.
-
-## Halt Conditions
-- Specific triggers that make the skill stop before completing, one bullet per item, or "None".
-
-## User Interaction
-
-Optional section: human-in-the-loop (HITL) exchanges during execution — a clarifying question or
-an approval gate — one bullet per item, or "None". Omit this section entirely when none apply.
 
 ## Anti-Patterns
 
@@ -162,15 +162,15 @@ Rules:
 - The directory name and the `name:` field MUST contain only lowercase alphanumeric characters and hyphens (e.g., `code-review`, `2fa-setup`).
 - `metadata` is REQUIRED. `metadata.version` MUST use full semantic versioning (`MAJOR.MINOR.PATCH`, e.g. `1.0.0`), consistent with [`_core-adr-policy-005`](005-semantic-versioning-for-xdrs-packages.md); `metadata.author` MUST be non-empty; `metadata.updated` MUST be an ISO `YYYY-MM-DD` date, refreshed whenever the skill's content materially changes.
 - `description` SHOULD stay near 250 characters when the activation trigger can be stated that tightly, even though the hard cap remains 1024 characters — it is loaded into context on every activation scan.
-- `## Overview` SHOULD state the task objective, expected outcome, and relevant prerequisites or tools when they matter.
-- `## Inputs` MUST contain `### Required` (the bare minimum needed to invoke the skill) then `### Optional` (helpful extra context), in that order.
-- `## Runtime Requirements` is OPTIONAL: free-form bullets for tooling, network, or environment prerequisites beyond the LLM itself; omit the section entirely when none apply.
+- `## Overview` SHOULD state the task objective, expected outcome, and relevant prerequisites or tools when they matter, and MUST contain nested subsections, in order, for `### Inputs`, `### Outputs`, `### Halt Conditions`, then the optional `### User Interaction` and `### Runtime Requirements`.
+- `### Inputs` MUST contain `#### Required` (the bare minimum needed to invoke the skill) then `#### Optional` (helpful extra context), in that order.
 - `## Instructions` SHOULD state one clearly recommended approach first when multiple are viable, noting alternatives briefly afterward, and SHOULD include verification steps or acceptance criteria at the end of the task or major phases.
 - `## Examples` SHOULD include 2-3 example prompts a user could give as input, alongside a short description of what to expect during execution and as output for each.
-- `## Outputs` covers only end-objective results, not intermediary items, and MUST contain `### Contents` (generated files or chat-delivered results) then `### Changes` (external system mutations that are part of the main objective), in that order.
-- `## Halt Conditions` MUST list this skill's specific stop-before-completing triggers, grounded in at least missing required input, dubious/ambiguous input, and insufficient agent confidence — distinct from `## Edge Cases` (activation/boundary conditions) and `## Anti-Patterns` (execution mistakes). A partial or empty result the skill still finishes and returns belongs in `## Outputs`, not `## Halt Conditions`.
-- `## User Interaction` is OPTIONAL: documents human-in-the-loop (HITL) exchanges during execution — a clarifying question or an approval gate — distinct from `## Halt Conditions` (which stop execution rather than pause-and-resume it) and `## Runtime Requirements` (static prerequisites, not an interactive exchange); omit the section entirely when the skill has none.
-- Every bullet in `### Required`, `### Optional`, `### Contents`, `### Changes`, `## Halt Conditions`, and `## User Interaction` MUST be under 10 words, or the section MUST contain a single "None" bullet instead.
+- `### Outputs` covers only end-objective results, not intermediary items, and MUST contain `#### Contents` (generated files or chat-delivered results) then `#### Changes` (external system mutations that are part of the main objective), in that order.
+- `### Halt Conditions` MUST list this skill's specific stop-before-completing triggers, grounded in at least missing required input, dubious/ambiguous input, and insufficient agent confidence — distinct from `## Edge Cases` (activation/boundary conditions) and `## Anti-Patterns` (execution mistakes). A partial or empty result the skill still finishes and returns belongs in `### Outputs`, not `### Halt Conditions`.
+- `### User Interaction` is OPTIONAL: documents human-in-the-loop (HITL) exchanges during execution — a clarifying question or an approval gate — distinct from `### Halt Conditions` (which stop execution rather than pause-and-resume it) and `### Runtime Requirements` (static prerequisites, not an interactive exchange); omit the section entirely when the skill has none.
+- `### Runtime Requirements` is OPTIONAL: free-form bullets for tooling, network, or environment prerequisites beyond the LLM itself; omit the section entirely when none apply.
+- Every bullet in `#### Required`, `#### Optional`, `#### Contents`, `#### Changes`, `### Halt Conditions`, and `### User Interaction` MUST be under 10 words, or the section MUST contain a single "None" bullet instead.
 - `## Anti-Patterns` is REQUIRED with a minimum of 3 entries, each naming a Mistake, Why it happens, and the correct approach Instead, grounded in real observed issues rather than theoretical ones. Keep it distinct from `## Edge Cases`: Edge Cases are activation/boundary conditions, Anti-Patterns are execution mistakes.
 - Key recommendations MAY be tagged `[PROVEN]`, `[RECOMMENDED]`, or `[EXPERIMENTAL]` when a skill offers several viable approaches at different confidence levels.
 - For diagram format preferences and non-Markdown asset rules, see [`_core-adr-policy-020`](020-media-and-asset-standards.md).

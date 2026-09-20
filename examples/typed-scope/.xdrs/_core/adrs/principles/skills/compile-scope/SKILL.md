@@ -12,17 +12,37 @@ metadata:
 
 Performs a full compilation cycle for any scope declaring `scope-type: compiled`: discovers compilation meta-policies across all type folders, fetches sources into a temporary directory, plans which policies to create, update, or remove, migrates them one at a time with full source traceability, runs lint and review, and documents any inconsistencies found in the source. Works for both initial compilation and re-compilation (updates). Requires `_core-adr-policy-019-compiled-scope-type` to be present in the workspace.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - Name of the compiled scope to sync.
 
-### Optional
+#### Optional
 
 - None.
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- Updated compiled scope, linted and reviewed.
+
+#### Changes
+
+- Policy files created, updated, or removed.
+
+### Halt Conditions
+
+- No local meta-policy found in the scope.
+- Scope does not declare scope-type: compiled.
+- A source cannot be fetched or converted.
+
+### User Interaction
+
+- Confirmation of the CREATE/UPDATE/REMOVE plan before migrating.
+
+### Runtime Requirements
 
 - Network/git access for remote sources.
 - `uvx markitdown` for non-Markdown source conversion, if needed.
@@ -136,26 +156,6 @@ After writing each policy:
    - Inconsistencies documented (with file path).
    - Any sources that could not be fetched.
    - Lint and review pass/fail status.
-
-## Outputs
-
-### Contents
-
-- Updated compiled scope, linted and reviewed.
-
-### Changes
-
-- Policy files created, updated, or removed.
-
-## Halt Conditions
-
-- No local meta-policy found in the scope.
-- Scope does not declare scope-type: compiled.
-- A source cannot be fetched or converted.
-
-## User Interaction
-
-- Confirmation of the CREATE/UPDATE/REMOVE plan before migrating.
 
 ## Anti-Patterns
 

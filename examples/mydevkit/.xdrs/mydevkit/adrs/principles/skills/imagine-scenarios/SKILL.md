@@ -14,13 +14,27 @@ metadata:
 Brainstorms a handful of speculative "what if" scenarios for a topic, to widen the range of
 possibilities considered before planning or deeper research.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A topic to imagine scenarios for.
 
-### Optional
+#### Optional
+
+- None.
+
+### Outputs
+
+#### Contents
+
+- 3-5 what-if scenario bullets.
+
+#### Changes
+
+- None.
+
+### Halt Conditions
 
 - None.
 
@@ -36,20 +50,6 @@ possibilities considered before planning or deeper research.
 
 - Topic: "adoption of a new internal API" → Scenarios: "What if adoption is instant across all
   teams?", "What if only one team ever adopts it?", "What if the API changes mid-rollout?"
-
-## Outputs
-
-### Contents
-
-- 3-5 what-if scenario bullets.
-
-### Changes
-
-- None.
-
-## Halt Conditions
-
-- None.
 
 ## Anti-Patterns
 

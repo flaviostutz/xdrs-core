@@ -13,17 +13,35 @@ metadata:
 
 Routes the request to the appropriate XDRS authoring skill based on the type of document the user wants to create. Reads the target skill at runtime and follows its instructions in full.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A free-form request to write a document.
 
-### Optional
+#### Optional
 
 - None.
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- The delegated skill's fully written file.
+
+#### Changes
+
+- Whatever changes the delegated skill makes.
+
+### Halt Conditions
+
+- No document type identifiable even after clarification.
+
+### User Interaction
+
+- A single disambiguation question when type is unclear.
+
+### Runtime Requirements
 
 - Same as the delegated skill's, if any.
 
@@ -75,24 +93,6 @@ Read the full content of the skill file for the inferred type, then follow all i
 - MUST NOT create documents of a type not listed in the routing table above.
 - When routing to the Policy skill, MUST also read `_core-adr-policy-016` (`.xdrs/_core/adrs/principles/016-policy-subjects.md`) before choosing a subject — it contains the allowed subject list, descriptions, and disambiguation tiebreaker rules.
 - When routing to the Policy skill, MUST also read `_core-adr-policy-017` (`.xdrs/_core/adrs/principles/017-policy-numbering-ranges.md`) before choosing a policy number — it defines the subject-based block ranges that determine valid numbers for each subject.
-
-## Outputs
-
-### Contents
-
-- The delegated skill's fully written file.
-
-### Changes
-
-- Whatever changes the delegated skill makes.
-
-## Halt Conditions
-
-- No document type identifiable even after clarification.
-
-## User Interaction
-
-- A single disambiguation question when type is unclear.
 
 ## Anti-Patterns
 

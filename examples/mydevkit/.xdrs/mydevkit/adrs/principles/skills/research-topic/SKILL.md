@@ -15,17 +15,31 @@ metadata:
 Runs a lightweight end-to-end research pass on a topic: drafts a research plan, records findings
 in a small table, and applies a final checklist before returning the result.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A topic to research.
 
-### Optional
+#### Optional
 
 - None.
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- A research plan, findings table, and summary.
+
+#### Changes
+
+- None.
+
+### Halt Conditions
+
+- None.
+
+### Runtime Requirements
 
 - `make` and `zip` on PATH for bundling.
 
@@ -50,20 +64,6 @@ in a small table, and applies a final checklist before returning the result.
 
 - Topic: "adoption of a new internal API" → Output: a research plan (Phase 1), a filled findings
   table with one row per question (Phase 2), and a short top-3-insights summary (Phase 3).
-
-## Outputs
-
-### Contents
-
-- A research plan, findings table, and summary.
-
-### Changes
-
-- None.
-
-## Halt Conditions
-
-- None.
 
 ## Anti-Patterns
 

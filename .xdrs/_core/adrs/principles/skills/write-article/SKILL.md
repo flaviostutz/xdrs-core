@@ -12,15 +12,33 @@ metadata:
 
 Guides the creation of a well-structured article by following `_core-adr-policy-004`, consulting `policy-standards` for every core element definition, researching the Policies, Research documents, and Skills to synthesize, and producing a concise document that serves as a navigable view without duplicating decision content.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A topic for the article.
 
-### Optional
+#### Optional
 
 - Target audience, scope, or XDRS elements to synthesize.
+
+### Outputs
+
+#### Contents
+
+- A new article file.
+
+#### Changes
+
+- Index entry and back-references in synthesized documents.
+
+### Halt Conditions
+
+- No relevant Policies, Research, or Skills exist to synthesize.
+
+### User Interaction
+
+- Clarification of target audience when unspecified.
 
 ## Instructions
 
@@ -144,16 +162,6 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 7. Update `.xdrs/_local/adrs/index.md` with a link to the new article.
 8. Add a reference to the article in `_core-adr-policy-003` under `## References`.
 
-## Outputs
-
-### Contents
-
-- A new article file.
-
-### Changes
-
-- Index entry and back-references in synthesized documents.
-
 ## Edge Cases
 
 - **Article vs. Policy confusion** — if the user asks for a document that makes a decision, write a Policy
@@ -171,14 +179,6 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST NOT create documents in external scopes (scopes whose files appear in the workspace root `.filedist.lock`).
 - MUST defer to active and applicable Policies when article synthesis conflicts with them.
-
-## Halt Conditions
-
-- No relevant Policies, Research, or Skills exist to synthesize.
-
-## User Interaction
-
-- Clarification of target audience when unspecified.
 
 ## Anti-Patterns
 

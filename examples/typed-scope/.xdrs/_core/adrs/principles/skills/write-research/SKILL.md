@@ -16,17 +16,35 @@ Guides the creation of a well-structured research document by following `_core-a
 
 This skill is interactive by design. Ask clarifying questions to the user at each phase where direction, evidence, or scope is unclear. Ask sequentially — one focused set of questions at a time — and wait for the user's answers before advancing to the next phase. Never front-load all questions at once if not all are yet relevant.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A research direction or question.
 
-### Optional
+#### Optional
 
 - Available evidence and the intended next step.
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- A standalone IMRAD research document.
+
+#### Changes
+
+- Index entry and back-references where relevant.
+
+### Halt Conditions
+
+- Redirects to write-policy if a final decision is wanted.
+
+### User Interaction
+
+- Interactive evidence-gathering, section by section.
+
+### Runtime Requirements
 
 - Python 3 for the optional ratio-check script.
 
@@ -203,7 +221,6 @@ for line in text.splitlines():
   if current is not None:
     sections[current].append(line)
 
-
 def count_words(markdown: str) -> int:
   cleaned = markdown
   cleaned = re.sub(r"^\|(?:\s*[-:]+\s*\|)+\s*$", " ", cleaned, flags=re.M)
@@ -216,7 +233,6 @@ def count_words(markdown: str) -> int:
   cleaned = re.sub(r"[^\w'’]+", " ", cleaned, flags=re.UNICODE)
   words = cleaned.strip().split()
   return len(words)
-
 
 targets = {
   "Introduction": 3,
@@ -283,16 +299,6 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 5. Write an IMRAD-based research document comparing options such as npm package, git submodule, and copy-paste distribution, with the comparison grounded in methods and results.
 6. Add references to the resulting Policy if a decision is later created.
 
-## Outputs
-
-### Contents
-
-- A standalone IMRAD research document.
-
-### Changes
-
-- Index entry and back-references where relevant.
-
 ## Edge Cases
 
 - If the user is really asking for a final decision, write a Policy instead of research.
@@ -300,14 +306,6 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - If the document grows too large, split independent problem threads into separate research files unless the introduction explicitly justifies a longer study.
 - If the supported decision does not exist yet, reference the decision topic or planned Policy title in the introduction and conclusion.
 - If the user's direction, evidence base, or intended next step is vague, ask follow-up questions and wait for clarification instead of choosing a path yourself.
-
-## Halt Conditions
-
-- Redirects to write-policy if a final decision is wanted.
-
-## User Interaction
-
-- Interactive evidence-gathering, section by section.
 
 ## Constraints
 

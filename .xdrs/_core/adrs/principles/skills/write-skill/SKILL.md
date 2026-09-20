@@ -14,17 +14,35 @@ metadata:
 
 Guides the creation of a well-structured skill package by following `_core-adr-policy-003` skill standards, consulting `xdrs-core` for every core element definition, checking existing skills to avoid duplication, and producing a complete SKILL.md ready to activate in VS Code.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A description of the task the skill should perform
 
-### Optional
+#### Optional
 
 - None
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- A complete SKILL.md file
+
+#### Changes
+
+- A symlink under `.agents/skills/`
+
+### Halt Conditions
+
+- No writable scope can be found or inferred
+
+### User Interaction
+
+- A clarifying question when scope or type is ambiguous
+
+### Runtime Requirements
 
 - Write access to the target scope.
 
@@ -87,17 +105,35 @@ metadata:
 
 [1–3 sentence goal statement with the task objective, expected outcome, and relevant prerequisites or tools when they matter.]
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 [Bare-minimum bullets needed to invoke the skill, or a single "None" bullet. Each under 10 words.]
 
-### Optional
+#### Optional
 
 [Extra helpful-context bullets, or a single "None" bullet. Each under 10 words.]
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+[End-objective files/chat text produced, or a single "None" bullet. Each under 10 words.]
+
+#### Changes
+
+[End-objective external system mutations, or a single "None" bullet. Each under 10 words.]
+
+### Halt Conditions
+
+[This skill's specific stop-before-completing triggers, or a single "None" bullet. Each under 10 words.]
+
+### User Interaction
+
+[Optional. Human-in-the-loop exchanges during execution: clarifying questions or approval gates, or a single "None" bullet. Each under 10 words. Omit the whole section if none apply.]
+
+### Runtime Requirements
 
 [Optional. Tooling/network prerequisites as free-form bullets. Omit the whole section if none apply.]
 
@@ -110,27 +146,9 @@ metadata:
 
 [At least one concrete input/context → expected agent action pair. Include 2-3 example prompts a user could type to trigger the skill.]
 
-## Outputs
-
-### Contents
-
-[End-objective files/chat text produced, or a single "None" bullet. Each under 10 words.]
-
-### Changes
-
-[End-objective external system mutations, or a single "None" bullet. Each under 10 words.]
-
 ## Edge Cases
 
 [Situations where the skill must not activate or must behave differently.]
-
-## Halt Conditions
-
-[This skill's specific stop-before-completing triggers, or a single "None" bullet. Each under 10 words.]
-
-## User Interaction
-
-[Optional. Human-in-the-loop exchanges during execution: clarifying questions or approval gates, or a single "None" bullet. Each under 10 words. Omit the whole section if none apply.]
 
 ## Anti-Patterns
 
@@ -166,7 +184,7 @@ Before writing files, verify:
 4. **Duplication**: Does this overlap an existing skill? If yes, revise.
 5. **References**: Are all related XDRs and skills linked, including the cases where the skill operationalizes multiple XDRs?
 6. **Anti-Patterns**: Does the skill include at least 3 genuine, domain-specific `## Anti-Patterns` entries (not generic filler)?
-7. **Required sections**: Does `## Inputs` list Required/Optional bullets, `## Outputs` list Contents/Changes bullets, and `## Halt Conditions` list this skill's specific stop triggers — each bullet under 10 words or a single "None"?
+7. **Required sections**: Does `## Overview` contain nested `### Inputs` (Required/Optional bullets), `### Outputs` (Contents/Changes bullets), and `### Halt Conditions` listing this skill's specific stop triggers — each bullet under 10 words or a single "None"?
 8. **Meta-policy compliance**: Run the shared module at `.xdrs/_core/adrs/principles/skills/.assets/meta-policy-compliance.md`. Substitute `[DOCUMENT]` with `skill`.
 
 If any check fails, revise before continuing.
@@ -193,7 +211,7 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST NOT create documents in external scopes (scopes whose files appear in the workspace root `.filedist.lock`).
 - MUST include a References section linking to `003-skill-standards`.
-- MUST include `## Inputs`, `## Outputs`, and `## Halt Conditions` with skill-specific content.
+- MUST include nested `### Inputs`, `### Outputs`, and `### Halt Conditions` subsections inside `## Overview` with skill-specific content.
 
 **Input**: "Create a skill to help debug CI pipelines"
 - Type: EDR (engineering workflow)
@@ -210,29 +228,11 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 **Input**: "Add a skill for our onboarding checklist"
 - Asks a clarifying question if scope or type is ambiguous, then drafts the skill package.
 
-## Outputs
-
-### Contents
-
-- A complete SKILL.md file
-
-### Changes
-
-- A symlink under `.agents/skills/`
-
 ## Edge Cases
 
 - If the user's goal is already covered by an existing skill, inform the user and offer to extend it instead of creating a new one.
 - If scope is ambiguous, default to `_local` and note the assumption.
 - If the goal spans multiple types (e.g., both EDR and ADR), favor the type that best matches the primary activity.
-
-## Halt Conditions
-
-- No writable scope can be found or inferred
-
-## User Interaction
-
-- A clarifying question when scope or type is ambiguous
 
 ## Anti-Patterns
 

@@ -14,15 +14,33 @@ metadata:
 
 Guides the creation of a well-structured initiative document by following `_core-adr-policy-007`, consulting `xdrs-core` for every core element definition, researching related Policies and existing initiatives, and producing a focused execution document that connects to the decisions, research, and skills it relates to.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A problem statement and proposed solution.
 
-### Optional
+#### Optional
 
 - Expected timeline or milestones.
+
+### Outputs
+
+#### Contents
+
+- A new initiative file.
+
+#### Changes
+
+- Index entry and back-references in related documents.
+
+### Halt Conditions
+
+- Rejects an expected end date beyond 2 years.
+
+### User Interaction
+
+- Clarifying questions about stakeholders and constraints, one batch.
 
 ## Instructions
 
@@ -42,7 +60,6 @@ Guides the creation of a well-structured initiative document by following `_core
    - Repeat this question-answer loop until you have enough information to write the initiative with confidence.
    - Typical questions cover: the problem being solved, the proposed solution, the expected timeline, the scope, the key stakeholders, and any known constraints or risks.
    - Do NOT ask questions whose answers are already clear from context.
-
 
 ### Phase 2: Select Scope, Type, and Subject
 
@@ -158,30 +175,12 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 5. Draft the initiative with clear problem, solution, milestones, and expected end date.
 6. Save, register in canonical index, and lint.
 
-## Outputs
-
-### Contents
-
-- A new initiative file.
-
-### Changes
-
-- Index entry and back-references in related documents.
-
 ## Edge Cases
 
 - If an initiative is too large (more than 2 years), split it into multiple smaller initiatives. Each initiative should be independently actionable and produce its own deliverables.
 - If an initiative spawns sub-initiatives during implementation, each sub-initiative is a separate initiative document in the appropriate subject folder. Link them in the References section.
 - If an initiative is fully implemented, delete it and confirm that all lasting outputs (Decisions, Skills, Articles, etc.) are properly linked and indexed.
 - If the user asks for an initiative that is really just a decision, guide them to create a Policy instead.
-
-## Halt Conditions
-
-- Rejects an expected end date beyond 2 years.
-
-## User Interaction
-
-- Clarifying questions about stakeholders and constraints, one batch.
 
 ## Anti-Patterns
 

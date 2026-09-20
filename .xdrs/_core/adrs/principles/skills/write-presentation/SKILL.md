@@ -13,17 +13,35 @@ metadata:
 
 Guides the creation of a Marp Markdown slide presentation that supports an existing XDRS document. The skill ensures the slides follow presentation standards (`_core-adr-policy-009`), are correctly placed in the `.assets/` folder, and maintain bidirectional links with the parent document.
 
-## Inputs
+### Inputs
 
-### Required
+#### Required
 
 - A parent XDRS document to present.
 
-### Optional
+#### Optional
 
 - Target audience for the slides.
 
-## Runtime Requirements
+### Outputs
+
+#### Contents
+
+- A new Marp slide deck file.
+
+#### Changes
+
+- A bidirectional link added to the parent document.
+
+### Halt Conditions
+
+- Parent document does not exist yet.
+
+### User Interaction
+
+- Confirmation of audience when unclear.
+
+### Runtime Requirements
 
 - Marp-compatible viewer for visual rendering (optional).
 
@@ -167,30 +185,12 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - If not, suggest creating the article first
 - Create slides for the article, not the individual Policies
 
-## Outputs
-
-### Contents
-
-- A new Marp slide deck file.
-
-### Changes
-
-- A bidirectional link added to the parent document.
-
 ## Edge Cases
 
 - If the parent document does not exist, do not create slides. Inform the user and suggest creating the parent first.
 - If the slide file name would exceed 64 characters, shorten the base name while keeping it recognizable.
 - If the content requires more than 30 slides, split into multiple slide sets with distinct audience or topic focus.
 - If the parent document changes after slides are created, the slides must be reviewed and updated.
-
-## Halt Conditions
-
-- Parent document does not exist yet.
-
-## User Interaction
-
-- Confirmation of audience when unclear.
 
 ## Anti-Patterns
 
