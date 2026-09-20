@@ -14,6 +14,9 @@ It is intended to be layered on top of `_core` through the package `.filedistrc`
 ## Skills
 
 - [release-package](principles/skills/release-package/SKILL.md) - Pack, verify, and publish the extension package
+- [imagine-scenarios](principles/skills/imagine-scenarios/SKILL.md) - Generate speculative what-if scenarios for a topic
+- [plan-research](principles/skills/plan-research/SKILL.md) - Draft a research plan from imagined scenarios
+- [research-topic](principles/skills/research-topic/SKILL.md) - Research a topic end to end into a filled findings table
 
 ## Articles
 

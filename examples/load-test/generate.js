@@ -518,14 +518,19 @@ function genResearch(scope, typeShort, subject, num, slug) {
   ].join('\n');
 }
 
-function genSkill(scope, typeShort, subject, slug) {
+function genSkill(scope, type, typeShort, subject, slug) {
   const title = titleCase(slug);
   const subjectTitle = titleCase(subject);
+  const updated = new Date().toISOString().slice(0, 10);
 
   return [
     `---`,
     `name: ${slug}`,
     `description: Step-by-step skill for performing ${title.toLowerCase()} within the city traffic management authority's ${subjectTitle} domain. Follow these steps when executing this procedure for trains, buses, road vehicles, bicycles, or pedestrian systems.`,
+    `metadata:`,
+    `  author: city-traffic-authority`,
+    `  version: "1.0.0"`,
+    `  updated: ${updated}`,
     `---`,
     ``,
     `# ${title}`,
@@ -533,6 +538,22 @@ function genSkill(scope, typeShort, subject, slug) {
     `## Overview`,
     ``,
     `This skill guides operators and engineers through the ${title.toLowerCase()} procedure. It covers preparation, execution, validation, and escalation steps to ensure safe, compliant, and consistent outcomes.`,
+    ``,
+    `## Inputs`,
+    ``,
+    `### Required`,
+    ``,
+    `- A request to perform this procedure.`,
+    ``,
+    `### Optional`,
+    ``,
+    `- None.`,
+    ``,
+    `## Runtime Requirements`,
+    ``,
+    `- Access to the operations management system.`,
+    `- Completion of the ${subjectTitle} training module.`,
+    `- Approval from the shift supervisor or lead.`,
     ``,
     `## Instructions`,
     ``,
@@ -579,6 +600,38 @@ function genSkill(scope, typeShort, subject, slug) {
     `## Escalation`,
     ``,
     `If any step cannot be completed as described, escalate immediately to the ${subjectTitle} team lead and follow the major incident coordination procedure.`,
+    ``,
+    `## Outputs`,
+    ``,
+    `### Contents`,
+    ``,
+    `- A completed and logged activity record.`,
+    ``,
+    `### Changes`,
+    ``,
+    `- None.`,
+    ``,
+    `## Halt Conditions`,
+    ``,
+    `- A required compliance record cannot be filed.`,
+    ``,
+    `## User Interaction`,
+    ``,
+    `- Confirmation before closing out the activity record.`,
+    ``,
+    `## Anti-Patterns`,
+    ``,
+    `- **Mistake:** Skipping the Phase 1 stakeholder notification because the activity seems routine.`,
+    `  **Why it happens:** Routine procedures feel low-risk, so notification is treated as optional.`,
+    `  **Instead:** Always notify affected teams at least 30 minutes in advance, regardless of perceived risk.`,
+    ``,
+    `- **Mistake:** Continuing execution after observing a deviation instead of pausing and escalating.`,
+    `  **Why it happens:** Stopping mid-procedure feels disruptive and slows down the shift.`,
+    `  **Instead:** Pause immediately on any deviation and follow the defined escalation path before resuming.`,
+    ``,
+    `- **Mistake:** Closing out the activity without filing required compliance records.`,
+    `  **Why it happens:** Compliance paperwork feels separate from the operational task itself.`,
+    `  **Instead:** Treat compliance record filing as part of Phase 4 closure, not an optional follow-up.`,
   ].join('\n');
 }
 
@@ -790,7 +843,7 @@ for (const row of PLAN) {
   for (let i = 1; i <= skills; i++) {
     const slug = skillSlug(topicKey, i - 1);
     const skillDir = path.join(skillsDir, slug);
-    write(path.join(skillDir, 'SKILL.md'), genSkill('city-traffic', typeShort, subject, slug));
+    write(path.join(skillDir, 'SKILL.md'), genSkill('city-traffic', type, typeShort, subject, slug));
     generated++;
     links.skills.push(`- [${slug}](./${subject}/skills/${slug}/SKILL.md)`);
   }

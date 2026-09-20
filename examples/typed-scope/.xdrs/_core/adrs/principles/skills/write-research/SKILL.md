@@ -6,7 +6,8 @@ description: >
   Activate this skill when the user asks to create, add, or write a research document that backs a decision.
 metadata:
   author: flaviostutz
-  version: "1.4"
+  version: "1.4.0"
+  updated: 2026-09-19
 ---
 
 ## Overview
@@ -14,6 +15,20 @@ metadata:
 Guides the creation of a well-structured research document by following `_core-adr-policy-006`, consulting `xdrs-core` for every core element definition, checking related Policies and existing research to avoid duplication, and producing an IMRAD-based study that reads as a standalone technical paper. Treat each section goal in the research template as an acceptance criterion, not as optional wording. Do not assume missing direction, evidence, or intended follow-up; ask the user explicitly before proceeding when those points are not already concrete.
 
 This skill is interactive by design. Ask clarifying questions to the user at each phase where direction, evidence, or scope is unclear. Ask sequentially — one focused set of questions at a time — and wait for the user's answers before advancing to the next phase. Never front-load all questions at once if not all are yet relevant.
+
+## Inputs
+
+### Required
+
+- A research direction or question.
+
+### Optional
+
+- Available evidence and the intended next step.
+
+## Runtime Requirements
+
+- Python 3 for the optional ratio-check script.
 
 ## Instructions
 
@@ -268,6 +283,16 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 5. Write an IMRAD-based research document comparing options such as npm package, git submodule, and copy-paste distribution, with the comparison grounded in methods and results.
 6. Add references to the resulting Policy if a decision is later created.
 
+## Outputs
+
+### Contents
+
+- A standalone IMRAD research document.
+
+### Changes
+
+- Index entry and back-references where relevant.
+
 ## Edge Cases
 
 - If the user is really asking for a final decision, write a Policy instead of research.
@@ -276,11 +301,13 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - If the supported decision does not exist yet, reference the decision topic or planned Policy title in the introduction and conclusion.
 - If the user's direction, evidence base, or intended next step is vague, ask follow-up questions and wait for clarification instead of choosing a path yourself.
 
-## References
+## Halt Conditions
 
-- [_core-adr-policy-006 - Research standards](../../006-research-standards.md)
-- [_core-adr-policy-001 - XDRS standards](../../001-xdrs-standards.md)
-- [write-policy skill](../write-policy/SKILL.md)
+- Redirects to write-policy if a final decision is wanted.
+
+## User Interaction
+
+- Interactive evidence-gathering, section by section.
 
 ## Constraints
 
@@ -289,3 +316,23 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST NOT create documents in external scopes (scopes whose files appear in the workspace root `.filedist.lock`).
 - MUST keep the document as research rather than turning it into a final decision.
+
+## Anti-Patterns
+
+- **Mistake:** Writing conclusions or a final decision inside the research document instead of keeping it exploratory.
+  **Why it happens:** The findings feel conclusive enough to just state the decision directly.
+  **Instead:** Keep the document as evidence and analysis; direct the user to `write-policy` for the actual decision.
+
+- **Mistake:** Front-loading all clarifying questions at once instead of asking sequentially as each phase reveals new gaps.
+  **Why it happens:** Batching questions feels more efficient for the user.
+  **Instead:** This skill is interactive by design — ask one focused set of questions per phase and wait for answers before advancing.
+
+- **Mistake:** Skipping the Phase 9 word-count/ratio check because the sections "look" balanced.
+  **Why it happens:** Running the Python script feels like unnecessary overhead once the draft reads well.
+  **Instead:** Always run the ratio check; imbalance is often invisible until measured (e.g., Results ballooning past Methods).
+
+## References
+
+- [_core-adr-policy-006 - Research standards](../../006-research-standards.md)
+- [_core-adr-policy-001 - XDRS standards](../../001-xdrs-standards.md)
+- [write-policy skill](../write-policy/SKILL.md)

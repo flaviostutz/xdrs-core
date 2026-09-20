@@ -6,12 +6,23 @@ description: >
   Activate this skill when the user asks to create, add, or write an initiative, plan, project plan, roadmap, or execution plan within an XDRS project.
 metadata:
   author: flaviostutz
-  version: "1.0"
+  version: "1.0.0"
+  updated: 2026-09-19
 ---
 
 ## Overview
 
 Guides the creation of a well-structured initiative document by following `_core-adr-policy-007`, consulting `xdrs-core` for every core element definition, researching related Policies and existing initiatives, and producing a focused execution document that connects to the decisions, research, and skills it relates to.
+
+## Inputs
+
+### Required
+
+- A problem statement and proposed solution.
+
+### Optional
+
+- Expected timeline or milestones.
 
 ## Instructions
 
@@ -147,12 +158,44 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 5. Draft the initiative with clear problem, solution, milestones, and expected end date.
 6. Save, register in canonical index, and lint.
 
+## Outputs
+
+### Contents
+
+- A new initiative file.
+
+### Changes
+
+- Index entry and back-references in related documents.
+
 ## Edge Cases
 
 - If an initiative is too large (more than 2 years), split it into multiple smaller initiatives. Each initiative should be independently actionable and produce its own deliverables.
 - If an initiative spawns sub-initiatives during implementation, each sub-initiative is a separate initiative document in the appropriate subject folder. Link them in the References section.
 - If an initiative is fully implemented, delete it and confirm that all lasting outputs (Decisions, Skills, Articles, etc.) are properly linked and indexed.
 - If the user asks for an initiative that is really just a decision, guide them to create a Policy instead.
+
+## Halt Conditions
+
+- Rejects an expected end date beyond 2 years.
+
+## User Interaction
+
+- Clarifying questions about stakeholders and constraints, one batch.
+
+## Anti-Patterns
+
+- **Mistake:** Writing a heavy, generic project-management document instead of focusing on problem/solution/approach.
+  **Why it happens:** Initiative templates have many optional sections, tempting the author to fill all of them.
+  **Instead:** Only fill optional sections when they add real value; keep the document focused and ephemeral.
+
+- **Mistake:** Leaving a completed initiative in the repository indefinitely instead of deleting it after implementation.
+  **Why it happens:** Deleting a finished document feels like discarding useful history.
+  **Instead:** Initiatives are ephemeral; delete them after full implementation once outputs are linked/indexed elsewhere.
+
+- **Mistake:** Setting an Expected end date more than 2 years out instead of splitting the initiative.
+  **Why it happens:** A large effort feels like one continuous initiative.
+  **Instead:** Break initiatives whose scope exceeds 2 years into multiple smaller, independently actionable initiatives.
 
 ## References
 

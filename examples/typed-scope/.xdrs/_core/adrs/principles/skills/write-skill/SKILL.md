@@ -6,12 +6,27 @@ description: >
   Activate this skill when the user asks to create, add, or write a new skill, agent skill, or SKILL.md file.
 metadata:
   author: flaviostutz
-  version: "1.0"
+  version: "1.0.0"
+  updated: 2026-09-19
 ---
 
 ## Overview
 
 Guides the creation of a well-structured skill package by following `_core-adr-policy-003` skill standards, consulting `xdrs-core` for every core element definition, checking existing skills to avoid duplication, and producing a complete SKILL.md ready to activate in VS Code.
+
+## Inputs
+
+### Required
+
+- A description of the task the skill should perform
+
+### Optional
+
+- None
+
+## Runtime Requirements
+
+- Write access to the target scope.
 
 ## Instructions
 
@@ -64,12 +79,27 @@ description: >
   [What the skill does AND exactly when an agent should activate it. Max 1024 chars.]
 metadata:
   author: [author]
-  version: "1.0"
+  version: "1.0.0"
+  updated: [YYYY-MM-DD]
 ---
 
 ## Overview
 
 [1–3 sentence goal statement with the task objective, expected outcome, and relevant prerequisites or tools when they matter.]
+
+## Inputs
+
+### Required
+
+[Bare-minimum bullets needed to invoke the skill, or a single "None" bullet. Each under 10 words.]
+
+### Optional
+
+[Extra helpful-context bullets, or a single "None" bullet. Each under 10 words.]
+
+## Runtime Requirements
+
+[Optional. Tooling/network prerequisites as free-form bullets. Omit the whole section if none apply.]
 
 ## Instructions
 
@@ -78,16 +108,40 @@ metadata:
 
 ## Examples
 
-[At least one concrete input/context → expected agent action pair.]
+[At least one concrete input/context → expected agent action pair. Include 2-3 example prompts a user could type to trigger the skill.]
+
+## Outputs
+
+### Contents
+
+[End-objective files/chat text produced, or a single "None" bullet. Each under 10 words.]
+
+### Changes
+
+[End-objective external system mutations, or a single "None" bullet. Each under 10 words.]
 
 ## Edge Cases
 
 [Situations where the skill must not activate or must behave differently.]
 
+## Halt Conditions
+
+[This skill's specific stop-before-completing triggers, or a single "None" bullet. Each under 10 words.]
+
+## User Interaction
+
+[Optional. Human-in-the-loop exchanges during execution: clarifying questions or approval gates, or a single "None" bullet. Each under 10 words. Omit the whole section if none apply.]
+
+## Anti-Patterns
+
+[At least 3 entries. Each with **Mistake:**/**Why it happens:**/**Instead:** structure, grounded in this specific skill's domain.]
+
 ## References
 
 [Links to related Policies and skills.]
 ```
+
+If the skill needs to be distributed as a standalone package outside the full `xdrs-core` package, it MAY also add a bundling `Makefile` following the optional mechanism in [`_core-adr-policy-021`](../../021-skill-bundling.md). This is not required for skills that are always consumed as part of the full package.
 
 Rules:
 - Use imperative language ("Read …", "Ask …", "Create …").
@@ -111,7 +165,9 @@ Before writing files, verify:
 3. **Length**: Under 6500 words? Trim verbose explanations.
 4. **Duplication**: Does this overlap an existing skill? If yes, revise.
 5. **References**: Are all related XDRs and skills linked, including the cases where the skill operationalizes multiple XDRs?
-6. **Meta-policy compliance**: Run the shared module at `.xdrs/_core/adrs/principles/skills/.assets/meta-policy-compliance.md`. Substitute `[DOCUMENT]` with `skill`.
+6. **Anti-Patterns**: Does the skill include at least 3 genuine, domain-specific `## Anti-Patterns` entries (not generic filler)?
+7. **Required sections**: Does `## Inputs` list Required/Optional bullets, `## Outputs` list Contents/Changes bullets, and `## Halt Conditions` list this skill's specific stop triggers — each bullet under 10 words or a single "None"?
+8. **Meta-policy compliance**: Run the shared module at `.xdrs/_core/adrs/principles/skills/.assets/meta-policy-compliance.md`. Substitute `[DOCUMENT]` with `skill`.
 
 If any check fails, revise before continuing.
 
@@ -137,6 +193,7 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - MUST keep scope `_local` unless the user explicitly states otherwise.
 - MUST NOT create documents in external scopes (scopes whose files appear in the workspace root `.filedist.lock`).
 - MUST include a References section linking to `003-skill-standards`.
+- MUST include `## Inputs`, `## Outputs`, and `## Halt Conditions` with skill-specific content.
 
 **Input**: "Create a skill to help debug CI pipelines"
 - Type: EDR (engineering workflow)
@@ -150,14 +207,50 @@ Follow the lint verification steps in `.xdrs/_core/adrs/principles/skills/.asset
 - Subject: `application`
 - Output: `.xdrs/_local/adrs/application/skills/review-api-design/SKILL.md`
 
+**Input**: "Add a skill for our onboarding checklist"
+- Asks a clarifying question if scope or type is ambiguous, then drafts the skill package.
+
+## Outputs
+
+### Contents
+
+- A complete SKILL.md file
+
+### Changes
+
+- A symlink under `.agents/skills/`
+
 ## Edge Cases
 
 - If the user's goal is already covered by an existing skill, inform the user and offer to extend it instead of creating a new one.
 - If scope is ambiguous, default to `_local` and note the assumption.
 - If the goal spans multiple types (e.g., both EDR and ADR), favor the type that best matches the primary activity.
 
+## Halt Conditions
+
+- No writable scope can be found or inferred
+
+## User Interaction
+
+- A clarifying question when scope or type is ambiguous
+
+## Anti-Patterns
+
+- **Mistake:** Omitting the `metadata.author`/`metadata.version`/`metadata.updated` fields, or using a partial version like `1.0` instead of full semantic versioning.
+  **Why it happens:** These feel like optional bookkeeping details rather than required fields.
+  **Instead:** `author`, `version` (full `MAJOR.MINOR.PATCH`), and `updated` (ISO date) are all required per `_core-adr-policy-003`.
+
+- **Mistake:** Writing a boilerplate `## Anti-Patterns` section that restates the Edge Cases content instead of describing real authoring mistakes.
+  **Why it happens:** Anti-Patterns and Edge Cases both describe "things that can go wrong", which invites duplication.
+  **Instead:** Edge Cases describe when the skill should behave differently; Anti-Patterns describe mistakes an agent following the skill is likely to make and how to avoid them.
+
+- **Mistake:** Creating a new skill that duplicates an existing one instead of extending it, because the existing skill wasn't searched for first.
+  **Why it happens:** Writing fresh instructions feels faster than reading and understanding an existing skill.
+  **Instead:** Always list `.xdrs/[scope]/[type]/[subject]/skills/` first (Phase 3) and extend or reference an existing skill when one already covers the goal.
+
 ## References
 
 - [_core-adr-policy-003 - Skill standards](../../003-skill-standards.md)
 - [_core-adr-policy-001 - XDRS standards](../../001-xdrs-standards.md)
+- [_core-adr-policy-021 - Skill bundling](../../021-skill-bundling.md)
 - [write-policy skill](../write-policy/SKILL.md)
