@@ -174,7 +174,7 @@ Rules:
 - `## Anti-Patterns` is REQUIRED with a minimum of 3 entries, each naming a Mistake, Why it happens, and the correct approach Instead, grounded in real observed issues rather than theoretical ones. Keep it distinct from `## Edge Cases`: Edge Cases are activation/boundary conditions, Anti-Patterns are execution mistakes.
 - Key recommendations MAY be tagged `[PROVEN]`, `[RECOMMENDED]`, or `[EXPERIMENTAL]` when a skill offers several viable approaches at different confidence levels.
 - For diagram format preferences and non-Markdown asset rules, see [`_core-adr-policy-020`](020-media-and-asset-standards.md).
-- `SKILL.md` MUST stay under 6500 words. Move lengthy reference material to `references/`; each `references/*.md` file MUST stay under 4000 words, splitting further when a single file grows unwieldy.
+- `SKILL.md` MUST stay under 7000 words. Move lengthy reference material to `references/`; each `references/*.md` file MUST stay under 4000 words, splitting further when a single file grows unwieldy.
 - Use relative paths for all links; MUST NOT use absolute paths starting with `/`.
 - File names MUST be lowercase.
 - MUST NOT use emojis in skill content.

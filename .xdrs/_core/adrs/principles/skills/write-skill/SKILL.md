@@ -172,7 +172,7 @@ Rules:
 - For diagrams and non-Markdown assets, follow `_core-adr-policy-020`: prefer plain Markdown tables/lists first, then ASCII art for very simple cases, then Mermaid.js (sequence, state, activity, entity diagrams) for complex ones, then draw.io when Mermaid is insufficient — save as Editable Vector (File → Save As → Editable Vector) and store as `.svg` in the sibling `.assets/` folder.
 - If `SKILL.md` genuinely needs local images or supporting files, store them in `.xdrs/[scope]/[type]/[subject]/skills/[skill-name]/.assets/` and link them using a same-folder relative path (e.g., `.assets/image.png`).
 - Use relative paths for all links; never use absolute paths starting with `/`.
-- No emojis. Lowercase filenames. Target under 6500 words.
+- No emojis. Lowercase filenames. Target under 7000 words.
 
 ### Phase 5: Review the Draft
 
@@ -180,7 +180,7 @@ Before writing files, verify:
 
 1. **Activation criteria**: Is it unambiguous when this skill loads vs. when it should not?
 2. **Completeness**: Does every phase have actionable steps?
-3. **Length**: Under 6500 words? Trim verbose explanations.
+3. **Length**: Under 7000 words? Trim verbose explanations.
 4. **Duplication**: Does this overlap an existing skill? If yes, revise.
 5. **References**: Are all related XDRs and skills linked, including the cases where the skill operationalizes multiple XDRs?
 6. **Anti-Patterns**: Does the skill include at least 3 genuine, domain-specific `## Anti-Patterns` entries (not generic filler)?
