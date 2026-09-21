@@ -5,8 +5,7 @@ DEPS := ../plan-research
 BUILD := dist/build
 ZIP := research-topic.zip
 
-build:
-	rm -rf dist
+build: clean
 	mkdir -p $(BUILD)
 	cp SKILL.md $(BUILD)/
 	cp -R .assets $(BUILD)/

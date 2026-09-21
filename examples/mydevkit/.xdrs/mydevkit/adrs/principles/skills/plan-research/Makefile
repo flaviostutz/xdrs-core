@@ -5,8 +5,7 @@ DEPS := ../imagine-scenarios
 BUILD := dist/build
 ZIP := plan-research.zip
 
-build:
-	rm -rf dist
+build: clean
 	mkdir -p $(BUILD)
 	cp SKILL.md $(BUILD)/
 	@for d in $(DEPS); do \
