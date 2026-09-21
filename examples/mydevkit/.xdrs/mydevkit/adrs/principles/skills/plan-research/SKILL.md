@@ -75,4 +75,3 @@ research questions those scenarios raise.
 ## References
 
 - [imagine-scenarios skill](../imagine-scenarios/SKILL.md)
-- [research-topic skill](../research-topic/SKILL.md)

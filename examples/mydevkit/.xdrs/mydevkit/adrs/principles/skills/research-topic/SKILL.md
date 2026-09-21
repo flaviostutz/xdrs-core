@@ -82,6 +82,5 @@ in a small table, and applies a final checklist before returning the result.
 ## References
 
 - [plan-research skill](../plan-research/SKILL.md)
-- [imagine-scenarios skill](../imagine-scenarios/SKILL.md)
 - [findings table template](.assets/table.json)
 - [more-instructions reference](references/more-instructions.md)
