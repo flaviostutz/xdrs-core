@@ -90,12 +90,17 @@ Every scope declares a `scope-type` in its `index.md` frontmatter. The six built
 ```yaml
 # .xdrs/owasp-top10/adrs/principles/001-core.md  (compilation meta-policy)
 ## Sources
-- [web] https://owasp.org/Top10/
-- [git] https://github.com/OWASP/Top10.git
+- [web] owasp-top10-web: https://owasp.org/Top10/
+- [git] owasp-top10-git: https://github.com/OWASP/Top10.git
 
 ## Selectors
 Include A01–A10 risk entries only.
+
+## Sync Settings
+- Source re-sync period days: 30
 ```
+
+By default, fetched and selected source content persists under `.assets/sources/[name]/` so later compilations can re-sync incrementally instead of always refetching; set `Source storage: temporary` in `## Sync Settings` to discard the bulk content after each run instead (only the per-source tracking file persists in that mode). Either way, `.assets/sources/` content is never authoritative on its own — only the compiled policies are.
 
 **`standard` scopes** are the default. Use them for team, product, or business-area scopes that do not fit the other types.
 
