@@ -4,6 +4,7 @@ name: ecomm-ref-payments
 description: PCI-DSS and payment industry compliance reference standards for the ecomm platform. Adopt or map against; not live operational content.
 apply-to: Teams building or operating payment flows in the ecomm platform
 valid-from: 2026-07-06
+extends-only: true
 ---
 
 # ecomm-ref-payments Scope Overview

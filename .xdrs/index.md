@@ -8,6 +8,8 @@ XDRS scopes listed last override the ones listed first
 
 Default ordering by scope type: `core → reference → platform → standard → _local`
 
+Scopes tagged `disabled` MUST be ignored; `extends-only` scopes apply only via extends (see _core-adr-policy-022)
+
 ### _core
 
 Defines how XDRS framework work

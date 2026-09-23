@@ -6,7 +6,7 @@ clean:
 install:
 	pnpm install
 
-lint: install
+lint: clean install
 	pnpm exec xdrs-core install
 	pnpm exec xdrs-core lint .
 

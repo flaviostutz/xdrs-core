@@ -124,6 +124,24 @@ Custom scope types can be introduced by adding a `{type}-scope-type` policy to a
 
 See [examples/typed-scope](examples/typed-scope) for a full working example covering all five scope types and a custom `business-area` type.
 
+### Scope activation
+
+Every installed scope MUST be linked exactly once in `.xdrs/index.md`, and its non-meta policies apply globally by default. Consumers narrow that with an activation tag placed right after the link:
+
+```markdown
+Scopes tagged `disabled` MUST be ignored; `extends-only` scopes apply only via extends (see _core-adr-policy-022)
+
+[View scope ecomm-ref-payments](ecomm-ref-payments/index.md) `extends-only`
+[View scope legacy-standards](legacy-standards/index.md) `disabled`
+```
+
+- `extends-only`: the scope's policies apply only through scopes that list it in `extends:`.
+- `disabled`: the scope is ignored; scopes that follow, extend or take their type from it become READ-ONLY.
+- Scope authors declare `extends-only: true` in the scope `index.md` frontmatter when the scope is meant only to be extended; lint requires the root index tag to match.
+- The root index belongs to the consumer: packages ship it unmanaged so tags survive reinstalls.
+
+See [_core-adr-policy-022](.xdrs/_core/adrs/principles/022-scope-activation.md), [_core-adr-policy-010](.xdrs/_core/adrs/principles/010-scope-governance.md) and [_core-adr-policy-011](.xdrs/_core/adrs/principles/011-core-scope-type.md).
+
 ### Subject grouping
 
 Within each scope and type, decisions are grouped by subject (e.g. `application`, `data`, `platform` for ADRs; `product`, `finance` for BDRs). This keeps related decisions together, improves human navigation, and allows AI agents to narrow their search to the relevant subject folder before reading individual records.
@@ -242,6 +260,7 @@ The `lint` command reads `./.xdrs/**` from the given workspace path and checks c
 - initiative `Expected end date:` field presence and ISO date format
 - canonical index presence and link consistency
 - root index coverage for all discovered canonical indexes
+- root index completeness: every scope folder linked exactly once, activation tags (`extends-only`, `disabled`) valid, coherent with the scope's `extends-only` field, and explained by the legend line when used
 - Policy metadata section placement and `valid-from` / `apply-to` field format
 - local markdown links between Policy documents, skills, articles, researches, and initiatives (excluding fenced code blocks)
 - local image and `.assets/` links resolving inside the sibling `.assets/` folder for each document

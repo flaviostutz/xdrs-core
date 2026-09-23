@@ -8,6 +8,8 @@ XDRS scopes listed last override the ones listed first
 
 Default ordering by scope type: `core → reference → platform → standard → _local`
 
+Scopes tagged `disabled` MUST be ignored; `extends-only` scopes apply only via extends (see _core-adr-policy-022)
+
 ### _core
 
 Base XDRS framework standards. Defines document types, subjects, scope structure, and scope-type policies for all built-in types.
@@ -26,9 +28,9 @@ Meta-governance for the ecomm domain. Defines authoring standards and the custom
 
 ### ecomm-ref-payments
 
-PCI-DSS and payment compliance reference standards for the ecomm platform. Adopt or map against; not live operational content.
+PCI-DSS and payment compliance reference standards for the ecomm platform. Adopt or map against; not live operational content. Tagged `extends-only`: applied only through scopes that extend it (e.g. checkout).
 
-[View scope ecomm-ref-payments](ecomm-ref-payments/index.md)
+[View scope ecomm-ref-payments](ecomm-ref-payments/index.md) `extends-only`
 
 ---
 

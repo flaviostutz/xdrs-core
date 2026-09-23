@@ -10,6 +10,13 @@ sets:
   - selector:
       files:
         - .xdrs/index.md
+    output:
+      path: .
+      gitignore: false
+      managed: false
+
+  - selector:
+      files:
         - .xdrs/mydevkit/**
     output:
       path: .

@@ -8,7 +8,7 @@ This example demonstrates all five built-in XDRS scope types — `core`, `refere
 |---|---|---|
 | `_core` | `core` | Built-in XDRS framework standards (extracted from xdrs-core) |
 | `ecomm-core` | `core` | Meta-governance for ecomm: authoring standards + custom scope type definitions |
-| `ecomm-ref-payments` | `reference` | PCI-DSS and payment regulation reference to adopt or adapt |
+| `ecomm-ref-payments` | `reference` | PCI-DSS and payment regulation reference to adopt or adapt; declares `extends-only: true` and is tagged `extends-only` in the root index, so it applies only through `checkout` (`extends: ecomm-ref-payments`) |
 | `ecomm-plat-cloud` | `platform` | Live cloud infrastructure available for team use |
 | `checkout` | `business-area` | Checkout team decisions; `business-area` is a custom type defined in `ecomm-core` |
 | `_local` | `_local` | Workspace-local overrides; never distributed |

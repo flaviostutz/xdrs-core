@@ -15,6 +15,7 @@ test: build
 	make test-lib
 	make -C examples/basic-usage test
 	make -C examples/mydevkit test
+	make -C examples/typed-scope test
 
 test-lib:
 	pnpm exec jest --runInBand --testRegex=".*/lib/.*\.test\.js$$" --testPathIgnorePatterns="node_modules" --verbose

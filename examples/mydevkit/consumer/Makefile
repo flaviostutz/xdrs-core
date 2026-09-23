@@ -16,6 +16,12 @@ test: clean install
 	test -e output/.agents/skills/release-package/SKILL.md
 	grep -q "mydevkit/index.md" output/.xdrs/index.md
 	pnpm exec mydevkit check --output ./output
+	# consumer activation tags in the root index must survive a reinstall (see _core-adr-policy-022)
+	sed -i.bak 's|^\[View scope mydevkit\](mydevkit/index.md)$$|& `disabled`|' output/.xdrs/index.md && rm output/.xdrs/index.md.bak
+	grep -q 'mydevkit/index.md) `disabled`' output/.xdrs/index.md
+	pnpm exec mydevkit install --output ./output
+	grep -q 'mydevkit/index.md) `disabled`' output/.xdrs/index.md
+	pnpm exec mydevkit check --output ./output
 	@echo "All tests passed!"
 
 lint: clean install

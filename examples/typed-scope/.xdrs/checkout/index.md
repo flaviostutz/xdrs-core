@@ -5,6 +5,7 @@ description: Architectural decisions for the ecomm checkout business area. Cover
 apply-to: Checkout team and services within the ecomm checkout domain
 valid-from: 2026-07-06
 follows: ecomm-core
+extends: ecomm-ref-payments
 ---
 
 # checkout Scope Overview
