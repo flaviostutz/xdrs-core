@@ -111,29 +111,29 @@ metadata:
 
 #### Required
 
-[Bare-minimum bullets needed to invoke the skill, or a single "None" bullet. Each <10 words.]
+[Bare-minimum bullets needed to invoke the skill, or a single "None" bullet. Each <20 words.]
 
 #### Optional
 
-[Extra helpful-context bullets, or a single "None" bullet. Each <10 words.]
+[Extra helpful-context bullets, or a single "None" bullet. Each <20 words.]
 
 ### Outputs
 
 #### Contents
 
-[End-objective files/chat text produced, or a single "None" bullet. Each <10 words. Append "(<N words)" or "(uncapped: <reason>)" to natural-language items not capped in a template or step, e.g. "Release notes (<300 words)". Code and structured data get no marker.]
+[End-objective files/chat text produced, or a single "None" bullet. Each <20 words. Append "(<N words)" or "(uncapped: <reason>)" to natural-language items not capped in a template or step, e.g. "Release notes (<300 words)". Code and structured data get no marker.]
 
 #### Changes
 
-[End-objective external system mutations, or a single "None" bullet. Each <10 words.]
+[End-objective external system mutations, or a single "None" bullet. Each <20 words.]
 
 ### Halt Conditions
 
-[This skill's specific stop-before-completing triggers, or a single "None" bullet. Each <10 words.]
+[This skill's specific stop-before-completing triggers, or a single "None" bullet. Each <20 words.]
 
 ### User Interaction
 
-[Optional. Human-in-the-loop exchanges during execution: clarifying questions or approval gates, or a single "None" bullet. Each <10 words. Omit the whole section if none apply.]
+[Optional. Human-in-the-loop exchanges during execution: clarifying questions or approval gates, or a single "None" bullet. Each <20 words. Omit the whole section if none apply.]
 
 ### Runtime Requirements
 
@@ -189,7 +189,7 @@ Before writing files, verify:
 4. **Duplication**: Does this overlap an existing skill? If yes, revise.
 5. **References**: Are all related XDRs and skills linked, including the cases where the skill operationalizes multiple XDRs?
 6. **Anti-Patterns**: Does the skill include at least 3 genuine, domain-specific `## Anti-Patterns` entries (not generic filler)?
-7. **Required sections**: Does `## Overview` contain nested `### Inputs` (Required/Optional bullets), `### Outputs` (Contents/Changes bullets), and `### Halt Conditions` listing this skill's specific stop triggers — each bullet under 10 words or a single "None"?
+7. **Required sections**: Does `## Overview` contain nested `### Inputs` (Required/Optional bullets), `### Outputs` (Contents/Changes bullets), and `### Halt Conditions` listing this skill's specific stop triggers — each bullet under 20 words or a single "None"?
 8. **Meta-policy compliance**: Run the shared module at `.xdrs/_core/adrs/principles/skills/.assets/meta-policy-compliance.md`. Substitute `[DOCUMENT]` with `skill`.
 9. **Output caps**: Does every natural-language content the skill generates (files, messages, questions, summaries, external posts) have exactly one "<N words" cap or "(uncapped: <reason>)" marker, with code and structured data unmarked?
 
