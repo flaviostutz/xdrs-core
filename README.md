@@ -12,7 +12,7 @@ After preparation those elements can be downloaded anywhere and used to compose 
 
 Policies capture Architectural (ADR), Business (BDR), and Engineering (EDR) decisions. As organizations grow, hundreds of decisions accumulate across teams, levels, and domains. Without a consistent structure, AI agents cannot efficiently locate the right decisions for a given context, and humans cannot maintain or evolve them sustainably.
 
-This project defines a standard for organizing XDRS that satisfies the following requirements.
+This project defines a standard for organizing XDRS that addresses this problem (see [Features](#features)).
 
 ## Overview
 
@@ -35,6 +35,20 @@ The XDRS framework separates these concerns into different document types, each 
 - **Articles** — Synthetic explanatory texts that combine information from multiple Policies, Research documents, and Skills around a specific topic or audience. They never replace Policies as source of truth.
 - **Initiatives** — Ephemeral execution documents that describe a problem, proposed solution, and the approach and activities needed to solve it. Initiatives have a clear start and end and must be deleted after full implementation. Lasting outputs are captured as Policies, Skills, Articles, or other artifacts.
 
+```mermaid
+flowchart LR
+    DR["Raw Decision Record<br/>ADR / BDR / EDR"]
+    DR -- why --> R[Research]
+    DR -- what --> P["Policy<br/>source of truth"]
+    DR -- how --> S[Skill]
+    DR -- when --> I["Initiative<br/>ephemeral"]
+    DR -- view --> A[Article]
+    R -. backs .-> P
+    S -. complies with .-> P
+    I -. implements .-> P
+    A -. explains .-> P
+```
+
 The compilation process of a raw Decision Record is to distribute it into those different documents and create links between them. You can also use the framework standalone, generating these elements individually directly during the writing process without starting from a raw Decision Record.
 
 ## Getting started
@@ -43,9 +57,11 @@ The compilation process of a raw Decision Record is to distribute it into those 
 
 2. On the workspace root folder, run `npx xdrs-core`
 
-   The basic xdrs tooling should be installed in your workspace along with:
-     - AGENTS.md pointing to the Policies structure
-     - XDRS related skills and prompts for Copilot
+   This installs:
+     - `AGENTS.md` instructing agents to consult Policies before every request
+     - `.xdrs/_core/` with the framework Policies, skills and articles
+     - `.xdrs/index.md` root index, installed unmanaged so you own it and list your scopes there
+     - `.agents/skills/review` and `.agents/skills/write-xdrs-doc` symlinks so agents discover the main skills
 
 3. Run a prompt such as:
 
@@ -53,10 +69,28 @@ The compilation process of a raw Decision Record is to distribute it into those 
 
    > Compile ADR 043-python-package-manager into the XDRS structure
 
+   > Review my changes against our Policies
+
+4. Validate the result with `npx xdrs-core lint .`
+
+### Bundled skills
+
+| Skill | Purpose |
+|---|---|
+| `write-xdrs-doc` | Router: infers the document type from your request and delegates to the right skill below |
+| `write-policy`, `write-skill`, `write-article`, `write-research`, `write-initiative` | Author each XDRS element type |
+| `write-presentation` | Create Marp slide decks backing XDRS documents |
+| `review` | Review code or documents against applicable Policies and report violations |
+| `compile-scope` | Fetch and compile a `compiled`-type scope from external sources |
+
+See [.xdrs/_core/adrs/index.md](.xdrs/_core/adrs/index.md) for the full list of `_core` Policies, skills and articles.
+
 ## Examples
 
 - [examples/basic-usage](examples/basic-usage) shows the minimal consumer flow for installing the packaged `xdrs-core` tarball, extracting files, checking drift, and linting the resulting tree.
 - [examples/mydevkit](examples/mydevkit) shows a reusable extension package that uses `.filedistrc` as its package config source, composes `xdrs-core`, and ships its own named scope.
+- [examples/typed-scope](examples/typed-scope) shows `core`, `reference`, `platform` and `_local` scopes, a custom `business-area` scope type, and `follows`.
+- [examples/load-test](examples/load-test) generates a large synthetic XDRS tree to exercise the linter at scale.
 - For a fuller real-world package built on the same distribution model, see [flaviostutz/agentme](https://github.com/flaviostutz/agentme).
 
 
@@ -66,7 +100,7 @@ The compilation process of a raw Decision Record is to distribute it into those 
 
 Different teams at different organizational levels make decisions that apply to different audiences. XDRS are organized by scope (e.g. `_core`, `business-x`, `business-y-mobileapp`) so that each team owns its own decision space. Scopes can extend or override policies from broader scopes, with explicit precedence rules: scopes listed later in an index override those listed earlier.
 
-### Scope types and `follows`
+### Scope types
 
 Every scope declares a `scope-type` in its `index.md` frontmatter. The six built-in types are `core`, `reference`, `platform`, `compiled`, `standard`, and `_local`, each with different governance rules. Custom types (e.g. `business-area`) can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope.
 
@@ -79,11 +113,7 @@ Every scope declares a `scope-type` in its `index.md` frontmatter. The six built
 | `standard` | Business areas, products, teams, or any general-purpose scope. Default type when nothing else fits. | Any valid scope name (e.g. `checkout`, `mobile-app`) | 4th |
 | `_local` | Workspace-local overrides. Reserved exclusively for the `_local` scope. Never distributed. | `_local` (reserved) | last |
 
-**`core` scopes** carry meta-policies — authoring standards, scope-type definitions, and governance conventions. `_core` is the built-in foundation; teams add their own `core` scope (e.g. `myorg-core`) to extend it with organisation-level standards. A `core`-type scope MUST NOT contain consumable policies intended for other teams to follow.
-
-**`reference` scopes** hold read-only material to adopt or map against: industry frameworks, regulatory requirements, vendor best-practice patterns, business procedure standards. Content describes how something should be done — not what is currently running.
-
-**`platform` scopes** document what already exists and is ready to use. A scope is of type `platform` when its content describes a live operational capability — what is available, how to access it, and what constraints apply.
+`_core` is the built-in `core` scope; teams can add their own (e.g. `myorg-core`) with organisation-level authoring standards.
 
 **`compiled` scopes** hold policies compiled directly from external authoritative sources. All content must trace back to the source; no invented content is allowed. A `compiled` scope requires a local meta-policy with source URLs and compilation configuration, and uses the `compile-scope` skill to fetch, compile, and keep content up to date. The `compiled` type may be combined with another type (e.g. `scope-type: compiled, reference`) when the combined type's governance also applies.
 
@@ -102,9 +132,7 @@ Include A01–A10 risk entries only.
 
 By default, fetched and selected source content persists under `.assets/sources/[name]/` so later compilations can re-sync incrementally instead of always refetching; set `Source storage: temporary` in `## Sync Settings` to discard the bulk content after each run instead (only the per-source tracking file persists in that mode). Either way, `.assets/sources/` content is never authoritative on its own — only the compiled policies are.
 
-**`standard` scopes** are the default. Use them for team, product, or business-area scopes that do not fit the other types.
-
-**`_local` scopes** hold workspace-specific content such as local tooling decisions, transition overrides, or temporary decisions. This content is never packaged or distributed.
+### Scope relationships: `follows` and `extends`
 
 The `follows` field in a scope's `index.md` links it to one or more `core` scopes whose standards it must respect (beyond `_core`). This models organisational hierarchies: a team scope can follow a business-area `core` scope, which in turn follows `_core`.
 
@@ -118,11 +146,37 @@ description: Checkout team decisions
 ---
 ```
 
-The recommended ordering in `.xdrs/index.md` is: `core → reference → platform → compiled/standard → _local`. Scopes listed later override earlier ones on the same topic.
+The `extends` field makes a scope inherit all **policy documents** (not skills, articles, research or initiatives) of other scopes, as if authored locally. Use it to adopt a `reference` scope and override only what differs. When scopes are related by `extends`, the chain decides conflicts instead of root index ordering. A scope cannot list the same scope in both `follows` and `extends`, cannot extend `_core`/`_local` or itself, and cannot form cycles.
 
-Custom scope types can be introduced by adding a `{type}-scope-type` policy to any `core`-type scope. The `checkout` scope in [examples/typed-scope](examples/typed-scope) uses a custom `business-area` type defined in `ecomm-core`.
+```yaml
+# .xdrs/payments/index.md
+---
+scope-type: standard
+name: payments
+extends: ecomm-ref-payments   # inherit its policies, override locally when needed
+---
+```
 
-See [examples/typed-scope](examples/typed-scope) for a full working example covering all five scope types and a custom `business-area` type.
+A scope can also hold its own authoring rules in a local meta-policy (`[type]/principles/NNN-core.md`) without creating a separate `-core` scope. See [_core-adr-policy-010](.xdrs/_core/adrs/principles/010-scope-governance.md) for the full precedence chain.
+
+```mermaid
+flowchart LR
+    ecore["ecomm-core<br/>core"]
+    ref["ecomm-ref-payments<br/>reference, extends-only"]
+    checkout["checkout<br/>standard"]
+    payments["payments<br/>standard"]
+    local["_local<br/>workspace only"]
+
+    checkout -- "follows: respects authoring rules" --> ecore
+    payments -- follows --> ecore
+    payments -- "extends: inherits policies" --> ref
+    local -- overrides --> checkout
+    local -- overrides --> payments
+```
+
+`_core` applies implicitly to every scope, so it is never listed in `follows` or `extends`.
+
+The `checkout` scope in [examples/typed-scope](examples/typed-scope) uses a custom `business-area` type defined in `ecomm-core` and declares `follows: ecomm-core`.
 
 ### Scope activation
 
@@ -158,12 +212,26 @@ XDRS packages are versioned and distributed via the npm registry. This allows te
 
 The folder layout, file naming, and document format are designed so that AI agents can efficiently work with hundreds of decisions:
 
-- Each Policy is a small, focused Markdown file (target under 1300 words), covering a set of rules or statements.
+- Each Policy is a small, focused Markdown file (target under 1300 words, hard limit 2600), covering a set of rules or statements.
+- Policies that need external citation can expose individually numbered rules (e.g. `_core-adr-policy-010.28-extends-disjoint`), see [_core-adr-policy-008](.xdrs/_core/adrs/principles/008-policy-structured-standards.md).
 - The canonical index per scope and type lists all XDRS elements with short descriptions, enabling agents to identify relevant records without reading every file.
 - The root index at `.xdrs/index.md` provides a single entry point for discovery.
 - Policy metadata gives agents a first-pass filter: check `valid-from` for the convergence date, then check `apply-to`, and finally the decision text itself to confirm the decision should be used in the current context. All documents present in the collection are considered active.
 - Decisions cross-reference each other by Policy ID rather than duplicating content, keeping individual files concise.
 - Subject folders reduce the search space when a query maps to a known domain.
+
+How an agent finds the Policies that apply to a request:
+
+```mermaid
+flowchart LR
+    Q([Request]) --> AG[AGENTS.md]
+    AG --> RI[".xdrs/index.md<br/>scope order and activation"]
+    RI --> TI["scope type indexes<br/>one line per document"]
+    TI --> F{"apply-to and<br/>valid-from match?"}
+    F -- yes --> P["Read Policy<br/>and linked Skills"]
+    F -- no --> X[Skip]
+    P --> W([Act and verify])
+```
 
 ### Multi-agent framework support
 
@@ -197,15 +265,13 @@ This is especially important for BDRs: because business rules govern decisions t
           .assets/
 ```
 
-Document types:
+Types:
 
 - **ADR** - Architectural Decision Record: architectural and technical decisions
 - **BDR** - Business Decision Record: business process and strategy decisions
 - **EDR** - Engineering Decision Record: engineering workflow and tooling decisions
-- **Research** - Exploratory support material used while evaluating or updating a decision. Research captures constraints, findings, options, and proposal tradeoffs, but it is not the source of truth.
-- **Skills** - Step-by-step procedural guides that can be followed by humans, AI agents, or both. Must comply with Policies, but add the execution detail they lack. Skills are not mandatory by themselves unless referenced by a Policy or another policy artifact. A skill may start as a fully manual human procedure and evolve incrementally toward partial or full AI automation without being restructured. Co-located with the Policies they implement inside `skills/` sub-directories.
-- **Articles** - Synthetic views that explain concepts or combine information from multiple Policies, Research documents, and Skills into a coherent text for a specific topic or audience. Articles are not the source of truth; Policies take precedence when there is a conflict. Useful as navigational indexes that link related artifacts around a specific aspect.
-- **Initiatives** - Ephemeral execution documents that describe a problem, proposed solution, and the approach and activities needed to solve it. Initiatives have a clear start and end and must be deleted after full implementation. Lasting outputs are captured as Policies, Skills, Articles, or other artifacts. Co-located with Policies inside `initiatives/` sub-directories.
+
+Each type has a fixed set of allowed subjects (e.g. `principles`, `application`, `data` for ADRs), see [_core-adr-policy-016](.xdrs/_core/adrs/principles/016-policy-subjects.md). Element types are described in [XDRS elements](#xdrs-elements).
 
 See [.xdrs/index.md](.xdrs/index.md) for the full list of active policies.
 
@@ -232,38 +298,37 @@ A project that wants to follow a scope's decisions adds the corresponding npm pa
 
 Multiple scope packages can be combined in the same workspace by listing them as separate dependencies. Scope precedence (defined in `.xdrs/index.md`) determines which decisions take effect when scopes overlap.
 
-```
-[Scope repo] --> npm publish --> [npm registry] --> npm install --> [Project workspace]
-  .xdrs/[scope]/                  versioned pkg                    .xdrs/[scope]/
-    adrs/ bdrs/ edrs/                                                adrs/ bdrs/ edrs/
-    [subject]/                                                        [subject]/
-      *.md                                                              *.md
-      researches/                                                       researches/
-      skills/                                                           skills/
-      articles/                                                         articles/
+```mermaid
+flowchart LR
+    subgraph owners[Scope owner repositories]
+        A[".xdrs/ecomm-core/"]
+        B[".xdrs/checkout/"]
+    end
+    A -- pack and publish --> NPM[("npm registry<br/>versioned packages")]
+    B -- pack and publish --> NPM
+    NPM -- "install (filedist)" --> WS
+    subgraph WS[Project workspace]
+        M[".xdrs/_core, ecomm-core, checkout<br/>managed, pinned in .filedist.lock"]
+        X[".xdrs/index.md<br/>owned by the project"]
+        L[".xdrs/_local<br/>never published"]
+    end
+    WS -- "xdrs-core lint / check" --> CI([CI])
 ```
 
 ## CLI
 
 The published package exposes the `xdrs-core` CLI.
 
-- Bootstrap or extract managed XDRS files with the existing `filedist`-backed commands such as `npx -y xdrs-core extract` and `npx -y xdrs-core check`.
-- Lint a Policy tree with `npx -y xdrs-core lint .`. By default, scopes whose files are listed in the workspace root `.filedist.lock` file are treated as external and skipped; use `--all` to include them.
+- `npx -y xdrs-core` (or `install`) installs or updates the managed XDRS files; `npx -y xdrs-core check` fails if managed files drifted from the package. Both are delegated to [filedist](https://github.com/flaviostutz/filedist) (run `--help` for all options).
+- `npx -y xdrs-core lint [path]` validates the XDRS tree. Scopes listed in the workspace `.filedist.lock` are treated as external and skipped; use `--all` to include them.
 
-The `lint` command reads `./.xdrs/**` from the given workspace path and checks common consistency rules, including:
+The `lint` command reads `.xdrs/**` (or `[path]` directly when it contains an `index.md`) and reports errors citing the violated Policy rule. It checks:
 
-- allowed scope, type, and subject folder structure
-- Policy numbering uniqueness per `scope/type`
-- article numbering uniqueness per `scope/type/subject/articles`
-- research numbering uniqueness per `scope/type/subject/researches`
-- initiative numbering uniqueness per `scope/type/subject/initiatives`
-- initiative `Expected end date:` field presence and ISO date format
-- canonical index presence and link consistency
-- root index coverage for all discovered canonical indexes
-- root index completeness: every scope folder linked exactly once, activation tags (`extends-only`, `disabled`) valid, coherent with the scope's `extends-only` field, and explained by the legend line when used
-- Policy metadata section placement and `valid-from` / `apply-to` field format
-- local markdown links between Policy documents, skills, articles, researches, and initiatives (excluding fenced code blocks)
-- local image and `.assets/` links resolving inside the sibling `.assets/` folder for each document
+- **Structure**: allowed scope, type and subject folders; canonical indexes present and linking every document; root index linking every scope exactly once with valid activation tags
+- **Numbering**: unique numbers per element type, subject-based numbering ranges ([_core-adr-policy-017](.xdrs/_core/adrs/principles/017-policy-numbering-ranges.md))
+- **Document format**: Policy metadata (`valid-from`, `apply-to`), structured rule syntax, initiative `Expected end date`, skill `README.md`, word limits per element type
+- **Scope governance**: scope-type definitions and naming conventions, `follows`/`extends` targets, cycles and conflicts, local meta-policies, `compiled` scope meta-policy
+- **Links**: local markdown links and `.assets/` references resolve (fenced code blocks are ignored)
 
 Examples:
 
@@ -279,30 +344,61 @@ The package also exposes a reusable behavior-test library for Jest or any other 
 
 Main exports:
 
-- `testPrompt(config, inputPrompt, judgePrompt)` runs the task prompt, evaluates the result in a fresh judge session, and returns an empty string on success or a markdown bullet list on failure.
-- `runPromptTest(config, inputPrompt, judgePrompt)` returns the structured result object when you need access to captured output and the agent-reported changed file list.
-- `copilotCmd(workspaceRoot)` returns a ready-to-use `promptCmd` template for the Copilot CLI in headless mode (`--autopilot`, full tool/url permissions, and `--no-ask-user`). The library uses that same command template for both the task and judge phases. If `workspaceRoot` is omitted it defaults to the current git repository root.
-- `config.workspaceRoot`, when set, is the authoritative workspace under test. If omitted, the library uses the current git repository root.
+- `async testPrompt(config, inputPrompt, judgePrompt, id?, verbose?)` runs the task prompt, evaluates the result with a judge prompt, and resolves to an empty string on success or a markdown bullet list of findings on failure. Passing results are cached (see below).
+- `async runPromptTest(config, inputPrompt, judgePrompt, verbose?)` resolves to the structured result (`passed`, `findings`, `taskOutput`, `agentReportedChanges`, `contextFiles`, `workspace`), without caching.
+- `copilotCmd(workspaceRoot?)` returns a partial config for the Copilot CLI in headless mode (`promptCmd`, `promptCmdContinueFlag`, `workspaceFilter`, `workspaceExclude`). Spread it into your config. `workspaceRoot` defaults to the current git repository root.
+
+Main `config` fields:
+
+| Field | Description |
+|---|---|
+| `promptCmd` | Command as string array or JSON array string; must include a `{PROMPT}` placeholder |
+| `promptCmdContinueFlag` | Flag inserted before the prompt to continue the previous session (e.g. `--continue`) |
+| `workspaceRoot` | Workspace under test (default: current git repository root) |
+| `workspaceMode` | `copy` (default, runs in a temp copy honoring `.gitignore`, without git metadata) or `in-place` |
+| `workspaceFilter` / `workspaceExclude` | Globs selecting which files are copied |
+| `taskTimeoutMs` / `judgeTimeoutMs` | Timeouts per phase |
+| `env` | Extra environment variables for the command |
+| `reportFile` | Cache file of passing tests (default: `<test-file>.report` next to the calling test); `null` disables caching |
+| `checkOnly` | Do not run prompts; fail unless a matching passing entry exists in `reportFile` (useful in CI) |
+| `model` | Model name, included in the cache hash |
 
 Execution model:
 
-- phase 1 runs the task prompt and captures final output text plus the files the agent says it changed
-- phase 2 runs an independent judge prompt in a fresh invocation of `promptCmd` against the original task prompt, task output, the agent-reported changed file list, and the current workspace state
-- the judge trusts that reported file list as the authoritative change report and reads file contents from the workspace directly when needed
-- when `workspaceMode: 'copy'` is used, the temporary workspace honors nested `.gitignore` rules and skips git metadata files during the copy
+1. **Task**: runs the task prompt and captures the final output
+2. **Files**: continues the same session to collect the files the agent read and changed
+3. **Judge**: continues the same session and evaluates the task output, changed files and workspace state against the judge prompt
 
-`promptCmd` accepts either a string array or a JSON array string and must include a `{PROMPT}` placeholder.
+A passing result is stored in `reportFile` with a hash of the model, prompts and the files the agent read. Later runs are skipped while that hash is unchanged, so tests re-run only when relevant context changes.
+
+```mermaid
+sequenceDiagram
+    participant T as Test
+    participant L as testPrompt
+    participant A as Agent CLI
+    T->>L: testPrompt(config, task, judge)
+    alt hash matches reportFile entry
+        L-->>T: empty string (cached pass)
+    else run
+        L->>A: 1. task prompt (temp workspace copy)
+        L->>A: 2. continue: list files read and changed
+        L->>A: 3. continue: judge prompt
+        A-->>L: pass and findings
+        L->>L: store hash when passed
+        L-->>T: empty string or findings markdown
+    end
+```
 
 Example with Jest:
 
 ```js
 const { copilotCmd, testPrompt } = require('xdrs-core');
 
-test('creates hello.md', () => {
-  const err = testPrompt(
+test('creates hello.md', async () => {
+  const err = await testPrompt(
     {
+      ...copilotCmd(process.cwd()),
       workspaceRoot: process.cwd(),
-      promptCmd: copilotCmd(process.cwd()),
       workspaceMode: 'copy'
     },
     "Create a nice markdown file at hello.md saying 'hello!'",

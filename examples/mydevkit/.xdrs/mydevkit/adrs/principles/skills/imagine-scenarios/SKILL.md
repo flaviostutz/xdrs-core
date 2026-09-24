@@ -5,8 +5,8 @@ description: >
   research needs imaginative scenario variations to widen the range of possibilities considered.
 metadata:
   author: flaviostutz
-  version: "1.0.0"
-  updated: 2026-09-19
+  version: "1.1.0"
+  updated: 2026-09-24
 ---
 
 ## Overview
@@ -43,7 +43,7 @@ possibilities considered before planning or deeper research.
 ### Phase 1: Generate scenarios
 
 1. Read the topic provided by the caller.
-2. Produce 3-5 short scenarios, each varying one key assumption or condition of the topic.
+2. Produce 3-5 short scenarios (<20 words each), each varying one key assumption or condition of the topic.
 3. Return the scenarios as a bullet list, one line each, prefixed with "What if".
 
 ## Examples

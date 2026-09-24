@@ -6,8 +6,8 @@ description: >
   IMRAD research document.
 metadata:
   author: flaviostutz
-  version: "1.0.0"
-  updated: 2026-09-19
+  version: "1.1.0"
+  updated: 2026-09-24
 ---
 
 ## Overview
@@ -54,7 +54,7 @@ in a small table, and applies a final checklist before returning the result.
 ### Phase 2: Populate the findings table
 
 1. Use `.assets/table.json` as the structural template for the findings table (its `columns`).
-2. For each question from Phase 1, add one row with a finding and a confidence level.
+2. For each question from Phase 1, add one row with a finding (<40 words) and a confidence level.
 
 ### Phase 3: Final checklist
 

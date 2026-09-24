@@ -121,7 +121,7 @@ Brief description of the skill goal.
 ### Outputs
 
 #### Contents
-- Generated files or chat-delivered results, one bullet per item, or "None".
+- Generated files or chat-delivered results, one bullet per item, or "None" (e.g., `Release notes (<300 words)`).
 
 #### Changes
 - External system mutations that are part of the skill's main objective, one bullet per item, or "None".
@@ -201,6 +201,17 @@ Generative skills — those producing a deliverable document (Policy, Skill, Art
 **Halt behavior**
 
 Skills MUST halt on missing required input, dubious/ambiguous input, or insufficient agent confidence, unless the user explicitly instructs the agent to proceed anyway. This override applies generally; a skill's own `## Halt Conditions` list does not need to restate it.
+
+**Generated content caps**
+
+Every natural-language content a skill generates MUST declare a hard word cap written exactly as `<N words`, whether a human or an agent executes the skill. This covers files, templates, reports, intermediate chat messages, HITL questions, final summaries, and text posted to external systems (e.g., PR comments, commit messages).
+- Exempt, with no marker: code (including its comments), structured data (JSON, YAML, tracking files), verbatim copies, and frontmatter fields already limited in characters by a spec or Policy.
+- Caps MUST be in words; other limits MAY coexist but never replace them.
+- Declare each cap once: in the template placeholder (including templates in `references/` or `.assets/`), else in the Instructions step producing the content, else in its `#### Contents` bullet.
+- A blanket statement MAY cover a content class (e.g., all intermediate messages); a more specific cap overrides it.
+- Write the number inline; a Policy reference is optional.
+- Content whose size cannot be bounded MUST be marked `(uncapped: <reason>)`, the reason explaining why.
+- Caps are hard: condense, or split into another item only where the skill allows it; never split one logical item across messages. An explicit user request lifts the cap for that item only.
 
 **Validation**
 

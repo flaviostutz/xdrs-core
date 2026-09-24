@@ -6,8 +6,8 @@ description: >
   research document is written.
 metadata:
   author: flaviostutz
-  version: "1.0.0"
-  updated: 2026-09-19
+  version: "1.1.0"
+  updated: 2026-09-24
 ---
 
 ## Overview
@@ -49,7 +49,7 @@ research questions those scenarios raise.
 
 ### Phase 2: Draft the plan
 
-1. For each scenario from Phase 1, write one research question it raises.
+1. For each scenario from Phase 1, write one research question (<30 words) it raises.
 2. Return the plan as a numbered list of questions, each noting which scenario it came from.
 
 ## Examples

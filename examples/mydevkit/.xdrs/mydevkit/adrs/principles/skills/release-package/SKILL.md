@@ -5,8 +5,8 @@ description: >
   .filedistrc file.
 metadata:
   author: flaviostutz
-  version: "1.0.0"
-  updated: 2026-09-19
+  version: "1.1.0"
+  updated: 2026-09-24
 ---
 
 ## Overview
@@ -48,6 +48,8 @@ be installed by a consumer workspace.
 - Network/registry access for the publish step only.
 
 ## Instructions
+
+Keep every question and intermediate message <100 words and the final summary <150 words.
 
 ### Phase 1: Pack the package
 
