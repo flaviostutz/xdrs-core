@@ -221,17 +221,6 @@ Use the [skills-ref](https://github.com/agentskills/agentskills/tree/main/skills
 skills-ref validate .xdrs/[scope]/[type]/[subject]/skills/[skill-name]
 ```
 
-## Considered Options
-
-* (REJECTED) **Top-level `skills/` directory separate from XDRS** - Decouples skills from the decisions that govern them.
-  * Reason: Breaks the natural association between a decision (Policy) and the skill that implements it; makes navigation harder.
-* (CHOSEN) **agentskills-compatible packages co-located with XDRS** - Standardized format with scoped discovery and clear ownership.
-  * Reason: Reuses proven agentskills tooling, aligns with the existing XDRS scope/subject hierarchy, and keeps skills close to the decisions they implement.
-* (REJECTED) **Fully self-contained skills, no shared assets** - Every skill package repeats any instruction shared with another skill.
-  * Reason: Duplicates maintenance burden across skills and drifts out of sync over time.
-* (CHOSEN) **Shared `.assets/` modules plus optional bundling** - Keep shared instruction modules DRY in-repo, and offer an optional per-skill bundling mechanism for standalone distribution.
-  * Reason: Preserves DRY authoring for the common case while still allowing a single skill to be distributed as a self-contained artifact when needed ([`_core-adr-policy-021`](021-skill-bundling.md)).
-
 ## References
 
 - [agentskills specification](https://agentskills.io/specification)

@@ -32,13 +32,6 @@ published `xdrs-core` package with the local `mydevkit` scope.
 - Consumer projects SHOULD install both `mydevkit` and `xdrs-core` when they also want the
   `xdrs-core lint` command available directly.
 
-## Considered Options
-
-* (REJECTED) **Keep config only in package.json** - Works, but does not demonstrate standalone config files.
-  * Reason: This repository already uses that pattern in the root package.
-* (CHOSEN) **Use `.filedist-package.yml` as package config** - Keep distribution rules outside package metadata.
-  * Reason: Shows a second supported packaging mode and keeps extraction concerns isolated.
-
 ## References
 
 - [release-package](skills/release-package/SKILL.md) - Skill for packing, verifying, and publishing the example package

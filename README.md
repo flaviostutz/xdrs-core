@@ -320,7 +320,7 @@ flowchart LR
 The published package exposes the `xdrs-core` CLI.
 
 - `npx -y xdrs-core` (or `install`) installs or updates the managed XDRS files; `npx -y xdrs-core check` fails if managed files drifted from the package. Both are delegated to [filedist](https://github.com/flaviostutz/filedist) (run `--help` for all options).
-- `npx -y xdrs-core lint [path]` validates the XDRS tree. Scopes listed in the workspace `.filedist.lock` are treated as external and skipped; use `--all` to include them.
+- `npx -y xdrs-core lint [path]` validates the XDRS tree. Scopes whose files are listed in the `.filedist.lock` written by filedist are treated as external and skipped; use `--all` to include them.
 
 The `lint` command reads `.xdrs/**` (or `[path]` directly when it contains an `index.md`) and reports errors citing the violated Policy rule. It checks:
 
