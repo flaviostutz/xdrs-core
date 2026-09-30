@@ -5,8 +5,8 @@ description: >
   Activate this skill when the user asks to create, add, or write a new Policy (ADR, BDR, or EDR).
 metadata:
   author: flaviostutz
-  version: "1.1.0"
-  updated: 2026-09-24
+  version: "1.2.0"
+  updated: 2026-09-30
 ---
 
 ## Overview
